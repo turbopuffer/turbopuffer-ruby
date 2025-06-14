@@ -47,6 +47,18 @@ module Turbopuffer
         # @type [Turbopuffer::Internal::Type::Converter]
         FloatArray = Turbopuffer::Internal::Type::ArrayOf[Float]
       end
+
+      def method_missing(name, *args, &block)
+        if @data.key?(name)
+          @data[name]
+        else
+          super
+        end
+      end
+
+      def respond_to_missing?(name, include_private = false)
+        @data.key?(name) || super
+      end
     end
   end
 end
