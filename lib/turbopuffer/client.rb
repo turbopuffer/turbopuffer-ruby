@@ -26,8 +26,14 @@ module Turbopuffer
     # @return [String, nil]
     attr_reader :default_namespace
 
-    # @return [Turbopuffer::Resources::Namespaces]
-    attr_reader :namespaces
+    # Creates a new namespace resource.
+    #
+    # @param namespace [String] The ID of the namespace.
+    #
+    # @return [Turbopuffer::Namespace]
+    def namespace(namespace)
+      Turbopuffer::Namespace.new(self, namespace)
+    end
 
     # List namespaces.
     #
@@ -113,8 +119,6 @@ module Turbopuffer
         initial_retry_delay: initial_retry_delay,
         max_retry_delay: max_retry_delay
       )
-
-      @namespaces = Turbopuffer::Resources::Namespaces.new(client: self)
     end
   end
 end
