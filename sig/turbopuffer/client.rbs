@@ -14,9 +14,7 @@ module Turbopuffer
 
     attr_reader default_namespace: String?
 
-    def namespace: (
-      ?namespace: String
-    ) -> Turbopuffer::Namespace
+    attr_reader namespaces: Turbopuffer::Resources::Namespaces
 
     def namespaces: (
       ?cursor: String,
