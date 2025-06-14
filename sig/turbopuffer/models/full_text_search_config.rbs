@@ -1,0 +1,68 @@
+module Turbopuffer
+  module Models
+    type full_text_search_config =
+      {
+        b: Float,
+        case_sensitive: bool,
+        :k1 => Float,
+        language: Turbopuffer::Models::language,
+        remove_stopwords: bool,
+        stemming: bool,
+        tokenizer: Turbopuffer::Models::tokenizer
+      }
+
+    class FullTextSearchConfig < Turbopuffer::Internal::Type::BaseModel
+      attr_reader b: Float?
+
+      def b=: (Float) -> Float
+
+      attr_reader case_sensitive: bool?
+
+      def case_sensitive=: (bool) -> bool
+
+      attr_reader k1: Float?
+
+      def k1=: (Float) -> Float
+
+      attr_reader language: Turbopuffer::Models::language?
+
+      def language=: (
+        Turbopuffer::Models::language
+      ) -> Turbopuffer::Models::language
+
+      attr_reader remove_stopwords: bool?
+
+      def remove_stopwords=: (bool) -> bool
+
+      attr_reader stemming: bool?
+
+      def stemming=: (bool) -> bool
+
+      attr_reader tokenizer: Turbopuffer::Models::tokenizer?
+
+      def tokenizer=: (
+        Turbopuffer::Models::tokenizer
+      ) -> Turbopuffer::Models::tokenizer
+
+      def initialize: (
+        ?b: Float,
+        ?case_sensitive: bool,
+        ?k1: Float,
+        ?language: Turbopuffer::Models::language,
+        ?remove_stopwords: bool,
+        ?stemming: bool,
+        ?tokenizer: Turbopuffer::Models::tokenizer
+      ) -> void
+
+      def to_hash: -> {
+        b: Float,
+        case_sensitive: bool,
+        :k1 => Float,
+        language: Turbopuffer::Models::language,
+        remove_stopwords: bool,
+        stemming: bool,
+        tokenizer: Turbopuffer::Models::tokenizer
+      }
+    end
+  end
+end

@@ -1,0 +1,11 @@
+module Turbopuffer
+  module Models
+    type attribute_schema = String | Turbopuffer::AttributeSchemaConfig
+
+    module AttributeSchema
+      extend Turbopuffer::Internal::Type::Union
+
+      def self?.variants: -> ::Array[Turbopuffer::Models::attribute_schema]
+    end
+  end
+end

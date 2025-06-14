@@ -1,0 +1,13 @@
+module Turbopuffer
+  module Internal
+    class NamespacePage[Elem]
+      include Turbopuffer::Internal::Type::BasePage[Elem]
+
+      attr_accessor namespaces: ::Array[Elem]?
+
+      attr_accessor next_cursor: String
+
+      def inspect: -> String
+    end
+  end
+end

@@ -1,0 +1,142 @@
+module Turbopuffer
+  module Models
+    type namespace_multi_query_params =
+      {
+        namespace: String,
+        queries: ::Array[Turbopuffer::NamespaceMultiQueryParams::Query],
+        consistency: Turbopuffer::NamespaceMultiQueryParams::Consistency,
+        vector_encoding: Turbopuffer::Models::vector_encoding
+      }
+      & Turbopuffer::Internal::Type::request_parameters
+
+    class NamespaceMultiQueryParams < Turbopuffer::Internal::Type::BaseModel
+      extend Turbopuffer::Internal::Type::RequestParameters::Converter
+      include Turbopuffer::Internal::Type::RequestParameters
+
+      attr_accessor namespace: String
+
+      attr_accessor queries: ::Array[Turbopuffer::NamespaceMultiQueryParams::Query]
+
+      attr_reader consistency: Turbopuffer::NamespaceMultiQueryParams::Consistency?
+
+      def consistency=: (
+        Turbopuffer::NamespaceMultiQueryParams::Consistency
+      ) -> Turbopuffer::NamespaceMultiQueryParams::Consistency
+
+      attr_reader vector_encoding: Turbopuffer::Models::vector_encoding?
+
+      def vector_encoding=: (
+        Turbopuffer::Models::vector_encoding
+      ) -> Turbopuffer::Models::vector_encoding
+
+      def initialize: (
+        namespace: String,
+        queries: ::Array[Turbopuffer::NamespaceMultiQueryParams::Query],
+        ?consistency: Turbopuffer::NamespaceMultiQueryParams::Consistency,
+        ?vector_encoding: Turbopuffer::Models::vector_encoding,
+        ?request_options: Turbopuffer::request_opts
+      ) -> void
+
+      def to_hash: -> {
+        namespace: String,
+        queries: ::Array[Turbopuffer::NamespaceMultiQueryParams::Query],
+        consistency: Turbopuffer::NamespaceMultiQueryParams::Consistency,
+        vector_encoding: Turbopuffer::Models::vector_encoding,
+        request_options: Turbopuffer::RequestOptions
+      }
+
+      type query =
+        {
+          aggregate_by: ::Hash[Symbol, top],
+          distance_metric: Turbopuffer::Models::distance_metric,
+          filters: top,
+          include_attributes: Turbopuffer::Models::include_attributes,
+          rank_by: top,
+          top_k: Integer
+        }
+
+      class Query < Turbopuffer::Internal::Type::BaseModel
+        attr_reader aggregate_by: ::Hash[Symbol, top]?
+
+        def aggregate_by=: (::Hash[Symbol, top]) -> ::Hash[Symbol, top]
+
+        attr_reader distance_metric: Turbopuffer::Models::distance_metric?
+
+        def distance_metric=: (
+          Turbopuffer::Models::distance_metric
+        ) -> Turbopuffer::Models::distance_metric
+
+        attr_reader filters: top?
+
+        def filters=: (top) -> top
+
+        attr_reader include_attributes: Turbopuffer::Models::include_attributes?
+
+        def include_attributes=: (
+          Turbopuffer::Models::include_attributes
+        ) -> Turbopuffer::Models::include_attributes
+
+        attr_reader rank_by: top?
+
+        def rank_by=: (top) -> top
+
+        attr_reader top_k: Integer?
+
+        def top_k=: (Integer) -> Integer
+
+        def initialize: (
+          ?aggregate_by: ::Hash[Symbol, top],
+          ?distance_metric: Turbopuffer::Models::distance_metric,
+          ?filters: top,
+          ?include_attributes: Turbopuffer::Models::include_attributes,
+          ?rank_by: top,
+          ?top_k: Integer
+        ) -> void
+
+        def to_hash: -> {
+          aggregate_by: ::Hash[Symbol, top],
+          distance_metric: Turbopuffer::Models::distance_metric,
+          filters: top,
+          include_attributes: Turbopuffer::Models::include_attributes,
+          rank_by: top,
+          top_k: Integer
+        }
+      end
+
+      type consistency =
+        {
+          level: Turbopuffer::Models::NamespaceMultiQueryParams::Consistency::level
+        }
+
+      class Consistency < Turbopuffer::Internal::Type::BaseModel
+        attr_reader level: Turbopuffer::Models::NamespaceMultiQueryParams::Consistency::level?
+
+        def level=: (
+          Turbopuffer::Models::NamespaceMultiQueryParams::Consistency::level
+        ) -> Turbopuffer::Models::NamespaceMultiQueryParams::Consistency::level
+
+        def initialize: (
+          ?level: Turbopuffer::Models::NamespaceMultiQueryParams::Consistency::level
+        ) -> void
+
+        def to_hash: -> {
+          level: Turbopuffer::Models::NamespaceMultiQueryParams::Consistency::level
+        }
+
+        type level = :strong | :eventual
+
+        module Level
+          extend Turbopuffer::Internal::Type::Enum
+
+          # Strong consistency. Requires a round-trip to object storage to fetch the latest writes.
+          STRONG: :strong
+
+          # Eventual consistency. Does not require a round-trip to object storage, but may not see the latest writes.
+          EVENTUAL: :eventual
+
+          def self?.values: -> ::Array[Turbopuffer::Models::NamespaceMultiQueryParams::Consistency::level]
+        end
+      end
+    end
+  end
+end

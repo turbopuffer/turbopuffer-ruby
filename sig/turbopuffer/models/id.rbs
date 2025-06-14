@@ -1,0 +1,11 @@
+module Turbopuffer
+  module Models
+    type id = String | Integer
+
+    module ID
+      extend Turbopuffer::Internal::Type::Union
+
+      def self?.variants: -> ::Array[Turbopuffer::Models::id]
+    end
+  end
+end

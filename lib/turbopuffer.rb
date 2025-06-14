@@ -1,0 +1,90 @@
+# frozen_string_literal: true
+
+# Standard libraries.
+# rubocop:disable Lint/RedundantRequireStatement
+require "English"
+require "cgi"
+require "date"
+require "erb"
+require "etc"
+require "json"
+require "net/http"
+require "pathname"
+require "rbconfig"
+require "securerandom"
+require "set"
+require "stringio"
+require "time"
+require "uri"
+# rubocop:enable Lint/RedundantRequireStatement
+
+# We already ship the preferred sorbet manifests in the package itself.
+# `tapioca` currently does not offer us a way to opt out of unnecessary compilation.
+if Object.const_defined?(:Tapioca) &&
+   caller.chain([$PROGRAM_NAME]).chain(ARGV).any?(/tapioca/) &&
+   ARGV.none?(/dsl/)
+  return
+end
+
+# Gems.
+require "connection_pool"
+
+# Package files.
+require_relative "turbopuffer/version"
+require_relative "turbopuffer/internal/util"
+require_relative "turbopuffer/internal/type/converter"
+require_relative "turbopuffer/internal/type/unknown"
+require_relative "turbopuffer/internal/type/boolean"
+require_relative "turbopuffer/internal/type/file_input"
+require_relative "turbopuffer/internal/type/enum"
+require_relative "turbopuffer/internal/type/union"
+require_relative "turbopuffer/internal/type/array_of"
+require_relative "turbopuffer/internal/type/hash_of"
+require_relative "turbopuffer/internal/type/base_model"
+require_relative "turbopuffer/internal/type/base_page"
+require_relative "turbopuffer/internal/type/request_parameters"
+require_relative "turbopuffer/internal"
+require_relative "turbopuffer/request_options"
+require_relative "turbopuffer/file_part"
+require_relative "turbopuffer/errors"
+require_relative "turbopuffer/internal/transport/base_client"
+require_relative "turbopuffer/internal/transport/pooled_net_requester"
+require_relative "turbopuffer/client"
+require_relative "turbopuffer/internal/namespace_page"
+require_relative "turbopuffer/models/attribute_schema"
+require_relative "turbopuffer/models/attribute_schema_config"
+require_relative "turbopuffer/models/attribute_type"
+require_relative "turbopuffer/models/client_namespaces_params"
+require_relative "turbopuffer/models/columns"
+require_relative "turbopuffer/models/distance_metric"
+require_relative "turbopuffer/models/full_text_search"
+require_relative "turbopuffer/models/full_text_search_config"
+require_relative "turbopuffer/models/id"
+require_relative "turbopuffer/models/include_attributes"
+require_relative "turbopuffer/models/language"
+require_relative "turbopuffer/models/namespace_delete_all_params"
+require_relative "turbopuffer/models/namespace_delete_all_response"
+require_relative "turbopuffer/models/namespace_hint_cache_warm_params"
+require_relative "turbopuffer/models/namespace_hint_cache_warm_response"
+require_relative "turbopuffer/models/namespace_multi_query_params"
+require_relative "turbopuffer/models/namespace_multi_query_response"
+require_relative "turbopuffer/models/namespace_query_params"
+require_relative "turbopuffer/models/namespace_query_response"
+require_relative "turbopuffer/models/namespace_recall_params"
+require_relative "turbopuffer/models/namespace_recall_response"
+require_relative "turbopuffer/models/namespace_schema_params"
+require_relative "turbopuffer/models/namespace_schema_response"
+require_relative "turbopuffer/models/namespace_summary"
+require_relative "turbopuffer/models/namespace_update_schema_params"
+require_relative "turbopuffer/models/namespace_update_schema_response"
+require_relative "turbopuffer/models/namespace_write_params"
+require_relative "turbopuffer/models/namespace_write_response"
+require_relative "turbopuffer/models/query_billing"
+require_relative "turbopuffer/models/query_performance"
+require_relative "turbopuffer/models/row"
+require_relative "turbopuffer/models/tokenizer"
+require_relative "turbopuffer/models/vector"
+require_relative "turbopuffer/models/vector_encoding"
+require_relative "turbopuffer/models/write_billing"
+require_relative "turbopuffer/models"
+require_relative "turbopuffer/resources/namespaces"

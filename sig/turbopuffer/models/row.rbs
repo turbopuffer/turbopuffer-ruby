@@ -1,0 +1,24 @@
+module Turbopuffer
+  module Models
+    type row =
+      { id: Turbopuffer::Models::id, vector: Turbopuffer::Models::vector }
+
+    class Row < Turbopuffer::Internal::Type::BaseModel
+      attr_accessor id: Turbopuffer::Models::id
+
+      attr_reader vector: Turbopuffer::Models::vector?
+
+      def vector=: (Turbopuffer::Models::vector) -> Turbopuffer::Models::vector
+
+      def initialize: (
+        id: Turbopuffer::Models::id,
+        ?vector: Turbopuffer::Models::vector
+      ) -> void
+
+      def to_hash: -> {
+        id: Turbopuffer::Models::id,
+        vector: Turbopuffer::Models::vector
+      }
+    end
+  end
+end

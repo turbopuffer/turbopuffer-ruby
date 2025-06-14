@@ -1,0 +1,54 @@
+module Turbopuffer
+  module Models
+    type namespace_recall_params =
+      {
+        namespace: String,
+        filters: top,
+        num: Integer,
+        queries: ::Array[Float],
+        top_k: Integer
+      }
+      & Turbopuffer::Internal::Type::request_parameters
+
+    class NamespaceRecallParams < Turbopuffer::Internal::Type::BaseModel
+      extend Turbopuffer::Internal::Type::RequestParameters::Converter
+      include Turbopuffer::Internal::Type::RequestParameters
+
+      attr_accessor namespace: String
+
+      attr_reader filters: top?
+
+      def filters=: (top) -> top
+
+      attr_reader num: Integer?
+
+      def num=: (Integer) -> Integer
+
+      attr_reader queries: ::Array[Float]?
+
+      def queries=: (::Array[Float]) -> ::Array[Float]
+
+      attr_reader top_k: Integer?
+
+      def top_k=: (Integer) -> Integer
+
+      def initialize: (
+        namespace: String,
+        ?filters: top,
+        ?num: Integer,
+        ?queries: ::Array[Float],
+        ?top_k: Integer,
+        ?request_options: Turbopuffer::request_opts
+      ) -> void
+
+      def to_hash: -> {
+        namespace: String,
+        filters: top,
+        num: Integer,
+        queries: ::Array[Float],
+        top_k: Integer,
+        request_options: Turbopuffer::RequestOptions
+      }
+    end
+  end
+end

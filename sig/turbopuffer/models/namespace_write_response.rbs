@@ -1,0 +1,35 @@
+module Turbopuffer
+  module Models
+    type namespace_write_response =
+      {
+        billing: Turbopuffer::WriteBilling,
+        message: String,
+        rows_affected: Integer,
+        status: :OK
+      }
+
+    class NamespaceWriteResponse < Turbopuffer::Internal::Type::BaseModel
+      attr_accessor billing: Turbopuffer::WriteBilling
+
+      attr_accessor message: String
+
+      attr_accessor rows_affected: Integer
+
+      attr_accessor status: :OK
+
+      def initialize: (
+        billing: Turbopuffer::WriteBilling,
+        message: String,
+        rows_affected: Integer,
+        ?status: :OK
+      ) -> void
+
+      def to_hash: -> {
+        billing: Turbopuffer::WriteBilling,
+        message: String,
+        rows_affected: Integer,
+        status: :OK
+      }
+    end
+  end
+end

@@ -1,0 +1,56 @@
+module Turbopuffer
+  module Internal
+    module Type
+      module Converter
+        extend Turbopuffer::Internal::Util::SorbetRuntimeSupport
+
+        type input = Turbopuffer::Internal::Type::Converter | Class
+
+        type coerce_state =
+          {
+            strictness: bool | :strong,
+            exactness: { yes: Integer, no: Integer, maybe: Integer },
+            branched: Integer
+          }
+
+        type dump_state = { can_retry: bool }
+
+        def coerce: (
+          top value,
+          state: Turbopuffer::Internal::Type::Converter::coerce_state
+        ) -> top
+
+        def dump: (
+          top value,
+          state: Turbopuffer::Internal::Type::Converter::dump_state
+        ) -> top
+
+        def inspect: (?depth: Integer) -> String
+
+        def self.type_info: (
+          {
+            const: (nil | bool | Integer | Float | Symbol)?,
+            enum: ^-> Turbopuffer::Internal::Type::Converter::input?,
+            union: ^-> Turbopuffer::Internal::Type::Converter::input?
+          }
+          | ^-> Turbopuffer::Internal::Type::Converter::input
+          | Turbopuffer::Internal::Type::Converter::input spec
+        ) -> (^-> top)
+
+        def self.coerce: (
+          Turbopuffer::Internal::Type::Converter::input target,
+          top value,
+          ?state: Turbopuffer::Internal::Type::Converter::coerce_state
+        ) -> top
+
+        def self.dump: (
+          Turbopuffer::Internal::Type::Converter::input target,
+          top value,
+          ?state: Turbopuffer::Internal::Type::Converter::dump_state
+        ) -> top
+
+        def self.inspect: (top target, depth: Integer) -> String
+      end
+    end
+  end
+end

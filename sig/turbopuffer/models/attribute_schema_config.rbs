@@ -1,0 +1,45 @@
+module Turbopuffer
+  module Models
+    type attribute_schema_config =
+      {
+        ann: bool,
+        filterable: bool,
+        full_text_search: Turbopuffer::Models::full_text_search,
+        type: String
+      }
+
+    class AttributeSchemaConfig < Turbopuffer::Internal::Type::BaseModel
+      attr_reader ann: bool?
+
+      def ann=: (bool) -> bool
+
+      attr_reader filterable: bool?
+
+      def filterable=: (bool) -> bool
+
+      attr_reader full_text_search: Turbopuffer::Models::full_text_search?
+
+      def full_text_search=: (
+        Turbopuffer::Models::full_text_search
+      ) -> Turbopuffer::Models::full_text_search
+
+      attr_reader type: String?
+
+      def type=: (String) -> String
+
+      def initialize: (
+        ?ann: bool,
+        ?filterable: bool,
+        ?full_text_search: Turbopuffer::Models::full_text_search,
+        ?type: String
+      ) -> void
+
+      def to_hash: -> {
+        ann: bool,
+        filterable: bool,
+        full_text_search: Turbopuffer::Models::full_text_search,
+        type: String
+      }
+    end
+  end
+end

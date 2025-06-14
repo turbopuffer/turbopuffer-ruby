@@ -1,0 +1,53 @@
+module Turbopuffer
+  module Models
+    type namespace_multi_query_response =
+      {
+        billing: Turbopuffer::QueryBilling,
+        performance: Turbopuffer::QueryPerformance,
+        results: ::Array[Turbopuffer::Models::NamespaceMultiQueryResponse::Result]
+      }
+
+    class NamespaceMultiQueryResponse < Turbopuffer::Internal::Type::BaseModel
+      attr_accessor billing: Turbopuffer::QueryBilling
+
+      attr_accessor performance: Turbopuffer::QueryPerformance
+
+      attr_accessor results: ::Array[Turbopuffer::Models::NamespaceMultiQueryResponse::Result]
+
+      def initialize: (
+        billing: Turbopuffer::QueryBilling,
+        performance: Turbopuffer::QueryPerformance,
+        results: ::Array[Turbopuffer::Models::NamespaceMultiQueryResponse::Result]
+      ) -> void
+
+      def to_hash: -> {
+        billing: Turbopuffer::QueryBilling,
+        performance: Turbopuffer::QueryPerformance,
+        results: ::Array[Turbopuffer::Models::NamespaceMultiQueryResponse::Result]
+      }
+
+      type result =
+        { aggregations: ::Hash[Symbol, top], rows: ::Array[Turbopuffer::Row] }
+
+      class Result < Turbopuffer::Internal::Type::BaseModel
+        attr_reader aggregations: ::Hash[Symbol, top]?
+
+        def aggregations=: (::Hash[Symbol, top]) -> ::Hash[Symbol, top]
+
+        attr_reader rows: ::Array[Turbopuffer::Row]?
+
+        def rows=: (::Array[Turbopuffer::Row]) -> ::Array[Turbopuffer::Row]
+
+        def initialize: (
+          ?aggregations: ::Hash[Symbol, top],
+          ?rows: ::Array[Turbopuffer::Row]
+        ) -> void
+
+        def to_hash: -> {
+          aggregations: ::Hash[Symbol, top],
+          rows: ::Array[Turbopuffer::Row]
+        }
+      end
+    end
+  end
+end

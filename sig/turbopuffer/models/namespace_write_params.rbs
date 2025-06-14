@@ -1,0 +1,133 @@
+module Turbopuffer
+  module Models
+    type namespace_write_params =
+      {
+        namespace: String,
+        copy_from_namespace: String,
+        delete_by_filter: top,
+        deletes: ::Array[Turbopuffer::Models::id],
+        distance_metric: Turbopuffer::Models::distance_metric,
+        encryption: Turbopuffer::NamespaceWriteParams::Encryption,
+        patch_columns: Turbopuffer::Columns,
+        patch_rows: ::Array[Turbopuffer::Row],
+        schema: ::Hash[Symbol, Turbopuffer::Models::attribute_schema],
+        upsert_columns: Turbopuffer::Columns,
+        upsert_rows: ::Array[Turbopuffer::Row]
+      }
+      & Turbopuffer::Internal::Type::request_parameters
+
+    class NamespaceWriteParams < Turbopuffer::Internal::Type::BaseModel
+      extend Turbopuffer::Internal::Type::RequestParameters::Converter
+      include Turbopuffer::Internal::Type::RequestParameters
+
+      attr_accessor namespace: String
+
+      attr_reader copy_from_namespace: String?
+
+      def copy_from_namespace=: (String) -> String
+
+      attr_reader delete_by_filter: top?
+
+      def delete_by_filter=: (top) -> top
+
+      attr_reader deletes: ::Array[Turbopuffer::Models::id]?
+
+      def deletes=: (
+        ::Array[Turbopuffer::Models::id]
+      ) -> ::Array[Turbopuffer::Models::id]
+
+      attr_reader distance_metric: Turbopuffer::Models::distance_metric?
+
+      def distance_metric=: (
+        Turbopuffer::Models::distance_metric
+      ) -> Turbopuffer::Models::distance_metric
+
+      attr_reader encryption: Turbopuffer::NamespaceWriteParams::Encryption?
+
+      def encryption=: (
+        Turbopuffer::NamespaceWriteParams::Encryption
+      ) -> Turbopuffer::NamespaceWriteParams::Encryption
+
+      attr_reader patch_columns: Turbopuffer::Columns?
+
+      def patch_columns=: (Turbopuffer::Columns) -> Turbopuffer::Columns
+
+      attr_reader patch_rows: ::Array[Turbopuffer::Row]?
+
+      def patch_rows=: (::Array[Turbopuffer::Row]) -> ::Array[Turbopuffer::Row]
+
+      attr_reader schema: ::Hash[Symbol, Turbopuffer::Models::attribute_schema]?
+
+      def schema=: (
+        ::Hash[Symbol, Turbopuffer::Models::attribute_schema]
+      ) -> ::Hash[Symbol, Turbopuffer::Models::attribute_schema]
+
+      attr_reader upsert_columns: Turbopuffer::Columns?
+
+      def upsert_columns=: (Turbopuffer::Columns) -> Turbopuffer::Columns
+
+      attr_reader upsert_rows: ::Array[Turbopuffer::Row]?
+
+      def upsert_rows=: (::Array[Turbopuffer::Row]) -> ::Array[Turbopuffer::Row]
+
+      def initialize: (
+        namespace: String,
+        ?copy_from_namespace: String,
+        ?delete_by_filter: top,
+        ?deletes: ::Array[Turbopuffer::Models::id],
+        ?distance_metric: Turbopuffer::Models::distance_metric,
+        ?encryption: Turbopuffer::NamespaceWriteParams::Encryption,
+        ?patch_columns: Turbopuffer::Columns,
+        ?patch_rows: ::Array[Turbopuffer::Row],
+        ?schema: ::Hash[Symbol, Turbopuffer::Models::attribute_schema],
+        ?upsert_columns: Turbopuffer::Columns,
+        ?upsert_rows: ::Array[Turbopuffer::Row],
+        ?request_options: Turbopuffer::request_opts
+      ) -> void
+
+      def to_hash: -> {
+        namespace: String,
+        copy_from_namespace: String,
+        delete_by_filter: top,
+        deletes: ::Array[Turbopuffer::Models::id],
+        distance_metric: Turbopuffer::Models::distance_metric,
+        encryption: Turbopuffer::NamespaceWriteParams::Encryption,
+        patch_columns: Turbopuffer::Columns,
+        patch_rows: ::Array[Turbopuffer::Row],
+        schema: ::Hash[Symbol, Turbopuffer::Models::attribute_schema],
+        upsert_columns: Turbopuffer::Columns,
+        upsert_rows: ::Array[Turbopuffer::Row],
+        request_options: Turbopuffer::RequestOptions
+      }
+
+      type encryption =
+        { cmek: Turbopuffer::NamespaceWriteParams::Encryption::Cmek }
+
+      class Encryption < Turbopuffer::Internal::Type::BaseModel
+        attr_reader cmek: Turbopuffer::NamespaceWriteParams::Encryption::Cmek?
+
+        def cmek=: (
+          Turbopuffer::NamespaceWriteParams::Encryption::Cmek
+        ) -> Turbopuffer::NamespaceWriteParams::Encryption::Cmek
+
+        def initialize: (
+          ?cmek: Turbopuffer::NamespaceWriteParams::Encryption::Cmek
+        ) -> void
+
+        def to_hash: -> {
+          cmek: Turbopuffer::NamespaceWriteParams::Encryption::Cmek
+        }
+
+        type cmek = { key_name: String }
+
+        class Cmek < Turbopuffer::Internal::Type::BaseModel
+          attr_accessor key_name: String
+
+          def initialize: (key_name: String) -> void
+
+          def to_hash: -> { key_name: String }
+        end
+      end
+    end
+  end
+end

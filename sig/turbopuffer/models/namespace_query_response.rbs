@@ -1,0 +1,39 @@
+module Turbopuffer
+  module Models
+    type namespace_query_response =
+      {
+        billing: Turbopuffer::QueryBilling,
+        performance: Turbopuffer::QueryPerformance,
+        aggregations: ::Hash[Symbol, top],
+        rows: ::Array[Turbopuffer::Row]
+      }
+
+    class NamespaceQueryResponse < Turbopuffer::Internal::Type::BaseModel
+      attr_accessor billing: Turbopuffer::QueryBilling
+
+      attr_accessor performance: Turbopuffer::QueryPerformance
+
+      attr_reader aggregations: ::Hash[Symbol, top]?
+
+      def aggregations=: (::Hash[Symbol, top]) -> ::Hash[Symbol, top]
+
+      attr_reader rows: ::Array[Turbopuffer::Row]?
+
+      def rows=: (::Array[Turbopuffer::Row]) -> ::Array[Turbopuffer::Row]
+
+      def initialize: (
+        billing: Turbopuffer::QueryBilling,
+        performance: Turbopuffer::QueryPerformance,
+        ?aggregations: ::Hash[Symbol, top],
+        ?rows: ::Array[Turbopuffer::Row]
+      ) -> void
+
+      def to_hash: -> {
+        billing: Turbopuffer::QueryBilling,
+        performance: Turbopuffer::QueryPerformance,
+        aggregations: ::Hash[Symbol, top],
+        rows: ::Array[Turbopuffer::Row]
+      }
+    end
+  end
+end

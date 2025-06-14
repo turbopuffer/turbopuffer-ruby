@@ -1,0 +1,26 @@
+module Turbopuffer
+  module Models
+    type namespace_recall_response =
+      { avg_ann_count: Float, avg_exhaustive_count: Float, avg_recall: Float }
+
+    class NamespaceRecallResponse < Turbopuffer::Internal::Type::BaseModel
+      attr_accessor avg_ann_count: Float
+
+      attr_accessor avg_exhaustive_count: Float
+
+      attr_accessor avg_recall: Float
+
+      def initialize: (
+        avg_ann_count: Float,
+        avg_exhaustive_count: Float,
+        avg_recall: Float
+      ) -> void
+
+      def to_hash: -> {
+        avg_ann_count: Float,
+        avg_exhaustive_count: Float,
+        avg_recall: Float
+      }
+    end
+  end
+end

@@ -1,0 +1,48 @@
+module Turbopuffer
+  module Models
+    type language =
+      :arabic
+      | :danish
+      | :dutch
+      | :english
+      | :finnish
+      | :french
+      | :german
+      | :greek
+      | :hungarian
+      | :italian
+      | :norwegian
+      | :portuguese
+      | :romanian
+      | :russian
+      | :spanish
+      | :swedish
+      | :tamil
+      | :turkish
+
+    module Language
+      extend Turbopuffer::Internal::Type::Enum
+
+      ARABIC: :arabic
+      DANISH: :danish
+      DUTCH: :dutch
+      ENGLISH: :english
+      FINNISH: :finnish
+      FRENCH: :french
+      GERMAN: :german
+      GREEK: :greek
+      HUNGARIAN: :hungarian
+      ITALIAN: :italian
+      NORWEGIAN: :norwegian
+      PORTUGUESE: :portuguese
+      ROMANIAN: :romanian
+      RUSSIAN: :russian
+      SPANISH: :spanish
+      SWEDISH: :swedish
+      TAMIL: :tamil
+      TURKISH: :turkish
+
+      def self?.values: -> ::Array[Turbopuffer::Models::language]
+    end
+  end
+end

@@ -1,0 +1,42 @@
+module Turbopuffer
+  module Models
+    type columns =
+      {
+        id: ::Array[Turbopuffer::Models::id],
+        vector: Turbopuffer::Models::Columns::vector
+      }
+
+    class Columns < Turbopuffer::Internal::Type::BaseModel
+      attr_accessor id: ::Array[Turbopuffer::Models::id]
+
+      attr_reader vector: Turbopuffer::Models::Columns::vector?
+
+      def vector=: (
+        Turbopuffer::Models::Columns::vector
+      ) -> Turbopuffer::Models::Columns::vector
+
+      def initialize: (
+        id: ::Array[Turbopuffer::Models::id],
+        ?vector: Turbopuffer::Models::Columns::vector
+      ) -> void
+
+      def to_hash: -> {
+        id: ::Array[Turbopuffer::Models::id],
+        vector: Turbopuffer::Models::Columns::vector
+      }
+
+      type vector =
+        ::Array[Turbopuffer::Models::vector] | ::Array[Float] | String
+
+      module Vector
+        extend Turbopuffer::Internal::Type::Union
+
+        def self?.variants: -> ::Array[Turbopuffer::Models::Columns::vector]
+
+        VectorArray: Turbopuffer::Internal::Type::Converter
+
+        FloatArray: Turbopuffer::Internal::Type::Converter
+      end
+    end
+  end
+end
