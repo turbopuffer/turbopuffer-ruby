@@ -6,13 +6,13 @@ module Turbopuffer
       # Delete namespace.
       sig do
         params(
-          namespace: String,
+          namespace: T.nilable(String),
           request_options: Turbopuffer::RequestOptions::OrHash
         ).returns(Turbopuffer::Models::NamespaceDeleteAllResponse)
       end
       def delete_all(
         # The name of the namespace.
-        namespace:,
+        namespace: nil,
         request_options: {}
       )
       end
@@ -20,13 +20,13 @@ module Turbopuffer
       # Warm the cache for a namespace.
       sig do
         params(
-          namespace: String,
+          namespace: T.nilable(String),
           request_options: Turbopuffer::RequestOptions::OrHash
         ).returns(Turbopuffer::Models::NamespaceHintCacheWarmResponse)
       end
       def hint_cache_warm(
         # The name of the namespace.
-        namespace:,
+        namespace: nil,
         request_options: {}
       )
       end
@@ -34,7 +34,6 @@ module Turbopuffer
       # Issue multiple concurrent queries filter or search documents.
       sig do
         params(
-          namespace: String,
           queries:
             T::Array[Turbopuffer::NamespaceMultiQueryParams::Query::OrHash],
           consistency:
@@ -44,8 +43,6 @@ module Turbopuffer
         ).returns(Turbopuffer::Models::NamespaceMultiQueryResponse)
       end
       def multi_query(
-        # Path param: The name of the namespace.
-        namespace:,
         # Body param:
         queries:,
         # Body param: The consistency level for a query.
@@ -59,7 +56,7 @@ module Turbopuffer
       # Query, filter, full-text search and vector search documents.
       sig do
         params(
-          namespace: String,
+          namespace: T.nilable(String),
           aggregate_by: T::Hash[Symbol, T.anything],
           consistency: Turbopuffer::NamespaceQueryParams::Consistency::OrHash,
           distance_metric: Turbopuffer::DistanceMetric::OrSymbol,
@@ -73,7 +70,7 @@ module Turbopuffer
       end
       def query(
         # Path param: The name of the namespace.
-        namespace:,
+        namespace: nil,
         # Body param: Aggregations to compute over all documents in the namespace that
         # match the filters.
         aggregate_by: nil,
@@ -99,7 +96,7 @@ module Turbopuffer
       # Evaluate recall.
       sig do
         params(
-          namespace: String,
+          namespace: T.nilable(String),
           filters: T.anything,
           num: Integer,
           queries: T::Array[Float],
@@ -109,7 +106,7 @@ module Turbopuffer
       end
       def recall(
         # Path param: The name of the namespace.
-        namespace:,
+        namespace: nil,
         # Body param: Filter by attributes. Same syntax as the query endpoint.
         filters: nil,
         # Body param: The number of searches to run.
@@ -126,13 +123,13 @@ module Turbopuffer
       # Get namespace schema.
       sig do
         params(
-          namespace: String,
+          namespace: T.nilable(String),
           request_options: Turbopuffer::RequestOptions::OrHash
         ).returns(T::Hash[Symbol, Turbopuffer::AttributeSchemaConfig])
       end
       def schema(
         # The name of the namespace.
-        namespace:,
+        namespace: nil,
         request_options: {}
       )
       end
@@ -140,7 +137,7 @@ module Turbopuffer
       # Update namespace schema.
       sig do
         params(
-          namespace: String,
+          namespace: T.nilable(String),
           schema:
             T::Hash[
               Symbol,
@@ -151,7 +148,7 @@ module Turbopuffer
       end
       def update_schema(
         # Path param: The name of the namespace.
-        namespace:,
+        namespace: nil,
         # Body param: The desired schema for the namespace.
         schema: nil,
         request_options: {}
@@ -161,7 +158,7 @@ module Turbopuffer
       # Create, update, or delete documents.
       sig do
         params(
-          namespace: String,
+          namespace: T.nilable(String),
           copy_from_namespace: String,
           delete_by_filter: T.anything,
           deletes: T::Array[Turbopuffer::ID::Variants],
@@ -181,7 +178,7 @@ module Turbopuffer
       end
       def write(
         # Path param: The name of the namespace.
-        namespace:,
+        namespace: nil,
         # Body param: The namespace to copy documents from.
         copy_from_namespace: nil,
         # Body param: The filter specifying which documents to delete.

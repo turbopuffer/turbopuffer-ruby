@@ -1,0 +1,5 @@
+module Turbopuffer
+  class Namespace < Turbopuffer::Resources::Namespaces
+    attr_reader id: String
+  end
+end
