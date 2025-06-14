@@ -21,6 +21,18 @@ module Turbopuffer
       #   @param id [String, Integer] An identifier for a document.
       #
       #   @param vector [Array<Float>, String] A vector embedding associated with a document.
+
+      def method_missing(name, *args, &block)
+        if @data.key?(name)
+          @data[name]
+        else
+          super
+        end
+      end
+
+      def respond_to_missing?(name, include_private = false)
+        @data.key?(name) || super
+      end
     end
   end
 end
