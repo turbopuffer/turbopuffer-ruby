@@ -21,8 +21,15 @@ module Turbopuffer
     sig { returns(T.nilable(String)) }
     attr_reader :default_namespace
 
-    sig { returns(Turbopuffer::Resources::Namespaces) }
-    attr_reader :namespaces
+    sig do
+      params(
+        namespace: String
+      ).returns(Turbopuffer::Namespace)
+    end
+    def namespace(
+      namespace
+    )
+    end
 
     # List namespaces.
     sig do

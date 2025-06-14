@@ -29,8 +29,7 @@ turbopuffer = Turbopuffer::Client.new(
   region: "gcp-us-central1"
 )
 
-response = turbopuffer.namespaces.write(
-  namespace: "products",
+response = turbopuffer.namespace("products").write(
   distance_metric: "cosine_distance",
   upsert_rows: [
     {id: "2108ed60-6851-49a0-9016-8325434f3845", vector: [0.1, 0.2], attributes: {name: "Red boots", price: 34.99}}
@@ -211,8 +210,7 @@ This library provides comprehensive [RBI](https://sorbet.org/docs/rbi) definitio
 You can provide typesafe request parameters like so:
 
 ```ruby
-turbopuffer.namespaces.write(
-  namespace: "products",
+turbopuffer.namespace("products").write(
   distance_metric: "cosine_distance",
   upsert_rows: [
     Turbopuffer::Row.new(
@@ -228,8 +226,7 @@ Or, equivalently:
 
 ```ruby
 # Hashes work, but are not typesafe:
-turbopuffer.namespaces.write(
-  namespace: "products",
+turbopuffer.namespace("products").write(
   distance_metric: "cosine_distance",
   upsert_rows: [
     {id: "2108ed60-6851-49a0-9016-8325434f3845", vector: [0.1, 0.2], attributes: {name: "Red boots", price: 34.99}}
@@ -238,7 +235,6 @@ turbopuffer.namespaces.write(
 
 # You can also splat a full Params class:
 params = Turbopuffer::NamespaceWriteParams.new(
-  namespace: "products",
   distance_metric: "cosine_distance",
   upsert_rows: [
     Turbopuffer::Row.new(
@@ -248,7 +244,7 @@ params = Turbopuffer::NamespaceWriteParams.new(
     )
   ]
 )
-turbopuffer.namespaces.write(**params)
+turbopuffer.namespace("products").write(**params)
 ```
 
 ### Enums
