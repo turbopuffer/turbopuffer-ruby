@@ -2,17 +2,17 @@ module Turbopuffer
   module Resources
     class Namespaces
       def delete_all: (
-        ?namespace: String,
+        namespace: String,
         ?request_options: Turbopuffer::request_opts
       ) -> Turbopuffer::Models::NamespaceDeleteAllResponse
 
       def hint_cache_warm: (
-        ?namespace: String,
+        namespace: String,
         ?request_options: Turbopuffer::request_opts
       ) -> Turbopuffer::Models::NamespaceHintCacheWarmResponse
 
       def multi_query: (
-        ?namespace: String,
+        namespace: String,
         queries: ::Array[Turbopuffer::NamespaceMultiQueryParams::Query],
         ?consistency: Turbopuffer::NamespaceMultiQueryParams::Consistency,
         ?vector_encoding: Turbopuffer::Models::vector_encoding,
@@ -20,7 +20,7 @@ module Turbopuffer
       ) -> Turbopuffer::Models::NamespaceMultiQueryResponse
 
       def query: (
-        ?namespace: String,
+        namespace: String,
         ?aggregate_by: ::Hash[Symbol, top],
         ?consistency: Turbopuffer::NamespaceQueryParams::Consistency,
         ?distance_metric: Turbopuffer::Models::distance_metric,
@@ -33,7 +33,7 @@ module Turbopuffer
       ) -> Turbopuffer::Models::NamespaceQueryResponse
 
       def recall: (
-        ?namespace: String,
+        namespace: String,
         ?filters: top,
         ?num: Integer,
         ?queries: ::Array[Float],
@@ -42,18 +42,18 @@ module Turbopuffer
       ) -> Turbopuffer::Models::NamespaceRecallResponse
 
       def schema: (
-        ?namespace: String,
+        namespace: String,
         ?request_options: Turbopuffer::request_opts
       ) -> Turbopuffer::Models::namespace_schema_response
 
       def update_schema: (
-        ?namespace: String,
+        namespace: String,
         ?schema: ::Hash[Symbol, Turbopuffer::Models::attribute_schema],
         ?request_options: Turbopuffer::request_opts
       ) -> Turbopuffer::Models::namespace_update_schema_response
 
       def write: (
-        ?namespace: String,
+        namespace: String,
         ?copy_from_namespace: String,
         ?delete_by_filter: top,
         ?deletes: ::Array[Turbopuffer::Models::id],
