@@ -1,0 +1,11 @@
+module Turbopuffer
+  module Models
+    type full_text_search = bool | Turbopuffer::FullTextSearchConfig
+
+    module FullTextSearch
+      extend Turbopuffer::Internal::Type::Union
+
+      def self?.variants: -> ::Array[Turbopuffer::Models::full_text_search]
+    end
+  end
+end

@@ -1,0 +1,38 @@
+module Turbopuffer
+  module Models
+    type client_namespaces_params =
+      { cursor: String, page_size: Integer, prefix: String }
+      & Turbopuffer::Internal::Type::request_parameters
+
+    class ClientNamespacesParams < Turbopuffer::Internal::Type::BaseModel
+      extend Turbopuffer::Internal::Type::RequestParameters::Converter
+      include Turbopuffer::Internal::Type::RequestParameters
+
+      attr_reader cursor: String?
+
+      def cursor=: (String) -> String
+
+      attr_reader page_size: Integer?
+
+      def page_size=: (Integer) -> Integer
+
+      attr_reader prefix: String?
+
+      def prefix=: (String) -> String
+
+      def initialize: (
+        ?cursor: String,
+        ?page_size: Integer,
+        ?prefix: String,
+        ?request_options: Turbopuffer::request_opts
+      ) -> void
+
+      def to_hash: -> {
+        cursor: String,
+        page_size: Integer,
+        prefix: String,
+        request_options: Turbopuffer::RequestOptions
+      }
+    end
+  end
+end

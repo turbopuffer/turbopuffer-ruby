@@ -1,0 +1,26 @@
+module Turbopuffer
+  module Internal
+    module Type
+      class Boolean
+        extend Turbopuffer::Internal::Type::Converter
+        extend Turbopuffer::Internal::Util::SorbetRuntimeSupport
+
+        def self.===: (top other) -> bool
+
+        def self.==: (top other) -> bool
+
+        def self.coerce: (
+          bool | top value,
+          state: Turbopuffer::Internal::Type::Converter::coerce_state
+        ) -> (bool | top)
+
+        def self.dump: (
+          bool | top value,
+          state: Turbopuffer::Internal::Type::Converter::dump_state
+        ) -> (bool | top)
+
+        def self.to_sorbet_type: -> top
+      end
+    end
+  end
+end

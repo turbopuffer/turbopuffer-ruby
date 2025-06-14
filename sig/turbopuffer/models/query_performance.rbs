@@ -1,0 +1,45 @@
+module Turbopuffer
+  module Models
+    type query_performance =
+      {
+        approx_namespace_size: Integer,
+        cache_hit_ratio: Float,
+        cache_temperature: String,
+        exhaustive_search_count: Integer,
+        query_execution_ms: Integer,
+        server_total_ms: Integer
+      }
+
+    class QueryPerformance < Turbopuffer::Internal::Type::BaseModel
+      attr_accessor approx_namespace_size: Integer
+
+      attr_accessor cache_hit_ratio: Float
+
+      attr_accessor cache_temperature: String
+
+      attr_accessor exhaustive_search_count: Integer
+
+      attr_accessor query_execution_ms: Integer
+
+      attr_accessor server_total_ms: Integer
+
+      def initialize: (
+        approx_namespace_size: Integer,
+        cache_hit_ratio: Float,
+        cache_temperature: String,
+        exhaustive_search_count: Integer,
+        query_execution_ms: Integer,
+        server_total_ms: Integer
+      ) -> void
+
+      def to_hash: -> {
+        approx_namespace_size: Integer,
+        cache_hit_ratio: Float,
+        cache_temperature: String,
+        exhaustive_search_count: Integer,
+        query_execution_ms: Integer,
+        server_total_ms: Integer
+      }
+    end
+  end
+end

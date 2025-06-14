@@ -1,0 +1,35 @@
+module Turbopuffer
+  module Models
+    type namespace_update_schema_params =
+      {
+        namespace: String,
+        schema: ::Hash[Symbol, Turbopuffer::Models::attribute_schema]
+      }
+      & Turbopuffer::Internal::Type::request_parameters
+
+    class NamespaceUpdateSchemaParams < Turbopuffer::Internal::Type::BaseModel
+      extend Turbopuffer::Internal::Type::RequestParameters::Converter
+      include Turbopuffer::Internal::Type::RequestParameters
+
+      attr_accessor namespace: String
+
+      attr_reader schema: ::Hash[Symbol, Turbopuffer::Models::attribute_schema]?
+
+      def schema=: (
+        ::Hash[Symbol, Turbopuffer::Models::attribute_schema]
+      ) -> ::Hash[Symbol, Turbopuffer::Models::attribute_schema]
+
+      def initialize: (
+        namespace: String,
+        ?schema: ::Hash[Symbol, Turbopuffer::Models::attribute_schema],
+        ?request_options: Turbopuffer::request_opts
+      ) -> void
+
+      def to_hash: -> {
+        namespace: String,
+        schema: ::Hash[Symbol, Turbopuffer::Models::attribute_schema],
+        request_options: Turbopuffer::RequestOptions
+      }
+    end
+  end
+end

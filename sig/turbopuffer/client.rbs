@@ -1,0 +1,39 @@
+module Turbopuffer
+  class Client < Turbopuffer::Internal::Transport::BaseClient
+    DEFAULT_MAX_RETRIES: 2
+
+    DEFAULT_TIMEOUT_IN_SECONDS: Float
+
+    DEFAULT_INITIAL_RETRY_DELAY: Float
+
+    DEFAULT_MAX_RETRY_DELAY: Float
+
+    attr_reader api_key: String
+
+    attr_reader region: String
+
+    attr_reader default_namespace: String?
+
+    attr_reader namespaces: Turbopuffer::Resources::Namespaces
+
+    def namespaces: (
+      ?cursor: String,
+      ?page_size: Integer,
+      ?prefix: String,
+      ?request_options: Turbopuffer::request_opts
+    ) -> Turbopuffer::Internal::NamespacePage[Turbopuffer::NamespaceSummary]
+
+    private def auth_headers: -> ::Hash[String, String]
+
+    def initialize: (
+      ?api_key: String?,
+      ?region: String?,
+      ?default_namespace: String?,
+      ?base_url: String?,
+      ?max_retries: Integer,
+      ?timeout: Float,
+      ?initial_retry_delay: Float,
+      ?max_retry_delay: Float
+    ) -> void
+  end
+end

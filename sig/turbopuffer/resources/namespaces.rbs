@@ -1,0 +1,73 @@
+module Turbopuffer
+  module Resources
+    class Namespaces
+      def delete_all: (
+        namespace: String,
+        ?request_options: Turbopuffer::request_opts
+      ) -> Turbopuffer::Models::NamespaceDeleteAllResponse
+
+      def hint_cache_warm: (
+        namespace: String,
+        ?request_options: Turbopuffer::request_opts
+      ) -> Turbopuffer::Models::NamespaceHintCacheWarmResponse
+
+      def multi_query: (
+        namespace: String,
+        queries: ::Array[Turbopuffer::NamespaceMultiQueryParams::Query],
+        ?consistency: Turbopuffer::NamespaceMultiQueryParams::Consistency,
+        ?vector_encoding: Turbopuffer::Models::vector_encoding,
+        ?request_options: Turbopuffer::request_opts
+      ) -> Turbopuffer::Models::NamespaceMultiQueryResponse
+
+      def query: (
+        namespace: String,
+        ?aggregate_by: ::Hash[Symbol, top],
+        ?consistency: Turbopuffer::NamespaceQueryParams::Consistency,
+        ?distance_metric: Turbopuffer::Models::distance_metric,
+        ?filters: top,
+        ?include_attributes: Turbopuffer::Models::include_attributes,
+        ?rank_by: top,
+        ?top_k: Integer,
+        ?vector_encoding: Turbopuffer::Models::vector_encoding,
+        ?request_options: Turbopuffer::request_opts
+      ) -> Turbopuffer::Models::NamespaceQueryResponse
+
+      def recall: (
+        namespace: String,
+        ?filters: top,
+        ?num: Integer,
+        ?queries: ::Array[Float],
+        ?top_k: Integer,
+        ?request_options: Turbopuffer::request_opts
+      ) -> Turbopuffer::Models::NamespaceRecallResponse
+
+      def schema: (
+        namespace: String,
+        ?request_options: Turbopuffer::request_opts
+      ) -> Turbopuffer::Models::namespace_schema_response
+
+      def update_schema: (
+        namespace: String,
+        ?schema: ::Hash[Symbol, Turbopuffer::Models::attribute_schema],
+        ?request_options: Turbopuffer::request_opts
+      ) -> Turbopuffer::Models::namespace_update_schema_response
+
+      def write: (
+        namespace: String,
+        ?copy_from_namespace: String,
+        ?delete_by_filter: top,
+        ?deletes: ::Array[Turbopuffer::Models::id],
+        ?distance_metric: Turbopuffer::Models::distance_metric,
+        ?encryption: Turbopuffer::NamespaceWriteParams::Encryption,
+        ?patch_columns: Turbopuffer::Columns,
+        ?patch_rows: ::Array[Turbopuffer::Row],
+        ?schema: ::Hash[Symbol, Turbopuffer::Models::attribute_schema],
+        ?upsert_columns: Turbopuffer::Columns,
+        ?upsert_rows: ::Array[Turbopuffer::Row],
+        ?request_options: Turbopuffer::request_opts
+      ) -> Turbopuffer::Models::NamespaceWriteResponse
+
+      def initialize: (client: Turbopuffer::Client) -> void
+    end
+  end
+end

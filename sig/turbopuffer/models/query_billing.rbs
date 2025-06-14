@@ -1,0 +1,25 @@
+module Turbopuffer
+  module Models
+    type query_billing =
+      {
+        billable_logical_bytes_queried: Integer,
+        billable_logical_bytes_returned: Integer
+      }
+
+    class QueryBilling < Turbopuffer::Internal::Type::BaseModel
+      attr_accessor billable_logical_bytes_queried: Integer
+
+      attr_accessor billable_logical_bytes_returned: Integer
+
+      def initialize: (
+        billable_logical_bytes_queried: Integer,
+        billable_logical_bytes_returned: Integer
+      ) -> void
+
+      def to_hash: -> {
+        billable_logical_bytes_queried: Integer,
+        billable_logical_bytes_returned: Integer
+      }
+    end
+  end
+end

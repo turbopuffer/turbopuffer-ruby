@@ -1,0 +1,13 @@
+module Turbopuffer
+  module Models
+    type include_attributes = bool | ::Array[String]
+
+    module IncludeAttributes
+      extend Turbopuffer::Internal::Type::Union
+
+      def self?.variants: -> ::Array[Turbopuffer::Models::include_attributes]
+
+      StringArray: Turbopuffer::Internal::Type::Converter
+    end
+  end
+end

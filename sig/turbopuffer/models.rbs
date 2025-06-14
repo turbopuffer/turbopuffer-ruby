@@ -1,0 +1,55 @@
+module Turbopuffer
+  module AttributeSchema = Turbopuffer::Models::AttributeSchema
+
+  class AttributeSchemaConfig = Turbopuffer::Models::AttributeSchemaConfig
+
+  class AttributeType = Turbopuffer::Models::AttributeType
+
+  class ClientNamespacesParams = Turbopuffer::Models::ClientNamespacesParams
+
+  class Columns = Turbopuffer::Models::Columns
+
+  module DistanceMetric = Turbopuffer::Models::DistanceMetric
+
+  module FullTextSearch = Turbopuffer::Models::FullTextSearch
+
+  class FullTextSearchConfig = Turbopuffer::Models::FullTextSearchConfig
+
+  module ID = Turbopuffer::Models::ID
+
+  module IncludeAttributes = Turbopuffer::Models::IncludeAttributes
+
+  module Language = Turbopuffer::Models::Language
+
+  class NamespaceDeleteAllParams = Turbopuffer::Models::NamespaceDeleteAllParams
+
+  class NamespaceHintCacheWarmParams = Turbopuffer::Models::NamespaceHintCacheWarmParams
+
+  class NamespaceMultiQueryParams = Turbopuffer::Models::NamespaceMultiQueryParams
+
+  class NamespaceQueryParams = Turbopuffer::Models::NamespaceQueryParams
+
+  class NamespaceRecallParams = Turbopuffer::Models::NamespaceRecallParams
+
+  class NamespaceSchemaParams = Turbopuffer::Models::NamespaceSchemaParams
+
+  class NamespaceSummary = Turbopuffer::Models::NamespaceSummary
+
+  class NamespaceUpdateSchemaParams = Turbopuffer::Models::NamespaceUpdateSchemaParams
+
+  class NamespaceWriteParams = Turbopuffer::Models::NamespaceWriteParams
+
+  class QueryBilling = Turbopuffer::Models::QueryBilling
+
+  class QueryPerformance = Turbopuffer::Models::QueryPerformance
+
+  class Row = Turbopuffer::Models::Row
+
+  module Tokenizer = Turbopuffer::Models::Tokenizer
+
+  module Vector = Turbopuffer::Models::Vector
+
+  module VectorEncoding = Turbopuffer::Models::VectorEncoding
+
+  class WriteBilling = Turbopuffer::Models::WriteBilling
+end

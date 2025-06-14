@@ -1,0 +1,9 @@
+module Turbopuffer
+  module Internal
+    extend Turbopuffer::Internal::Util::SorbetRuntimeSupport
+
+    type file_input = Pathname | StringIO | IO | String | Turbopuffer::FilePart
+
+    OMIT: Object
+  end
+end

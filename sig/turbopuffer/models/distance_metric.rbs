@@ -1,0 +1,17 @@
+module Turbopuffer
+  module Models
+    type distance_metric = :cosine_distance | :euclidean_squared
+
+    module DistanceMetric
+      extend Turbopuffer::Internal::Type::Enum
+
+      # Defined as `1 - cosine_similarity` and ranges from 0 to 2. Lower is better.
+      COSINE_DISTANCE: :cosine_distance
+
+      # Defined as `sum((x - y)^2)`. Lower is better.
+      EUCLIDEAN_SQUARED: :euclidean_squared
+
+      def self?.values: -> ::Array[Turbopuffer::Models::distance_metric]
+    end
+  end
+end

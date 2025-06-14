@@ -1,0 +1,14 @@
+module Turbopuffer
+  module Models
+    type vector_encoding = :float | :base64
+
+    module VectorEncoding
+      extend Turbopuffer::Internal::Type::Enum
+
+      FLOAT: :float
+      BASE64: :base64
+
+      def self?.values: -> ::Array[Turbopuffer::Models::vector_encoding]
+    end
+  end
+end

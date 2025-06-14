@@ -1,0 +1,13 @@
+module Turbopuffer
+  module Models
+    type vector = ::Array[Float] | String
+
+    module Vector
+      extend Turbopuffer::Internal::Type::Union
+
+      def self?.variants: -> ::Array[Turbopuffer::Models::vector]
+
+      FloatArray: Turbopuffer::Internal::Type::Converter
+    end
+  end
+end

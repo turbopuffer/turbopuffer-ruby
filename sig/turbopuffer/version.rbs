@@ -1,0 +1,3 @@
+module Turbopuffer
+  VERSION: String
+end

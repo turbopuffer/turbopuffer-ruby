@@ -1,0 +1,5 @@
+module Turbopuffer
+  module Models
+    class AttributeType = String
+  end
+end

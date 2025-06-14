@@ -1,0 +1,8 @@
+module Turbopuffer
+  module Models
+    type namespace_schema_response =
+      ::Hash[Symbol, Turbopuffer::AttributeSchemaConfig]
+
+    NamespaceSchemaResponse: Turbopuffer::Internal::Type::Converter
+  end
+end
