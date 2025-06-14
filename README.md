@@ -1,6 +1,6 @@
 # Turbopuffer Ruby API library
 
-The Turbopuffer Ruby library provides convenient access to the Turbopuffer REST API from any Ruby 3.2.0+ application. It ships with comprehensive types & docstrings in Yard, RBS, and RBI – [see below](https://github.com/stainless-sdks/turbopuffer-ruby#Sorbet) for usage with Sorbet. The standard library's `net/http` is used as the HTTP transport, with connection pooling via the `connection_pool` gem.
+The Turbopuffer Ruby library provides convenient access to the Turbopuffer REST API from any Ruby 3.2.0+ application. It ships with comprehensive types & docstrings in Yard, RBS, and RBI – [see below](https://github.com/turbopuffer/turbopuffer-ruby#Sorbet) for usage with Sorbet. The standard library's `net/http` is used as the HTTP transport, with connection pooling via the `connection_pool` gem.
 
 It is generated with [Stainless](https://www.stainless.com/).
 
@@ -14,9 +14,13 @@ The REST API documentation can be found on [turbopuffer.com](https://turbopuffer
 
 To use this gem, install via Bundler by adding the following to your application's `Gemfile`:
 
+<!-- x-release-please-start-version -->
+
 ```ruby
 gem "turbopuffer", "~> 0.0.1.pre.alpha.0"
 ```
+
+<!-- x-release-please-end -->
 
 ## Usage
 
@@ -29,7 +33,8 @@ turbopuffer = Turbopuffer::Client.new(
   region: "gcp-us-central1"
 )
 
-response = turbopuffer.namespace("products").write(
+response = turbopuffer.namespaces.write(
+  namespace: "products",
   distance_metric: "cosine_distance",
   upsert_rows: [
     {id: "2108ed60-6851-49a0-9016-8325434f3845", vector: [0.1, 0.2], attributes: {name: "Red boots", price: 34.99}}
@@ -210,7 +215,8 @@ This library provides comprehensive [RBI](https://sorbet.org/docs/rbi) definitio
 You can provide typesafe request parameters like so:
 
 ```ruby
-turbopuffer.namespace("products").write(
+turbopuffer.namespaces.write(
+  namespace: "products",
   distance_metric: "cosine_distance",
   upsert_rows: [
     Turbopuffer::Row.new(
@@ -226,7 +232,8 @@ Or, equivalently:
 
 ```ruby
 # Hashes work, but are not typesafe:
-turbopuffer.namespace("products").write(
+turbopuffer.namespaces.write(
+  namespace: "products",
   distance_metric: "cosine_distance",
   upsert_rows: [
     {id: "2108ed60-6851-49a0-9016-8325434f3845", vector: [0.1, 0.2], attributes: {name: "Red boots", price: 34.99}}
@@ -235,6 +242,7 @@ turbopuffer.namespace("products").write(
 
 # You can also splat a full Params class:
 params = Turbopuffer::NamespaceWriteParams.new(
+  namespace: "products",
   distance_metric: "cosine_distance",
   upsert_rows: [
     Turbopuffer::Row.new(
@@ -244,7 +252,7 @@ params = Turbopuffer::NamespaceWriteParams.new(
     )
   ]
 )
-turbopuffer.namespace("products").write(**params)
+turbopuffer.namespaces.write(**params)
 ```
 
 ### Enums
@@ -287,4 +295,4 @@ Ruby 3.2.0 or higher.
 
 ## Contributing
 
-See [the contributing documentation](https://github.com/stainless-sdks/turbopuffer-ruby/tree/main/CONTRIBUTING.md).
+See [the contributing documentation](https://github.com/turbopuffer/turbopuffer-ruby/tree/main/CONTRIBUTING.md).
