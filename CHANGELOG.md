@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.1.0-alpha.2 (2025-06-14)
+
+Full Changelog: [v0.1.0-alpha.1...v0.1.0-alpha.2](https://github.com/turbopuffer/turbopuffer-ruby/compare/v0.1.0-alpha.1...v0.1.0-alpha.2)
+
+### Features
+
+* add namespace resource and example ([7cbb4e4](https://github.com/turbopuffer/turbopuffer-ruby/commit/7cbb4e42820a628c6db965d9f43a27139a764413))
+
 ## 0.1.0-alpha.1 (2025-06-14)
 
 Full Changelog: [v0.0.1-alpha.0...v0.1.0-alpha.1](https://github.com/turbopuffer/turbopuffer-ruby/compare/v0.0.1-alpha.0...v0.1.0-alpha.1)
