@@ -9,6 +9,28 @@ module Turbopuffer
     end
 
     class ConversionError < Turbopuffer::Errors::Error
+      # @return [StandardError, nil]
+      def cause = @cause.nil? ? super : @cause
+
+      # @api private
+      #
+      # @param on [Class<StandardError>]
+      # @param method [Symbol]
+      # @param target [Object]
+      # @param value [Object]
+      # @param cause [StandardError, nil]
+      def initialize(on:, method:, target:, value:, cause: nil)
+        cls = on.name.split("::").last
+
+        message = [
+          "Failed to parse #{cls}.#{method} from #{value.class} to #{target.inspect}.",
+          "To get the unparsed API response, use #{cls}[#{method.inspect}].",
+          cause && "Cause: #{cause.message}"
+        ].filter(&:itself).join(" ")
+
+        @cause = cause
+        super(message)
+      end
     end
 
     class APIError < Turbopuffer::Errors::Error
