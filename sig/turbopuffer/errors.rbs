@@ -5,6 +5,15 @@ module Turbopuffer
     end
 
     class ConversionError < Turbopuffer::Errors::Error
+      def cause: -> StandardError?
+
+      def initialize: (
+        on: Class,
+        method: Symbol,
+        target: top,
+        value: top,
+        ?cause: StandardError?
+      ) -> void
     end
 
     class APIError < Turbopuffer::Errors::Error
