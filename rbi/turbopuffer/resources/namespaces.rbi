@@ -35,8 +35,7 @@ module Turbopuffer
       sig do
         params(
           namespace: String,
-          queries:
-            T::Array[Turbopuffer::NamespaceMultiQueryParams::Query::OrHash],
+          queries: T::Array[Turbopuffer::Query::OrHash],
           consistency:
             Turbopuffer::NamespaceMultiQueryParams::Consistency::OrHash,
           vector_encoding: Turbopuffer::VectorEncoding::OrSymbol,

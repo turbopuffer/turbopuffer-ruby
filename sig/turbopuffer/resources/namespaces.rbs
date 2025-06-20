@@ -13,7 +13,7 @@ module Turbopuffer
 
       def multi_query: (
         namespace: String,
-        queries: ::Array[Turbopuffer::NamespaceMultiQueryParams::Query],
+        queries: ::Array[Turbopuffer::Query],
         ?consistency: Turbopuffer::NamespaceMultiQueryParams::Consistency,
         ?vector_encoding: Turbopuffer::Models::vector_encoding,
         ?request_options: Turbopuffer::request_opts

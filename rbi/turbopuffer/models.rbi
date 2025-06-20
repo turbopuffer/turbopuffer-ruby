@@ -42,6 +42,8 @@ module Turbopuffer
 
   NamespaceWriteParams = Turbopuffer::Models::NamespaceWriteParams
 
+  Query = Turbopuffer::Models::Query
+
   QueryBilling = Turbopuffer::Models::QueryBilling
 
   QueryPerformance = Turbopuffer::Models::QueryPerformance

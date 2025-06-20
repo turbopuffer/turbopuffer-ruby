@@ -59,7 +59,7 @@ module Turbopuffer
       #
       # @param namespace [String] Path param: The name of the namespace.
       #
-      # @param queries [Array<Turbopuffer::Models::NamespaceMultiQueryParams::Query>] Body param:
+      # @param queries [Array<Turbopuffer::Models::Query>] Body param:
       #
       # @param consistency [Turbopuffer::Models::NamespaceMultiQueryParams::Consistency] Body param: The consistency level for a query.
       #
