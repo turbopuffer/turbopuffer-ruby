@@ -24,6 +24,13 @@ module Turbopuffer
       #   @return [Object, nil]
       optional :delete_by_filter, Turbopuffer::Internal::Type::Unknown
 
+      # @!attribute delete_condition
+      #   A condition evaluated against the current value of each document targeted by a
+      #   delete write. Only documents that pass the condition are deleted.
+      #
+      #   @return [Object, nil]
+      optional :delete_condition, Turbopuffer::Internal::Type::Unknown
+
       # @!attribute deletes
       #
       #   @return [Array<String, Integer>, nil]
@@ -48,6 +55,13 @@ module Turbopuffer
       #   @return [Turbopuffer::Models::Columns, nil]
       optional :patch_columns, -> { Turbopuffer::Columns }
 
+      # @!attribute patch_condition
+      #   A condition evaluated against the current value of each document targeted by a
+      #   patch write. Only documents that pass the condition are patched.
+      #
+      #   @return [Object, nil]
+      optional :patch_condition, Turbopuffer::Internal::Type::Unknown
+
       # @!attribute patch_rows
       #
       #   @return [Array<Turbopuffer::Models::Row>, nil]
@@ -66,12 +80,19 @@ module Turbopuffer
       #   @return [Turbopuffer::Models::Columns, nil]
       optional :upsert_columns, -> { Turbopuffer::Columns }
 
+      # @!attribute upsert_condition
+      #   A condition evaluated against the current value of each document targeted by an
+      #   upsert write. Only documents that pass the condition are upserted.
+      #
+      #   @return [Object, nil]
+      optional :upsert_condition, Turbopuffer::Internal::Type::Unknown
+
       # @!attribute upsert_rows
       #
       #   @return [Array<Turbopuffer::Models::Row>, nil]
       optional :upsert_rows, -> { Turbopuffer::Internal::Type::ArrayOf[Turbopuffer::Row] }
 
-      # @!method initialize(namespace:, copy_from_namespace: nil, delete_by_filter: nil, deletes: nil, distance_metric: nil, encryption: nil, patch_columns: nil, patch_rows: nil, schema: nil, upsert_columns: nil, upsert_rows: nil, request_options: {})
+      # @!method initialize(namespace:, copy_from_namespace: nil, delete_by_filter: nil, delete_condition: nil, deletes: nil, distance_metric: nil, encryption: nil, patch_columns: nil, patch_condition: nil, patch_rows: nil, schema: nil, upsert_columns: nil, upsert_condition: nil, upsert_rows: nil, request_options: {})
       #   Some parameter documentations has been truncated, see
       #   {Turbopuffer::Models::NamespaceWriteParams} for more details.
       #
@@ -81,6 +102,8 @@ module Turbopuffer
       #
       #   @param delete_by_filter [Object] The filter specifying which documents to delete.
       #
+      #   @param delete_condition [Object] A condition evaluated against the current value of each document targeted by a d
+      #
       #   @param deletes [Array<String, Integer>]
       #
       #   @param distance_metric [Symbol, Turbopuffer::Models::DistanceMetric] A function used to calculate vector similarity.
@@ -89,11 +112,15 @@ module Turbopuffer
       #
       #   @param patch_columns [Turbopuffer::Models::Columns] A list of documents in columnar format. Each key is a column name, mapped to an
       #
+      #   @param patch_condition [Object] A condition evaluated against the current value of each document targeted by a p
+      #
       #   @param patch_rows [Array<Turbopuffer::Models::Row>]
       #
       #   @param schema [Hash{Symbol=>String, Turbopuffer::Models::AttributeSchemaConfig}] The schema of the attributes attached to the documents.
       #
       #   @param upsert_columns [Turbopuffer::Models::Columns] A list of documents in columnar format. Each key is a column name, mapped to an
+      #
+      #   @param upsert_condition [Object] A condition evaluated against the current value of each document targeted by an
       #
       #   @param upsert_rows [Array<Turbopuffer::Models::Row>]
       #

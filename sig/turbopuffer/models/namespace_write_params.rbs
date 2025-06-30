@@ -5,13 +5,16 @@ module Turbopuffer
         namespace: String,
         copy_from_namespace: String,
         delete_by_filter: top,
+        delete_condition: top,
         deletes: ::Array[Turbopuffer::Models::id],
         distance_metric: Turbopuffer::Models::distance_metric,
         encryption: Turbopuffer::NamespaceWriteParams::Encryption,
         patch_columns: Turbopuffer::Columns,
+        patch_condition: top,
         patch_rows: ::Array[Turbopuffer::Row],
         schema: ::Hash[Symbol, Turbopuffer::Models::attribute_schema],
         upsert_columns: Turbopuffer::Columns,
+        upsert_condition: top,
         upsert_rows: ::Array[Turbopuffer::Row]
       }
       & Turbopuffer::Internal::Type::request_parameters
@@ -29,6 +32,10 @@ module Turbopuffer
       attr_reader delete_by_filter: top?
 
       def delete_by_filter=: (top) -> top
+
+      attr_reader delete_condition: top?
+
+      def delete_condition=: (top) -> top
 
       attr_reader deletes: ::Array[Turbopuffer::Models::id]?
 
@@ -52,6 +59,10 @@ module Turbopuffer
 
       def patch_columns=: (Turbopuffer::Columns) -> Turbopuffer::Columns
 
+      attr_reader patch_condition: top?
+
+      def patch_condition=: (top) -> top
+
       attr_reader patch_rows: ::Array[Turbopuffer::Row]?
 
       def patch_rows=: (::Array[Turbopuffer::Row]) -> ::Array[Turbopuffer::Row]
@@ -66,6 +77,10 @@ module Turbopuffer
 
       def upsert_columns=: (Turbopuffer::Columns) -> Turbopuffer::Columns
 
+      attr_reader upsert_condition: top?
+
+      def upsert_condition=: (top) -> top
+
       attr_reader upsert_rows: ::Array[Turbopuffer::Row]?
 
       def upsert_rows=: (::Array[Turbopuffer::Row]) -> ::Array[Turbopuffer::Row]
@@ -74,13 +89,16 @@ module Turbopuffer
         namespace: String,
         ?copy_from_namespace: String,
         ?delete_by_filter: top,
+        ?delete_condition: top,
         ?deletes: ::Array[Turbopuffer::Models::id],
         ?distance_metric: Turbopuffer::Models::distance_metric,
         ?encryption: Turbopuffer::NamespaceWriteParams::Encryption,
         ?patch_columns: Turbopuffer::Columns,
+        ?patch_condition: top,
         ?patch_rows: ::Array[Turbopuffer::Row],
         ?schema: ::Hash[Symbol, Turbopuffer::Models::attribute_schema],
         ?upsert_columns: Turbopuffer::Columns,
+        ?upsert_condition: top,
         ?upsert_rows: ::Array[Turbopuffer::Row],
         ?request_options: Turbopuffer::request_opts
       ) -> void
@@ -89,13 +107,16 @@ module Turbopuffer
         namespace: String,
         copy_from_namespace: String,
         delete_by_filter: top,
+        delete_condition: top,
         deletes: ::Array[Turbopuffer::Models::id],
         distance_metric: Turbopuffer::Models::distance_metric,
         encryption: Turbopuffer::NamespaceWriteParams::Encryption,
         patch_columns: Turbopuffer::Columns,
+        patch_condition: top,
         patch_rows: ::Array[Turbopuffer::Row],
         schema: ::Hash[Symbol, Turbopuffer::Models::attribute_schema],
         upsert_columns: Turbopuffer::Columns,
+        upsert_condition: top,
         upsert_rows: ::Array[Turbopuffer::Row],
         request_options: Turbopuffer::RequestOptions
       }
