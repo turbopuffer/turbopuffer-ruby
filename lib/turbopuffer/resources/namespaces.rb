@@ -225,13 +225,15 @@ module Turbopuffer
       #
       # Create, update, or delete documents.
       #
-      # @overload write(namespace:, copy_from_namespace: nil, delete_by_filter: nil, deletes: nil, distance_metric: nil, encryption: nil, patch_columns: nil, patch_rows: nil, schema: nil, upsert_columns: nil, upsert_rows: nil, request_options: {})
+      # @overload write(namespace:, copy_from_namespace: nil, delete_by_filter: nil, delete_condition: nil, deletes: nil, distance_metric: nil, encryption: nil, patch_columns: nil, patch_condition: nil, patch_rows: nil, schema: nil, upsert_columns: nil, upsert_condition: nil, upsert_rows: nil, request_options: {})
       #
       # @param namespace [String] Path param: The name of the namespace.
       #
       # @param copy_from_namespace [String] Body param: The namespace to copy documents from.
       #
       # @param delete_by_filter [Object] Body param: The filter specifying which documents to delete.
+      #
+      # @param delete_condition [Object] Body param: A condition evaluated against the current value of each document tar
       #
       # @param deletes [Array<String, Integer>] Body param:
       #
@@ -241,11 +243,15 @@ module Turbopuffer
       #
       # @param patch_columns [Turbopuffer::Models::Columns] Body param: A list of documents in columnar format. Each key is a column name, m
       #
+      # @param patch_condition [Object] Body param: A condition evaluated against the current value of each document tar
+      #
       # @param patch_rows [Array<Turbopuffer::Models::Row>] Body param:
       #
       # @param schema [Hash{Symbol=>String, Turbopuffer::Models::AttributeSchemaConfig}] Body param: The schema of the attributes attached to the documents.
       #
       # @param upsert_columns [Turbopuffer::Models::Columns] Body param: A list of documents in columnar format. Each key is a column name, m
+      #
+      # @param upsert_condition [Object] Body param: A condition evaluated against the current value of each document tar
       #
       # @param upsert_rows [Array<Turbopuffer::Models::Row>] Body param:
       #
