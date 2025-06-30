@@ -56,13 +56,16 @@ module Turbopuffer
         ?namespace: String,
         ?copy_from_namespace: String,
         ?delete_by_filter: top,
+        ?delete_condition: top,
         ?deletes: ::Array[Turbopuffer::Models::id],
         ?distance_metric: Turbopuffer::Models::distance_metric,
         ?encryption: Turbopuffer::NamespaceWriteParams::Encryption,
         ?patch_columns: Turbopuffer::Columns,
+        ?patch_condition: top,
         ?patch_rows: ::Array[Turbopuffer::Row],
         ?schema: ::Hash[Symbol, Turbopuffer::Models::attribute_schema],
         ?upsert_columns: Turbopuffer::Columns,
+        ?upsert_condition: top,
         ?upsert_rows: ::Array[Turbopuffer::Row],
         ?request_options: Turbopuffer::request_opts
       ) -> Turbopuffer::Models::NamespaceWriteResponse
