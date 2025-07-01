@@ -125,7 +125,10 @@ class Turbopuffer::Test::Resources::NamespacesTest < Turbopuffer::Test::Resource
         billing: Turbopuffer::WriteBilling,
         message: String,
         rows_affected: Integer,
-        status: Symbol
+        status: Symbol,
+        rows_deleted: Integer | nil,
+        rows_patched: Integer | nil,
+        rows_upserted: Integer | nil
       }
     end
   end
