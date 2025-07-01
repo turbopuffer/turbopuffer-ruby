@@ -1,0 +1,61 @@
+module Turbopuffer
+  module Models
+    type query =
+      {
+        aggregate_by: ::Hash[Symbol, top],
+        distance_metric: Turbopuffer::Models::distance_metric,
+        filters: top,
+        include_attributes: Turbopuffer::Models::include_attributes,
+        rank_by: top,
+        top_k: Integer
+      }
+
+    class Query < Turbopuffer::Internal::Type::BaseModel
+      attr_reader aggregate_by: ::Hash[Symbol, top]?
+
+      def aggregate_by=: (::Hash[Symbol, top]) -> ::Hash[Symbol, top]
+
+      attr_reader distance_metric: Turbopuffer::Models::distance_metric?
+
+      def distance_metric=: (
+        Turbopuffer::Models::distance_metric
+      ) -> Turbopuffer::Models::distance_metric
+
+      attr_reader filters: top?
+
+      def filters=: (top) -> top
+
+      attr_reader include_attributes: Turbopuffer::Models::include_attributes?
+
+      def include_attributes=: (
+        Turbopuffer::Models::include_attributes
+      ) -> Turbopuffer::Models::include_attributes
+
+      attr_reader rank_by: top?
+
+      def rank_by=: (top) -> top
+
+      attr_reader top_k: Integer?
+
+      def top_k=: (Integer) -> Integer
+
+      def initialize: (
+        ?aggregate_by: ::Hash[Symbol, top],
+        ?distance_metric: Turbopuffer::Models::distance_metric,
+        ?filters: top,
+        ?include_attributes: Turbopuffer::Models::include_attributes,
+        ?rank_by: top,
+        ?top_k: Integer
+      ) -> void
+
+      def to_hash: -> {
+        aggregate_by: ::Hash[Symbol, top],
+        distance_metric: Turbopuffer::Models::distance_metric,
+        filters: top,
+        include_attributes: Turbopuffer::Models::include_attributes,
+        rank_by: top,
+        top_k: Integer
+      }
+    end
+  end
+end

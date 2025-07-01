@@ -30,12 +30,36 @@ module Turbopuffer
       sig { returns(Symbol) }
       attr_accessor :status
 
+      # The number of rows deleted by the write request.
+      sig { returns(T.nilable(Integer)) }
+      attr_reader :rows_deleted
+
+      sig { params(rows_deleted: Integer).void }
+      attr_writer :rows_deleted
+
+      # The number of rows patched by the write request.
+      sig { returns(T.nilable(Integer)) }
+      attr_reader :rows_patched
+
+      sig { params(rows_patched: Integer).void }
+      attr_writer :rows_patched
+
+      # The number of rows upserted by the write request.
+      sig { returns(T.nilable(Integer)) }
+      attr_reader :rows_upserted
+
+      sig { params(rows_upserted: Integer).void }
+      attr_writer :rows_upserted
+
       # The response to a successful write request.
       sig do
         params(
           billing: Turbopuffer::WriteBilling::OrHash,
           message: String,
           rows_affected: Integer,
+          rows_deleted: Integer,
+          rows_patched: Integer,
+          rows_upserted: Integer,
           status: Symbol
         ).returns(T.attached_class)
       end
@@ -46,6 +70,12 @@ module Turbopuffer
         message:,
         # The number of rows affected by the write request.
         rows_affected:,
+        # The number of rows deleted by the write request.
+        rows_deleted: nil,
+        # The number of rows patched by the write request.
+        rows_patched: nil,
+        # The number of rows upserted by the write request.
+        rows_upserted: nil,
         # The status of the request.
         status: :OK
       )
@@ -57,7 +87,10 @@ module Turbopuffer
             billing: Turbopuffer::WriteBilling,
             message: String,
             rows_affected: Integer,
-            status: Symbol
+            status: Symbol,
+            rows_deleted: Integer,
+            rows_patched: Integer,
+            rows_upserted: Integer
           }
         )
       end

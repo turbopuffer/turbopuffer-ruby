@@ -31,6 +31,14 @@ module Turbopuffer
       sig { params(delete_by_filter: T.anything).void }
       attr_writer :delete_by_filter
 
+      # A condition evaluated against the current value of each document targeted by a
+      # delete write. Only documents that pass the condition are deleted.
+      sig { returns(T.nilable(T.anything)) }
+      attr_reader :delete_condition
+
+      sig { params(delete_condition: T.anything).void }
+      attr_writer :delete_condition
+
       sig { returns(T.nilable(T::Array[Turbopuffer::ID::Variants])) }
       attr_reader :deletes
 
@@ -64,6 +72,14 @@ module Turbopuffer
 
       sig { params(patch_columns: Turbopuffer::Columns::OrHash).void }
       attr_writer :patch_columns
+
+      # A condition evaluated against the current value of each document targeted by a
+      # patch write. Only documents that pass the condition are patched.
+      sig { returns(T.nilable(T.anything)) }
+      attr_reader :patch_condition
+
+      sig { params(patch_condition: T.anything).void }
+      attr_writer :patch_condition
 
       sig { returns(T.nilable(T::Array[Turbopuffer::Row])) }
       attr_reader :patch_rows
@@ -100,6 +116,14 @@ module Turbopuffer
       sig { params(upsert_columns: Turbopuffer::Columns::OrHash).void }
       attr_writer :upsert_columns
 
+      # A condition evaluated against the current value of each document targeted by an
+      # upsert write. Only documents that pass the condition are upserted.
+      sig { returns(T.nilable(T.anything)) }
+      attr_reader :upsert_condition
+
+      sig { params(upsert_condition: T.anything).void }
+      attr_writer :upsert_condition
+
       sig { returns(T.nilable(T::Array[Turbopuffer::Row])) }
       attr_reader :upsert_rows
 
@@ -111,10 +135,12 @@ module Turbopuffer
           namespace: String,
           copy_from_namespace: String,
           delete_by_filter: T.anything,
+          delete_condition: T.anything,
           deletes: T::Array[Turbopuffer::ID::Variants],
           distance_metric: Turbopuffer::DistanceMetric::OrSymbol,
           encryption: Turbopuffer::NamespaceWriteParams::Encryption::OrHash,
           patch_columns: Turbopuffer::Columns::OrHash,
+          patch_condition: T.anything,
           patch_rows: T::Array[Turbopuffer::Row::OrHash],
           schema:
             T::Hash[
@@ -122,6 +148,7 @@ module Turbopuffer
               T.any(String, Turbopuffer::AttributeSchemaConfig::OrHash)
             ],
           upsert_columns: Turbopuffer::Columns::OrHash,
+          upsert_condition: T.anything,
           upsert_rows: T::Array[Turbopuffer::Row::OrHash],
           request_options: Turbopuffer::RequestOptions::OrHash
         ).returns(T.attached_class)
@@ -132,6 +159,9 @@ module Turbopuffer
         copy_from_namespace: nil,
         # The filter specifying which documents to delete.
         delete_by_filter: nil,
+        # A condition evaluated against the current value of each document targeted by a
+        # delete write. Only documents that pass the condition are deleted.
+        delete_condition: nil,
         deletes: nil,
         # A function used to calculate vector similarity.
         distance_metric: nil,
@@ -140,12 +170,18 @@ module Turbopuffer
         # A list of documents in columnar format. Each key is a column name, mapped to an
         # array of values for that column.
         patch_columns: nil,
+        # A condition evaluated against the current value of each document targeted by a
+        # patch write. Only documents that pass the condition are patched.
+        patch_condition: nil,
         patch_rows: nil,
         # The schema of the attributes attached to the documents.
         schema: nil,
         # A list of documents in columnar format. Each key is a column name, mapped to an
         # array of values for that column.
         upsert_columns: nil,
+        # A condition evaluated against the current value of each document targeted by an
+        # upsert write. Only documents that pass the condition are upserted.
+        upsert_condition: nil,
         upsert_rows: nil,
         request_options: {}
       )
@@ -157,10 +193,12 @@ module Turbopuffer
             namespace: String,
             copy_from_namespace: String,
             delete_by_filter: T.anything,
+            delete_condition: T.anything,
             deletes: T::Array[Turbopuffer::ID::Variants],
             distance_metric: Turbopuffer::DistanceMetric::OrSymbol,
             encryption: Turbopuffer::NamespaceWriteParams::Encryption,
             patch_columns: Turbopuffer::Columns,
+            patch_condition: T.anything,
             patch_rows: T::Array[Turbopuffer::Row],
             schema:
               T::Hash[
@@ -168,6 +206,7 @@ module Turbopuffer
                 T.any(String, Turbopuffer::AttributeSchemaConfig)
               ],
             upsert_columns: Turbopuffer::Columns,
+            upsert_condition: T.anything,
             upsert_rows: T::Array[Turbopuffer::Row],
             request_options: Turbopuffer::RequestOptions
           }

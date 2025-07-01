@@ -34,8 +34,7 @@ module Turbopuffer
       # Issue multiple concurrent queries filter or search documents.
       sig do
         params(
-          queries:
-            T::Array[Turbopuffer::NamespaceMultiQueryParams::Query::OrHash],
+          queries: T::Array[Turbopuffer::Query::OrHash],
           consistency:
             Turbopuffer::NamespaceMultiQueryParams::Consistency::OrHash,
           vector_encoding: Turbopuffer::VectorEncoding::OrSymbol,
@@ -161,10 +160,12 @@ module Turbopuffer
           namespace: T.nilable(String),
           copy_from_namespace: String,
           delete_by_filter: T.anything,
+          delete_condition: T.anything,
           deletes: T::Array[Turbopuffer::ID::Variants],
           distance_metric: Turbopuffer::DistanceMetric::OrSymbol,
           encryption: Turbopuffer::NamespaceWriteParams::Encryption::OrHash,
           patch_columns: Turbopuffer::Columns::OrHash,
+          patch_condition: T.anything,
           patch_rows: T::Array[Turbopuffer::Row::OrHash],
           schema:
             T::Hash[
@@ -172,6 +173,7 @@ module Turbopuffer
               T.any(String, Turbopuffer::AttributeSchemaConfig::OrHash)
             ],
           upsert_columns: Turbopuffer::Columns::OrHash,
+          upsert_condition: T.anything,
           upsert_rows: T::Array[Turbopuffer::Row::OrHash],
           request_options: Turbopuffer::RequestOptions::OrHash
         ).returns(Turbopuffer::Models::NamespaceWriteResponse)
@@ -183,6 +185,9 @@ module Turbopuffer
         copy_from_namespace: nil,
         # Body param: The filter specifying which documents to delete.
         delete_by_filter: nil,
+        # Body param: A condition evaluated against the current value of each document
+        # targeted by a delete write. Only documents that pass the condition are deleted.
+        delete_condition: nil,
         # Body param:
         deletes: nil,
         # Body param: A function used to calculate vector similarity.
@@ -192,6 +197,9 @@ module Turbopuffer
         # Body param: A list of documents in columnar format. Each key is a column name,
         # mapped to an array of values for that column.
         patch_columns: nil,
+        # Body param: A condition evaluated against the current value of each document
+        # targeted by a patch write. Only documents that pass the condition are patched.
+        patch_condition: nil,
         # Body param:
         patch_rows: nil,
         # Body param: The schema of the attributes attached to the documents.
@@ -199,6 +207,10 @@ module Turbopuffer
         # Body param: A list of documents in columnar format. Each key is a column name,
         # mapped to an array of values for that column.
         upsert_columns: nil,
+        # Body param: A condition evaluated against the current value of each document
+        # targeted by an upsert write. Only documents that pass the condition are
+        # upserted.
+        upsert_condition: nil,
         # Body param:
         upsert_rows: nil,
         request_options: {}

@@ -28,7 +28,25 @@ module Turbopuffer
       #   @return [Symbol, :OK]
       required :status, const: :OK
 
-      # @!method initialize(billing:, message:, rows_affected:, status: :OK)
+      # @!attribute rows_deleted
+      #   The number of rows deleted by the write request.
+      #
+      #   @return [Integer, nil]
+      optional :rows_deleted, Integer
+
+      # @!attribute rows_patched
+      #   The number of rows patched by the write request.
+      #
+      #   @return [Integer, nil]
+      optional :rows_patched, Integer
+
+      # @!attribute rows_upserted
+      #   The number of rows upserted by the write request.
+      #
+      #   @return [Integer, nil]
+      optional :rows_upserted, Integer
+
+      # @!method initialize(billing:, message:, rows_affected:, rows_deleted: nil, rows_patched: nil, rows_upserted: nil, status: :OK)
       #   The response to a successful write request.
       #
       #   @param billing [Turbopuffer::Models::WriteBilling] The billing information for a write request.
@@ -36,6 +54,12 @@ module Turbopuffer
       #   @param message [String] A message describing the result of the write request.
       #
       #   @param rows_affected [Integer] The number of rows affected by the write request.
+      #
+      #   @param rows_deleted [Integer] The number of rows deleted by the write request.
+      #
+      #   @param rows_patched [Integer] The number of rows patched by the write request.
+      #
+      #   @param rows_upserted [Integer] The number of rows upserted by the write request.
       #
       #   @param status [Symbol, :OK] The status of the request.
     end
