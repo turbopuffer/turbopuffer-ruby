@@ -15,7 +15,7 @@ module Turbopuffer
     attr_reader :api_key
 
     # The turbopuffer region to use.
-    sig { returns(String) }
+    sig { returns(T.nilable(String)) }
     attr_reader :region
 
     sig { returns(T.nilable(String)) }

@@ -48,11 +48,7 @@ class Turbopuffer::Test::SingletonClient < Turbopuffer::Client
   TEST_API_BASE_URL = ENV.fetch("TEST_API_BASE_URL", "http://localhost:4010")
 
   def initialize
-    super(
-      base_url: Turbopuffer::Test::SingletonClient::TEST_API_BASE_URL,
-      api_key: "tpuf_A1...",
-      region: "gcp-us-central1"
-    )
+    super(base_url: Turbopuffer::Test::SingletonClient::TEST_API_BASE_URL, api_key: "tpuf_A1...")
   end
 end
 

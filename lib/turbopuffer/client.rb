@@ -20,7 +20,7 @@ module Turbopuffer
     attr_reader :api_key
 
     # The turbopuffer region to use.
-    # @return [String]
+    # @return [String, nil]
     attr_reader :region
 
     # @return [String, nil]
@@ -98,13 +98,10 @@ module Turbopuffer
       if api_key.nil?
         raise ArgumentError.new("api_key is required, and can be set via environ: \"TURBOPUFFER_API_KEY\"")
       end
-      if region.nil?
-        raise ArgumentError.new("region is required, and can be set via environ: \"TURBOPUFFER_REGION\"")
-      end
 
       @default_namespace = default_namespace&.to_s
       @api_key = api_key.to_s
-      @region = region.to_s
+      @region = region&.to_s
 
       super(
         base_url: base_url,

@@ -10,7 +10,7 @@ module Turbopuffer
 
     attr_reader api_key: String
 
-    attr_reader region: String
+    attr_reader region: String?
 
     attr_reader default_namespace: String?
 

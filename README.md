@@ -29,8 +29,7 @@ require "bundler/setup"
 require "turbopuffer"
 
 turbopuffer = Turbopuffer::Client.new(
-  api_key: ENV["TURBOPUFFER_API_KEY"], # This is the default and can be omitted
-  region: "gcp-us-central1"
+  api_key: ENV["TURBOPUFFER_API_KEY"] # This is the default and can be omitted
 )
 
 response = turbopuffer.namespaces.write(
@@ -117,8 +116,7 @@ You can use the `max_retries` option to configure or disable this:
 ```ruby
 # Configure the default for all requests:
 turbopuffer = Turbopuffer::Client.new(
-  max_retries: 0, # default is 2
-  region: "gcp-us-central1"
+  max_retries: 0 # default is 2
 )
 
 # Or, configure per-request:
@@ -132,8 +130,7 @@ By default, requests will time out after 60 seconds. You can use the timeout opt
 ```ruby
 # Configure the default for all requests:
 turbopuffer = Turbopuffer::Client.new(
-  timeout: nil, # default is 60
-  region: "gcp-us-central1"
+  timeout: nil # default is 60
 )
 
 # Or, configure per-request:
