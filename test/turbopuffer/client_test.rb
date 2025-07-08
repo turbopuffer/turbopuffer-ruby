@@ -37,8 +37,7 @@ class TurbopufferTest < Minitest::Test
   def test_client_default_request_default_retry_attempts
     stub_request(:get, "http://localhost/v1/namespaces").to_return_json(status: 500, body: {})
 
-    turbopuffer =
-      Turbopuffer::Client.new(base_url: "http://localhost", api_key: "tpuf_A1...", region: "gcp-us-central1")
+    turbopuffer = Turbopuffer::Client.new(base_url: "http://localhost", api_key: "tpuf_A1...")
 
     assert_raises(Turbopuffer::Errors::InternalServerError) do
       turbopuffer.namespaces
@@ -51,12 +50,7 @@ class TurbopufferTest < Minitest::Test
     stub_request(:get, "http://localhost/v1/namespaces").to_return_json(status: 500, body: {})
 
     turbopuffer =
-      Turbopuffer::Client.new(
-        base_url: "http://localhost",
-        api_key: "tpuf_A1...",
-        region: "gcp-us-central1",
-        max_retries: 3
-      )
+      Turbopuffer::Client.new(base_url: "http://localhost", api_key: "tpuf_A1...", max_retries: 3)
 
     assert_raises(Turbopuffer::Errors::InternalServerError) do
       turbopuffer.namespaces
@@ -68,8 +62,7 @@ class TurbopufferTest < Minitest::Test
   def test_client_default_request_given_retry_attempts
     stub_request(:get, "http://localhost/v1/namespaces").to_return_json(status: 500, body: {})
 
-    turbopuffer =
-      Turbopuffer::Client.new(base_url: "http://localhost", api_key: "tpuf_A1...", region: "gcp-us-central1")
+    turbopuffer = Turbopuffer::Client.new(base_url: "http://localhost", api_key: "tpuf_A1...")
 
     assert_raises(Turbopuffer::Errors::InternalServerError) do
       turbopuffer.namespaces(request_options: {max_retries: 3})
@@ -82,12 +75,7 @@ class TurbopufferTest < Minitest::Test
     stub_request(:get, "http://localhost/v1/namespaces").to_return_json(status: 500, body: {})
 
     turbopuffer =
-      Turbopuffer::Client.new(
-        base_url: "http://localhost",
-        api_key: "tpuf_A1...",
-        region: "gcp-us-central1",
-        max_retries: 3
-      )
+      Turbopuffer::Client.new(base_url: "http://localhost", api_key: "tpuf_A1...", max_retries: 3)
 
     assert_raises(Turbopuffer::Errors::InternalServerError) do
       turbopuffer.namespaces(request_options: {max_retries: 4})
@@ -104,12 +92,7 @@ class TurbopufferTest < Minitest::Test
     )
 
     turbopuffer =
-      Turbopuffer::Client.new(
-        base_url: "http://localhost",
-        api_key: "tpuf_A1...",
-        region: "gcp-us-central1",
-        max_retries: 1
-      )
+      Turbopuffer::Client.new(base_url: "http://localhost", api_key: "tpuf_A1...", max_retries: 1)
 
     assert_raises(Turbopuffer::Errors::InternalServerError) do
       turbopuffer.namespaces
@@ -127,12 +110,7 @@ class TurbopufferTest < Minitest::Test
     )
 
     turbopuffer =
-      Turbopuffer::Client.new(
-        base_url: "http://localhost",
-        api_key: "tpuf_A1...",
-        region: "gcp-us-central1",
-        max_retries: 1
-      )
+      Turbopuffer::Client.new(base_url: "http://localhost", api_key: "tpuf_A1...", max_retries: 1)
 
     assert_raises(Turbopuffer::Errors::InternalServerError) do
       Thread.current.thread_variable_set(:time_now, Time.now)
@@ -152,12 +130,7 @@ class TurbopufferTest < Minitest::Test
     )
 
     turbopuffer =
-      Turbopuffer::Client.new(
-        base_url: "http://localhost",
-        api_key: "tpuf_A1...",
-        region: "gcp-us-central1",
-        max_retries: 1
-      )
+      Turbopuffer::Client.new(base_url: "http://localhost", api_key: "tpuf_A1...", max_retries: 1)
 
     assert_raises(Turbopuffer::Errors::InternalServerError) do
       turbopuffer.namespaces
@@ -170,8 +143,7 @@ class TurbopufferTest < Minitest::Test
   def test_retry_count_header
     stub_request(:get, "http://localhost/v1/namespaces").to_return_json(status: 500, body: {})
 
-    turbopuffer =
-      Turbopuffer::Client.new(base_url: "http://localhost", api_key: "tpuf_A1...", region: "gcp-us-central1")
+    turbopuffer = Turbopuffer::Client.new(base_url: "http://localhost", api_key: "tpuf_A1...")
 
     assert_raises(Turbopuffer::Errors::InternalServerError) do
       turbopuffer.namespaces
@@ -185,8 +157,7 @@ class TurbopufferTest < Minitest::Test
   def test_omit_retry_count_header
     stub_request(:get, "http://localhost/v1/namespaces").to_return_json(status: 500, body: {})
 
-    turbopuffer =
-      Turbopuffer::Client.new(base_url: "http://localhost", api_key: "tpuf_A1...", region: "gcp-us-central1")
+    turbopuffer = Turbopuffer::Client.new(base_url: "http://localhost", api_key: "tpuf_A1...")
 
     assert_raises(Turbopuffer::Errors::InternalServerError) do
       turbopuffer.namespaces(request_options: {extra_headers: {"x-stainless-retry-count" => nil}})
@@ -200,8 +171,7 @@ class TurbopufferTest < Minitest::Test
   def test_overwrite_retry_count_header
     stub_request(:get, "http://localhost/v1/namespaces").to_return_json(status: 500, body: {})
 
-    turbopuffer =
-      Turbopuffer::Client.new(base_url: "http://localhost", api_key: "tpuf_A1...", region: "gcp-us-central1")
+    turbopuffer = Turbopuffer::Client.new(base_url: "http://localhost", api_key: "tpuf_A1...")
 
     assert_raises(Turbopuffer::Errors::InternalServerError) do
       turbopuffer.namespaces(request_options: {extra_headers: {"x-stainless-retry-count" => "42"}})
@@ -221,8 +191,7 @@ class TurbopufferTest < Minitest::Test
       headers: {"location" => "/redirected"}
     )
 
-    turbopuffer =
-      Turbopuffer::Client.new(base_url: "http://localhost", api_key: "tpuf_A1...", region: "gcp-us-central1")
+    turbopuffer = Turbopuffer::Client.new(base_url: "http://localhost", api_key: "tpuf_A1...")
 
     assert_raises(Turbopuffer::Errors::APIConnectionError) do
       turbopuffer.namespaces(request_options: {extra_headers: {}})
@@ -251,8 +220,7 @@ class TurbopufferTest < Minitest::Test
       headers: {"location" => "/redirected"}
     )
 
-    turbopuffer =
-      Turbopuffer::Client.new(base_url: "http://localhost", api_key: "tpuf_A1...", region: "gcp-us-central1")
+    turbopuffer = Turbopuffer::Client.new(base_url: "http://localhost", api_key: "tpuf_A1...")
 
     assert_raises(Turbopuffer::Errors::APIConnectionError) do
       turbopuffer.namespaces(request_options: {extra_headers: {}})
@@ -276,8 +244,7 @@ class TurbopufferTest < Minitest::Test
       headers: {"location" => "/redirected"}
     )
 
-    turbopuffer =
-      Turbopuffer::Client.new(base_url: "http://localhost", api_key: "tpuf_A1...", region: "gcp-us-central1")
+    turbopuffer = Turbopuffer::Client.new(base_url: "http://localhost", api_key: "tpuf_A1...")
 
     assert_raises(Turbopuffer::Errors::APIConnectionError) do
       turbopuffer.namespaces(request_options: {extra_headers: {"authorization" => "Bearer xyz"}})
@@ -304,8 +271,7 @@ class TurbopufferTest < Minitest::Test
       headers: {"location" => "https://example.com/redirected"}
     )
 
-    turbopuffer =
-      Turbopuffer::Client.new(base_url: "http://localhost", api_key: "tpuf_A1...", region: "gcp-us-central1")
+    turbopuffer = Turbopuffer::Client.new(base_url: "http://localhost", api_key: "tpuf_A1...")
 
     assert_raises(Turbopuffer::Errors::APIConnectionError) do
       turbopuffer.namespaces(request_options: {extra_headers: {"authorization" => "Bearer xyz"}})
@@ -320,8 +286,7 @@ class TurbopufferTest < Minitest::Test
   def test_default_headers
     stub_request(:get, "http://localhost/v1/namespaces").to_return_json(status: 200, body: {})
 
-    turbopuffer =
-      Turbopuffer::Client.new(base_url: "http://localhost", api_key: "tpuf_A1...", region: "gcp-us-central1")
+    turbopuffer = Turbopuffer::Client.new(base_url: "http://localhost", api_key: "tpuf_A1...")
 
     turbopuffer.namespaces
 
