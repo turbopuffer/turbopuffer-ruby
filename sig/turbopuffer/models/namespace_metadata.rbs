@@ -1,0 +1,30 @@
+module Turbopuffer
+  module Models
+    type namespace_metadata =
+      {
+        approx_logical_bytes: Integer,
+        created_at: Time,
+        schema: ::Hash[Symbol, Turbopuffer::AttributeSchemaConfig]
+      }
+
+    class NamespaceMetadata < Turbopuffer::Internal::Type::BaseModel
+      attr_accessor approx_logical_bytes: Integer
+
+      attr_accessor created_at: Time
+
+      attr_accessor schema: ::Hash[Symbol, Turbopuffer::AttributeSchemaConfig]
+
+      def initialize: (
+        approx_logical_bytes: Integer,
+        created_at: Time,
+        schema: ::Hash[Symbol, Turbopuffer::AttributeSchemaConfig]
+      ) -> void
+
+      def to_hash: -> {
+        approx_logical_bytes: Integer,
+        created_at: Time,
+        schema: ::Hash[Symbol, Turbopuffer::AttributeSchemaConfig]
+      }
+    end
+  end
+end
