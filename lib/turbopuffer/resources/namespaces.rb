@@ -53,6 +53,31 @@ module Turbopuffer
         )
       end
 
+      # Get metadata about a namespace.
+      #
+      # @overload metadata(namespace:, request_options: {})
+      #
+      # @param namespace [String] The name of the namespace.
+      #
+      # @param request_options [Turbopuffer::RequestOptions, Hash{Symbol=>Object}, nil]
+      #
+      # @return [Turbopuffer::Models::NamespaceMetadata]
+      #
+      # @see Turbopuffer::Models::NamespaceMetadataParams
+      def metadata(params)
+        parsed, options = Turbopuffer::NamespaceMetadataParams.dump_request(params)
+        namespace =
+          parsed.delete(:namespace) do
+            @client.default_namespace
+          end
+        @client.request(
+          method: :get,
+          path: ["v1/namespaces/%1$s/metadata", namespace],
+          model: Turbopuffer::NamespaceMetadata,
+          options: options
+        )
+      end
+
       # Issue multiple concurrent queries filter or search documents.
       #
       # @overload multi_query(namespace:, queries:, consistency: nil, vector_encoding: nil, request_options: {})

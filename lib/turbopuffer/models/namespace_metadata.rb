@@ -2,6 +2,7 @@
 
 module Turbopuffer
   module Models
+    # @see Turbopuffer::Resources::Namespaces#metadata
     class NamespaceMetadata < Turbopuffer::Internal::Type::BaseModel
       # @!attribute approx_logical_bytes
       #   The approximate number of logical bytes in the namespace.
