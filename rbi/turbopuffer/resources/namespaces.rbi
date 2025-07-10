@@ -31,6 +31,20 @@ module Turbopuffer
       )
       end
 
+      # Get metadata about a namespace.
+      sig do
+        params(
+          namespace: String,
+          request_options: Turbopuffer::RequestOptions::OrHash
+        ).returns(Turbopuffer::NamespaceMetadata)
+      end
+      def metadata(
+        # The name of the namespace.
+        namespace:,
+        request_options: {}
+      )
+      end
+
       # Issue multiple concurrent queries filter or search documents.
       sig do
         params(
