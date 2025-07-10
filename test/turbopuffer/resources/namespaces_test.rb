@@ -36,6 +36,24 @@ class Turbopuffer::Test::Resources::NamespacesTest < Turbopuffer::Test::Resource
     end
   end
 
+  def test_metadata_required_params
+    skip("skipped: tests are disabled for the time being")
+
+    response = @turbopuffer.namespaces.metadata(namespace: "namespace")
+
+    assert_pattern do
+      response => Turbopuffer::NamespaceMetadata
+    end
+
+    assert_pattern do
+      response => {
+        approx_logical_bytes: Integer,
+        created_at: Time,
+        schema: ^(Turbopuffer::Internal::Type::HashOf[Turbopuffer::AttributeSchemaConfig])
+      }
+    end
+  end
+
   def test_multi_query_required_params
     skip("skipped: tests are disabled for the time being")
 

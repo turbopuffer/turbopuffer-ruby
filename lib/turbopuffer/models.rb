@@ -67,6 +67,8 @@ module Turbopuffer
 
   NamespaceMetadata = Turbopuffer::Models::NamespaceMetadata
 
+  NamespaceMetadataParams = Turbopuffer::Models::NamespaceMetadataParams
+
   NamespaceMultiQueryParams = Turbopuffer::Models::NamespaceMultiQueryParams
 
   NamespaceQueryParams = Turbopuffer::Models::NamespaceQueryParams

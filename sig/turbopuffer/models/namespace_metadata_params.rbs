@@ -1,0 +1,23 @@
+module Turbopuffer
+  module Models
+    type namespace_metadata_params =
+      { namespace: String } & Turbopuffer::Internal::Type::request_parameters
+
+    class NamespaceMetadataParams < Turbopuffer::Internal::Type::BaseModel
+      extend Turbopuffer::Internal::Type::RequestParameters::Converter
+      include Turbopuffer::Internal::Type::RequestParameters
+
+      attr_accessor namespace: String
+
+      def initialize: (
+        namespace: String,
+        ?request_options: Turbopuffer::request_opts
+      ) -> void
+
+      def to_hash: -> {
+        namespace: String,
+        request_options: Turbopuffer::RequestOptions
+      }
+    end
+  end
+end
