@@ -25,6 +25,8 @@ module Turbopuffer
 
   class NamespaceHintCacheWarmParams = Turbopuffer::Models::NamespaceHintCacheWarmParams
 
+  class NamespaceMetadata = Turbopuffer::Models::NamespaceMetadata
+
   class NamespaceMultiQueryParams = Turbopuffer::Models::NamespaceMultiQueryParams
 
   class NamespaceQueryParams = Turbopuffer::Models::NamespaceQueryParams
