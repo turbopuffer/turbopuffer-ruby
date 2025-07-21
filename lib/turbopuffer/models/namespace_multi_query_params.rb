@@ -9,8 +9,8 @@ module Turbopuffer
 
       # @!attribute namespace
       #
-      #   @return [String]
-      required :namespace, String
+      #   @return [String, nil]
+      optional :namespace, String
 
       # @!attribute queries
       #
@@ -29,10 +29,10 @@ module Turbopuffer
       #   @return [Symbol, Turbopuffer::Models::VectorEncoding, nil]
       optional :vector_encoding, enum: -> { Turbopuffer::VectorEncoding }
 
-      # @!method initialize(namespace:, queries:, consistency: nil, vector_encoding: nil, request_options: {})
-      #   @param namespace [String]
-      #
+      # @!method initialize(queries:, namespace: nil, consistency: nil, vector_encoding: nil, request_options: {})
       #   @param queries [Array<Turbopuffer::Models::Query>]
+      #
+      #   @param namespace [String]
       #
       #   @param consistency [Turbopuffer::Models::NamespaceMultiQueryParams::Consistency] The consistency level for a query.
       #

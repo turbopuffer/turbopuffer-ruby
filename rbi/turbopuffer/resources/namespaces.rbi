@@ -40,7 +40,7 @@ module Turbopuffer
       end
       def metadata(
         # The name of the namespace.
-        namespace:,
+        namespace: nil,
         request_options: {}
       )
       end
@@ -49,6 +49,7 @@ module Turbopuffer
       sig do
         params(
           queries: T::Array[Turbopuffer::Query::OrHash],
+          namespace: String,
           consistency:
             Turbopuffer::NamespaceMultiQueryParams::Consistency::OrHash,
           vector_encoding: Turbopuffer::VectorEncoding::OrSymbol,
@@ -58,6 +59,8 @@ module Turbopuffer
       def multi_query(
         # Body param:
         queries:,
+        # Path param: The name of the namespace.
+        namespace: nil,
         # Body param: The consistency level for a query.
         consistency: nil,
         # Body param: The encoding to use for vectors in the response.

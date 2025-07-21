@@ -14,8 +14,11 @@ module Turbopuffer
           )
         end
 
-      sig { returns(String) }
-      attr_accessor :namespace
+      sig { returns(T.nilable(String)) }
+      attr_reader :namespace
+
+      sig { params(namespace: String).void }
+      attr_writer :namespace
 
       sig { returns(T::Array[Turbopuffer::Query]) }
       attr_accessor :queries
@@ -45,8 +48,8 @@ module Turbopuffer
 
       sig do
         params(
-          namespace: String,
           queries: T::Array[Turbopuffer::Query::OrHash],
+          namespace: String,
           consistency:
             Turbopuffer::NamespaceMultiQueryParams::Consistency::OrHash,
           vector_encoding: Turbopuffer::VectorEncoding::OrSymbol,
@@ -54,8 +57,8 @@ module Turbopuffer
         ).returns(T.attached_class)
       end
       def self.new(
-        namespace:,
         queries:,
+        namespace: nil,
         # The consistency level for a query.
         consistency: nil,
         # The encoding to use for vectors in the response.

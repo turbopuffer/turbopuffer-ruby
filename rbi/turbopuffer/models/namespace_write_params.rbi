@@ -14,8 +14,11 @@ module Turbopuffer
           )
         end
 
-      sig { returns(String) }
-      attr_accessor :namespace
+      sig { returns(T.nilable(String)) }
+      attr_reader :namespace
+
+      sig { params(namespace: String).void }
+      attr_writer :namespace
 
       # The namespace to copy documents from.
       sig { returns(T.nilable(String)) }
@@ -154,7 +157,7 @@ module Turbopuffer
         ).returns(T.attached_class)
       end
       def self.new(
-        namespace:,
+        namespace: nil,
         # The namespace to copy documents from.
         copy_from_namespace: nil,
         # The filter specifying which documents to delete.

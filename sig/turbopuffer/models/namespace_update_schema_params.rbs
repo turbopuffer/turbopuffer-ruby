@@ -11,7 +11,9 @@ module Turbopuffer
       extend Turbopuffer::Internal::Type::RequestParameters::Converter
       include Turbopuffer::Internal::Type::RequestParameters
 
-      attr_accessor namespace: String
+      attr_reader namespace: String?
+
+      def namespace=: (String) -> String
 
       attr_reader schema: ::Hash[Symbol, Turbopuffer::Models::attribute_schema]?
 
@@ -20,7 +22,7 @@ module Turbopuffer
       ) -> ::Hash[Symbol, Turbopuffer::Models::attribute_schema]
 
       def initialize: (
-        namespace: String,
+        ?namespace: String,
         ?schema: ::Hash[Symbol, Turbopuffer::Models::attribute_schema],
         ?request_options: Turbopuffer::request_opts
       ) -> void

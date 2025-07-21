@@ -13,7 +13,9 @@ module Turbopuffer
       extend Turbopuffer::Internal::Type::RequestParameters::Converter
       include Turbopuffer::Internal::Type::RequestParameters
 
-      attr_accessor namespace: String
+      attr_reader namespace: String?
+
+      def namespace=: (String) -> String
 
       attr_accessor queries: ::Array[Turbopuffer::Query]
 
@@ -30,8 +32,8 @@ module Turbopuffer
       ) -> Turbopuffer::Models::vector_encoding
 
       def initialize: (
-        namespace: String,
         queries: ::Array[Turbopuffer::Query],
+        ?namespace: String,
         ?consistency: Turbopuffer::NamespaceMultiQueryParams::Consistency,
         ?vector_encoding: Turbopuffer::Models::vector_encoding,
         ?request_options: Turbopuffer::request_opts
