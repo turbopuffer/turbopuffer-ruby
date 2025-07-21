@@ -14,9 +14,12 @@ class TurbopufferTest < Minitest::Test
   def setup
     super
     Thread.current.thread_variable_set(:mock_sleep, [])
+    @env = ENV.to_h
+    ENV.reject! { |k, _| k.start_with?("TURBOPUFFER") }
   end
 
   def teardown
+    ENV.replace(@env)
     Thread.current.thread_variable_set(:mock_sleep, nil)
     WebMock.reset!
     super
@@ -32,6 +35,37 @@ class TurbopufferTest < Minitest::Test
       Turbopuffer::Client.new
     end
     assert_match(/is required/, e.message)
+  end
+
+  def test_region_substitution_works_with_default_url
+    turbopuffer = Turbopuffer::Client.new(region: "my-cool-region", api_key: "tpuf_A1...")
+    assert_equal("https://my-cool-region.turbopuffer.com", turbopuffer.base_url.to_s)
+  end
+
+  def test_region_required_with_default_url
+    e = assert_raises(ArgumentError) do
+      Turbopuffer::Client.new(api_key: "tpuf_A1...")
+    end
+    assert_equal("region is required when base_url contains {region} placeholder: https://{region}.turbopuffer.com", e.message)
+  end
+
+  def test_region_not_required_with_complete_url
+    turbopuffer = Turbopuffer::Client.new(base_url: "https://tpuf.example.com", api_key: "tpuf_A1...")
+    assert_equal("https://tpuf.example.com", turbopuffer.base_url.to_s)
+  end
+
+  def test_error_when_region_missing_but_url_has_placeholder
+    e = assert_raises(ArgumentError) do
+      Turbopuffer::Client.new(base_url: "https://tpuf-{region}.example.com", api_key: "tpuf_A1...")
+    end
+    assert_equal("region is required when base_url contains {region} placeholder: https://tpuf-{region}.example.com", e.message)
+  end
+
+  def test_error_when_region_provided_but_url_has_no_placeholder
+    e = assert_raises(ArgumentError) do
+      Turbopuffer::Client.new(base_url: "https://tpuf.example.com", region: "my-cool-region", api_key: "tpuf_A1...")
+    end
+    assert_equal("region is set, but would be ignored (baseUrl does not contain {region} placeholder: https://tpuf.example.com)", e.message)
   end
 
   def test_client_default_request_default_retry_attempts
