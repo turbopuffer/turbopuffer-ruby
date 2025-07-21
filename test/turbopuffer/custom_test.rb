@@ -15,7 +15,10 @@ class Turbopuffer::Test::CustomTest < Minitest::Test
   end
 
   def test_smoke
-    result = @ns.write(upsert_rows: [{id: 1, vector: [1, 2, 3]}])
+    result = @ns.write(
+      upsert_rows: [{id: 1, vector: [1, 2, 3]}],
+      distance_metric: Turbopuffer::DistanceMetric::COSINE_DISTANCE
+    )
     assert_equal(result.rows_affected, 1)
   end
 end
