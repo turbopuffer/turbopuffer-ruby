@@ -99,10 +99,19 @@ module Turbopuffer
       initial_retry_delay: self.class::DEFAULT_INITIAL_RETRY_DELAY,
       max_retry_delay: self.class::DEFAULT_MAX_RETRY_DELAY
     )
-      base_url ||= "https://#{region}.turbopuffer.com"
+      base_url ||= "https://{region}.turbopuffer.com"
 
       if api_key.nil?
         raise ArgumentError.new("api_key is required, and can be set via environ: \"TURBOPUFFER_API_KEY\"")
+      end
+
+      if base_url.include?("{region}")
+        if region.nil?
+          raise ArgumentError.new("region is required when base_url contains {region} placeholder: #{base_url}")
+        end
+        base_url = base_url.gsub("{region}", region)
+      elsif !region.nil?
+        raise ArgumentError.new("region is set, but would be ignored (baseUrl does not contain {region} placeholder: #{base_url})")
       end
 
       @default_namespace = default_namespace&.to_s
