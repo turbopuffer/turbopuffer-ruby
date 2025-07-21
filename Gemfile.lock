@@ -11,7 +11,7 @@ GIT
 PATH
   remote: .
   specs:
-    turbopuffer (0.1.0.pre.alpha.2)
+    turbopuffer-ruby (0.1.0.pre.alpha.2)
       connection_pool
 
 GEM
@@ -203,7 +203,7 @@ DEPENDENCIES
   syntax_tree
   syntax_tree-rbs!
   tapioca
-  turbopuffer!
+  turbopuffer-ruby!
   webmock
   webrick
   yard
