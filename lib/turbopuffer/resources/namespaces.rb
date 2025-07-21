@@ -5,7 +5,7 @@ module Turbopuffer
     class Namespaces
       # Delete namespace.
       #
-      # @overload delete_all(namespace:, request_options: {})
+      # @overload delete_all(namespace: nil, request_options: {})
       #
       # @param namespace [String] The name of the namespace.
       #
@@ -14,7 +14,7 @@ module Turbopuffer
       # @return [Turbopuffer::Models::NamespaceDeleteAllResponse]
       #
       # @see Turbopuffer::Models::NamespaceDeleteAllParams
-      def delete_all(params)
+      def delete_all(params = {})
         parsed, options = Turbopuffer::NamespaceDeleteAllParams.dump_request(params)
         namespace =
           parsed.delete(:namespace) do
@@ -30,7 +30,7 @@ module Turbopuffer
 
       # Warm the cache for a namespace.
       #
-      # @overload hint_cache_warm(namespace:, request_options: {})
+      # @overload hint_cache_warm(namespace: nil, request_options: {})
       #
       # @param namespace [String] The name of the namespace.
       #
@@ -39,7 +39,7 @@ module Turbopuffer
       # @return [Turbopuffer::Models::NamespaceHintCacheWarmResponse]
       #
       # @see Turbopuffer::Models::NamespaceHintCacheWarmParams
-      def hint_cache_warm(params)
+      def hint_cache_warm(params = {})
         parsed, options = Turbopuffer::NamespaceHintCacheWarmParams.dump_request(params)
         namespace =
           parsed.delete(:namespace) do
@@ -55,7 +55,7 @@ module Turbopuffer
 
       # Get metadata about a namespace.
       #
-      # @overload metadata(namespace:, request_options: {})
+      # @overload metadata(namespace: nil, request_options: {})
       #
       # @param namespace [String] The name of the namespace.
       #
@@ -64,7 +64,7 @@ module Turbopuffer
       # @return [Turbopuffer::Models::NamespaceMetadata]
       #
       # @see Turbopuffer::Models::NamespaceMetadataParams
-      def metadata(params)
+      def metadata(params = {})
         parsed, options = Turbopuffer::NamespaceMetadataParams.dump_request(params)
         namespace =
           parsed.delete(:namespace) do
@@ -80,11 +80,11 @@ module Turbopuffer
 
       # Issue multiple concurrent queries filter or search documents.
       #
-      # @overload multi_query(namespace:, queries:, consistency: nil, vector_encoding: nil, request_options: {})
-      #
-      # @param namespace [String] Path param: The name of the namespace.
+      # @overload multi_query(queries:, namespace: nil, consistency: nil, vector_encoding: nil, request_options: {})
       #
       # @param queries [Array<Turbopuffer::Models::Query>] Body param:
+      #
+      # @param namespace [String] Path param: The name of the namespace.
       #
       # @param consistency [Turbopuffer::Models::NamespaceMultiQueryParams::Consistency] Body param: The consistency level for a query.
       #
@@ -115,7 +115,7 @@ module Turbopuffer
       #
       # Query, filter, full-text search and vector search documents.
       #
-      # @overload query(namespace:, aggregate_by: nil, consistency: nil, distance_metric: nil, filters: nil, include_attributes: nil, rank_by: nil, top_k: nil, vector_encoding: nil, request_options: {})
+      # @overload query(namespace: nil, aggregate_by: nil, consistency: nil, distance_metric: nil, filters: nil, include_attributes: nil, rank_by: nil, top_k: nil, vector_encoding: nil, request_options: {})
       #
       # @param namespace [String] Path param: The name of the namespace.
       #
@@ -140,7 +140,7 @@ module Turbopuffer
       # @return [Turbopuffer::Models::NamespaceQueryResponse]
       #
       # @see Turbopuffer::Models::NamespaceQueryParams
-      def query(params)
+      def query(params = {})
         parsed, options = Turbopuffer::NamespaceQueryParams.dump_request(params)
         namespace =
           parsed.delete(:namespace) do
@@ -160,7 +160,7 @@ module Turbopuffer
       #
       # Evaluate recall.
       #
-      # @overload recall(namespace:, filters: nil, num: nil, queries: nil, top_k: nil, request_options: {})
+      # @overload recall(namespace: nil, filters: nil, num: nil, queries: nil, top_k: nil, request_options: {})
       #
       # @param namespace [String] Path param: The name of the namespace.
       #
@@ -177,7 +177,7 @@ module Turbopuffer
       # @return [Turbopuffer::Models::NamespaceRecallResponse]
       #
       # @see Turbopuffer::Models::NamespaceRecallParams
-      def recall(params)
+      def recall(params = {})
         parsed, options = Turbopuffer::NamespaceRecallParams.dump_request(params)
         namespace =
           parsed.delete(:namespace) do
@@ -194,7 +194,7 @@ module Turbopuffer
 
       # Get namespace schema.
       #
-      # @overload schema(namespace:, request_options: {})
+      # @overload schema(namespace: nil, request_options: {})
       #
       # @param namespace [String] The name of the namespace.
       #
@@ -203,7 +203,7 @@ module Turbopuffer
       # @return [Hash{Symbol=>Turbopuffer::Models::AttributeSchemaConfig}]
       #
       # @see Turbopuffer::Models::NamespaceSchemaParams
-      def schema(params)
+      def schema(params = {})
         parsed, options = Turbopuffer::NamespaceSchemaParams.dump_request(params)
         namespace =
           parsed.delete(:namespace) do
@@ -219,7 +219,7 @@ module Turbopuffer
 
       # Update namespace schema.
       #
-      # @overload update_schema(namespace:, schema: nil, request_options: {})
+      # @overload update_schema(namespace: nil, schema: nil, request_options: {})
       #
       # @param namespace [String] Path param: The name of the namespace.
       #
@@ -230,7 +230,7 @@ module Turbopuffer
       # @return [Hash{Symbol=>Turbopuffer::Models::AttributeSchemaConfig}]
       #
       # @see Turbopuffer::Models::NamespaceUpdateSchemaParams
-      def update_schema(params)
+      def update_schema(params = {})
         parsed, options = Turbopuffer::NamespaceUpdateSchemaParams.dump_request(params)
         namespace =
           parsed.delete(:namespace) do
@@ -250,7 +250,7 @@ module Turbopuffer
       #
       # Create, update, or delete documents.
       #
-      # @overload write(namespace:, copy_from_namespace: nil, delete_by_filter: nil, delete_condition: nil, deletes: nil, distance_metric: nil, encryption: nil, patch_columns: nil, patch_condition: nil, patch_rows: nil, schema: nil, upsert_columns: nil, upsert_condition: nil, upsert_rows: nil, request_options: {})
+      # @overload write(namespace: nil, copy_from_namespace: nil, delete_by_filter: nil, delete_condition: nil, deletes: nil, distance_metric: nil, encryption: nil, patch_columns: nil, patch_condition: nil, patch_rows: nil, schema: nil, upsert_columns: nil, upsert_condition: nil, upsert_rows: nil, request_options: {})
       #
       # @param namespace [String] Path param: The name of the namespace.
       #
@@ -285,7 +285,7 @@ module Turbopuffer
       # @return [Turbopuffer::Models::NamespaceWriteResponse]
       #
       # @see Turbopuffer::Models::NamespaceWriteParams
-      def write(params)
+      def write(params = {})
         parsed, options = Turbopuffer::NamespaceWriteParams.dump_request(params)
         namespace =
           parsed.delete(:namespace) do

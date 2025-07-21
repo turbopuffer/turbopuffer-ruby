@@ -12,7 +12,7 @@ module Turbopuffer
       end
       def delete_all(
         # The name of the namespace.
-        namespace:,
+        namespace: nil,
         request_options: {}
       )
       end
@@ -26,7 +26,7 @@ module Turbopuffer
       end
       def hint_cache_warm(
         # The name of the namespace.
-        namespace:,
+        namespace: nil,
         request_options: {}
       )
       end
@@ -40,7 +40,7 @@ module Turbopuffer
       end
       def metadata(
         # The name of the namespace.
-        namespace:,
+        namespace: nil,
         request_options: {}
       )
       end
@@ -48,8 +48,8 @@ module Turbopuffer
       # Issue multiple concurrent queries filter or search documents.
       sig do
         params(
-          namespace: String,
           queries: T::Array[Turbopuffer::Query::OrHash],
+          namespace: String,
           consistency:
             Turbopuffer::NamespaceMultiQueryParams::Consistency::OrHash,
           vector_encoding: Turbopuffer::VectorEncoding::OrSymbol,
@@ -57,10 +57,10 @@ module Turbopuffer
         ).returns(Turbopuffer::Models::NamespaceMultiQueryResponse)
       end
       def multi_query(
-        # Path param: The name of the namespace.
-        namespace:,
         # Body param:
         queries:,
+        # Path param: The name of the namespace.
+        namespace: nil,
         # Body param: The consistency level for a query.
         consistency: nil,
         # Body param: The encoding to use for vectors in the response.
@@ -86,7 +86,7 @@ module Turbopuffer
       end
       def query(
         # Path param: The name of the namespace.
-        namespace:,
+        namespace: nil,
         # Body param: Aggregations to compute over all documents in the namespace that
         # match the filters.
         aggregate_by: nil,
@@ -122,7 +122,7 @@ module Turbopuffer
       end
       def recall(
         # Path param: The name of the namespace.
-        namespace:,
+        namespace: nil,
         # Body param: Filter by attributes. Same syntax as the query endpoint.
         filters: nil,
         # Body param: The number of searches to run.
@@ -145,7 +145,7 @@ module Turbopuffer
       end
       def schema(
         # The name of the namespace.
-        namespace:,
+        namespace: nil,
         request_options: {}
       )
       end
@@ -164,7 +164,7 @@ module Turbopuffer
       end
       def update_schema(
         # Path param: The name of the namespace.
-        namespace:,
+        namespace: nil,
         # Body param: The desired schema for the namespace.
         schema: nil,
         request_options: {}
@@ -197,7 +197,7 @@ module Turbopuffer
       end
       def write(
         # Path param: The name of the namespace.
-        namespace:,
+        namespace: nil,
         # Body param: The namespace to copy documents from.
         copy_from_namespace: nil,
         # Body param: The filter specifying which documents to delete.

@@ -14,8 +14,11 @@ module Turbopuffer
           )
         end
 
-      sig { returns(String) }
-      attr_accessor :namespace
+      sig { returns(T.nilable(String)) }
+      attr_reader :namespace
+
+      sig { params(namespace: String).void }
+      attr_writer :namespace
 
       sig do
         params(
@@ -23,7 +26,7 @@ module Turbopuffer
           request_options: Turbopuffer::RequestOptions::OrHash
         ).returns(T.attached_class)
       end
-      def self.new(namespace:, request_options: {})
+      def self.new(namespace: nil, request_options: {})
       end
 
       sig do

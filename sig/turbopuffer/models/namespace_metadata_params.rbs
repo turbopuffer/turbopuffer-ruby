@@ -7,10 +7,12 @@ module Turbopuffer
       extend Turbopuffer::Internal::Type::RequestParameters::Converter
       include Turbopuffer::Internal::Type::RequestParameters
 
-      attr_accessor namespace: String
+      attr_reader namespace: String?
+
+      def namespace=: (String) -> String
 
       def initialize: (
-        namespace: String,
+        ?namespace: String,
         ?request_options: Turbopuffer::request_opts
       ) -> void
 

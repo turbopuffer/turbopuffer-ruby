@@ -23,7 +23,9 @@ module Turbopuffer
       extend Turbopuffer::Internal::Type::RequestParameters::Converter
       include Turbopuffer::Internal::Type::RequestParameters
 
-      attr_accessor namespace: String
+      attr_reader namespace: String?
+
+      def namespace=: (String) -> String
 
       attr_reader copy_from_namespace: String?
 
@@ -86,7 +88,7 @@ module Turbopuffer
       def upsert_rows=: (::Array[Turbopuffer::Row]) -> ::Array[Turbopuffer::Row]
 
       def initialize: (
-        namespace: String,
+        ?namespace: String,
         ?copy_from_namespace: String,
         ?delete_by_filter: top,
         ?delete_condition: top,

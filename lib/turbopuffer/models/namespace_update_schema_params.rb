@@ -9,8 +9,8 @@ module Turbopuffer
 
       # @!attribute namespace
       #
-      #   @return [String]
-      required :namespace, String
+      #   @return [String, nil]
+      optional :namespace, String
 
       # @!attribute schema
       #   The desired schema for the namespace.
@@ -18,7 +18,7 @@ module Turbopuffer
       #   @return [Hash{Symbol=>String, Turbopuffer::Models::AttributeSchemaConfig}, nil]
       optional :schema, -> { Turbopuffer::Internal::Type::HashOf[union: Turbopuffer::AttributeSchema] }
 
-      # @!method initialize(namespace:, schema: nil, request_options: {})
+      # @!method initialize(namespace: nil, schema: nil, request_options: {})
       #   @param namespace [String]
       #
       #   @param schema [Hash{Symbol=>String, Turbopuffer::Models::AttributeSchemaConfig}] The desired schema for the namespace.
