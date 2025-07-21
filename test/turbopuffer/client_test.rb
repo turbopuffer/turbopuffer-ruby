@@ -46,7 +46,9 @@ class TurbopufferTest < Minitest::Test
     e = assert_raises(ArgumentError) do
       Turbopuffer::Client.new(api_key: "tpuf_A1...")
     end
-    assert_equal("region is required when base_url contains {region} placeholder: https://{region}.turbopuffer.com", e.message)
+    assert_equal(
+      "region is required when base_url contains {region} placeholder: https://{region}.turbopuffer.com", e.message
+    )
   end
 
   def test_region_not_required_with_complete_url
@@ -58,14 +60,22 @@ class TurbopufferTest < Minitest::Test
     e = assert_raises(ArgumentError) do
       Turbopuffer::Client.new(base_url: "https://tpuf-{region}.example.com", api_key: "tpuf_A1...")
     end
-    assert_equal("region is required when base_url contains {region} placeholder: https://tpuf-{region}.example.com", e.message)
+    assert_equal(
+      "region is required when base_url contains {region} placeholder: https://tpuf-{region}.example.com", e.message
+    )
   end
 
   def test_error_when_region_provided_but_url_has_no_placeholder
     e = assert_raises(ArgumentError) do
-      Turbopuffer::Client.new(base_url: "https://tpuf.example.com", region: "my-cool-region", api_key: "tpuf_A1...")
+      Turbopuffer::Client.new(
+        base_url: "https://tpuf.example.com",
+        region: "my-cool-region",
+        api_key: "tpuf_A1..."
+      )
     end
-    assert_equal("region is set, but would be ignored (baseUrl does not contain {region} placeholder: https://tpuf.example.com)", e.message)
+    assert_equal(
+      "region is set, but would be ignored (baseUrl does not contain {region} placeholder: https://tpuf.example.com)", e.message
+    )
   end
 
   def test_client_default_request_default_retry_attempts
