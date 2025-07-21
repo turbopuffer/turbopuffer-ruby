@@ -1,5 +1,37 @@
 # Changelog
 
+## 0.2.0-alpha.1 (2025-07-21)
+
+Full Changelog: [v0.1.0-alpha.2...v0.2.0-alpha.1](https://github.com/turbopuffer/turbopuffer-ruby/compare/v0.1.0-alpha.2...v0.2.0-alpha.1)
+
+### Features
+
+* **api:** introduce dedicated Query model ([420e42b](https://github.com/turbopuffer/turbopuffer-ruby/commit/420e42b03f05bafb3441e15167349184ac6705da))
+
+
+### Bug Fixes
+
+* **api:** api update ([7348b90](https://github.com/turbopuffer/turbopuffer-ruby/commit/7348b90f988b59a00f5bb6adb76467a699da8273))
+* **api:** api update ([e600278](https://github.com/turbopuffer/turbopuffer-ruby/commit/e60027807e7ca72cc92dae225c1afebb2b5bc455))
+* **api:** api update ([823d059](https://github.com/turbopuffer/turbopuffer-ruby/commit/823d05948dfb60656d7388ea7d25f11b86e41eb3))
+* **api:** api update ([6380572](https://github.com/turbopuffer/turbopuffer-ruby/commit/63805720cbaf84f048907907e86831fdaa19c546))
+* **api:** api update ([ca95879](https://github.com/turbopuffer/turbopuffer-ruby/commit/ca958796c50576e1c3beb80d4e1eba4b63563b56))
+* **api:** api update ([6f54464](https://github.com/turbopuffer/turbopuffer-ruby/commit/6f544641410f009b954f499a5771fb62965d2750))
+* **ci:** plumb API key to tests ([25603e1](https://github.com/turbopuffer/turbopuffer-ruby/commit/25603e1dff1af7f8d0a4cc5163341b039b3483fc))
+* **ci:** release-doctor — report correct token name ([df0b386](https://github.com/turbopuffer/turbopuffer-ruby/commit/df0b386b694d8b46df995553dd4c4e8116eab1b5))
+* don't require region unless baseUrl contains {region} placeholder ([2d537ff](https://github.com/turbopuffer/turbopuffer-ruby/commit/2d537ff0a6ce8af113b724143b38ab573591c62e))
+* formatting ([5d1aa92](https://github.com/turbopuffer/turbopuffer-ruby/commit/5d1aa92fb0a17331a4c228b01301581601767d22))
+* issue where we cannot mutate arrays on base model derivatives ([bc889aa](https://github.com/turbopuffer/turbopuffer-ruby/commit/bc889aa6865671327bf7f6349bff783f2242a005))
+* request parameters should not be marked required if they can be derived from client properties ([aaa1c73](https://github.com/turbopuffer/turbopuffer-ruby/commit/aaa1c73043810c7d7a12aae8972c0e616765308a))
+* **test:** provide distance_metric ([2c41aee](https://github.com/turbopuffer/turbopuffer-ruby/commit/2c41aee42d290fd3bbd8641eb937f8644b324311))
+
+
+### Chores
+
+* **ci:** enable for pull requests ([0abb0af](https://github.com/turbopuffer/turbopuffer-ruby/commit/0abb0afaaf0ab9b749eaee2fe602b65a64457945))
+* **ci:** only run for pushes and fork pull requests ([eb299b8](https://github.com/turbopuffer/turbopuffer-ruby/commit/eb299b82e3884da5fa620d338be2c2bc6e7e79a9))
+* **internal:** allow streams to also be unwrapped on a per-row basis ([85fbc15](https://github.com/turbopuffer/turbopuffer-ruby/commit/85fbc151fba8e0262a5ae106beecaa6e8eb310c7))
+
 ## 0.1.0-alpha.2 (2025-06-14)
 
 Full Changelog: [v0.1.0-alpha.1...v0.1.0-alpha.2](https://github.com/turbopuffer/turbopuffer-ruby/compare/v0.1.0-alpha.1...v0.1.0-alpha.2)
