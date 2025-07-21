@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.2.0-alpha.2 (2025-07-21)
+
+Full Changelog: [v0.2.0-alpha.1...v0.2.0-alpha.2](https://github.com/turbopuffer/turbopuffer-ruby/compare/v0.2.0-alpha.1...v0.2.0-alpha.2)
+
+### Chores
+
+* **internal:** version bump ([1f8048f](https://github.com/turbopuffer/turbopuffer-ruby/commit/1f8048f35780345a9f8de1ff55daa136fab72ff1))
+
 ## 0.2.0-alpha.1 (2025-07-21)
 
 Full Changelog: [v0.1.0-alpha.2...v0.2.0-alpha.1](https://github.com/turbopuffer/turbopuffer-ruby/compare/v0.1.0-alpha.2...v0.2.0-alpha.1)
