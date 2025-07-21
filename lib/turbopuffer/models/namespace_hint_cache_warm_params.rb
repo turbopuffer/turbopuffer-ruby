@@ -9,10 +9,10 @@ module Turbopuffer
 
       # @!attribute namespace
       #
-      #   @return [String]
-      required :namespace, String
+      #   @return [String, nil]
+      optional :namespace, String
 
-      # @!method initialize(namespace:, request_options: {})
+      # @!method initialize(namespace: nil, request_options: {})
       #   @param namespace [String]
       #   @param request_options [Turbopuffer::RequestOptions, Hash{Symbol=>Object}]
     end

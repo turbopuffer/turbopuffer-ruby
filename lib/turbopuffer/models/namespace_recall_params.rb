@@ -9,8 +9,8 @@ module Turbopuffer
 
       # @!attribute namespace
       #
-      #   @return [String]
-      required :namespace, String
+      #   @return [String, nil]
+      optional :namespace, String
 
       # @!attribute filters
       #   Filter by attributes. Same syntax as the query endpoint.
@@ -37,7 +37,7 @@ module Turbopuffer
       #   @return [Integer, nil]
       optional :top_k, Integer
 
-      # @!method initialize(namespace:, filters: nil, num: nil, queries: nil, top_k: nil, request_options: {})
+      # @!method initialize(namespace: nil, filters: nil, num: nil, queries: nil, top_k: nil, request_options: {})
       #   Some parameter documentations has been truncated, see
       #   {Turbopuffer::Models::NamespaceRecallParams} for more details.
       #

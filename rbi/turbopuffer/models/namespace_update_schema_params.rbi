@@ -14,8 +14,11 @@ module Turbopuffer
           )
         end
 
-      sig { returns(String) }
-      attr_accessor :namespace
+      sig { returns(T.nilable(String)) }
+      attr_reader :namespace
+
+      sig { params(namespace: String).void }
+      attr_writer :namespace
 
       # The desired schema for the namespace.
       sig do
@@ -50,7 +53,7 @@ module Turbopuffer
         ).returns(T.attached_class)
       end
       def self.new(
-        namespace:,
+        namespace: nil,
         # The desired schema for the namespace.
         schema: nil,
         request_options: {}

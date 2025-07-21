@@ -12,13 +12,13 @@ module Turbopuffer
       ) -> Turbopuffer::Models::NamespaceHintCacheWarmResponse
 
       def metadata: (
-        namespace: String,
+        ?namespace: String,
         ?request_options: Turbopuffer::request_opts
       ) -> Turbopuffer::NamespaceMetadata
 
       def multi_query: (
-        ?namespace: String,
         queries: ::Array[Turbopuffer::Query],
+        ?namespace: String,
         ?consistency: Turbopuffer::NamespaceMultiQueryParams::Consistency,
         ?vector_encoding: Turbopuffer::Models::vector_encoding,
         ?request_options: Turbopuffer::request_opts

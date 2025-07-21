@@ -14,7 +14,9 @@ module Turbopuffer
       extend Turbopuffer::Internal::Type::RequestParameters::Converter
       include Turbopuffer::Internal::Type::RequestParameters
 
-      attr_accessor namespace: String
+      attr_reader namespace: String?
+
+      def namespace=: (String) -> String
 
       attr_reader filters: top?
 
@@ -33,7 +35,7 @@ module Turbopuffer
       def top_k=: (Integer) -> Integer
 
       def initialize: (
-        namespace: String,
+        ?namespace: String,
         ?filters: top,
         ?num: Integer,
         ?queries: ::Array[Float],

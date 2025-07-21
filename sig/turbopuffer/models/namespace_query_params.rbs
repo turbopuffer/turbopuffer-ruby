@@ -18,7 +18,9 @@ module Turbopuffer
       extend Turbopuffer::Internal::Type::RequestParameters::Converter
       include Turbopuffer::Internal::Type::RequestParameters
 
-      attr_accessor namespace: String
+      attr_reader namespace: String?
+
+      def namespace=: (String) -> String
 
       attr_reader aggregate_by: ::Hash[Symbol, top]?
 
@@ -61,7 +63,7 @@ module Turbopuffer
       ) -> Turbopuffer::Models::vector_encoding
 
       def initialize: (
-        namespace: String,
+        ?namespace: String,
         ?aggregate_by: ::Hash[Symbol, top],
         ?consistency: Turbopuffer::NamespaceQueryParams::Consistency,
         ?distance_metric: Turbopuffer::Models::distance_metric,

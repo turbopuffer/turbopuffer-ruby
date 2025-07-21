@@ -9,8 +9,8 @@ module Turbopuffer
 
       # @!attribute namespace
       #
-      #   @return [String]
-      required :namespace, String
+      #   @return [String, nil]
+      optional :namespace, String
 
       # @!attribute aggregate_by
       #   Aggregations to compute over all documents in the namespace that match the
@@ -62,7 +62,7 @@ module Turbopuffer
       #   @return [Symbol, Turbopuffer::Models::VectorEncoding, nil]
       optional :vector_encoding, enum: -> { Turbopuffer::VectorEncoding }
 
-      # @!method initialize(namespace:, aggregate_by: nil, consistency: nil, distance_metric: nil, filters: nil, include_attributes: nil, rank_by: nil, top_k: nil, vector_encoding: nil, request_options: {})
+      # @!method initialize(namespace: nil, aggregate_by: nil, consistency: nil, distance_metric: nil, filters: nil, include_attributes: nil, rank_by: nil, top_k: nil, vector_encoding: nil, request_options: {})
       #   Some parameter documentations has been truncated, see
       #   {Turbopuffer::Models::NamespaceQueryParams} for more details.
       #
