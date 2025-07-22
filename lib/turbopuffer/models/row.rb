@@ -33,6 +33,14 @@ module Turbopuffer
       def respond_to_missing?(name, include_private = false)
         @data.key?(name) || super
       end
+
+      def []=(key, value)
+        unless key.instance_of?(Symbol)
+          raise ArgumentError.new("Expected symbol key for set, got #{key.inspect}")
+        end
+
+        @data[key] = value
+      end
     end
   end
 end
