@@ -27,19 +27,39 @@ gem "turbopuffer-ruby", "~> 0.2.0.pre.alpha.2"
 ```ruby
 require "bundler/setup"
 require "turbopuffer"
+require "json"
 
-turbopuffer = Turbopuffer::Client.new(
-  api_key: ENV["TURBOPUFFER_API_KEY"] # This is the default and can be omitted
+tpuf = Turbopuffer::Client.new(
+  # API tokens are created in the dashboard: https://turbopuffer.com/dashboard
+  api_key: ENV["TURBOPUFFER_API_KEY"],
+  # Pick the right region: https://turbopuffer.com/docs/regions
+  region: "gcp-us-central1",
 )
 
-response = turbopuffer.namespace("products").write(
-  distance_metric: "cosine_distance",
-  upsert_rows: [
-    {id: "2108ed60-6851-49a0-9016-8325434f3845", vector: [0.1, 0.2], attributes: {name: "Red boots", price: 34.99}}
-  ]
-)
+ns = tpuf.namespace("example")
 
-puts(response.rows_affected)
+# Query nearest neighbors with filter
+result = ns.query(
+  rank_by: ["vector", "ANN", openai_or_rand_vector("walrus narwhal")],
+  top_k: 10,
+  filters: ["And", [["name", "Eq", "foo"], ["public", "Eq", 1]]],
+  include_attributes: ["name"],
+)
+puts result.rows
+# {id: 1, "$dist": 0.0, name: "foo"}
+
+# Full-text search on an attribute
+# If you want to combine FTS and vector search, see https://turbopuffer.com/docs/hybrid-search
+result = ns.query(
+  top_k: 10,
+  filters: ["name", "Eq", "foo"],
+  rank_by: ["text", "BM25", "quick walrus"],
+)
+puts result.rows
+# {id: 1, "$dist": 0.19856808}
+# {id: 2, "$dist": 0.16853257}
+
+# See https://turbopuffer.com/docs/quickstart for more.s
 ```
 
 ### Pagination
