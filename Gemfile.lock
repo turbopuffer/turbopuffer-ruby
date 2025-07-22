@@ -11,7 +11,7 @@ GIT
 PATH
   remote: .
   specs:
-    turbopuffer-ruby (0.2.0.pre.beta.1)
+    turbopuffer-ruby (0.2.0)
       connection_pool
 
 GEM
