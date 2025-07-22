@@ -1,5 +1,20 @@
 # Changelog
 
+## 0.2.0-alpha.3 (2025-07-22)
+
+Full Changelog: [v0.2.0-alpha.2...v0.2.0-alpha.3](https://github.com/turbopuffer/turbopuffer-ruby/compare/v0.2.0-alpha.2...v0.2.0-alpha.3)
+
+### Bug Fixes
+
+* allow modifying Row objects in place ([269929a](https://github.com/turbopuffer/turbopuffer-ruby/commit/269929aace3a3b69a5db972d1382a01080f0c70a))
+* improve the README example ([84793e6](https://github.com/turbopuffer/turbopuffer-ruby/commit/84793e649a8b45d3e7c0826c90899a3b25220190))
+* **internal:** tests should use normalized property names ([a2bfe81](https://github.com/turbopuffer/turbopuffer-ruby/commit/a2bfe81c3149796e0d2fed0e54db8e6deacef03b))
+
+
+### Chores
+
+* **internal:** version bump ([9ac2013](https://github.com/turbopuffer/turbopuffer-ruby/commit/9ac201321f311c97923ed9c667d88d1b9c4221f0))
+
 ## 0.2.0-alpha.2 (2025-07-21)
 
 Full Changelog: [v0.2.0-alpha.1...v0.2.0-alpha.2](https://github.com/turbopuffer/turbopuffer-ruby/compare/v0.2.0-alpha.1...v0.2.0-alpha.2)
