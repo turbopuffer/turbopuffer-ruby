@@ -243,9 +243,7 @@ Or, equivalently:
 # Hashes work, but are not typesafe:
 turbopuffer.namespace("products").write(
   distance_metric: "cosine_distance",
-  upsert_rows: [
-    {id: "2108ed60-6851-49a0-9016-8325434f3845", vector: [0.1, 0.2], attributes: {name: "Red boots", price: 34.99}}
-  ]
+  upsert_rows: [{id: "2108ed60-6851-49a0-9016-8325434f3845", vector: [0.1, 0.2]}]
 )
 
 # You can also splat a full Params class:
