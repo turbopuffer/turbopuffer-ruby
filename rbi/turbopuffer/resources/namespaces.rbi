@@ -76,6 +76,7 @@ module Turbopuffer
           aggregate_by: T::Hash[Symbol, T.anything],
           consistency: Turbopuffer::NamespaceQueryParams::Consistency::OrHash,
           distance_metric: Turbopuffer::DistanceMetric::OrSymbol,
+          exclude_attributes: T::Array[String],
           filters: T.anything,
           include_attributes: Turbopuffer::IncludeAttributes::Variants,
           rank_by: T.anything,
@@ -94,6 +95,9 @@ module Turbopuffer
         consistency: nil,
         # Body param: A function used to calculate vector similarity.
         distance_metric: nil,
+        # Body param: List of attribute names to exclude from the response. All other
+        # attributes will be included in the response.
+        exclude_attributes: nil,
         # Body param: Exact filters for attributes to refine search results for. Think of
         # it as a SQL WHERE clause.
         filters: nil,

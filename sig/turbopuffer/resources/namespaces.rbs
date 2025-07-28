@@ -29,6 +29,7 @@ module Turbopuffer
         ?aggregate_by: ::Hash[Symbol, top],
         ?consistency: Turbopuffer::NamespaceQueryParams::Consistency,
         ?distance_metric: Turbopuffer::Models::distance_metric,
+        ?exclude_attributes: ::Array[String],
         ?filters: top,
         ?include_attributes: Turbopuffer::Models::include_attributes,
         ?rank_by: top,
