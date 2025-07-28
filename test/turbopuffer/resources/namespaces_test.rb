@@ -48,6 +48,7 @@ class Turbopuffer::Test::Resources::NamespacesTest < Turbopuffer::Test::Resource
     assert_pattern do
       response => {
         approx_logical_bytes: Integer,
+        approx_row_count: Integer,
         created_at: Time,
         schema: ^(Turbopuffer::Internal::Type::HashOf[Turbopuffer::AttributeSchemaConfig])
       }

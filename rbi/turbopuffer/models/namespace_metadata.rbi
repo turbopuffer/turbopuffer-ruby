@@ -12,6 +12,10 @@ module Turbopuffer
       sig { returns(Integer) }
       attr_accessor :approx_logical_bytes
 
+      # The approximate number of rows in the namespace.
+      sig { returns(Integer) }
+      attr_accessor :approx_row_count
+
       # The timestamp when the namespace was created.
       sig { returns(Time) }
       attr_accessor :created_at
@@ -24,6 +28,7 @@ module Turbopuffer
       sig do
         params(
           approx_logical_bytes: Integer,
+          approx_row_count: Integer,
           created_at: Time,
           schema: T::Hash[Symbol, Turbopuffer::AttributeSchemaConfig::OrHash]
         ).returns(T.attached_class)
@@ -31,6 +36,8 @@ module Turbopuffer
       def self.new(
         # The approximate number of logical bytes in the namespace.
         approx_logical_bytes:,
+        # The approximate number of rows in the namespace.
+        approx_row_count:,
         # The timestamp when the namespace was created.
         created_at:,
         # The schema of the namespace.
@@ -42,6 +49,7 @@ module Turbopuffer
         override.returns(
           {
             approx_logical_bytes: Integer,
+            approx_row_count: Integer,
             created_at: Time,
             schema: T::Hash[Symbol, Turbopuffer::AttributeSchemaConfig]
           }
