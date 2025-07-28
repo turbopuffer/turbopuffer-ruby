@@ -6,6 +6,7 @@ module Turbopuffer
         aggregate_by: ::Hash[Symbol, top],
         consistency: Turbopuffer::NamespaceQueryParams::Consistency,
         distance_metric: Turbopuffer::Models::distance_metric,
+        exclude_attributes: ::Array[String],
         filters: top,
         include_attributes: Turbopuffer::Models::include_attributes,
         rank_by: top,
@@ -38,6 +39,10 @@ module Turbopuffer
         Turbopuffer::Models::distance_metric
       ) -> Turbopuffer::Models::distance_metric
 
+      attr_reader exclude_attributes: ::Array[String]?
+
+      def exclude_attributes=: (::Array[String]) -> ::Array[String]
+
       attr_reader filters: top?
 
       def filters=: (top) -> top
@@ -67,6 +72,7 @@ module Turbopuffer
         ?aggregate_by: ::Hash[Symbol, top],
         ?consistency: Turbopuffer::NamespaceQueryParams::Consistency,
         ?distance_metric: Turbopuffer::Models::distance_metric,
+        ?exclude_attributes: ::Array[String],
         ?filters: top,
         ?include_attributes: Turbopuffer::Models::include_attributes,
         ?rank_by: top,
@@ -80,6 +86,7 @@ module Turbopuffer
         aggregate_by: ::Hash[Symbol, top],
         consistency: Turbopuffer::NamespaceQueryParams::Consistency,
         distance_metric: Turbopuffer::Models::distance_metric,
+        exclude_attributes: ::Array[String],
         filters: top,
         include_attributes: Turbopuffer::Models::include_attributes,
         rank_by: top,
