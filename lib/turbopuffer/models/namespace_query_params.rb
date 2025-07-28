@@ -31,6 +31,13 @@ module Turbopuffer
       #   @return [Symbol, Turbopuffer::Models::DistanceMetric, nil]
       optional :distance_metric, enum: -> { Turbopuffer::DistanceMetric }
 
+      # @!attribute exclude_attributes
+      #   List of attribute names to exclude from the response. All other attributes will
+      #   be included in the response.
+      #
+      #   @return [Array<String>, nil]
+      optional :exclude_attributes, Turbopuffer::Internal::Type::ArrayOf[String]
+
       # @!attribute filters
       #   Exact filters for attributes to refine search results for. Think of it as a SQL
       #   WHERE clause.
@@ -62,7 +69,7 @@ module Turbopuffer
       #   @return [Symbol, Turbopuffer::Models::VectorEncoding, nil]
       optional :vector_encoding, enum: -> { Turbopuffer::VectorEncoding }
 
-      # @!method initialize(namespace: nil, aggregate_by: nil, consistency: nil, distance_metric: nil, filters: nil, include_attributes: nil, rank_by: nil, top_k: nil, vector_encoding: nil, request_options: {})
+      # @!method initialize(namespace: nil, aggregate_by: nil, consistency: nil, distance_metric: nil, exclude_attributes: nil, filters: nil, include_attributes: nil, rank_by: nil, top_k: nil, vector_encoding: nil, request_options: {})
       #   Some parameter documentations has been truncated, see
       #   {Turbopuffer::Models::NamespaceQueryParams} for more details.
       #
@@ -73,6 +80,8 @@ module Turbopuffer
       #   @param consistency [Turbopuffer::Models::NamespaceQueryParams::Consistency] The consistency level for a query.
       #
       #   @param distance_metric [Symbol, Turbopuffer::Models::DistanceMetric] A function used to calculate vector similarity.
+      #
+      #   @param exclude_attributes [Array<String>] List of attribute names to exclude from the response. All other attributes will
       #
       #   @param filters [Object] Exact filters for attributes to refine search results for. Think of it as a SQL
       #
