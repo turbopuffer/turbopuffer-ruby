@@ -17,6 +17,51 @@ module Turbopuffer
       )
       end
 
+      # Explain a query plan.
+      sig do
+        params(
+          namespace: String,
+          aggregate_by: T::Hash[Symbol, T.anything],
+          consistency:
+            Turbopuffer::NamespaceExplainQueryParams::Consistency::OrHash,
+          distance_metric: Turbopuffer::DistanceMetric::OrSymbol,
+          exclude_attributes: T::Array[String],
+          filters: T.anything,
+          include_attributes: Turbopuffer::IncludeAttributes::Variants,
+          rank_by: T.anything,
+          top_k: Integer,
+          vector_encoding: Turbopuffer::VectorEncoding::OrSymbol,
+          request_options: Turbopuffer::RequestOptions::OrHash
+        ).returns(Turbopuffer::Models::NamespaceExplainQueryResponse)
+      end
+      def explain_query(
+        # Path param: The name of the namespace.
+        namespace: nil,
+        # Body param: Aggregations to compute over all documents in the namespace that
+        # match the filters.
+        aggregate_by: nil,
+        # Body param: The consistency level for a query.
+        consistency: nil,
+        # Body param: A function used to calculate vector similarity.
+        distance_metric: nil,
+        # Body param: List of attribute names to exclude from the response. All other
+        # attributes will be included in the response.
+        exclude_attributes: nil,
+        # Body param: Exact filters for attributes to refine search results for. Think of
+        # it as a SQL WHERE clause.
+        filters: nil,
+        # Body param: Whether to include attributes in the response.
+        include_attributes: nil,
+        # Body param: How to rank the documents in the namespace.
+        rank_by: nil,
+        # Body param: The number of results to return.
+        top_k: nil,
+        # Body param: The encoding to use for vectors in the response.
+        vector_encoding: nil,
+        request_options: {}
+      )
+      end
+
       # Warm the cache for a namespace.
       sig do
         params(

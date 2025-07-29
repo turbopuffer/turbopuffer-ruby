@@ -6,6 +6,20 @@ module Turbopuffer
         ?request_options: Turbopuffer::request_opts
       ) -> Turbopuffer::Models::NamespaceDeleteAllResponse
 
+      def explain_query: (
+        ?namespace: String,
+        ?aggregate_by: ::Hash[Symbol, top],
+        ?consistency: Turbopuffer::NamespaceExplainQueryParams::Consistency,
+        ?distance_metric: Turbopuffer::Models::distance_metric,
+        ?exclude_attributes: ::Array[String],
+        ?filters: top,
+        ?include_attributes: Turbopuffer::Models::include_attributes,
+        ?rank_by: top,
+        ?top_k: Integer,
+        ?vector_encoding: Turbopuffer::Models::vector_encoding,
+        ?request_options: Turbopuffer::request_opts
+      ) -> Turbopuffer::Models::NamespaceExplainQueryResponse
+
       def hint_cache_warm: (
         ?namespace: String,
         ?request_options: Turbopuffer::request_opts

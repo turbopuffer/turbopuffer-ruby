@@ -1,0 +1,15 @@
+module Turbopuffer
+  module Models
+    type namespace_explain_query_response = { plan_text: String }
+
+    class NamespaceExplainQueryResponse < Turbopuffer::Internal::Type::BaseModel
+      attr_reader plan_text: String?
+
+      def plan_text=: (String) -> String
+
+      def initialize: (?plan_text: String) -> void
+
+      def to_hash: -> { plan_text: String }
+    end
+  end
+end

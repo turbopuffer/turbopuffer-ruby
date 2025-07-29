@@ -1,0 +1,134 @@
+module Turbopuffer
+  module Models
+    type namespace_explain_query_params =
+      {
+        namespace: String,
+        aggregate_by: ::Hash[Symbol, top],
+        consistency: Turbopuffer::NamespaceExplainQueryParams::Consistency,
+        distance_metric: Turbopuffer::Models::distance_metric,
+        exclude_attributes: ::Array[String],
+        filters: top,
+        include_attributes: Turbopuffer::Models::include_attributes,
+        rank_by: top,
+        top_k: Integer,
+        vector_encoding: Turbopuffer::Models::vector_encoding
+      }
+      & Turbopuffer::Internal::Type::request_parameters
+
+    class NamespaceExplainQueryParams < Turbopuffer::Internal::Type::BaseModel
+      extend Turbopuffer::Internal::Type::RequestParameters::Converter
+      include Turbopuffer::Internal::Type::RequestParameters
+
+      attr_reader namespace: String?
+
+      def namespace=: (String) -> String
+
+      attr_reader aggregate_by: ::Hash[Symbol, top]?
+
+      def aggregate_by=: (::Hash[Symbol, top]) -> ::Hash[Symbol, top]
+
+      attr_reader consistency: Turbopuffer::NamespaceExplainQueryParams::Consistency?
+
+      def consistency=: (
+        Turbopuffer::NamespaceExplainQueryParams::Consistency
+      ) -> Turbopuffer::NamespaceExplainQueryParams::Consistency
+
+      attr_reader distance_metric: Turbopuffer::Models::distance_metric?
+
+      def distance_metric=: (
+        Turbopuffer::Models::distance_metric
+      ) -> Turbopuffer::Models::distance_metric
+
+      attr_reader exclude_attributes: ::Array[String]?
+
+      def exclude_attributes=: (::Array[String]) -> ::Array[String]
+
+      attr_reader filters: top?
+
+      def filters=: (top) -> top
+
+      attr_reader include_attributes: Turbopuffer::Models::include_attributes?
+
+      def include_attributes=: (
+        Turbopuffer::Models::include_attributes
+      ) -> Turbopuffer::Models::include_attributes
+
+      attr_reader rank_by: top?
+
+      def rank_by=: (top) -> top
+
+      attr_reader top_k: Integer?
+
+      def top_k=: (Integer) -> Integer
+
+      attr_reader vector_encoding: Turbopuffer::Models::vector_encoding?
+
+      def vector_encoding=: (
+        Turbopuffer::Models::vector_encoding
+      ) -> Turbopuffer::Models::vector_encoding
+
+      def initialize: (
+        ?namespace: String,
+        ?aggregate_by: ::Hash[Symbol, top],
+        ?consistency: Turbopuffer::NamespaceExplainQueryParams::Consistency,
+        ?distance_metric: Turbopuffer::Models::distance_metric,
+        ?exclude_attributes: ::Array[String],
+        ?filters: top,
+        ?include_attributes: Turbopuffer::Models::include_attributes,
+        ?rank_by: top,
+        ?top_k: Integer,
+        ?vector_encoding: Turbopuffer::Models::vector_encoding,
+        ?request_options: Turbopuffer::request_opts
+      ) -> void
+
+      def to_hash: -> {
+        namespace: String,
+        aggregate_by: ::Hash[Symbol, top],
+        consistency: Turbopuffer::NamespaceExplainQueryParams::Consistency,
+        distance_metric: Turbopuffer::Models::distance_metric,
+        exclude_attributes: ::Array[String],
+        filters: top,
+        include_attributes: Turbopuffer::Models::include_attributes,
+        rank_by: top,
+        top_k: Integer,
+        vector_encoding: Turbopuffer::Models::vector_encoding,
+        request_options: Turbopuffer::RequestOptions
+      }
+
+      type consistency =
+        {
+          level: Turbopuffer::Models::NamespaceExplainQueryParams::Consistency::level
+        }
+
+      class Consistency < Turbopuffer::Internal::Type::BaseModel
+        attr_reader level: Turbopuffer::Models::NamespaceExplainQueryParams::Consistency::level?
+
+        def level=: (
+          Turbopuffer::Models::NamespaceExplainQueryParams::Consistency::level
+        ) -> Turbopuffer::Models::NamespaceExplainQueryParams::Consistency::level
+
+        def initialize: (
+          ?level: Turbopuffer::Models::NamespaceExplainQueryParams::Consistency::level
+        ) -> void
+
+        def to_hash: -> {
+          level: Turbopuffer::Models::NamespaceExplainQueryParams::Consistency::level
+        }
+
+        type level = :strong | :eventual
+
+        module Level
+          extend Turbopuffer::Internal::Type::Enum
+
+          # Strong consistency. Requires a round-trip to object storage to fetch the latest writes.
+          STRONG: :strong
+
+          # Eventual consistency. Does not require a round-trip to object storage, but may not see the latest writes.
+          EVENTUAL: :eventual
+
+          def self?.values: -> ::Array[Turbopuffer::Models::NamespaceExplainQueryParams::Consistency::level]
+        end
+      end
+    end
+  end
+end
