@@ -41,6 +41,13 @@ module Turbopuffer
       end
       attr_writer :full_text_search
 
+      # Whether to enable Regex filters on this attribute.
+      sig { returns(T.nilable(T::Boolean)) }
+      attr_reader :regex
+
+      sig { params(regex: T::Boolean).void }
+      attr_writer :regex
+
       # The data type of the attribute. Valid values: string, int, uint, uuid, datetime,
       # bool, []string, []int, []uint, []uuid, []datetime, [DIMS]f16, [DIMS]f32.
       sig { returns(T.nilable(String)) }
@@ -56,6 +63,7 @@ module Turbopuffer
           filterable: T::Boolean,
           full_text_search:
             T.any(T::Boolean, Turbopuffer::FullTextSearchConfig::OrHash),
+          regex: T::Boolean,
           type: String
         ).returns(T.attached_class)
       end
@@ -68,6 +76,8 @@ module Turbopuffer
         # the `string` or `[]string` type, and by default, BM25-enabled attributes are not
         # filterable. You can override this by setting `filterable: true`.
         full_text_search: nil,
+        # Whether to enable Regex filters on this attribute.
+        regex: nil,
         # The data type of the attribute. Valid values: string, int, uint, uuid, datetime,
         # bool, []string, []int, []uint, []uuid, []datetime, [DIMS]f16, [DIMS]f32.
         type: nil
@@ -81,6 +91,7 @@ module Turbopuffer
             filterable: T::Boolean,
             full_text_search:
               T.any(T::Boolean, Turbopuffer::FullTextSearchConfig),
+            regex: T::Boolean,
             type: String
           }
         )
