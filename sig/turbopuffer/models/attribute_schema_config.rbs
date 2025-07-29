@@ -5,6 +5,7 @@ module Turbopuffer
         ann: bool,
         filterable: bool,
         full_text_search: Turbopuffer::Models::full_text_search,
+        regex: bool,
         type: String
       }
 
@@ -23,6 +24,10 @@ module Turbopuffer
         Turbopuffer::Models::full_text_search
       ) -> Turbopuffer::Models::full_text_search
 
+      attr_reader regex: bool?
+
+      def regex=: (bool) -> bool
+
       attr_reader type: String?
 
       def type=: (String) -> String
@@ -31,6 +36,7 @@ module Turbopuffer
         ?ann: bool,
         ?filterable: bool,
         ?full_text_search: Turbopuffer::Models::full_text_search,
+        ?regex: bool,
         ?type: String
       ) -> void
 
@@ -38,6 +44,7 @@ module Turbopuffer
         ann: bool,
         filterable: bool,
         full_text_search: Turbopuffer::Models::full_text_search,
+        regex: bool,
         type: String
       }
     end
