@@ -87,7 +87,7 @@ class TurbopufferTest < Minitest::Test
       turbopuffer.namespaces
     end
 
-    assert_requested(:any, /./, times: 3)
+    assert_requested(:any, /./, times: 5)
   end
 
   def test_client_given_request_default_retry_attempts
@@ -193,7 +193,7 @@ class TurbopufferTest < Minitest::Test
       turbopuffer.namespaces
     end
 
-    3.times do
+    5.times do
       assert_requested(:any, /./, headers: {"x-stainless-retry-count" => _1})
     end
   end
@@ -207,7 +207,7 @@ class TurbopufferTest < Minitest::Test
       turbopuffer.namespaces(request_options: {extra_headers: {"x-stainless-retry-count" => nil}})
     end
 
-    assert_requested(:any, /./, times: 3) do
+    assert_requested(:any, /./, times: 5) do
       refute_includes(_1.headers.keys.map(&:downcase), "x-stainless-retry-count")
     end
   end
@@ -221,7 +221,7 @@ class TurbopufferTest < Minitest::Test
       turbopuffer.namespaces(request_options: {extra_headers: {"x-stainless-retry-count" => "42"}})
     end
 
-    assert_requested(:any, /./, headers: {"x-stainless-retry-count" => "42"}, times: 3)
+    assert_requested(:any, /./, headers: {"x-stainless-retry-count" => "42"}, times: 5)
   end
 
   def test_client_redirect_307

@@ -3,14 +3,14 @@
 module Turbopuffer
   class Client < Turbopuffer::Internal::Transport::BaseClient
     # Default max number of retries to attempt after a failed retryable request.
-    DEFAULT_MAX_RETRIES = 2
+    DEFAULT_MAX_RETRIES = 4
 
     # Default per-request timeout.
     DEFAULT_TIMEOUT_IN_SECONDS = 60.0
 
     # Default initial retry delay in seconds.
     # Overall delay is calculated using exponential backoff + jitter.
-    DEFAULT_INITIAL_RETRY_DELAY = 0.5
+    DEFAULT_INITIAL_RETRY_DELAY = 0.3
 
     # Default max retry delay in seconds.
     DEFAULT_MAX_RETRY_DELAY = 8.0
