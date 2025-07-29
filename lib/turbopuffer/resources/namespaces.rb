@@ -298,7 +298,7 @@ module Turbopuffer
           path: ["v2/namespaces/%1$s", namespace],
           body: parsed,
           model: Turbopuffer::Models::NamespaceWriteResponse,
-          options: options
+          options: {max_retries: 6, **options}
         )
       end
 
