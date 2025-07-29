@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.2.2 (2025-07-29)
+
+Full Changelog: [v0.2.1...v0.2.2](https://github.com/turbopuffer/turbopuffer-ruby/compare/v0.2.1...v0.2.2)
+
+### Bug Fixes
+
+* **api:** api update ([9650229](https://github.com/turbopuffer/turbopuffer-ruby/commit/965022936b5551d035ccba9dceb98f7b180ed34d))
+* **api:** api update ([f27319a](https://github.com/turbopuffer/turbopuffer-ruby/commit/f27319a7f811a5f6975acbb2d714c113f32fb8e8))
+* **internal:** ensure sorbet test always runs serially ([954ee15](https://github.com/turbopuffer/turbopuffer-ruby/commit/954ee1533f161a7da823cd98077edb0d7bb4b750))
+
 ## 0.2.1 (2025-07-28)
 
 Full Changelog: [v0.2.0...v0.2.1](https://github.com/turbopuffer/turbopuffer-ruby/compare/v0.2.0...v0.2.1)
