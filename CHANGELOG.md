@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.2.3 (2025-07-29)
+
+Full Changelog: [v0.2.2...v0.2.3](https://github.com/turbopuffer/turbopuffer-ruby/compare/v0.2.2...v0.2.3)
+
+### Bug Fixes
+
+* **api:** api update ([fc8709f](https://github.com/turbopuffer/turbopuffer-ruby/commit/fc8709fbebe7d26a2d82a8ba3c28b0e7f606cea2))
+* **api:** api update ([5295ae2](https://github.com/turbopuffer/turbopuffer-ruby/commit/5295ae24caff9edd7acc8f14a8321323a831cf70))
+
 ## 0.2.2 (2025-07-29)
 
 Full Changelog: [v0.2.1...v0.2.2](https://github.com/turbopuffer/turbopuffer-ruby/compare/v0.2.1...v0.2.2)
