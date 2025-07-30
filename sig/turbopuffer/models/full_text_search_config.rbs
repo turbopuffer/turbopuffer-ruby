@@ -6,6 +6,7 @@ module Turbopuffer
         case_sensitive: bool,
         :k1 => Float,
         language: Turbopuffer::Models::language,
+        max_token_length: Integer,
         remove_stopwords: bool,
         stemming: bool,
         tokenizer: Turbopuffer::Models::tokenizer
@@ -30,6 +31,10 @@ module Turbopuffer
         Turbopuffer::Models::language
       ) -> Turbopuffer::Models::language
 
+      attr_reader max_token_length: Integer?
+
+      def max_token_length=: (Integer) -> Integer
+
       attr_reader remove_stopwords: bool?
 
       def remove_stopwords=: (bool) -> bool
@@ -49,6 +54,7 @@ module Turbopuffer
         ?case_sensitive: bool,
         ?k1: Float,
         ?language: Turbopuffer::Models::language,
+        ?max_token_length: Integer,
         ?remove_stopwords: bool,
         ?stemming: bool,
         ?tokenizer: Turbopuffer::Models::tokenizer
@@ -59,6 +65,7 @@ module Turbopuffer
         case_sensitive: bool,
         :k1 => Float,
         language: Turbopuffer::Models::language,
+        max_token_length: Integer,
         remove_stopwords: bool,
         stemming: bool,
         tokenizer: Turbopuffer::Models::tokenizer
