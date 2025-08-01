@@ -40,6 +40,15 @@ module Turbopuffer
       sig { params(language: Turbopuffer::Language::OrSymbol).void }
       attr_writer :language
 
+      # Maximum length of a token in bytes. Tokens larger than this value during
+      # tokenization will be filtered out. Has to be between `1` and `254` (inclusive).
+      # Defaults to `39`.
+      sig { returns(T.nilable(Integer)) }
+      attr_reader :max_token_length
+
+      sig { params(max_token_length: Integer).void }
+      attr_writer :max_token_length
+
       # Removes common words from the text based on language. Defaults to `true` (i.e.
       # remove common words).
       sig { returns(T.nilable(T::Boolean)) }
@@ -70,6 +79,7 @@ module Turbopuffer
           case_sensitive: T::Boolean,
           k1: Float,
           language: Turbopuffer::Language::OrSymbol,
+          max_token_length: Integer,
           remove_stopwords: T::Boolean,
           stemming: T::Boolean,
           tokenizer: Turbopuffer::Tokenizer::OrSymbol
@@ -85,6 +95,10 @@ module Turbopuffer
         k1: nil,
         # Describes the language of a text attribute. Defaults to `english`.
         language: nil,
+        # Maximum length of a token in bytes. Tokens larger than this value during
+        # tokenization will be filtered out. Has to be between `1` and `254` (inclusive).
+        # Defaults to `39`.
+        max_token_length: nil,
         # Removes common words from the text based on language. Defaults to `true` (i.e.
         # remove common words).
         remove_stopwords: nil,
@@ -103,6 +117,7 @@ module Turbopuffer
             case_sensitive: T::Boolean,
             k1: Float,
             language: Turbopuffer::Language::OrSymbol,
+            max_token_length: Integer,
             remove_stopwords: T::Boolean,
             stemming: T::Boolean,
             tokenizer: Turbopuffer::Tokenizer::OrSymbol

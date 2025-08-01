@@ -17,7 +17,7 @@ To use this gem, install via Bundler by adding the following to your application
 <!-- x-release-please-start-version -->
 
 ```ruby
-gem "turbopuffer-ruby", "~> 0.2.3"
+gem "turbopuffer-ruby", "~> 0.2.4"
 ```
 
 <!-- x-release-please-end -->
@@ -259,25 +259,25 @@ turbopuffer.namespace("products").write(**params)
 Since this library does not depend on `sorbet-runtime`, it cannot provide [`T::Enum`](https://sorbet.org/docs/tenum) instances. Instead, we provide "tagged symbols" instead, which is always a primitive at runtime:
 
 ```ruby
-# :float
-puts(Turbopuffer::VectorEncoding::FLOAT)
+# :cosine_distance
+puts(Turbopuffer::DistanceMetric::COSINE_DISTANCE)
 
-# Revealed type: `T.all(Turbopuffer::VectorEncoding, Symbol)`
-T.reveal_type(Turbopuffer::VectorEncoding::FLOAT)
+# Revealed type: `T.all(Turbopuffer::DistanceMetric, Symbol)`
+T.reveal_type(Turbopuffer::DistanceMetric::COSINE_DISTANCE)
 ```
 
 Enum parameters have a "relaxed" type, so you can either pass in enum constants or their literal value:
 
 ```ruby
 # Using the enum constants preserves the tagged type information:
-turbopuffer.namespaces.multi_query(
-  vector_encoding: Turbopuffer::VectorEncoding::FLOAT,
+turbopuffer.namespaces.explain_query(
+  distance_metric: Turbopuffer::DistanceMetric::COSINE_DISTANCE,
   # …
 )
 
 # Literal values are also permissible:
-turbopuffer.namespaces.multi_query(
-  vector_encoding: :float,
+turbopuffer.namespaces.explain_query(
+  distance_metric: :cosine_distance,
   # …
 )
 ```

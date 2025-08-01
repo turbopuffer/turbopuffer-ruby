@@ -63,6 +63,8 @@ module Turbopuffer
 
   NamespaceDeleteAllParams = Turbopuffer::Models::NamespaceDeleteAllParams
 
+  NamespaceExplainQueryParams = Turbopuffer::Models::NamespaceExplainQueryParams
+
   NamespaceHintCacheWarmParams = Turbopuffer::Models::NamespaceHintCacheWarmParams
 
   NamespaceMetadata = Turbopuffer::Models::NamespaceMetadata

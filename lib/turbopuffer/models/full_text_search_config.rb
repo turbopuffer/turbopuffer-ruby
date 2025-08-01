@@ -28,6 +28,14 @@ module Turbopuffer
       #   @return [Symbol, Turbopuffer::Models::Language, nil]
       optional :language, enum: -> { Turbopuffer::Language }
 
+      # @!attribute max_token_length
+      #   Maximum length of a token in bytes. Tokens larger than this value during
+      #   tokenization will be filtered out. Has to be between `1` and `254` (inclusive).
+      #   Defaults to `39`.
+      #
+      #   @return [Integer, nil]
+      optional :max_token_length, Integer
+
       # @!attribute remove_stopwords
       #   Removes common words from the text based on language. Defaults to `true` (i.e.
       #   remove common words).
@@ -48,7 +56,7 @@ module Turbopuffer
       #   @return [Symbol, Turbopuffer::Models::Tokenizer, nil]
       optional :tokenizer, enum: -> { Turbopuffer::Tokenizer }
 
-      # @!method initialize(b: nil, case_sensitive: nil, k1: nil, language: nil, remove_stopwords: nil, stemming: nil, tokenizer: nil)
+      # @!method initialize(b: nil, case_sensitive: nil, k1: nil, language: nil, max_token_length: nil, remove_stopwords: nil, stemming: nil, tokenizer: nil)
       #   Some parameter documentations has been truncated, see
       #   {Turbopuffer::Models::FullTextSearchConfig} for more details.
       #
@@ -61,6 +69,8 @@ module Turbopuffer
       #   @param k1 [Float] The `k1` term saturation parameter for BM25. Defaults to `1.2`.
       #
       #   @param language [Symbol, Turbopuffer::Models::Language] Describes the language of a text attribute. Defaults to `english`.
+      #
+      #   @param max_token_length [Integer] Maximum length of a token in bytes. Tokens larger than this value during tokeniz
       #
       #   @param remove_stopwords [Boolean] Removes common words from the text based on language. Defaults to `true` (i.e. r
       #

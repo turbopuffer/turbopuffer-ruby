@@ -19,6 +19,22 @@ class Turbopuffer::Test::Resources::NamespacesTest < Turbopuffer::Test::Resource
     end
   end
 
+  def test_explain_query_required_params
+    skip("skipped: tests are disabled for the time being")
+
+    response = @turbopuffer.namespaces.explain_query(namespace: "namespace")
+
+    assert_pattern do
+      response => Turbopuffer::Models::NamespaceExplainQueryResponse
+    end
+
+    assert_pattern do
+      response => {
+        plan_text: String | nil
+      }
+    end
+  end
+
   def test_hint_cache_warm_required_params
     skip("skipped: tests are disabled for the time being")
 

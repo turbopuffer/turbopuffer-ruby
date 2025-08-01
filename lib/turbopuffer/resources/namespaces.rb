@@ -28,6 +28,53 @@ module Turbopuffer
         )
       end
 
+      # Some parameter documentations has been truncated, see
+      # {Turbopuffer::Models::NamespaceExplainQueryParams} for more details.
+      #
+      # Explain a query plan.
+      #
+      # @overload explain_query(namespace: nil, aggregate_by: nil, consistency: nil, distance_metric: nil, exclude_attributes: nil, filters: nil, include_attributes: nil, rank_by: nil, top_k: nil, vector_encoding: nil, request_options: {})
+      #
+      # @param namespace [String] Path param: The name of the namespace.
+      #
+      # @param aggregate_by [Hash{Symbol=>Object}] Body param: Aggregations to compute over all documents in the namespace that mat
+      #
+      # @param consistency [Turbopuffer::Models::NamespaceExplainQueryParams::Consistency] Body param: The consistency level for a query.
+      #
+      # @param distance_metric [Symbol, Turbopuffer::Models::DistanceMetric] Body param: A function used to calculate vector similarity.
+      #
+      # @param exclude_attributes [Array<String>] Body param: List of attribute names to exclude from the response. All other attr
+      #
+      # @param filters [Object] Body param: Exact filters for attributes to refine search results for. Think of
+      #
+      # @param include_attributes [Boolean, Array<String>] Body param: Whether to include attributes in the response.
+      #
+      # @param rank_by [Object] Body param: How to rank the documents in the namespace.
+      #
+      # @param top_k [Integer] Body param: The number of results to return.
+      #
+      # @param vector_encoding [Symbol, Turbopuffer::Models::VectorEncoding] Body param: The encoding to use for vectors in the response.
+      #
+      # @param request_options [Turbopuffer::RequestOptions, Hash{Symbol=>Object}, nil]
+      #
+      # @return [Turbopuffer::Models::NamespaceExplainQueryResponse]
+      #
+      # @see Turbopuffer::Models::NamespaceExplainQueryParams
+      def explain_query(params = {})
+        parsed, options = Turbopuffer::NamespaceExplainQueryParams.dump_request(params)
+        namespace =
+          parsed.delete(:namespace) do
+            @client.default_namespace
+          end
+        @client.request(
+          method: :post,
+          path: ["v2/namespaces/%1$s/explain_query", namespace],
+          body: parsed,
+          model: Turbopuffer::Models::NamespaceExplainQueryResponse,
+          options: options
+        )
+      end
+
       # Warm the cache for a namespace.
       #
       # @overload hint_cache_warm(namespace: nil, request_options: {})
