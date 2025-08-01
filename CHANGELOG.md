@@ -1,5 +1,19 @@
 # Changelog
 
+## 0.2.4 (2025-08-01)
+
+Full Changelog: [v0.2.3...v0.2.4](https://github.com/turbopuffer/turbopuffer-ruby/compare/v0.2.3...v0.2.4)
+
+### Bug Fixes
+
+* **api:** api update ([900bd73](https://github.com/turbopuffer/turbopuffer-ruby/commit/900bd73a945bdb8af7d1c23d7f44a359a154c1aa))
+* **api:** api update ([d63b961](https://github.com/turbopuffer/turbopuffer-ruby/commit/d63b9613a0827be0969a218a29df23934ef8c46f))
+
+
+### Chores
+
+* **internal:** increase visibility of internal helper method ([fc6e1e7](https://github.com/turbopuffer/turbopuffer-ruby/commit/fc6e1e7c7a5824c751d32bb3f88ab8c716f763cf))
+
 ## 0.2.3 (2025-07-29)
 
 Full Changelog: [v0.2.2...v0.2.3](https://github.com/turbopuffer/turbopuffer-ruby/compare/v0.2.2...v0.2.3)
