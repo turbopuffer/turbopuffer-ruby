@@ -16,7 +16,8 @@ module Turbopuffer
             T::Array[
               [
                 T.nilable(Symbol),
-                T.proc.returns(Turbopuffer::Internal::Type::Converter::Input)
+                T.proc.returns(Turbopuffer::Internal::Type::Converter::Input),
+                Turbopuffer::Internal::AnyHash
               ]
             ]
           )
@@ -25,7 +26,13 @@ module Turbopuffer
         end
 
         # @api private
-        sig { returns(T::Array[[T.nilable(Symbol), T.anything]]) }
+        sig do
+          returns(
+            T::Array[
+              [T.nilable(Symbol), T.anything, Turbopuffer::Internal::AnyHash]
+            ]
+          )
+        end
         protected def derefed_variants
         end
 
