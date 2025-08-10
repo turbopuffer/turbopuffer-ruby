@@ -39,6 +39,23 @@ module Turbopuffer
           | Turbopuffer::Internal::Type::Converter::input spec
         ) -> (^-> top)
 
+        def self.meta_info: (
+          {
+            const: (nil | bool | Integer | Float | Symbol)?,
+            enum: ^-> Turbopuffer::Internal::Type::Converter::input?,
+            union: ^-> Turbopuffer::Internal::Type::Converter::input?
+          }
+          | ^-> Turbopuffer::Internal::Type::Converter::input
+          | Turbopuffer::Internal::Type::Converter::input type_info,
+          {
+            const: (nil | bool | Integer | Float | Symbol)?,
+            enum: ^-> Turbopuffer::Internal::Type::Converter::input?,
+            union: ^-> Turbopuffer::Internal::Type::Converter::input?
+          }
+          | ^-> Turbopuffer::Internal::Type::Converter::input
+          | Turbopuffer::Internal::Type::Converter::input spec
+        ) -> ::Hash[Symbol, top]
+
         def self.new_coerce_state: (
           ?translate_names: bool
         ) -> Turbopuffer::Internal::Type::Converter::coerce_state
