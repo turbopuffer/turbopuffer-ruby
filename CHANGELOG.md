@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.2.5 (2025-08-11)
+
+Full Changelog: [v0.2.4...v0.2.5](https://github.com/turbopuffer/turbopuffer-ruby/compare/v0.2.4...v0.2.5)
+
+### Chores
+
+* collect metadata from type DSL ([79bb9bd](https://github.com/turbopuffer/turbopuffer-ruby/commit/79bb9bd39297006af6693580f09d35c1c801500f))
+* **internal:** update comment in script ([0b151c0](https://github.com/turbopuffer/turbopuffer-ruby/commit/0b151c035ce5ba8785c3499247843428ba8267bd))
+* update @stainless-api/prism-cli to v5.15.0 ([bb9a4b1](https://github.com/turbopuffer/turbopuffer-ruby/commit/bb9a4b1de0ac931671b2abeefa9c4cf8a67bae63))
+
 ## 0.2.4 (2025-08-01)
 
 Full Changelog: [v0.2.3...v0.2.4](https://github.com/turbopuffer/turbopuffer-ruby/compare/v0.2.3...v0.2.4)
