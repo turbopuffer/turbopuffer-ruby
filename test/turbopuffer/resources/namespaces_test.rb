@@ -4,7 +4,7 @@ require_relative "../test_helper"
 
 class Turbopuffer::Test::Resources::NamespacesTest < Turbopuffer::Test::ResourceTest
   def test_delete_all_required_params
-    skip("skipped: tests are disabled for the time being")
+    skip("Prism tests are disabled")
 
     response = @turbopuffer.namespaces.delete_all(namespace: "namespace")
 
@@ -20,7 +20,7 @@ class Turbopuffer::Test::Resources::NamespacesTest < Turbopuffer::Test::Resource
   end
 
   def test_explain_query_required_params
-    skip("skipped: tests are disabled for the time being")
+    skip("Prism tests are disabled")
 
     response = @turbopuffer.namespaces.explain_query(namespace: "namespace")
 
@@ -36,7 +36,7 @@ class Turbopuffer::Test::Resources::NamespacesTest < Turbopuffer::Test::Resource
   end
 
   def test_hint_cache_warm_required_params
-    skip("skipped: tests are disabled for the time being")
+    skip("Prism tests are disabled")
 
     response = @turbopuffer.namespaces.hint_cache_warm(namespace: "namespace")
 
@@ -53,7 +53,7 @@ class Turbopuffer::Test::Resources::NamespacesTest < Turbopuffer::Test::Resource
   end
 
   def test_metadata_required_params
-    skip("skipped: tests are disabled for the time being")
+    skip("Prism tests are disabled")
 
     response = @turbopuffer.namespaces.metadata(namespace: "namespace")
 
@@ -72,7 +72,7 @@ class Turbopuffer::Test::Resources::NamespacesTest < Turbopuffer::Test::Resource
   end
 
   def test_multi_query_required_params
-    skip("skipped: tests are disabled for the time being")
+    skip("Prism tests are disabled")
 
     response = @turbopuffer.namespaces.multi_query(namespace: "namespace", queries: [{}])
 
@@ -90,7 +90,7 @@ class Turbopuffer::Test::Resources::NamespacesTest < Turbopuffer::Test::Resource
   end
 
   def test_query_required_params
-    skip("skipped: tests are disabled for the time being")
+    skip("Prism tests are disabled")
 
     response = @turbopuffer.namespaces.query(namespace: "namespace")
 
@@ -109,7 +109,7 @@ class Turbopuffer::Test::Resources::NamespacesTest < Turbopuffer::Test::Resource
   end
 
   def test_recall_required_params
-    skip("skipped: tests are disabled for the time being")
+    skip("Prism tests are disabled")
 
     response = @turbopuffer.namespaces.recall(namespace: "namespace")
 
@@ -127,7 +127,7 @@ class Turbopuffer::Test::Resources::NamespacesTest < Turbopuffer::Test::Resource
   end
 
   def test_schema_required_params
-    skip("skipped: tests are disabled for the time being")
+    skip("Prism tests are disabled")
 
     response = @turbopuffer.namespaces.schema(namespace: "namespace")
 
@@ -137,7 +137,7 @@ class Turbopuffer::Test::Resources::NamespacesTest < Turbopuffer::Test::Resource
   end
 
   def test_update_schema_required_params
-    skip("skipped: tests are disabled for the time being")
+    skip("Prism tests are disabled")
 
     response = @turbopuffer.namespaces.update_schema(namespace: "namespace")
 
@@ -147,7 +147,7 @@ class Turbopuffer::Test::Resources::NamespacesTest < Turbopuffer::Test::Resource
   end
 
   def test_write_required_params
-    skip("skipped: tests are disabled for the time being")
+    skip("Prism tests are disabled")
 
     response = @turbopuffer.namespaces.write(namespace: "namespace")
 
