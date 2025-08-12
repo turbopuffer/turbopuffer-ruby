@@ -26,7 +26,7 @@ module Turbopuffer
       def self.new(
         message: nil,
         # The status of the request.
-        status: :OK
+        status: :ACCEPTED
       )
       end
 

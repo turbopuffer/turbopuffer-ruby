@@ -7,20 +7,20 @@ module Turbopuffer
       # @!attribute status
       #   The status of the request.
       #
-      #   @return [Symbol, :OK]
-      required :status, const: :OK
+      #   @return [Symbol, :ACCEPTED]
+      required :status, const: :ACCEPTED
 
       # @!attribute message
       #
       #   @return [String, nil]
       optional :message, String
 
-      # @!method initialize(message: nil, status: :OK)
+      # @!method initialize(message: nil, status: :ACCEPTED)
       #   The response to a successful cache warm request.
       #
       #   @param message [String]
       #
-      #   @param status [Symbol, :OK] The status of the request.
+      #   @param status [Symbol, :ACCEPTED] The status of the request.
     end
   end
 end
