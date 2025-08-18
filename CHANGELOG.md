@@ -1,5 +1,19 @@
 # Changelog
 
+## 0.2.6 (2025-08-18)
+
+Full Changelog: [v0.2.5...v0.2.6](https://github.com/turbopuffer/turbopuffer-ruby/compare/v0.2.5...v0.2.6)
+
+### Bug Fixes
+
+* **api:** add support for `group_by` query parameter ([c4e6261](https://github.com/turbopuffer/turbopuffer-ruby/commit/c4e626148df5642d654e5ae739d07588fcd4ad5d))
+* remove 200 error code for hint_cache_warm API call (always 202 now) ([bbd6d75](https://github.com/turbopuffer/turbopuffer-ruby/commit/bbd6d759e25a1b7b4dd8e3208acc1089f1d35f36))
+
+
+### Chores
+
+* **internal:** codegen related update ([880022b](https://github.com/turbopuffer/turbopuffer-ruby/commit/880022bea36595da811d14bd5a2e610624b283eb))
+
 ## 0.2.5 (2025-08-11)
 
 Full Changelog: [v0.2.4...v0.2.5](https://github.com/turbopuffer/turbopuffer-ruby/compare/v0.2.4...v0.2.5)
