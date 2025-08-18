@@ -16,6 +16,11 @@ module Turbopuffer
       #   @return [Turbopuffer::Models::QueryPerformance]
       required :performance, -> { Turbopuffer::QueryPerformance }
 
+      # @!attribute aggregation_groups
+      #
+      #   @return [Array<Turbopuffer::Models::Row>, nil]
+      optional :aggregation_groups, -> { Turbopuffer::Internal::Type::ArrayOf[Turbopuffer::Row] }
+
       # @!attribute aggregations
       #
       #   @return [Hash{Symbol=>Object}, nil]
@@ -26,12 +31,14 @@ module Turbopuffer
       #   @return [Array<Turbopuffer::Models::Row>, nil]
       optional :rows, -> { Turbopuffer::Internal::Type::ArrayOf[Turbopuffer::Row] }
 
-      # @!method initialize(billing:, performance:, aggregations: nil, rows: nil)
+      # @!method initialize(billing:, performance:, aggregation_groups: nil, aggregations: nil, rows: nil)
       #   The result of a query.
       #
       #   @param billing [Turbopuffer::Models::QueryBilling] The billing information for a query.
       #
       #   @param performance [Turbopuffer::Models::QueryPerformance] The performance information for a query.
+      #
+      #   @param aggregation_groups [Array<Turbopuffer::Models::Row>]
       #
       #   @param aggregations [Hash{Symbol=>Object}]
       #

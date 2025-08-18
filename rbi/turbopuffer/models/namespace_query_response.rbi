@@ -25,6 +25,14 @@ module Turbopuffer
       sig { params(performance: Turbopuffer::QueryPerformance::OrHash).void }
       attr_writer :performance
 
+      sig { returns(T.nilable(T::Array[Turbopuffer::Row])) }
+      attr_reader :aggregation_groups
+
+      sig do
+        params(aggregation_groups: T::Array[Turbopuffer::Row::OrHash]).void
+      end
+      attr_writer :aggregation_groups
+
       sig { returns(T.nilable(T::Hash[Symbol, T.anything])) }
       attr_reader :aggregations
 
@@ -42,6 +50,7 @@ module Turbopuffer
         params(
           billing: Turbopuffer::QueryBilling::OrHash,
           performance: Turbopuffer::QueryPerformance::OrHash,
+          aggregation_groups: T::Array[Turbopuffer::Row::OrHash],
           aggregations: T::Hash[Symbol, T.anything],
           rows: T::Array[Turbopuffer::Row::OrHash]
         ).returns(T.attached_class)
@@ -51,6 +60,7 @@ module Turbopuffer
         billing:,
         # The performance information for a query.
         performance:,
+        aggregation_groups: nil,
         aggregations: nil,
         rows: nil
       )
@@ -61,6 +71,7 @@ module Turbopuffer
           {
             billing: Turbopuffer::QueryBilling,
             performance: Turbopuffer::QueryPerformance,
+            aggregation_groups: T::Array[Turbopuffer::Row],
             aggregations: T::Hash[Symbol, T.anything],
             rows: T::Array[Turbopuffer::Row]
           }

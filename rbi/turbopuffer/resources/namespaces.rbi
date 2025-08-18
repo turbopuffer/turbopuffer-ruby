@@ -27,6 +27,7 @@ module Turbopuffer
           distance_metric: Turbopuffer::DistanceMetric::OrSymbol,
           exclude_attributes: T::Array[String],
           filters: T.anything,
+          group_by: T::Array[String],
           include_attributes: Turbopuffer::IncludeAttributes::Variants,
           rank_by: T.anything,
           top_k: Integer,
@@ -50,6 +51,9 @@ module Turbopuffer
         # Body param: Exact filters for attributes to refine search results for. Think of
         # it as a SQL WHERE clause.
         filters: nil,
+        # Body param: Groups documents by the specified attributes (the "group key")
+        # before computing aggregates. Aggregates are computed separately for each group.
+        group_by: nil,
         # Body param: Whether to include attributes in the response.
         include_attributes: nil,
         # Body param: How to rank the documents in the namespace.
@@ -123,6 +127,7 @@ module Turbopuffer
           distance_metric: Turbopuffer::DistanceMetric::OrSymbol,
           exclude_attributes: T::Array[String],
           filters: T.anything,
+          group_by: T::Array[String],
           include_attributes: Turbopuffer::IncludeAttributes::Variants,
           rank_by: T.anything,
           top_k: Integer,
@@ -146,6 +151,9 @@ module Turbopuffer
         # Body param: Exact filters for attributes to refine search results for. Think of
         # it as a SQL WHERE clause.
         filters: nil,
+        # Body param: Groups documents by the specified attributes (the "group key")
+        # before computing aggregates. Aggregates are computed separately for each group.
+        group_by: nil,
         # Body param: Whether to include attributes in the response.
         include_attributes: nil,
         # Body param: How to rank the documents in the namespace.

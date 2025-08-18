@@ -6,6 +6,7 @@ module Turbopuffer
         distance_metric: Turbopuffer::Models::distance_metric,
         exclude_attributes: ::Array[String],
         filters: top,
+        group_by: ::Array[String],
         include_attributes: Turbopuffer::Models::include_attributes,
         rank_by: top,
         top_k: Integer
@@ -30,6 +31,10 @@ module Turbopuffer
 
       def filters=: (top) -> top
 
+      attr_reader group_by: ::Array[String]?
+
+      def group_by=: (::Array[String]) -> ::Array[String]
+
       attr_reader include_attributes: Turbopuffer::Models::include_attributes?
 
       def include_attributes=: (
@@ -49,6 +54,7 @@ module Turbopuffer
         ?distance_metric: Turbopuffer::Models::distance_metric,
         ?exclude_attributes: ::Array[String],
         ?filters: top,
+        ?group_by: ::Array[String],
         ?include_attributes: Turbopuffer::Models::include_attributes,
         ?rank_by: top,
         ?top_k: Integer
@@ -59,6 +65,7 @@ module Turbopuffer
         distance_metric: Turbopuffer::Models::distance_metric,
         exclude_attributes: ::Array[String],
         filters: top,
+        group_by: ::Array[String],
         include_attributes: Turbopuffer::Models::include_attributes,
         rank_by: top,
         top_k: Integer
