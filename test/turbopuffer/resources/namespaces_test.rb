@@ -102,6 +102,7 @@ class Turbopuffer::Test::Resources::NamespacesTest < Turbopuffer::Test::Resource
       response => {
         billing: Turbopuffer::QueryBilling,
         performance: Turbopuffer::QueryPerformance,
+        aggregation_groups: ^(Turbopuffer::Internal::Type::ArrayOf[Turbopuffer::Row]) | nil,
         aggregations: ^(Turbopuffer::Internal::Type::HashOf[Turbopuffer::Internal::Type::Unknown]) | nil,
         rows: ^(Turbopuffer::Internal::Type::ArrayOf[Turbopuffer::Row]) | nil
       }

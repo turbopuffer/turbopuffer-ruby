@@ -27,9 +27,19 @@ module Turbopuffer
       }
 
       type result =
-        { aggregations: ::Hash[Symbol, top], rows: ::Array[Turbopuffer::Row] }
+        {
+          aggregation_groups: ::Array[Turbopuffer::Row],
+          aggregations: ::Hash[Symbol, top],
+          rows: ::Array[Turbopuffer::Row]
+        }
 
       class Result < Turbopuffer::Internal::Type::BaseModel
+        attr_reader aggregation_groups: ::Array[Turbopuffer::Row]?
+
+        def aggregation_groups=: (
+          ::Array[Turbopuffer::Row]
+        ) -> ::Array[Turbopuffer::Row]
+
         attr_reader aggregations: ::Hash[Symbol, top]?
 
         def aggregations=: (::Hash[Symbol, top]) -> ::Hash[Symbol, top]
@@ -39,11 +49,13 @@ module Turbopuffer
         def rows=: (::Array[Turbopuffer::Row]) -> ::Array[Turbopuffer::Row]
 
         def initialize: (
+          ?aggregation_groups: ::Array[Turbopuffer::Row],
           ?aggregations: ::Hash[Symbol, top],
           ?rows: ::Array[Turbopuffer::Row]
         ) -> void
 
         def to_hash: -> {
+          aggregation_groups: ::Array[Turbopuffer::Row],
           aggregations: ::Hash[Symbol, top],
           rows: ::Array[Turbopuffer::Row]
         }

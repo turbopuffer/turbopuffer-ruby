@@ -33,7 +33,7 @@ module Turbopuffer
       #
       # Explain a query plan.
       #
-      # @overload explain_query(namespace: nil, aggregate_by: nil, consistency: nil, distance_metric: nil, exclude_attributes: nil, filters: nil, include_attributes: nil, rank_by: nil, top_k: nil, vector_encoding: nil, request_options: {})
+      # @overload explain_query(namespace: nil, aggregate_by: nil, consistency: nil, distance_metric: nil, exclude_attributes: nil, filters: nil, group_by: nil, include_attributes: nil, rank_by: nil, top_k: nil, vector_encoding: nil, request_options: {})
       #
       # @param namespace [String] Path param: The name of the namespace.
       #
@@ -46,6 +46,8 @@ module Turbopuffer
       # @param exclude_attributes [Array<String>] Body param: List of attribute names to exclude from the response. All other attr
       #
       # @param filters [Object] Body param: Exact filters for attributes to refine search results for. Think of
+      #
+      # @param group_by [Array<String>] Body param: Groups documents by the specified attributes (the "group key") befor
       #
       # @param include_attributes [Boolean, Array<String>] Body param: Whether to include attributes in the response.
       #
@@ -162,7 +164,7 @@ module Turbopuffer
       #
       # Query, filter, full-text search and vector search documents.
       #
-      # @overload query(namespace: nil, aggregate_by: nil, consistency: nil, distance_metric: nil, exclude_attributes: nil, filters: nil, include_attributes: nil, rank_by: nil, top_k: nil, vector_encoding: nil, request_options: {})
+      # @overload query(namespace: nil, aggregate_by: nil, consistency: nil, distance_metric: nil, exclude_attributes: nil, filters: nil, group_by: nil, include_attributes: nil, rank_by: nil, top_k: nil, vector_encoding: nil, request_options: {})
       #
       # @param namespace [String] Path param: The name of the namespace.
       #
@@ -175,6 +177,8 @@ module Turbopuffer
       # @param exclude_attributes [Array<String>] Body param: List of attribute names to exclude from the response. All other attr
       #
       # @param filters [Object] Body param: Exact filters for attributes to refine search results for. Think of
+      #
+      # @param group_by [Array<String>] Body param: Groups documents by the specified attributes (the "group key") befor
       #
       # @param include_attributes [Boolean, Array<String>] Body param: Whether to include attributes in the response.
       #
