@@ -32,6 +32,11 @@ module Turbopuffer
       #   @param results [Array<Turbopuffer::Models::NamespaceMultiQueryResponse::Result>]
 
       class Result < Turbopuffer::Internal::Type::BaseModel
+        # @!attribute aggregation_groups
+        #
+        #   @return [Array<Turbopuffer::Models::Row>, nil]
+        optional :aggregation_groups, -> { Turbopuffer::Internal::Type::ArrayOf[Turbopuffer::Row] }
+
         # @!attribute aggregations
         #
         #   @return [Hash{Symbol=>Object}, nil]
@@ -42,7 +47,8 @@ module Turbopuffer
         #   @return [Array<Turbopuffer::Models::Row>, nil]
         optional :rows, -> { Turbopuffer::Internal::Type::ArrayOf[Turbopuffer::Row] }
 
-        # @!method initialize(aggregations: nil, rows: nil)
+        # @!method initialize(aggregation_groups: nil, aggregations: nil, rows: nil)
+        #   @param aggregation_groups [Array<Turbopuffer::Models::Row>]
         #   @param aggregations [Hash{Symbol=>Object}]
         #   @param rows [Array<Turbopuffer::Models::Row>]
       end

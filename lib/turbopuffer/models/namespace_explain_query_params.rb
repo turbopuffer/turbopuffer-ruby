@@ -45,6 +45,13 @@ module Turbopuffer
       #   @return [Object, nil]
       optional :filters, Turbopuffer::Internal::Type::Unknown
 
+      # @!attribute group_by
+      #   Groups documents by the specified attributes (the "group key") before computing
+      #   aggregates. Aggregates are computed separately for each group.
+      #
+      #   @return [Array<String>, nil]
+      optional :group_by, Turbopuffer::Internal::Type::ArrayOf[String]
+
       # @!attribute include_attributes
       #   Whether to include attributes in the response.
       #
@@ -69,7 +76,7 @@ module Turbopuffer
       #   @return [Symbol, Turbopuffer::Models::VectorEncoding, nil]
       optional :vector_encoding, enum: -> { Turbopuffer::VectorEncoding }
 
-      # @!method initialize(namespace: nil, aggregate_by: nil, consistency: nil, distance_metric: nil, exclude_attributes: nil, filters: nil, include_attributes: nil, rank_by: nil, top_k: nil, vector_encoding: nil, request_options: {})
+      # @!method initialize(namespace: nil, aggregate_by: nil, consistency: nil, distance_metric: nil, exclude_attributes: nil, filters: nil, group_by: nil, include_attributes: nil, rank_by: nil, top_k: nil, vector_encoding: nil, request_options: {})
       #   Some parameter documentations has been truncated, see
       #   {Turbopuffer::Models::NamespaceExplainQueryParams} for more details.
       #
@@ -84,6 +91,8 @@ module Turbopuffer
       #   @param exclude_attributes [Array<String>] List of attribute names to exclude from the response. All other attributes will
       #
       #   @param filters [Object] Exact filters for attributes to refine search results for. Think of it as a SQL
+      #
+      #   @param group_by [Array<String>] Groups documents by the specified attributes (the "group key") before computing
       #
       #   @param include_attributes [Boolean, Array<String>] Whether to include attributes in the response.
       #

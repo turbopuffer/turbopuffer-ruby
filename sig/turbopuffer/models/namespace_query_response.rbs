@@ -4,6 +4,7 @@ module Turbopuffer
       {
         billing: Turbopuffer::QueryBilling,
         performance: Turbopuffer::QueryPerformance,
+        aggregation_groups: ::Array[Turbopuffer::Row],
         aggregations: ::Hash[Symbol, top],
         rows: ::Array[Turbopuffer::Row]
       }
@@ -12,6 +13,12 @@ module Turbopuffer
       attr_accessor billing: Turbopuffer::QueryBilling
 
       attr_accessor performance: Turbopuffer::QueryPerformance
+
+      attr_reader aggregation_groups: ::Array[Turbopuffer::Row]?
+
+      def aggregation_groups=: (
+        ::Array[Turbopuffer::Row]
+      ) -> ::Array[Turbopuffer::Row]
 
       attr_reader aggregations: ::Hash[Symbol, top]?
 
@@ -24,6 +31,7 @@ module Turbopuffer
       def initialize: (
         billing: Turbopuffer::QueryBilling,
         performance: Turbopuffer::QueryPerformance,
+        ?aggregation_groups: ::Array[Turbopuffer::Row],
         ?aggregations: ::Hash[Symbol, top],
         ?rows: ::Array[Turbopuffer::Row]
       ) -> void
@@ -31,6 +39,7 @@ module Turbopuffer
       def to_hash: -> {
         billing: Turbopuffer::QueryBilling,
         performance: Turbopuffer::QueryPerformance,
+        aggregation_groups: ::Array[Turbopuffer::Row],
         aggregations: ::Hash[Symbol, top],
         rows: ::Array[Turbopuffer::Row]
       }

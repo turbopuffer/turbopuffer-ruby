@@ -41,6 +41,14 @@ module Turbopuffer
       sig { params(filters: T.anything).void }
       attr_writer :filters
 
+      # Groups documents by the specified attributes (the "group key") before computing
+      # aggregates. Aggregates are computed separately for each group.
+      sig { returns(T.nilable(T::Array[String])) }
+      attr_reader :group_by
+
+      sig { params(group_by: T::Array[String]).void }
+      attr_writer :group_by
+
       # Whether to include attributes in the response.
       sig { returns(T.nilable(Turbopuffer::IncludeAttributes::Variants)) }
       attr_reader :include_attributes
@@ -73,6 +81,7 @@ module Turbopuffer
           distance_metric: Turbopuffer::DistanceMetric::OrSymbol,
           exclude_attributes: T::Array[String],
           filters: T.anything,
+          group_by: T::Array[String],
           include_attributes: Turbopuffer::IncludeAttributes::Variants,
           rank_by: T.anything,
           top_k: Integer
@@ -90,6 +99,9 @@ module Turbopuffer
         # Exact filters for attributes to refine search results for. Think of it as a SQL
         # WHERE clause.
         filters: nil,
+        # Groups documents by the specified attributes (the "group key") before computing
+        # aggregates. Aggregates are computed separately for each group.
+        group_by: nil,
         # Whether to include attributes in the response.
         include_attributes: nil,
         # How to rank the documents in the namespace.
@@ -106,6 +118,7 @@ module Turbopuffer
             distance_metric: Turbopuffer::DistanceMetric::OrSymbol,
             exclude_attributes: T::Array[String],
             filters: T.anything,
+            group_by: T::Array[String],
             include_attributes: Turbopuffer::IncludeAttributes::Variants,
             rank_by: T.anything,
             top_k: Integer
