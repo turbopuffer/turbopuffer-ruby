@@ -2,7 +2,8 @@
 
 module Turbopuffer
   module Models
-    # The tokenizer to use for full-text search on an attribute.
+    # The tokenizer to use for full-text search on an attribute. Defaults to
+    # `word_v2`.
     module Tokenizer
       extend Turbopuffer::Internal::Type::Enum
 
@@ -13,6 +14,7 @@ module Turbopuffer
         T.let(:pre_tokenized_array, Turbopuffer::Tokenizer::TaggedSymbol)
       WORD_V0 = T.let(:word_v0, Turbopuffer::Tokenizer::TaggedSymbol)
       WORD_V1 = T.let(:word_v1, Turbopuffer::Tokenizer::TaggedSymbol)
+      WORD_V2 = T.let(:word_v2, Turbopuffer::Tokenizer::TaggedSymbol)
 
       sig { override.returns(T::Array[Turbopuffer::Tokenizer::TaggedSymbol]) }
       def self.values

@@ -51,7 +51,8 @@ module Turbopuffer
       optional :stemming, Turbopuffer::Internal::Type::Boolean
 
       # @!attribute tokenizer
-      #   The tokenizer to use for full-text search on an attribute.
+      #   The tokenizer to use for full-text search on an attribute. Defaults to
+      #   `word_v2`.
       #
       #   @return [Symbol, Turbopuffer::Models::Tokenizer, nil]
       optional :tokenizer, enum: -> { Turbopuffer::Tokenizer }
@@ -76,7 +77,7 @@ module Turbopuffer
       #
       #   @param stemming [Boolean] Language-specific stemming for the text. Defaults to `false` (i.e., do not stem)
       #
-      #   @param tokenizer [Symbol, Turbopuffer::Models::Tokenizer] The tokenizer to use for full-text search on an attribute.
+      #   @param tokenizer [Symbol, Turbopuffer::Models::Tokenizer] The tokenizer to use for full-text search on an attribute. Defaults to `word_v2`
     end
   end
 end
