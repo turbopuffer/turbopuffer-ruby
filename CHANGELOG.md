@@ -1,5 +1,23 @@
 # Changelog
 
+## 1.0.0 (2025-08-28)
+
+Full Changelog: [v0.2.6...v1.0.0](https://github.com/turbopuffer/turbopuffer-ruby/compare/v0.2.6...v1.0.0)
+
+### Features
+
+* Make word_v2 the default FTS tokenizer ([80b7df4](https://github.com/turbopuffer/turbopuffer-ruby/commit/80b7df45beb96368a97af615330eb9bdff415577))
+
+
+### Bug Fixes
+
+* bump sorbet version and fix new type errors from the breaking change ([751bf80](https://github.com/turbopuffer/turbopuffer-ruby/commit/751bf8010f07d33521d73c40b49ca341f9d26505))
+
+
+### Chores
+
+* add json schema comment for rubocop.yml ([ce20bd0](https://github.com/turbopuffer/turbopuffer-ruby/commit/ce20bd0db6a9cead8cd66874a29a4c99c857b31e))
+
 ## 0.2.6 (2025-08-18)
 
 Full Changelog: [v0.2.5...v0.2.6](https://github.com/turbopuffer/turbopuffer-ruby/compare/v0.2.5...v0.2.6)
