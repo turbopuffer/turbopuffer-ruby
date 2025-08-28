@@ -17,7 +17,7 @@ To use this gem, install via Bundler by adding the following to your application
 <!-- x-release-please-start-version -->
 
 ```ruby
-gem "turbopuffer-ruby", "~> 0.2.6"
+gem "turbopuffer-ruby", "~> 1.0.0"
 ```
 
 <!-- x-release-please-end -->
