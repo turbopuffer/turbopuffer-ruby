@@ -1,4 +1,6 @@
 module Turbopuffer
+  AggregationGroup: Turbopuffer::Internal::Type::Converter
+
   module AttributeSchema = Turbopuffer::Models::AttributeSchema
 
   class AttributeSchemaConfig = Turbopuffer::Models::AttributeSchemaConfig

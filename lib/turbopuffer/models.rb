@@ -39,6 +39,9 @@ module Turbopuffer
     mod.define_sorbet_constant!(const) { T.type_alias { mod.to_sorbet_type } }
   end
 
+  # @type [Turbopuffer::Internal::Type::Converter]
+  AggregationGroup = Turbopuffer::Models::AggregationGroup
+
   AttributeSchema = Turbopuffer::Models::AttributeSchema
 
   AttributeSchemaConfig = Turbopuffer::Models::AttributeSchemaConfig

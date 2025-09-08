@@ -74,11 +74,11 @@ module Turbopuffer
             )
           end
 
-        sig { returns(T.nilable(T::Array[Turbopuffer::Row])) }
+        sig { returns(T.nilable(T::Array[T::Hash[Symbol, T.anything]])) }
         attr_reader :aggregation_groups
 
         sig do
-          params(aggregation_groups: T::Array[Turbopuffer::Row::OrHash]).void
+          params(aggregation_groups: T::Array[T::Hash[Symbol, T.anything]]).void
         end
         attr_writer :aggregation_groups
 
@@ -96,7 +96,7 @@ module Turbopuffer
 
         sig do
           params(
-            aggregation_groups: T::Array[Turbopuffer::Row::OrHash],
+            aggregation_groups: T::Array[T::Hash[Symbol, T.anything]],
             aggregations: T::Hash[Symbol, T.anything],
             rows: T::Array[Turbopuffer::Row::OrHash]
           ).returns(T.attached_class)
@@ -107,7 +107,7 @@ module Turbopuffer
         sig do
           override.returns(
             {
-              aggregation_groups: T::Array[Turbopuffer::Row],
+              aggregation_groups: T::Array[T::Hash[Symbol, T.anything]],
               aggregations: T::Hash[Symbol, T.anything],
               rows: T::Array[Turbopuffer::Row]
             }
