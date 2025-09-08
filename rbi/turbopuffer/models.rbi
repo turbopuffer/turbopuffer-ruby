@@ -1,6 +1,12 @@
 # typed: strong
 
 module Turbopuffer
+  AggregationGroup =
+    T.let(
+      Turbopuffer::Models::AggregationGroup,
+      Turbopuffer::Internal::Type::Converter
+    )
+
   AttributeSchema = Turbopuffer::Models::AttributeSchema
 
   AttributeSchemaConfig = Turbopuffer::Models::AttributeSchemaConfig
