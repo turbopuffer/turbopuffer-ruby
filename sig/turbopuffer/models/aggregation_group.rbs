@@ -1,0 +1,7 @@
+module Turbopuffer
+  module Models
+    type aggregation_group = ::Hash[Symbol, top]
+
+    AggregationGroup: Turbopuffer::Internal::Type::Converter
+  end
+end
