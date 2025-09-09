@@ -27,6 +27,14 @@ module Turbopuffer
       sig { params(filters: T.anything).void }
       attr_writer :filters
 
+      # Include ground truth data (query vectors and true nearest neighbors) in the
+      # response.
+      sig { returns(T.nilable(T::Boolean)) }
+      attr_reader :include_ground_truth
+
+      sig { params(include_ground_truth: T::Boolean).void }
+      attr_writer :include_ground_truth
+
       # The number of searches to run.
       sig { returns(T.nilable(Integer)) }
       attr_reader :num
@@ -53,6 +61,7 @@ module Turbopuffer
         params(
           namespace: String,
           filters: T.anything,
+          include_ground_truth: T::Boolean,
           num: Integer,
           queries: T::Array[Float],
           top_k: Integer,
@@ -63,6 +72,9 @@ module Turbopuffer
         namespace: nil,
         # Filter by attributes. Same syntax as the query endpoint.
         filters: nil,
+        # Include ground truth data (query vectors and true nearest neighbors) in the
+        # response.
+        include_ground_truth: nil,
         # The number of searches to run.
         num: nil,
         # Use specific query vectors for the measurement. If omitted, sampled from the
@@ -79,6 +91,7 @@ module Turbopuffer
           {
             namespace: String,
             filters: T.anything,
+            include_ground_truth: T::Boolean,
             num: Integer,
             queries: T::Array[Float],
             top_k: Integer,

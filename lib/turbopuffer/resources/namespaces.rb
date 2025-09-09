@@ -213,11 +213,13 @@ module Turbopuffer
       #
       # Evaluate recall.
       #
-      # @overload recall(namespace: nil, filters: nil, num: nil, queries: nil, top_k: nil, request_options: {})
+      # @overload recall(namespace: nil, filters: nil, include_ground_truth: nil, num: nil, queries: nil, top_k: nil, request_options: {})
       #
       # @param namespace [String] Path param: The name of the namespace.
       #
       # @param filters [Object] Body param: Filter by attributes. Same syntax as the query endpoint.
+      #
+      # @param include_ground_truth [Boolean] Body param: Include ground truth data (query vectors and true nearest neighbors)
       #
       # @param num [Integer] Body param: The number of searches to run.
       #

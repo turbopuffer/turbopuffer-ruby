@@ -4,6 +4,7 @@ module Turbopuffer
       {
         namespace: String,
         filters: top,
+        include_ground_truth: bool,
         num: Integer,
         queries: ::Array[Float],
         top_k: Integer
@@ -22,6 +23,10 @@ module Turbopuffer
 
       def filters=: (top) -> top
 
+      attr_reader include_ground_truth: bool?
+
+      def include_ground_truth=: (bool) -> bool
+
       attr_reader num: Integer?
 
       def num=: (Integer) -> Integer
@@ -37,6 +42,7 @@ module Turbopuffer
       def initialize: (
         ?namespace: String,
         ?filters: top,
+        ?include_ground_truth: bool,
         ?num: Integer,
         ?queries: ::Array[Float],
         ?top_k: Integer,
@@ -46,6 +52,7 @@ module Turbopuffer
       def to_hash: -> {
         namespace: String,
         filters: top,
+        include_ground_truth: bool,
         num: Integer,
         queries: ::Array[Float],
         top_k: Integer,
