@@ -171,6 +171,7 @@ module Turbopuffer
         params(
           namespace: T.nilable(String),
           filters: T.anything,
+          include_ground_truth: T::Boolean,
           num: Integer,
           queries: T::Array[Float],
           top_k: Integer,
@@ -182,6 +183,9 @@ module Turbopuffer
         namespace: nil,
         # Body param: Filter by attributes. Same syntax as the query endpoint.
         filters: nil,
+        # Body param: Include ground truth data (query vectors and true nearest neighbors)
+        # in the response.
+        include_ground_truth: nil,
         # Body param: The number of searches to run.
         num: nil,
         # Body param: Use specific query vectors for the measurement. If omitted, sampled
