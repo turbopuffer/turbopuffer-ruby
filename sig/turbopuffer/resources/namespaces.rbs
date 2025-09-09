@@ -57,6 +57,7 @@ module Turbopuffer
       def recall: (
         ?namespace: String,
         ?filters: top,
+        ?include_ground_truth: bool,
         ?num: Integer,
         ?queries: ::Array[Float],
         ?top_k: Integer,

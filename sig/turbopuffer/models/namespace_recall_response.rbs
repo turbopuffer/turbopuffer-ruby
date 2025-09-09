@@ -1,7 +1,12 @@
 module Turbopuffer
   module Models
     type namespace_recall_response =
-      { avg_ann_count: Float, avg_exhaustive_count: Float, avg_recall: Float }
+      {
+        avg_ann_count: Float,
+        avg_exhaustive_count: Float,
+        avg_recall: Float,
+        ground_truth: ::Array[Turbopuffer::Models::NamespaceRecallResponse::GroundTruth]
+      }
 
     class NamespaceRecallResponse < Turbopuffer::Internal::Type::BaseModel
       attr_accessor avg_ann_count: Float
@@ -10,17 +15,47 @@ module Turbopuffer
 
       attr_accessor avg_recall: Float
 
+      attr_reader ground_truth: ::Array[Turbopuffer::Models::NamespaceRecallResponse::GroundTruth]?
+
+      def ground_truth=: (
+        ::Array[Turbopuffer::Models::NamespaceRecallResponse::GroundTruth]
+      ) -> ::Array[Turbopuffer::Models::NamespaceRecallResponse::GroundTruth]
+
       def initialize: (
         avg_ann_count: Float,
         avg_exhaustive_count: Float,
-        avg_recall: Float
+        avg_recall: Float,
+        ?ground_truth: ::Array[Turbopuffer::Models::NamespaceRecallResponse::GroundTruth]
       ) -> void
 
       def to_hash: -> {
         avg_ann_count: Float,
         avg_exhaustive_count: Float,
-        avg_recall: Float
+        avg_recall: Float,
+        ground_truth: ::Array[Turbopuffer::Models::NamespaceRecallResponse::GroundTruth]
       }
+
+      type ground_truth =
+        {
+          nearest_neighbors: ::Array[Turbopuffer::Row],
+          query_vector: ::Array[Float]
+        }
+
+      class GroundTruth < Turbopuffer::Internal::Type::BaseModel
+        attr_accessor nearest_neighbors: ::Array[Turbopuffer::Row]
+
+        attr_accessor query_vector: ::Array[Float]
+
+        def initialize: (
+          nearest_neighbors: ::Array[Turbopuffer::Row],
+          query_vector: ::Array[Float]
+        ) -> void
+
+        def to_hash: -> {
+          nearest_neighbors: ::Array[Turbopuffer::Row],
+          query_vector: ::Array[Float]
+        }
+      end
     end
   end
 end

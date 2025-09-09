@@ -122,7 +122,8 @@ class Turbopuffer::Test::Resources::NamespacesTest < Turbopuffer::Test::Resource
       response => {
         avg_ann_count: Float,
         avg_exhaustive_count: Float,
-        avg_recall: Float
+        avg_recall: Float,
+        ground_truth: ^(Turbopuffer::Internal::Type::ArrayOf[Turbopuffer::Models::NamespaceRecallResponse::GroundTruth]) | nil
       }
     end
   end

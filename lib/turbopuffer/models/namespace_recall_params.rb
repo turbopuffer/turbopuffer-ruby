@@ -18,6 +18,13 @@ module Turbopuffer
       #   @return [Object, nil]
       optional :filters, Turbopuffer::Internal::Type::Unknown
 
+      # @!attribute include_ground_truth
+      #   Include ground truth data (query vectors and true nearest neighbors) in the
+      #   response.
+      #
+      #   @return [Boolean, nil]
+      optional :include_ground_truth, Turbopuffer::Internal::Type::Boolean
+
       # @!attribute num
       #   The number of searches to run.
       #
@@ -37,13 +44,15 @@ module Turbopuffer
       #   @return [Integer, nil]
       optional :top_k, Integer
 
-      # @!method initialize(namespace: nil, filters: nil, num: nil, queries: nil, top_k: nil, request_options: {})
+      # @!method initialize(namespace: nil, filters: nil, include_ground_truth: nil, num: nil, queries: nil, top_k: nil, request_options: {})
       #   Some parameter documentations has been truncated, see
       #   {Turbopuffer::Models::NamespaceRecallParams} for more details.
       #
       #   @param namespace [String]
       #
       #   @param filters [Object] Filter by attributes. Same syntax as the query endpoint.
+      #
+      #   @param include_ground_truth [Boolean] Include ground truth data (query vectors and true nearest neighbors) in the resp
       #
       #   @param num [Integer] The number of searches to run.
       #
