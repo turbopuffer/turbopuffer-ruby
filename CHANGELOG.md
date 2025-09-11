@@ -1,5 +1,14 @@
 # Changelog
 
+## 1.1.0 (2025-09-11)
+
+Full Changelog: [v1.0.0...v1.1.0](https://github.com/turbopuffer/turbopuffer-ruby/compare/v1.0.0...v1.1.0)
+
+### Features
+
+* spec: add dedicated type for AggregationGroup response ([e30bb79](https://github.com/turbopuffer/turbopuffer-ruby/commit/e30bb796ff91b36d3f9424674470eb84feeaad63))
+* tpuf: add include_ground_truth option to recall endpoint ([9d535c4](https://github.com/turbopuffer/turbopuffer-ruby/commit/9d535c44ce64f47a312a693d009506d635230322))
+
 ## 1.0.0 (2025-08-28)
 
 Full Changelog: [v0.2.6...v1.0.0](https://github.com/turbopuffer/turbopuffer-ruby/compare/v0.2.6...v1.0.0)
