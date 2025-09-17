@@ -6,7 +6,7 @@ It is generated with [Stainless](https://www.stainless.com/).
 
 ## Documentation
 
-Documentation for releases of this gem can be found [on RubyDoc](https://gemdocs.org/gems/turbopuffer-ruby).
+Documentation for releases of this gem can be found [on RubyDoc](https://gemdocs.org/gems/turbopuffer).
 
 The REST API documentation can be found on [turbopuffer.com](https://turbopuffer.com/docs/auth).
 
@@ -17,7 +17,7 @@ To use this gem, install via Bundler by adding the following to your application
 <!-- x-release-please-start-version -->
 
 ```ruby
-gem "turbopuffer-ruby", "~> 1.1.0"
+gem "turbopuffer", "~> 1.1.0"
 ```
 
 <!-- x-release-please-end -->
