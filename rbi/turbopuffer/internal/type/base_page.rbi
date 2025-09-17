@@ -31,7 +31,7 @@ module Turbopuffer
             client: Turbopuffer::Internal::Transport::BaseClient,
             req:
               Turbopuffer::Internal::Transport::BaseClient::RequestComponents,
-            headers: T.any(T::Hash[String, String], Net::HTTPHeader),
+            headers: T::Hash[String, String],
             page_data: T.anything
           ).void
         end
