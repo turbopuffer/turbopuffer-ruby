@@ -1,5 +1,14 @@
 # Changelog
 
+## 1.2.0 (2025-09-17)
+
+Full Changelog: [v1.1.0...v1.2.0](https://github.com/turbopuffer/turbopuffer-ruby/compare/v1.1.0...v1.2.0)
+
+### Features
+
+* expose response headers for both streams and errors ([05ceb63](https://github.com/turbopuffer/turbopuffer-ruby/commit/05ceb63799123872cae25afcc227ef3e5c0801b6))
+* spec: move Ruby gem to `turbopuffer` ([c971adc](https://github.com/turbopuffer/turbopuffer-ruby/commit/c971adcdb550ecdb2796174dc823b7f611ba4686))
+
 ## 1.1.0 (2025-09-11)
 
 Full Changelog: [v1.0.0...v1.1.0](https://github.com/turbopuffer/turbopuffer-ruby/compare/v1.0.0...v1.1.0)
