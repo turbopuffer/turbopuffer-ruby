@@ -7,9 +7,13 @@ module Turbopuffer
 
   class AttributeType = Turbopuffer::Models::AttributeType
 
+  class Bm25ClauseParams = Turbopuffer::Models::Bm25ClauseParams
+
   class ClientNamespacesParams = Turbopuffer::Models::ClientNamespacesParams
 
   class Columns = Turbopuffer::Models::Columns
+
+  class ContainsAllTokensFilterParams = Turbopuffer::Models::ContainsAllTokensFilterParams
 
   module DistanceMetric = Turbopuffer::Models::DistanceMetric
 
