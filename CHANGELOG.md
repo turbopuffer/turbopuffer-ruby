@@ -1,5 +1,18 @@
 # Changelog
 
+## 1.3.0 (2025-09-19)
+
+Full Changelog: [v1.2.0...v1.3.0](https://github.com/turbopuffer/turbopuffer-ruby/compare/v1.2.0...v1.3.0)
+
+### Features
+
+* add WithParams variant to BM25 and ContainsAllTokens ([77c2acc](https://github.com/turbopuffer/turbopuffer-ruby/commit/77c2accb00d21ffa454dddd3e381c99082358098))
+
+
+### Chores
+
+* do not install brew dependencies in ./scripts/bootstrap by default ([923bcb0](https://github.com/turbopuffer/turbopuffer-ruby/commit/923bcb05ff927173b23edc446b075f456df4b332))
+
 ## 1.2.0 (2025-09-17)
 
 Full Changelog: [v1.1.0...v1.2.0](https://github.com/turbopuffer/turbopuffer-ruby/compare/v1.1.0...v1.2.0)
