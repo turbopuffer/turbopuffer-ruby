@@ -66,7 +66,7 @@ module Turbopuffer
       )
       end
 
-      # Warm the cache for a namespace.
+      # Signal turbopuffer to prepare for low-latency requests.
       sig do
         params(
           namespace: T.nilable(String),
