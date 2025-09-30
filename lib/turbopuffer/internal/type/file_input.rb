@@ -82,17 +82,20 @@ module Turbopuffer
           #
           # @return [Pathname, StringIO, IO, String, Object]
           def dump(value, state:)
-            # rubocop:disable Lint/DuplicateBranch
             case value
+            in StringIO | String
+              # https://datatracker.ietf.org/doc/html/rfc7578#section-4.2
+              # while not required, a filename is recommended, and in practice many servers do expect this
+              Turbopuffer::FilePart.new(value, filename: "upload")
             in IO
               state[:can_retry] = false
+              value.to_path.nil? ? Turbopuffer::FilePart.new(value, filename: "upload") : value
             in Turbopuffer::FilePart if value.content.is_a?(IO)
               state[:can_retry] = false
+              value
             else
+              value
             end
-            # rubocop:enable Lint/DuplicateBranch
-
-            value
           end
 
           # @api private

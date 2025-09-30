@@ -77,7 +77,7 @@ module Turbopuffer
         )
       end
 
-      # Warm the cache for a namespace.
+      # Signal turbopuffer to prepare for low-latency requests.
       #
       # @overload hint_cache_warm(namespace: nil, request_options: {})
       #

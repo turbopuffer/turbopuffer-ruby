@@ -1,5 +1,31 @@
 # Changelog
 
+## 1.3.1 (2025-09-30)
+
+Full Changelog: [v1.3.0...v1.3.1](https://github.com/turbopuffer/turbopuffer-ruby/compare/v1.3.0...v1.3.1)
+
+### Bug Fixes
+
+* always send `filename=...` for multipart requests where a file is expected ([155e39b](https://github.com/turbopuffer/turbopuffer-ruby/commit/155e39bd218655c654daa3815b67f373e7879730))
+* coroutine leaks from connection pool ([be9b5c2](https://github.com/turbopuffer/turbopuffer-ruby/commit/be9b5c20c1d73951996136b5db5ffb0f004e7530))
+* **internal:** use null byte as file separator in the fast formatting script ([c14be00](https://github.com/turbopuffer/turbopuffer-ruby/commit/c14be00b6284b7ba0c6167a1745b7f72077a7f3a))
+* shorten multipart boundary sep to less than RFC specificed max length ([a128bba](https://github.com/turbopuffer/turbopuffer-ruby/commit/a128bba556db8a9a0143ee64577c4bd2f5bbf495))
+
+
+### Performance Improvements
+
+* faster code formatting ([4b2b9b8](https://github.com/turbopuffer/turbopuffer-ruby/commit/4b2b9b87406f19b32283ed7ef4f5eea147b41ffb))
+
+
+### Chores
+
+* allow fast-format to use bsd sed as well ([9ba0c7d](https://github.com/turbopuffer/turbopuffer-ruby/commit/9ba0c7dd793d88af2e07d9ddfff1a2f49810ac65))
+
+
+### Documentation
+
+* hint_cache_warm also update header and openapi ([91dd701](https://github.com/turbopuffer/turbopuffer-ruby/commit/91dd701d5221b5e245de2a14af0c5afcbee58123))
+
 ## 1.3.0 (2025-09-19)
 
 Full Changelog: [v1.2.0...v1.3.0](https://github.com/turbopuffer/turbopuffer-ruby/compare/v1.2.0...v1.3.0)
