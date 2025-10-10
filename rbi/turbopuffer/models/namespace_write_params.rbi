@@ -48,6 +48,13 @@ module Turbopuffer
       sig { params(deletes: T::Array[Turbopuffer::ID::Variants]).void }
       attr_writer :deletes
 
+      # Disables write throttling (HTTP 429 responses) during high-volume ingestion.
+      sig { returns(T.nilable(T::Boolean)) }
+      attr_reader :disable_backpressure
+
+      sig { params(disable_backpressure: T::Boolean).void }
+      attr_writer :disable_backpressure
+
       # A function used to calculate vector similarity.
       sig { returns(T.nilable(Turbopuffer::DistanceMetric::OrSymbol)) }
       attr_reader :distance_metric
@@ -140,6 +147,7 @@ module Turbopuffer
           delete_by_filter: T.anything,
           delete_condition: T.anything,
           deletes: T::Array[Turbopuffer::ID::Variants],
+          disable_backpressure: T::Boolean,
           distance_metric: Turbopuffer::DistanceMetric::OrSymbol,
           encryption: Turbopuffer::NamespaceWriteParams::Encryption::OrHash,
           patch_columns: Turbopuffer::Columns::OrHash,
@@ -166,6 +174,8 @@ module Turbopuffer
         # delete write. Only documents that pass the condition are deleted.
         delete_condition: nil,
         deletes: nil,
+        # Disables write throttling (HTTP 429 responses) during high-volume ingestion.
+        disable_backpressure: nil,
         # A function used to calculate vector similarity.
         distance_metric: nil,
         # The encryption configuration for a namespace.
@@ -198,6 +208,7 @@ module Turbopuffer
             delete_by_filter: T.anything,
             delete_condition: T.anything,
             deletes: T::Array[Turbopuffer::ID::Variants],
+            disable_backpressure: T::Boolean,
             distance_metric: Turbopuffer::DistanceMetric::OrSymbol,
             encryption: Turbopuffer::NamespaceWriteParams::Encryption,
             patch_columns: Turbopuffer::Columns,
