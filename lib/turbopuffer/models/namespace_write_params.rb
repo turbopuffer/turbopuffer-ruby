@@ -36,6 +36,12 @@ module Turbopuffer
       #   @return [Array<String, Integer>, nil]
       optional :deletes, -> { Turbopuffer::Internal::Type::ArrayOf[union: Turbopuffer::ID] }
 
+      # @!attribute disable_backpressure
+      #   Disables write throttling (HTTP 429 responses) during high-volume ingestion.
+      #
+      #   @return [Boolean, nil]
+      optional :disable_backpressure, Turbopuffer::Internal::Type::Boolean
+
       # @!attribute distance_metric
       #   A function used to calculate vector similarity.
       #
@@ -92,7 +98,7 @@ module Turbopuffer
       #   @return [Array<Turbopuffer::Models::Row>, nil]
       optional :upsert_rows, -> { Turbopuffer::Internal::Type::ArrayOf[Turbopuffer::Row] }
 
-      # @!method initialize(namespace: nil, copy_from_namespace: nil, delete_by_filter: nil, delete_condition: nil, deletes: nil, distance_metric: nil, encryption: nil, patch_columns: nil, patch_condition: nil, patch_rows: nil, schema: nil, upsert_columns: nil, upsert_condition: nil, upsert_rows: nil, request_options: {})
+      # @!method initialize(namespace: nil, copy_from_namespace: nil, delete_by_filter: nil, delete_condition: nil, deletes: nil, disable_backpressure: nil, distance_metric: nil, encryption: nil, patch_columns: nil, patch_condition: nil, patch_rows: nil, schema: nil, upsert_columns: nil, upsert_condition: nil, upsert_rows: nil, request_options: {})
       #   Some parameter documentations has been truncated, see
       #   {Turbopuffer::Models::NamespaceWriteParams} for more details.
       #
@@ -105,6 +111,8 @@ module Turbopuffer
       #   @param delete_condition [Object] A condition evaluated against the current value of each document targeted by a d
       #
       #   @param deletes [Array<String, Integer>]
+      #
+      #   @param disable_backpressure [Boolean] Disables write throttling (HTTP 429 responses) during high-volume ingestion.
       #
       #   @param distance_metric [Symbol, Turbopuffer::Models::DistanceMetric] A function used to calculate vector similarity.
       #

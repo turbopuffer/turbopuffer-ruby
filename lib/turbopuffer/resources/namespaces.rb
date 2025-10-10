@@ -305,7 +305,7 @@ module Turbopuffer
       #
       # Create, update, or delete documents.
       #
-      # @overload write(namespace: nil, copy_from_namespace: nil, delete_by_filter: nil, delete_condition: nil, deletes: nil, distance_metric: nil, encryption: nil, patch_columns: nil, patch_condition: nil, patch_rows: nil, schema: nil, upsert_columns: nil, upsert_condition: nil, upsert_rows: nil, request_options: {})
+      # @overload write(namespace: nil, copy_from_namespace: nil, delete_by_filter: nil, delete_condition: nil, deletes: nil, disable_backpressure: nil, distance_metric: nil, encryption: nil, patch_columns: nil, patch_condition: nil, patch_rows: nil, schema: nil, upsert_columns: nil, upsert_condition: nil, upsert_rows: nil, request_options: {})
       #
       # @param namespace [String] Path param: The name of the namespace.
       #
@@ -316,6 +316,8 @@ module Turbopuffer
       # @param delete_condition [Object] Body param: A condition evaluated against the current value of each document tar
       #
       # @param deletes [Array<String, Integer>] Body param:
+      #
+      # @param disable_backpressure [Boolean] Body param: Disables write throttling (HTTP 429 responses) during high-volume in
       #
       # @param distance_metric [Symbol, Turbopuffer::Models::DistanceMetric] Body param: A function used to calculate vector similarity.
       #

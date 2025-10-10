@@ -240,6 +240,7 @@ module Turbopuffer
           delete_by_filter: T.anything,
           delete_condition: T.anything,
           deletes: T::Array[Turbopuffer::ID::Variants],
+          disable_backpressure: T::Boolean,
           distance_metric: Turbopuffer::DistanceMetric::OrSymbol,
           encryption: Turbopuffer::NamespaceWriteParams::Encryption::OrHash,
           patch_columns: Turbopuffer::Columns::OrHash,
@@ -268,6 +269,9 @@ module Turbopuffer
         delete_condition: nil,
         # Body param:
         deletes: nil,
+        # Body param: Disables write throttling (HTTP 429 responses) during high-volume
+        # ingestion.
+        disable_backpressure: nil,
         # Body param: A function used to calculate vector similarity.
         distance_metric: nil,
         # Body param: The encryption configuration for a namespace.

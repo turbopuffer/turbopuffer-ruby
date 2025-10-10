@@ -81,6 +81,7 @@ module Turbopuffer
         ?delete_by_filter: top,
         ?delete_condition: top,
         ?deletes: ::Array[Turbopuffer::Models::id],
+        ?disable_backpressure: bool,
         ?distance_metric: Turbopuffer::Models::distance_metric,
         ?encryption: Turbopuffer::NamespaceWriteParams::Encryption,
         ?patch_columns: Turbopuffer::Columns,
