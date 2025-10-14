@@ -6,7 +6,7 @@ module Turbopuffer
     module AttributeSchema
       extend Turbopuffer::Internal::Type::Union
 
-      # The data type of the attribute. Valid values: string, int, uint, uuid, datetime, bool, []string, []int, []uint, []uuid, []datetime, [DIMS]f16, [DIMS]f32.
+      # The data type of the attribute. Valid values: string, int, uint, float, uuid, datetime, bool, []string, []int, []uint, []float, []uuid, []datetime, []bool, [DIMS]f16, [DIMS]f32.
       variant -> { Turbopuffer::AttributeType }
 
       # Detailed configuration for an attribute attached to a document.

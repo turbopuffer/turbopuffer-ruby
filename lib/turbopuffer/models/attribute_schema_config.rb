@@ -30,8 +30,9 @@ module Turbopuffer
       optional :regex, Turbopuffer::Internal::Type::Boolean
 
       # @!attribute type
-      #   The data type of the attribute. Valid values: string, int, uint, uuid, datetime,
-      #   bool, []string, []int, []uint, []uuid, []datetime, [DIMS]f16, [DIMS]f32.
+      #   The data type of the attribute. Valid values: string, int, uint, float, uuid,
+      #   datetime, bool, []string, []int, []uint, []float, []uuid, []datetime, []bool,
+      #   [DIMS]f16, [DIMS]f32.
       #
       #   @return [String, nil]
       optional :type, String
@@ -50,7 +51,7 @@ module Turbopuffer
       #
       #   @param regex [Boolean] Whether to enable Regex filters on this attribute.
       #
-      #   @param type [String] The data type of the attribute. Valid values: string, int, uint, uuid, datetime,
+      #   @param type [String] The data type of the attribute. Valid values: string, int, uint, float, uuid, da
     end
   end
 end

@@ -48,8 +48,9 @@ module Turbopuffer
       sig { params(regex: T::Boolean).void }
       attr_writer :regex
 
-      # The data type of the attribute. Valid values: string, int, uint, uuid, datetime,
-      # bool, []string, []int, []uint, []uuid, []datetime, [DIMS]f16, [DIMS]f32.
+      # The data type of the attribute. Valid values: string, int, uint, float, uuid,
+      # datetime, bool, []string, []int, []uint, []float, []uuid, []datetime, []bool,
+      # [DIMS]f16, [DIMS]f32.
       sig { returns(T.nilable(String)) }
       attr_reader :type
 
@@ -78,8 +79,9 @@ module Turbopuffer
         full_text_search: nil,
         # Whether to enable Regex filters on this attribute.
         regex: nil,
-        # The data type of the attribute. Valid values: string, int, uint, uuid, datetime,
-        # bool, []string, []int, []uint, []uuid, []datetime, [DIMS]f16, [DIMS]f32.
+        # The data type of the attribute. Valid values: string, int, uint, float, uuid,
+        # datetime, bool, []string, []int, []uint, []float, []uuid, []datetime, []bool,
+        # [DIMS]f16, [DIMS]f32.
         type: nil
       )
       end
