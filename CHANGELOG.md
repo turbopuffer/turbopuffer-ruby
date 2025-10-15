@@ -1,5 +1,40 @@
 # Changelog
 
+## 1.4.0 (2025-10-15)
+
+Full Changelog: [v1.3.0...v1.4.0](https://github.com/turbopuffer/turbopuffer-ruby/compare/v1.3.0...v1.4.0)
+
+### Features
+
+* Add float, []float and []bool to the list of valid types in the OpenAPI spec. ([0b809b3](https://github.com/turbopuffer/turbopuffer-ruby/commit/0b809b331e6a9e2121f440e26f47752ac2492459))
+* Promote disable_backpressure to first-class Write property ([96b020d](https://github.com/turbopuffer/turbopuffer-ruby/commit/96b020d754bfcef28e285c4fdb6c33aff85c502b))
+
+
+### Bug Fixes
+
+* absolutely qualified uris should always override the default ([7497b77](https://github.com/turbopuffer/turbopuffer-ruby/commit/7497b770a28cea22db5059aa1506ea316a445dc0))
+* always send `filename=...` for multipart requests where a file is expected ([155e39b](https://github.com/turbopuffer/turbopuffer-ruby/commit/155e39bd218655c654daa3815b67f373e7879730))
+* coroutine leaks from connection pool ([be9b5c2](https://github.com/turbopuffer/turbopuffer-ruby/commit/be9b5c20c1d73951996136b5db5ffb0f004e7530))
+* **internal:** use null byte as file separator in the fast formatting script ([c14be00](https://github.com/turbopuffer/turbopuffer-ruby/commit/c14be00b6284b7ba0c6167a1745b7f72077a7f3a))
+* shorten multipart boundary sep to less than RFC specificed max length ([a128bba](https://github.com/turbopuffer/turbopuffer-ruby/commit/a128bba556db8a9a0143ee64577c4bd2f5bbf495))
+* should not reuse buffers for `IO.copy_stream` interop ([e1d1753](https://github.com/turbopuffer/turbopuffer-ruby/commit/e1d1753c2dd07742617dfa605229581028fa34a8))
+
+
+### Performance Improvements
+
+* faster code formatting ([4b2b9b8](https://github.com/turbopuffer/turbopuffer-ruby/commit/4b2b9b87406f19b32283ed7ef4f5eea147b41ffb))
+
+
+### Chores
+
+* allow fast-format to use bsd sed as well ([9ba0c7d](https://github.com/turbopuffer/turbopuffer-ruby/commit/9ba0c7dd793d88af2e07d9ddfff1a2f49810ac65))
+* ignore linter error for tests having large collections ([c6a3403](https://github.com/turbopuffer/turbopuffer-ruby/commit/c6a34033c8a3476ebd0197c5435e637c9619a506))
+
+
+### Documentation
+
+* hint_cache_warm also update header and openapi ([91dd701](https://github.com/turbopuffer/turbopuffer-ruby/commit/91dd701d5221b5e245de2a14af0c5afcbee58123))
+
 ## 1.3.0 (2025-09-19)
 
 Full Changelog: [v1.2.0...v1.3.0](https://github.com/turbopuffer/turbopuffer-ruby/compare/v1.2.0...v1.3.0)
