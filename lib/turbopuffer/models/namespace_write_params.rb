@@ -54,6 +54,12 @@ module Turbopuffer
       #   @return [Turbopuffer::Models::NamespaceWriteParams::Encryption, nil]
       optional :encryption, -> { Turbopuffer::NamespaceWriteParams::Encryption }
 
+      # @!attribute patch_by_filter
+      #   The patch and filter specifying which documents to patch.
+      #
+      #   @return [Turbopuffer::Models::NamespaceWriteParams::PatchByFilter, nil]
+      optional :patch_by_filter, -> { Turbopuffer::NamespaceWriteParams::PatchByFilter }
+
       # @!attribute patch_columns
       #   A list of documents in columnar format. Each key is a column name, mapped to an
       #   array of values for that column.
@@ -98,7 +104,7 @@ module Turbopuffer
       #   @return [Array<Turbopuffer::Models::Row>, nil]
       optional :upsert_rows, -> { Turbopuffer::Internal::Type::ArrayOf[Turbopuffer::Row] }
 
-      # @!method initialize(namespace: nil, copy_from_namespace: nil, delete_by_filter: nil, delete_condition: nil, deletes: nil, disable_backpressure: nil, distance_metric: nil, encryption: nil, patch_columns: nil, patch_condition: nil, patch_rows: nil, schema: nil, upsert_columns: nil, upsert_condition: nil, upsert_rows: nil, request_options: {})
+      # @!method initialize(namespace: nil, copy_from_namespace: nil, delete_by_filter: nil, delete_condition: nil, deletes: nil, disable_backpressure: nil, distance_metric: nil, encryption: nil, patch_by_filter: nil, patch_columns: nil, patch_condition: nil, patch_rows: nil, schema: nil, upsert_columns: nil, upsert_condition: nil, upsert_rows: nil, request_options: {})
       #   Some parameter documentations has been truncated, see
       #   {Turbopuffer::Models::NamespaceWriteParams} for more details.
       #
@@ -117,6 +123,8 @@ module Turbopuffer
       #   @param distance_metric [Symbol, Turbopuffer::Models::DistanceMetric] A function used to calculate vector similarity.
       #
       #   @param encryption [Turbopuffer::Models::NamespaceWriteParams::Encryption] The encryption configuration for a namespace.
+      #
+      #   @param patch_by_filter [Turbopuffer::Models::NamespaceWriteParams::PatchByFilter] The patch and filter specifying which documents to patch.
       #
       #   @param patch_columns [Turbopuffer::Models::Columns] A list of documents in columnar format. Each key is a column name, mapped to an
       #
@@ -160,6 +168,26 @@ module Turbopuffer
           #
           #   @param key_name [String] The identifier of the CMEK key to use for encryption. For GCP, the fully-qualifi
         end
+      end
+
+      class PatchByFilter < Turbopuffer::Internal::Type::BaseModel
+        # @!attribute filters
+        #   Filter by attributes. Same syntax as the query endpoint.
+        #
+        #   @return [Object, nil]
+        optional :filters, Turbopuffer::Internal::Type::Unknown
+
+        # @!attribute patch
+        #
+        #   @return [Hash{Symbol=>Object}, nil]
+        optional :patch, Turbopuffer::Internal::Type::HashOf[Turbopuffer::Internal::Type::Unknown]
+
+        # @!method initialize(filters: nil, patch: nil)
+        #   The patch and filter specifying which documents to patch.
+        #
+        #   @param filters [Object] Filter by attributes. Same syntax as the query endpoint.
+        #
+        #   @param patch [Hash{Symbol=>Object}]
       end
     end
   end

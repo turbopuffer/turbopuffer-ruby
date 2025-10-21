@@ -10,6 +10,7 @@ module Turbopuffer
         disable_backpressure: bool,
         distance_metric: Turbopuffer::Models::distance_metric,
         encryption: Turbopuffer::NamespaceWriteParams::Encryption,
+        patch_by_filter: Turbopuffer::NamespaceWriteParams::PatchByFilter,
         patch_columns: Turbopuffer::Columns,
         patch_condition: top,
         patch_rows: ::Array[Turbopuffer::Row],
@@ -62,6 +63,12 @@ module Turbopuffer
         Turbopuffer::NamespaceWriteParams::Encryption
       ) -> Turbopuffer::NamespaceWriteParams::Encryption
 
+      attr_reader patch_by_filter: Turbopuffer::NamespaceWriteParams::PatchByFilter?
+
+      def patch_by_filter=: (
+        Turbopuffer::NamespaceWriteParams::PatchByFilter
+      ) -> Turbopuffer::NamespaceWriteParams::PatchByFilter
+
       attr_reader patch_columns: Turbopuffer::Columns?
 
       def patch_columns=: (Turbopuffer::Columns) -> Turbopuffer::Columns
@@ -101,6 +108,7 @@ module Turbopuffer
         ?disable_backpressure: bool,
         ?distance_metric: Turbopuffer::Models::distance_metric,
         ?encryption: Turbopuffer::NamespaceWriteParams::Encryption,
+        ?patch_by_filter: Turbopuffer::NamespaceWriteParams::PatchByFilter,
         ?patch_columns: Turbopuffer::Columns,
         ?patch_condition: top,
         ?patch_rows: ::Array[Turbopuffer::Row],
@@ -120,6 +128,7 @@ module Turbopuffer
         disable_backpressure: bool,
         distance_metric: Turbopuffer::Models::distance_metric,
         encryption: Turbopuffer::NamespaceWriteParams::Encryption,
+        patch_by_filter: Turbopuffer::NamespaceWriteParams::PatchByFilter,
         patch_columns: Turbopuffer::Columns,
         patch_condition: top,
         patch_rows: ::Array[Turbopuffer::Row],
@@ -157,6 +166,22 @@ module Turbopuffer
 
           def to_hash: -> { key_name: String }
         end
+      end
+
+      type patch_by_filter = { filters: top, patch: ::Hash[Symbol, top] }
+
+      class PatchByFilter < Turbopuffer::Internal::Type::BaseModel
+        attr_reader filters: top?
+
+        def filters=: (top) -> top
+
+        attr_reader patch: ::Hash[Symbol, top]?
+
+        def patch=: (::Hash[Symbol, top]) -> ::Hash[Symbol, top]
+
+        def initialize: (?filters: top, ?patch: ::Hash[Symbol, top]) -> void
+
+        def to_hash: -> { filters: top, patch: ::Hash[Symbol, top] }
       end
     end
   end

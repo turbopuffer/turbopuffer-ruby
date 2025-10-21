@@ -305,7 +305,7 @@ module Turbopuffer
       #
       # Create, update, or delete documents.
       #
-      # @overload write(namespace: nil, copy_from_namespace: nil, delete_by_filter: nil, delete_condition: nil, deletes: nil, disable_backpressure: nil, distance_metric: nil, encryption: nil, patch_columns: nil, patch_condition: nil, patch_rows: nil, schema: nil, upsert_columns: nil, upsert_condition: nil, upsert_rows: nil, request_options: {})
+      # @overload write(namespace: nil, copy_from_namespace: nil, delete_by_filter: nil, delete_condition: nil, deletes: nil, disable_backpressure: nil, distance_metric: nil, encryption: nil, patch_by_filter: nil, patch_columns: nil, patch_condition: nil, patch_rows: nil, schema: nil, upsert_columns: nil, upsert_condition: nil, upsert_rows: nil, request_options: {})
       #
       # @param namespace [String] Path param: The name of the namespace.
       #
@@ -322,6 +322,8 @@ module Turbopuffer
       # @param distance_metric [Symbol, Turbopuffer::Models::DistanceMetric] Body param: A function used to calculate vector similarity.
       #
       # @param encryption [Turbopuffer::Models::NamespaceWriteParams::Encryption] Body param: The encryption configuration for a namespace.
+      #
+      # @param patch_by_filter [Turbopuffer::Models::NamespaceWriteParams::PatchByFilter] Body param: The patch and filter specifying which documents to patch.
       #
       # @param patch_columns [Turbopuffer::Models::Columns] Body param: A list of documents in columnar format. Each key is a column name, m
       #

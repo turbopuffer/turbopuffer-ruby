@@ -84,6 +84,7 @@ module Turbopuffer
         ?disable_backpressure: bool,
         ?distance_metric: Turbopuffer::Models::distance_metric,
         ?encryption: Turbopuffer::NamespaceWriteParams::Encryption,
+        ?patch_by_filter: Turbopuffer::NamespaceWriteParams::PatchByFilter,
         ?patch_columns: Turbopuffer::Columns,
         ?patch_condition: top,
         ?patch_rows: ::Array[Turbopuffer::Row],
