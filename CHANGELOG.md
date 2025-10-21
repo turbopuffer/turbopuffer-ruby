@@ -1,5 +1,15 @@
 # Changelog
 
+## 1.5.0 (2025-10-21)
+
+Full Changelog: [v1.4.0...v1.5.0](https://github.com/turbopuffer/turbopuffer-ruby/compare/v1.4.0...v1.5.0)
+
+### Features
+
+* Metadata endpoint updates (e.g. to track indexing progress) ([4e631c7](https://github.com/turbopuffer/turbopuffer-ruby/commit/4e631c73375f784d2be0b7acb58c75d336cf1b2c))
+* required for patch_by_filter :facepalm: ([f075887](https://github.com/turbopuffer/turbopuffer-ruby/commit/f0758879e11152cec2506509b5e558c1a6e143c8))
+* stainless: add patch_by_filter ([da661c2](https://github.com/turbopuffer/turbopuffer-ruby/commit/da661c2d9bf4e8eaf3b70ea9430d22998188a02e))
+
 ## 1.4.0 (2025-10-15)
 
 Full Changelog: [v1.3.0...v1.4.0](https://github.com/turbopuffer/turbopuffer-ruby/compare/v1.3.0...v1.4.0)
