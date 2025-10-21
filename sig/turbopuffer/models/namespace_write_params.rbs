@@ -171,15 +171,11 @@ module Turbopuffer
       type patch_by_filter = { filters: top, patch: ::Hash[Symbol, top] }
 
       class PatchByFilter < Turbopuffer::Internal::Type::BaseModel
-        attr_reader filters: top?
+        attr_accessor filters: top
 
-        def filters=: (top) -> top
+        attr_accessor patch: ::Hash[Symbol, top]
 
-        attr_reader patch: ::Hash[Symbol, top]?
-
-        def patch=: (::Hash[Symbol, top]) -> ::Hash[Symbol, top]
-
-        def initialize: (?filters: top, ?patch: ::Hash[Symbol, top]) -> void
+        def initialize: (filters: top, patch: ::Hash[Symbol, top]) -> void
 
         def to_hash: -> { filters: top, patch: ::Hash[Symbol, top] }
       end

@@ -174,15 +174,15 @@ module Turbopuffer
         # @!attribute filters
         #   Filter by attributes. Same syntax as the query endpoint.
         #
-        #   @return [Object, nil]
-        optional :filters, Turbopuffer::Internal::Type::Unknown
+        #   @return [Object]
+        required :filters, Turbopuffer::Internal::Type::Unknown
 
         # @!attribute patch
         #
-        #   @return [Hash{Symbol=>Object}, nil]
-        optional :patch, Turbopuffer::Internal::Type::HashOf[Turbopuffer::Internal::Type::Unknown]
+        #   @return [Hash{Symbol=>Object}]
+        required :patch, Turbopuffer::Internal::Type::HashOf[Turbopuffer::Internal::Type::Unknown]
 
-        # @!method initialize(filters: nil, patch: nil)
+        # @!method initialize(filters:, patch:)
         #   The patch and filter specifying which documents to patch.
         #
         #   @param filters [Object] Filter by attributes. Same syntax as the query endpoint.
