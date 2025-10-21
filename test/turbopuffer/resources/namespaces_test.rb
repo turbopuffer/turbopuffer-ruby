@@ -66,7 +66,10 @@ class Turbopuffer::Test::Resources::NamespacesTest < Turbopuffer::Test::Resource
         approx_logical_bytes: Integer,
         approx_row_count: Integer,
         created_at: Time,
-        schema: ^(Turbopuffer::Internal::Type::HashOf[Turbopuffer::AttributeSchemaConfig])
+        schema: ^(Turbopuffer::Internal::Type::HashOf[Turbopuffer::AttributeSchemaConfig]),
+        updated_at: Time,
+        encryption: Turbopuffer::NamespaceMetadata::Encryption | nil,
+        index: Turbopuffer::NamespaceMetadata::Index | nil
       }
     end
   end
