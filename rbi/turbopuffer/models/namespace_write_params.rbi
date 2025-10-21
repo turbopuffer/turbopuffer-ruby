@@ -75,6 +75,20 @@ module Turbopuffer
       end
       attr_writer :encryption
 
+      # The patch and filter specifying which documents to patch.
+      sig do
+        returns(T.nilable(Turbopuffer::NamespaceWriteParams::PatchByFilter))
+      end
+      attr_reader :patch_by_filter
+
+      sig do
+        params(
+          patch_by_filter:
+            Turbopuffer::NamespaceWriteParams::PatchByFilter::OrHash
+        ).void
+      end
+      attr_writer :patch_by_filter
+
       # A list of documents in columnar format. Each key is a column name, mapped to an
       # array of values for that column.
       sig { returns(T.nilable(Turbopuffer::Columns)) }
@@ -150,6 +164,8 @@ module Turbopuffer
           disable_backpressure: T::Boolean,
           distance_metric: Turbopuffer::DistanceMetric::OrSymbol,
           encryption: Turbopuffer::NamespaceWriteParams::Encryption::OrHash,
+          patch_by_filter:
+            Turbopuffer::NamespaceWriteParams::PatchByFilter::OrHash,
           patch_columns: Turbopuffer::Columns::OrHash,
           patch_condition: T.anything,
           patch_rows: T::Array[Turbopuffer::Row::OrHash],
@@ -180,6 +196,8 @@ module Turbopuffer
         distance_metric: nil,
         # The encryption configuration for a namespace.
         encryption: nil,
+        # The patch and filter specifying which documents to patch.
+        patch_by_filter: nil,
         # A list of documents in columnar format. Each key is a column name, mapped to an
         # array of values for that column.
         patch_columns: nil,
@@ -211,6 +229,7 @@ module Turbopuffer
             disable_backpressure: T::Boolean,
             distance_metric: Turbopuffer::DistanceMetric::OrSymbol,
             encryption: Turbopuffer::NamespaceWriteParams::Encryption,
+            patch_by_filter: Turbopuffer::NamespaceWriteParams::PatchByFilter,
             patch_columns: Turbopuffer::Columns,
             patch_condition: T.anything,
             patch_rows: T::Array[Turbopuffer::Row],
@@ -294,6 +313,51 @@ module Turbopuffer
           sig { override.returns({ key_name: String }) }
           def to_hash
           end
+        end
+      end
+
+      class PatchByFilter < Turbopuffer::Internal::Type::BaseModel
+        OrHash =
+          T.type_alias do
+            T.any(
+              Turbopuffer::NamespaceWriteParams::PatchByFilter,
+              Turbopuffer::Internal::AnyHash
+            )
+          end
+
+        # Filter by attributes. Same syntax as the query endpoint.
+        sig { returns(T.nilable(T.anything)) }
+        attr_reader :filters
+
+        sig { params(filters: T.anything).void }
+        attr_writer :filters
+
+        sig { returns(T.nilable(T::Hash[Symbol, T.anything])) }
+        attr_reader :patch
+
+        sig { params(patch: T::Hash[Symbol, T.anything]).void }
+        attr_writer :patch
+
+        # The patch and filter specifying which documents to patch.
+        sig do
+          params(
+            filters: T.anything,
+            patch: T::Hash[Symbol, T.anything]
+          ).returns(T.attached_class)
+        end
+        def self.new(
+          # Filter by attributes. Same syntax as the query endpoint.
+          filters: nil,
+          patch: nil
+        )
+        end
+
+        sig do
+          override.returns(
+            { filters: T.anything, patch: T::Hash[Symbol, T.anything] }
+          )
+        end
+        def to_hash
         end
       end
     end
