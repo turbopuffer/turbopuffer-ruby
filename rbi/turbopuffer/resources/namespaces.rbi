@@ -243,6 +243,8 @@ module Turbopuffer
           disable_backpressure: T::Boolean,
           distance_metric: Turbopuffer::DistanceMetric::OrSymbol,
           encryption: Turbopuffer::NamespaceWriteParams::Encryption::OrHash,
+          patch_by_filter:
+            Turbopuffer::NamespaceWriteParams::PatchByFilter::OrHash,
           patch_columns: Turbopuffer::Columns::OrHash,
           patch_condition: T.anything,
           patch_rows: T::Array[Turbopuffer::Row::OrHash],
@@ -276,6 +278,8 @@ module Turbopuffer
         distance_metric: nil,
         # Body param: The encryption configuration for a namespace.
         encryption: nil,
+        # Body param: The patch and filter specifying which documents to patch.
+        patch_by_filter: nil,
         # Body param: A list of documents in columnar format. Each key is a column name,
         # mapped to an array of values for that column.
         patch_columns: nil,
