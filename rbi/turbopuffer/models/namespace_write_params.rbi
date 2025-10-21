@@ -326,17 +326,11 @@ module Turbopuffer
           end
 
         # Filter by attributes. Same syntax as the query endpoint.
-        sig { returns(T.nilable(T.anything)) }
-        attr_reader :filters
+        sig { returns(T.anything) }
+        attr_accessor :filters
 
-        sig { params(filters: T.anything).void }
-        attr_writer :filters
-
-        sig { returns(T.nilable(T::Hash[Symbol, T.anything])) }
-        attr_reader :patch
-
-        sig { params(patch: T::Hash[Symbol, T.anything]).void }
-        attr_writer :patch
+        sig { returns(T::Hash[Symbol, T.anything]) }
+        attr_accessor :patch
 
         # The patch and filter specifying which documents to patch.
         sig do
@@ -347,8 +341,8 @@ module Turbopuffer
         end
         def self.new(
           # Filter by attributes. Same syntax as the query endpoint.
-          filters: nil,
-          patch: nil
+          filters:,
+          patch:
         )
         end
 
