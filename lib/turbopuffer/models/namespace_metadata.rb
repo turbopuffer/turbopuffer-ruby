@@ -28,7 +28,28 @@ module Turbopuffer
       #   @return [Hash{Symbol=>Turbopuffer::Models::AttributeSchemaConfig}]
       required :schema, -> { Turbopuffer::Internal::Type::HashOf[Turbopuffer::AttributeSchemaConfig] }
 
-      # @!method initialize(approx_logical_bytes:, approx_row_count:, created_at:, schema:)
+      # @!attribute updated_at
+      #   The timestamp when the namespace was last modified by a write operation.
+      #
+      #   @return [Time]
+      required :updated_at, Time
+
+      # @!attribute encryption
+      #   Indicates that the namespace is encrypted with a customer-managed encryption key
+      #   (CMEK).
+      #
+      #   @return [Boolean, Turbopuffer::Models::NamespaceMetadata::Encryption::Cmek, nil]
+      optional :encryption, union: -> { Turbopuffer::NamespaceMetadata::Encryption }
+
+      # @!attribute index
+      #
+      #   @return [Turbopuffer::Models::NamespaceMetadata::Index::Status, Turbopuffer::Models::NamespaceMetadata::Index::UnionMember1, nil]
+      optional :index, union: -> { Turbopuffer::NamespaceMetadata::Index }
+
+      # @!method initialize(approx_logical_bytes:, approx_row_count:, created_at:, schema:, updated_at:, encryption: nil, index: nil)
+      #   Some parameter documentations has been truncated, see
+      #   {Turbopuffer::Models::NamespaceMetadata} for more details.
+      #
       #   Metadata about a namespace.
       #
       #   @param approx_logical_bytes [Integer] The approximate number of logical bytes in the namespace.
@@ -38,6 +59,97 @@ module Turbopuffer
       #   @param created_at [Time] The timestamp when the namespace was created.
       #
       #   @param schema [Hash{Symbol=>Turbopuffer::Models::AttributeSchemaConfig}] The schema of the namespace.
+      #
+      #   @param updated_at [Time] The timestamp when the namespace was last modified by a write operation.
+      #
+      #   @param encryption [Boolean, Turbopuffer::Models::NamespaceMetadata::Encryption::Cmek] Indicates that the namespace is encrypted with a customer-managed encryption key
+      #
+      #   @param index [Turbopuffer::Models::NamespaceMetadata::Index::Status, Turbopuffer::Models::NamespaceMetadata::Index::UnionMember1]
+
+      # Indicates that the namespace is encrypted with a customer-managed encryption key
+      # (CMEK).
+      #
+      # @see Turbopuffer::Models::NamespaceMetadata#encryption
+      module Encryption
+        extend Turbopuffer::Internal::Type::Union
+
+        variant Turbopuffer::Internal::Type::Boolean
+
+        # Indicates that the namespace is encrypted with a customer-managed encryption key (CMEK).
+        variant -> { Turbopuffer::NamespaceMetadata::Encryption::Cmek }
+
+        class Cmek < Turbopuffer::Internal::Type::BaseModel
+          # @!attribute cmek
+          #
+          #   @return [Turbopuffer::Models::NamespaceMetadata::Encryption::Cmek::Cmek, nil]
+          optional :cmek, -> { Turbopuffer::NamespaceMetadata::Encryption::Cmek::Cmek }
+
+          # @!method initialize(cmek: nil)
+          #   Indicates that the namespace is encrypted with a customer-managed encryption key
+          #   (CMEK).
+          #
+          #   @param cmek [Turbopuffer::Models::NamespaceMetadata::Encryption::Cmek::Cmek]
+
+          # @see Turbopuffer::Models::NamespaceMetadata::Encryption::Cmek#cmek
+          class Cmek < Turbopuffer::Internal::Type::BaseModel
+            # @!attribute key_name
+            #   The name of the CMEK key in use.
+            #
+            #   @return [String]
+            required :key_name, String
+
+            # @!method initialize(key_name:)
+            #   @param key_name [String] The name of the CMEK key in use.
+          end
+        end
+
+        # @!method self.variants
+        #   @return [Array(Boolean, Turbopuffer::Models::NamespaceMetadata::Encryption::Cmek)]
+      end
+
+      # @see Turbopuffer::Models::NamespaceMetadata#index
+      module Index
+        extend Turbopuffer::Internal::Type::Union
+
+        variant -> { Turbopuffer::NamespaceMetadata::Index::Status }
+
+        variant -> { Turbopuffer::NamespaceMetadata::Index::UnionMember1 }
+
+        class Status < Turbopuffer::Internal::Type::BaseModel
+          # @!attribute status
+          #
+          #   @return [Symbol, :"up-to-date"]
+          required :status, const: :"up-to-date"
+
+          # @!method initialize(status: :"up-to-date")
+          #   @param status [Symbol, :"up-to-date"]
+        end
+
+        class UnionMember1 < Turbopuffer::Internal::Type::BaseModel
+          # @!attribute status
+          #
+          #   @return [Symbol, :updating]
+          required :status, const: :updating
+
+          # @!attribute unindexed_bytes
+          #   The number of bytes in the namespace that are in the write-ahead log but have
+          #   not yet been indexed.
+          #
+          #   @return [Integer]
+          required :unindexed_bytes, Integer
+
+          # @!method initialize(unindexed_bytes:, status: :updating)
+          #   Some parameter documentations has been truncated, see
+          #   {Turbopuffer::Models::NamespaceMetadata::Index::UnionMember1} for more details.
+          #
+          #   @param unindexed_bytes [Integer] The number of bytes in the namespace that are in the write-ahead log but have no
+          #
+          #   @param status [Symbol, :updating]
+        end
+
+        # @!method self.variants
+        #   @return [Array(Turbopuffer::Models::NamespaceMetadata::Index::Status, Turbopuffer::Models::NamespaceMetadata::Index::UnionMember1)]
+      end
     end
   end
 end
