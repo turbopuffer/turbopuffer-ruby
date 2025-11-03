@@ -4,10 +4,11 @@ module Turbopuffer
   module Models
     class AttributeSchemaConfig < Turbopuffer::Internal::Type::BaseModel
       # @!attribute ann
-      #   Whether to create an approximate nearest neighbor index for the attribute.
+      #   Whether to create an approximate nearest neighbor index for the attribute. Can
+      #   be a boolean or a detailed configuration object.
       #
-      #   @return [Boolean, nil]
-      optional :ann, Turbopuffer::Internal::Type::Boolean
+      #   @return [Boolean, Turbopuffer::Models::AttributeSchemaConfig::Ann::AnnConfig, nil]
+      optional :ann, union: -> { Turbopuffer::AttributeSchemaConfig::Ann }
 
       # @!attribute filterable
       #   Whether or not the attributes can be used in filters.
@@ -43,7 +44,7 @@ module Turbopuffer
       #
       #   Detailed configuration for an attribute attached to a document.
       #
-      #   @param ann [Boolean] Whether to create an approximate nearest neighbor index for the attribute.
+      #   @param ann [Boolean, Turbopuffer::Models::AttributeSchemaConfig::Ann::AnnConfig] Whether to create an approximate nearest neighbor index for the attribute. Can b
       #
       #   @param filterable [Boolean] Whether or not the attributes can be used in filters.
       #
@@ -52,6 +53,35 @@ module Turbopuffer
       #   @param regex [Boolean] Whether to enable Regex filters on this attribute.
       #
       #   @param type [String] The data type of the attribute. Valid values: string, int, uint, float, uuid, da
+
+      # Whether to create an approximate nearest neighbor index for the attribute. Can
+      # be a boolean or a detailed configuration object.
+      #
+      # @see Turbopuffer::Models::AttributeSchemaConfig#ann
+      module Ann
+        extend Turbopuffer::Internal::Type::Union
+
+        variant Turbopuffer::Internal::Type::Boolean
+
+        # Configuration options for ANN (Approximate Nearest Neighbor) indexing.
+        variant -> { Turbopuffer::AttributeSchemaConfig::Ann::AnnConfig }
+
+        class AnnConfig < Turbopuffer::Internal::Type::BaseModel
+          # @!attribute distance_metric
+          #   A function used to calculate vector similarity.
+          #
+          #   @return [Symbol, Turbopuffer::Models::DistanceMetric, nil]
+          optional :distance_metric, enum: -> { Turbopuffer::DistanceMetric }
+
+          # @!method initialize(distance_metric: nil)
+          #   Configuration options for ANN (Approximate Nearest Neighbor) indexing.
+          #
+          #   @param distance_metric [Symbol, Turbopuffer::Models::DistanceMetric] A function used to calculate vector similarity.
+        end
+
+        # @!method self.variants
+        #   @return [Array(Boolean, Turbopuffer::Models::AttributeSchemaConfig::Ann::AnnConfig)]
+      end
     end
   end
 end

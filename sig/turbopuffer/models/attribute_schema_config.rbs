@@ -2,7 +2,7 @@ module Turbopuffer
   module Models
     type attribute_schema_config =
       {
-        ann: bool,
+        ann: Turbopuffer::Models::AttributeSchemaConfig::ann,
         filterable: bool,
         full_text_search: Turbopuffer::Models::full_text_search,
         regex: bool,
@@ -10,9 +10,11 @@ module Turbopuffer
       }
 
     class AttributeSchemaConfig < Turbopuffer::Internal::Type::BaseModel
-      attr_reader ann: bool?
+      attr_reader ann: Turbopuffer::Models::AttributeSchemaConfig::ann?
 
-      def ann=: (bool) -> bool
+      def ann=: (
+        Turbopuffer::Models::AttributeSchemaConfig::ann
+      ) -> Turbopuffer::Models::AttributeSchemaConfig::ann
 
       attr_reader filterable: bool?
 
@@ -33,7 +35,7 @@ module Turbopuffer
       def type=: (String) -> String
 
       def initialize: (
-        ?ann: bool,
+        ?ann: Turbopuffer::Models::AttributeSchemaConfig::ann,
         ?filterable: bool,
         ?full_text_search: Turbopuffer::Models::full_text_search,
         ?regex: bool,
@@ -41,12 +43,39 @@ module Turbopuffer
       ) -> void
 
       def to_hash: -> {
-        ann: bool,
+        ann: Turbopuffer::Models::AttributeSchemaConfig::ann,
         filterable: bool,
         full_text_search: Turbopuffer::Models::full_text_search,
         regex: bool,
         type: String
       }
+
+      type ann = bool | Turbopuffer::AttributeSchemaConfig::Ann::AnnConfig
+
+      module Ann
+        extend Turbopuffer::Internal::Type::Union
+
+        type ann_config =
+          { distance_metric: Turbopuffer::Models::distance_metric }
+
+        class AnnConfig < Turbopuffer::Internal::Type::BaseModel
+          attr_reader distance_metric: Turbopuffer::Models::distance_metric?
+
+          def distance_metric=: (
+            Turbopuffer::Models::distance_metric
+          ) -> Turbopuffer::Models::distance_metric
+
+          def initialize: (
+            ?distance_metric: Turbopuffer::Models::distance_metric
+          ) -> void
+
+          def to_hash: -> {
+            distance_metric: Turbopuffer::Models::distance_metric
+          }
+        end
+
+        def self?.variants: -> ::Array[Turbopuffer::Models::AttributeSchemaConfig::ann]
+      end
     end
   end
 end

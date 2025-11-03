@@ -11,11 +11,29 @@ module Turbopuffer
           )
         end
 
-      # Whether to create an approximate nearest neighbor index for the attribute.
-      sig { returns(T.nilable(T::Boolean)) }
+      # Whether to create an approximate nearest neighbor index for the attribute. Can
+      # be a boolean or a detailed configuration object.
+      sig do
+        returns(
+          T.nilable(
+            T.any(
+              T::Boolean,
+              Turbopuffer::AttributeSchemaConfig::Ann::AnnConfig
+            )
+          )
+        )
+      end
       attr_reader :ann
 
-      sig { params(ann: T::Boolean).void }
+      sig do
+        params(
+          ann:
+            T.any(
+              T::Boolean,
+              Turbopuffer::AttributeSchemaConfig::Ann::AnnConfig::OrHash
+            )
+        ).void
+      end
       attr_writer :ann
 
       # Whether or not the attributes can be used in filters.
@@ -60,7 +78,11 @@ module Turbopuffer
       # Detailed configuration for an attribute attached to a document.
       sig do
         params(
-          ann: T::Boolean,
+          ann:
+            T.any(
+              T::Boolean,
+              Turbopuffer::AttributeSchemaConfig::Ann::AnnConfig::OrHash
+            ),
           filterable: T::Boolean,
           full_text_search:
             T.any(T::Boolean, Turbopuffer::FullTextSearchConfig::OrHash),
@@ -69,7 +91,8 @@ module Turbopuffer
         ).returns(T.attached_class)
       end
       def self.new(
-        # Whether to create an approximate nearest neighbor index for the attribute.
+        # Whether to create an approximate nearest neighbor index for the attribute. Can
+        # be a boolean or a detailed configuration object.
         ann: nil,
         # Whether or not the attributes can be used in filters.
         filterable: nil,
@@ -89,7 +112,11 @@ module Turbopuffer
       sig do
         override.returns(
           {
-            ann: T::Boolean,
+            ann:
+              T.any(
+                T::Boolean,
+                Turbopuffer::AttributeSchemaConfig::Ann::AnnConfig
+              ),
             filterable: T::Boolean,
             full_text_search:
               T.any(T::Boolean, Turbopuffer::FullTextSearchConfig),
@@ -99,6 +126,67 @@ module Turbopuffer
         )
       end
       def to_hash
+      end
+
+      # Whether to create an approximate nearest neighbor index for the attribute. Can
+      # be a boolean or a detailed configuration object.
+      module Ann
+        extend Turbopuffer::Internal::Type::Union
+
+        Variants =
+          T.type_alias do
+            T.any(
+              T::Boolean,
+              Turbopuffer::AttributeSchemaConfig::Ann::AnnConfig
+            )
+          end
+
+        class AnnConfig < Turbopuffer::Internal::Type::BaseModel
+          OrHash =
+            T.type_alias do
+              T.any(
+                Turbopuffer::AttributeSchemaConfig::Ann::AnnConfig,
+                Turbopuffer::Internal::AnyHash
+              )
+            end
+
+          # A function used to calculate vector similarity.
+          sig { returns(T.nilable(Turbopuffer::DistanceMetric::OrSymbol)) }
+          attr_reader :distance_metric
+
+          sig do
+            params(distance_metric: Turbopuffer::DistanceMetric::OrSymbol).void
+          end
+          attr_writer :distance_metric
+
+          # Configuration options for ANN (Approximate Nearest Neighbor) indexing.
+          sig do
+            params(
+              distance_metric: Turbopuffer::DistanceMetric::OrSymbol
+            ).returns(T.attached_class)
+          end
+          def self.new(
+            # A function used to calculate vector similarity.
+            distance_metric: nil
+          )
+          end
+
+          sig do
+            override.returns(
+              { distance_metric: Turbopuffer::DistanceMetric::OrSymbol }
+            )
+          end
+          def to_hash
+          end
+        end
+
+        sig do
+          override.returns(
+            T::Array[Turbopuffer::AttributeSchemaConfig::Ann::Variants]
+          )
+        end
+        def self.variants
+        end
       end
     end
   end
