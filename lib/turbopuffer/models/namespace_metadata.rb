@@ -31,7 +31,7 @@ module Turbopuffer
 
       # @!attribute index
       #
-      #   @return [Turbopuffer::Models::NamespaceMetadata::Index::Status, Turbopuffer::Models::NamespaceMetadata::Index::UnionMember1]
+      #   @return [Turbopuffer::Models::NamespaceMetadata::Index::IndexUpToDate, Turbopuffer::Models::NamespaceMetadata::Index::IndexUpdating]
       required :index, union: -> { Turbopuffer::NamespaceMetadata::Index }
 
       # @!attribute schema
@@ -60,7 +60,7 @@ module Turbopuffer
       #
       #   @param encryption [Turbopuffer::Models::NamespaceMetadata::Encryption::Sse, Turbopuffer::Models::NamespaceMetadata::Encryption::Cmek] Indicates that the namespace is encrypted with a customer-managed encryption key
       #
-      #   @param index [Turbopuffer::Models::NamespaceMetadata::Index::Status, Turbopuffer::Models::NamespaceMetadata::Index::UnionMember1]
+      #   @param index [Turbopuffer::Models::NamespaceMetadata::Index::IndexUpToDate, Turbopuffer::Models::NamespaceMetadata::Index::IndexUpdating]
       #
       #   @param schema [Hash{Symbol=>Turbopuffer::Models::AttributeSchemaConfig}] The schema of the namespace.
       #
@@ -122,11 +122,11 @@ module Turbopuffer
       module Index
         extend Turbopuffer::Internal::Type::Union
 
-        variant -> { Turbopuffer::NamespaceMetadata::Index::Status }
+        variant -> { Turbopuffer::NamespaceMetadata::Index::IndexUpToDate }
 
-        variant -> { Turbopuffer::NamespaceMetadata::Index::UnionMember1 }
+        variant -> { Turbopuffer::NamespaceMetadata::Index::IndexUpdating }
 
-        class Status < Turbopuffer::Internal::Type::BaseModel
+        class IndexUpToDate < Turbopuffer::Internal::Type::BaseModel
           # @!attribute status
           #
           #   @return [Symbol, :"up-to-date"]
@@ -136,7 +136,7 @@ module Turbopuffer
           #   @param status [Symbol, :"up-to-date"]
         end
 
-        class UnionMember1 < Turbopuffer::Internal::Type::BaseModel
+        class IndexUpdating < Turbopuffer::Internal::Type::BaseModel
           # @!attribute status
           #
           #   @return [Symbol, :updating]
@@ -151,7 +151,7 @@ module Turbopuffer
 
           # @!method initialize(unindexed_bytes:, status: :updating)
           #   Some parameter documentations has been truncated, see
-          #   {Turbopuffer::Models::NamespaceMetadata::Index::UnionMember1} for more details.
+          #   {Turbopuffer::Models::NamespaceMetadata::Index::IndexUpdating} for more details.
           #
           #   @param unindexed_bytes [Integer] The number of bytes in the namespace that are in the write-ahead log but have no
           #
@@ -159,7 +159,7 @@ module Turbopuffer
         end
 
         # @!method self.variants
-        #   @return [Array(Turbopuffer::Models::NamespaceMetadata::Index::Status, Turbopuffer::Models::NamespaceMetadata::Index::UnionMember1)]
+        #   @return [Array(Turbopuffer::Models::NamespaceMetadata::Index::IndexUpToDate, Turbopuffer::Models::NamespaceMetadata::Index::IndexUpdating)]
       end
     end
   end
