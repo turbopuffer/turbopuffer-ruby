@@ -1,5 +1,28 @@
 # Changelog
 
+## 1.6.0 (2025-11-06)
+
+Full Changelog: [v1.5.0...v1.6.0](https://github.com/turbopuffer/turbopuffer-ruby/compare/v1.5.0...v1.6.0)
+
+### Features
+
+* Add vector attribute schema to metadata endpoint ([a509e47](https://github.com/turbopuffer/turbopuffer-ruby/commit/a509e479bc8fdeb6a72b39703636d1ccc331274e))
+* handle thread interrupts in the core HTTP client ([ad531ac](https://github.com/turbopuffer/turbopuffer-ruby/commit/ad531ac4776d6445a23033601d7e46900f8824bc))
+* Make `type` required on `AttributeSchemaConfig` ([c9300f6](https://github.com/turbopuffer/turbopuffer-ruby/commit/c9300f621999c6937d16c363ba7bdb423605a825))
+* openapi: Fix stainless warnings ([1b7685f](https://github.com/turbopuffer/turbopuffer-ruby/commit/1b7685f30fd448eff4d17b809714ee01aa864ffd))
+* openapi: name variants of `NamespaceMetadata.index` ([3b7cd24](https://github.com/turbopuffer/turbopuffer-ruby/commit/3b7cd24aa4f0fbb0c7f805d28f3c0e20726697de))
+
+
+### Bug Fixes
+
+* better thread safety via early initializing SSL store during HTTP client creation ([588faf7](https://github.com/turbopuffer/turbopuffer-ruby/commit/588faf74de4e21652afadd3eb557062818639cd6))
+
+
+### Chores
+
+* bump dependency version and update sorbet types ([b8c6c9a](https://github.com/turbopuffer/turbopuffer-ruby/commit/b8c6c9a56cf98142d6736e21b25fa3a541fafd47))
+* **client:** send user-agent header ([dda4633](https://github.com/turbopuffer/turbopuffer-ruby/commit/dda4633d4fe3cfb16b90d5d4b32aa887ee810d52))
+
 ## 1.5.0 (2025-10-21)
 
 Full Changelog: [v1.4.0...v1.5.0](https://github.com/turbopuffer/turbopuffer-ruby/compare/v1.4.0...v1.5.0)
