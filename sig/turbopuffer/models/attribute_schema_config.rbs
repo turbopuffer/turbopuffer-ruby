@@ -2,14 +2,16 @@ module Turbopuffer
   module Models
     type attribute_schema_config =
       {
+        type: String,
         ann: Turbopuffer::Models::AttributeSchemaConfig::ann,
         filterable: bool,
         full_text_search: Turbopuffer::Models::full_text_search,
-        regex: bool,
-        type: String
+        regex: bool
       }
 
     class AttributeSchemaConfig < Turbopuffer::Internal::Type::BaseModel
+      attr_accessor type: String
+
       attr_reader ann: Turbopuffer::Models::AttributeSchemaConfig::ann?
 
       def ann=: (
@@ -30,24 +32,20 @@ module Turbopuffer
 
       def regex=: (bool) -> bool
 
-      attr_reader type: String?
-
-      def type=: (String) -> String
-
       def initialize: (
+        type: String,
         ?ann: Turbopuffer::Models::AttributeSchemaConfig::ann,
         ?filterable: bool,
         ?full_text_search: Turbopuffer::Models::full_text_search,
-        ?regex: bool,
-        ?type: String
+        ?regex: bool
       ) -> void
 
       def to_hash: -> {
+        type: String,
         ann: Turbopuffer::Models::AttributeSchemaConfig::ann,
         filterable: bool,
         full_text_search: Turbopuffer::Models::full_text_search,
-        regex: bool,
-        type: String
+        regex: bool
       }
 
       type ann = bool | Turbopuffer::AttributeSchemaConfig::Ann::AnnConfig
