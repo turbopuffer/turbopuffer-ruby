@@ -20,6 +20,14 @@ module Turbopuffer
       sig { returns(Time) }
       attr_accessor :created_at
 
+      # Indicates that the namespace is encrypted with a customer-managed encryption key
+      # (CMEK).
+      sig { returns(Turbopuffer::NamespaceMetadata::Encryption::Variants) }
+      attr_accessor :encryption
+
+      sig { returns(Turbopuffer::NamespaceMetadata::Index::Variants) }
+      attr_accessor :index
+
       # The schema of the namespace.
       sig { returns(T::Hash[Symbol, Turbopuffer::AttributeSchemaConfig]) }
       attr_accessor :schema
@@ -28,58 +36,24 @@ module Turbopuffer
       sig { returns(Time) }
       attr_accessor :updated_at
 
-      # Indicates that the namespace is encrypted with a customer-managed encryption key
-      # (CMEK).
-      sig do
-        returns(T.nilable(Turbopuffer::NamespaceMetadata::Encryption::Variants))
-      end
-      attr_reader :encryption
-
-      sig do
-        params(
-          encryption:
-            T.any(
-              T::Boolean,
-              Turbopuffer::NamespaceMetadata::Encryption::Cmek::OrHash
-            )
-        ).void
-      end
-      attr_writer :encryption
-
-      sig do
-        returns(T.nilable(Turbopuffer::NamespaceMetadata::Index::Variants))
-      end
-      attr_reader :index
-
-      sig do
-        params(
-          index:
-            T.any(
-              Turbopuffer::NamespaceMetadata::Index::Status::OrHash,
-              Turbopuffer::NamespaceMetadata::Index::UnionMember1::OrHash
-            )
-        ).void
-      end
-      attr_writer :index
-
       # Metadata about a namespace.
       sig do
         params(
           approx_logical_bytes: Integer,
           approx_row_count: Integer,
           created_at: Time,
-          schema: T::Hash[Symbol, Turbopuffer::AttributeSchemaConfig::OrHash],
-          updated_at: Time,
           encryption:
             T.any(
-              T::Boolean,
+              Turbopuffer::NamespaceMetadata::Encryption::Sse::OrHash,
               Turbopuffer::NamespaceMetadata::Encryption::Cmek::OrHash
             ),
           index:
             T.any(
               Turbopuffer::NamespaceMetadata::Index::Status::OrHash,
               Turbopuffer::NamespaceMetadata::Index::UnionMember1::OrHash
-            )
+            ),
+          schema: T::Hash[Symbol, Turbopuffer::AttributeSchemaConfig::OrHash],
+          updated_at: Time
         ).returns(T.attached_class)
       end
       def self.new(
@@ -89,14 +63,14 @@ module Turbopuffer
         approx_row_count:,
         # The timestamp when the namespace was created.
         created_at:,
+        # Indicates that the namespace is encrypted with a customer-managed encryption key
+        # (CMEK).
+        encryption:,
+        index:,
         # The schema of the namespace.
         schema:,
         # The timestamp when the namespace was last modified by a write operation.
-        updated_at:,
-        # Indicates that the namespace is encrypted with a customer-managed encryption key
-        # (CMEK).
-        encryption: nil,
-        index: nil
+        updated_at:
       )
       end
 
@@ -106,10 +80,10 @@ module Turbopuffer
             approx_logical_bytes: Integer,
             approx_row_count: Integer,
             created_at: Time,
-            schema: T::Hash[Symbol, Turbopuffer::AttributeSchemaConfig],
-            updated_at: Time,
             encryption: Turbopuffer::NamespaceMetadata::Encryption::Variants,
-            index: Turbopuffer::NamespaceMetadata::Index::Variants
+            index: Turbopuffer::NamespaceMetadata::Index::Variants,
+            schema: T::Hash[Symbol, Turbopuffer::AttributeSchemaConfig],
+            updated_at: Time
           }
         )
       end
@@ -123,8 +97,36 @@ module Turbopuffer
 
         Variants =
           T.type_alias do
-            T.any(T::Boolean, Turbopuffer::NamespaceMetadata::Encryption::Cmek)
+            T.any(
+              Turbopuffer::NamespaceMetadata::Encryption::Sse,
+              Turbopuffer::NamespaceMetadata::Encryption::Cmek
+            )
           end
+
+        class Sse < Turbopuffer::Internal::Type::BaseModel
+          OrHash =
+            T.type_alias do
+              T.any(
+                Turbopuffer::NamespaceMetadata::Encryption::Sse,
+                Turbopuffer::Internal::AnyHash
+              )
+            end
+
+          # Always true. Indicates that the namespace is encrypted with SSE.
+          sig { returns(T::Boolean) }
+          attr_accessor :sse
+
+          sig { params(sse: T::Boolean).returns(T.attached_class) }
+          def self.new(
+            # Always true. Indicates that the namespace is encrypted with SSE.
+            sse:
+          )
+          end
+
+          sig { override.returns({ sse: T::Boolean }) }
+          def to_hash
+          end
+        end
 
         class Cmek < Turbopuffer::Internal::Type::BaseModel
           OrHash =
@@ -136,9 +138,7 @@ module Turbopuffer
             end
 
           sig do
-            returns(
-              T.nilable(Turbopuffer::NamespaceMetadata::Encryption::Cmek::Cmek)
-            )
+            returns(Turbopuffer::NamespaceMetadata::Encryption::Cmek::Cmek)
           end
           attr_reader :cmek
 
@@ -158,7 +158,7 @@ module Turbopuffer
                 Turbopuffer::NamespaceMetadata::Encryption::Cmek::Cmek::OrHash
             ).returns(T.attached_class)
           end
-          def self.new(cmek: nil)
+          def self.new(cmek:)
           end
 
           sig do

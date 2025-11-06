@@ -5,10 +5,10 @@ module Turbopuffer
         approx_logical_bytes: Integer,
         approx_row_count: Integer,
         created_at: Time,
-        schema: ::Hash[Symbol, Turbopuffer::AttributeSchemaConfig],
-        updated_at: Time,
         encryption: Turbopuffer::Models::NamespaceMetadata::encryption,
-        index: Turbopuffer::Models::NamespaceMetadata::index
+        index: Turbopuffer::Models::NamespaceMetadata::index,
+        schema: ::Hash[Symbol, Turbopuffer::AttributeSchemaConfig],
+        updated_at: Time
       }
 
     class NamespaceMetadata < Turbopuffer::Internal::Type::BaseModel
@@ -18,59 +18,59 @@ module Turbopuffer
 
       attr_accessor created_at: Time
 
+      attr_accessor encryption: Turbopuffer::Models::NamespaceMetadata::encryption
+
+      attr_accessor index: Turbopuffer::Models::NamespaceMetadata::index
+
       attr_accessor schema: ::Hash[Symbol, Turbopuffer::AttributeSchemaConfig]
 
       attr_accessor updated_at: Time
-
-      attr_reader encryption: Turbopuffer::Models::NamespaceMetadata::encryption?
-
-      def encryption=: (
-        Turbopuffer::Models::NamespaceMetadata::encryption
-      ) -> Turbopuffer::Models::NamespaceMetadata::encryption
-
-      attr_reader index: Turbopuffer::Models::NamespaceMetadata::index?
-
-      def index=: (
-        Turbopuffer::Models::NamespaceMetadata::index
-      ) -> Turbopuffer::Models::NamespaceMetadata::index
 
       def initialize: (
         approx_logical_bytes: Integer,
         approx_row_count: Integer,
         created_at: Time,
+        encryption: Turbopuffer::Models::NamespaceMetadata::encryption,
+        index: Turbopuffer::Models::NamespaceMetadata::index,
         schema: ::Hash[Symbol, Turbopuffer::AttributeSchemaConfig],
-        updated_at: Time,
-        ?encryption: Turbopuffer::Models::NamespaceMetadata::encryption,
-        ?index: Turbopuffer::Models::NamespaceMetadata::index
+        updated_at: Time
       ) -> void
 
       def to_hash: -> {
         approx_logical_bytes: Integer,
         approx_row_count: Integer,
         created_at: Time,
-        schema: ::Hash[Symbol, Turbopuffer::AttributeSchemaConfig],
-        updated_at: Time,
         encryption: Turbopuffer::Models::NamespaceMetadata::encryption,
-        index: Turbopuffer::Models::NamespaceMetadata::index
+        index: Turbopuffer::Models::NamespaceMetadata::index,
+        schema: ::Hash[Symbol, Turbopuffer::AttributeSchemaConfig],
+        updated_at: Time
       }
 
-      type encryption = bool | Turbopuffer::NamespaceMetadata::Encryption::Cmek
+      type encryption =
+        Turbopuffer::NamespaceMetadata::Encryption::Sse
+        | Turbopuffer::NamespaceMetadata::Encryption::Cmek
 
       module Encryption
         extend Turbopuffer::Internal::Type::Union
+
+        type sse = { sse: bool }
+
+        class Sse < Turbopuffer::Internal::Type::BaseModel
+          attr_accessor sse: bool
+
+          def initialize: (sse: bool) -> void
+
+          def to_hash: -> { sse: bool }
+        end
 
         type cmek =
           { cmek: Turbopuffer::NamespaceMetadata::Encryption::Cmek::Cmek }
 
         class Cmek < Turbopuffer::Internal::Type::BaseModel
-          attr_reader cmek: Turbopuffer::NamespaceMetadata::Encryption::Cmek::Cmek?
-
-          def cmek=: (
-            Turbopuffer::NamespaceMetadata::Encryption::Cmek::Cmek
-          ) -> Turbopuffer::NamespaceMetadata::Encryption::Cmek::Cmek
+          attr_accessor cmek: Turbopuffer::NamespaceMetadata::Encryption::Cmek::Cmek
 
           def initialize: (
-            ?cmek: Turbopuffer::NamespaceMetadata::Encryption::Cmek::Cmek
+            cmek: Turbopuffer::NamespaceMetadata::Encryption::Cmek::Cmek
           ) -> void
 
           def to_hash: -> {
