@@ -92,15 +92,15 @@ module Turbopuffer
       end
 
       type index =
-        Turbopuffer::NamespaceMetadata::Index::Status
-        | Turbopuffer::NamespaceMetadata::Index::UnionMember1
+        Turbopuffer::NamespaceMetadata::Index::IndexUpToDate
+        | Turbopuffer::NamespaceMetadata::Index::IndexUpdating
 
       module Index
         extend Turbopuffer::Internal::Type::Union
 
-        type status = { status: :"up-to-date" }
+        type index_up_to_date = { status: :"up-to-date" }
 
-        class Status < Turbopuffer::Internal::Type::BaseModel
+        class IndexUpToDate < Turbopuffer::Internal::Type::BaseModel
           attr_accessor status: :"up-to-date"
 
           def initialize: (?status: :"up-to-date") -> void
@@ -108,9 +108,9 @@ module Turbopuffer
           def to_hash: -> { status: :"up-to-date" }
         end
 
-        type union_member1 = { status: :updating, unindexed_bytes: Integer }
+        type index_updating = { status: :updating, unindexed_bytes: Integer }
 
-        class UnionMember1 < Turbopuffer::Internal::Type::BaseModel
+        class IndexUpdating < Turbopuffer::Internal::Type::BaseModel
           attr_accessor status: :updating
 
           attr_accessor unindexed_bytes: Integer

@@ -49,8 +49,8 @@ module Turbopuffer
             ),
           index:
             T.any(
-              Turbopuffer::NamespaceMetadata::Index::Status::OrHash,
-              Turbopuffer::NamespaceMetadata::Index::UnionMember1::OrHash
+              Turbopuffer::NamespaceMetadata::Index::IndexUpToDate::OrHash,
+              Turbopuffer::NamespaceMetadata::Index::IndexUpdating::OrHash
             ),
           schema: T::Hash[Symbol, Turbopuffer::AttributeSchemaConfig::OrHash],
           updated_at: Time
@@ -210,16 +210,16 @@ module Turbopuffer
         Variants =
           T.type_alias do
             T.any(
-              Turbopuffer::NamespaceMetadata::Index::Status,
-              Turbopuffer::NamespaceMetadata::Index::UnionMember1
+              Turbopuffer::NamespaceMetadata::Index::IndexUpToDate,
+              Turbopuffer::NamespaceMetadata::Index::IndexUpdating
             )
           end
 
-        class Status < Turbopuffer::Internal::Type::BaseModel
+        class IndexUpToDate < Turbopuffer::Internal::Type::BaseModel
           OrHash =
             T.type_alias do
               T.any(
-                Turbopuffer::NamespaceMetadata::Index::Status,
+                Turbopuffer::NamespaceMetadata::Index::IndexUpToDate,
                 Turbopuffer::Internal::AnyHash
               )
             end
@@ -236,11 +236,11 @@ module Turbopuffer
           end
         end
 
-        class UnionMember1 < Turbopuffer::Internal::Type::BaseModel
+        class IndexUpdating < Turbopuffer::Internal::Type::BaseModel
           OrHash =
             T.type_alias do
               T.any(
-                Turbopuffer::NamespaceMetadata::Index::UnionMember1,
+                Turbopuffer::NamespaceMetadata::Index::IndexUpdating,
                 Turbopuffer::Internal::AnyHash
               )
             end
