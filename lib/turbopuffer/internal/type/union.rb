@@ -11,7 +11,7 @@ module Turbopuffer
       #   when Turbopuffer::AttributeType
       #     # ...
       #   when Turbopuffer::AttributeSchemaConfig
-      #     puts(attribute_schema.ann)
+      #     puts(attribute_schema.type)
       #   else
       #     puts(attribute_schema)
       #   end

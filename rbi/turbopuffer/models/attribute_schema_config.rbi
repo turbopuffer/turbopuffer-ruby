@@ -11,6 +11,12 @@ module Turbopuffer
           )
         end
 
+      # The data type of the attribute. Valid values: string, int, uint, float, uuid,
+      # datetime, bool, []string, []int, []uint, []float, []uuid, []datetime, []bool,
+      # [DIMS]f16, [DIMS]f32.
+      sig { returns(String) }
+      attr_accessor :type
+
       # Whether to create an approximate nearest neighbor index for the attribute. Can
       # be a boolean or a detailed configuration object.
       sig do
@@ -66,18 +72,10 @@ module Turbopuffer
       sig { params(regex: T::Boolean).void }
       attr_writer :regex
 
-      # The data type of the attribute. Valid values: string, int, uint, float, uuid,
-      # datetime, bool, []string, []int, []uint, []float, []uuid, []datetime, []bool,
-      # [DIMS]f16, [DIMS]f32.
-      sig { returns(T.nilable(String)) }
-      attr_reader :type
-
-      sig { params(type: String).void }
-      attr_writer :type
-
       # Detailed configuration for an attribute attached to a document.
       sig do
         params(
+          type: String,
           ann:
             T.any(
               T::Boolean,
@@ -86,11 +84,14 @@ module Turbopuffer
           filterable: T::Boolean,
           full_text_search:
             T.any(T::Boolean, Turbopuffer::FullTextSearchConfig::OrHash),
-          regex: T::Boolean,
-          type: String
+          regex: T::Boolean
         ).returns(T.attached_class)
       end
       def self.new(
+        # The data type of the attribute. Valid values: string, int, uint, float, uuid,
+        # datetime, bool, []string, []int, []uint, []float, []uuid, []datetime, []bool,
+        # [DIMS]f16, [DIMS]f32.
+        type:,
         # Whether to create an approximate nearest neighbor index for the attribute. Can
         # be a boolean or a detailed configuration object.
         ann: nil,
@@ -101,17 +102,14 @@ module Turbopuffer
         # filterable. You can override this by setting `filterable: true`.
         full_text_search: nil,
         # Whether to enable Regex filters on this attribute.
-        regex: nil,
-        # The data type of the attribute. Valid values: string, int, uint, float, uuid,
-        # datetime, bool, []string, []int, []uint, []float, []uuid, []datetime, []bool,
-        # [DIMS]f16, [DIMS]f32.
-        type: nil
+        regex: nil
       )
       end
 
       sig do
         override.returns(
           {
+            type: String,
             ann:
               T.any(
                 T::Boolean,
@@ -120,8 +118,7 @@ module Turbopuffer
             filterable: T::Boolean,
             full_text_search:
               T.any(T::Boolean, Turbopuffer::FullTextSearchConfig),
-            regex: T::Boolean,
-            type: String
+            regex: T::Boolean
           }
         )
       end
