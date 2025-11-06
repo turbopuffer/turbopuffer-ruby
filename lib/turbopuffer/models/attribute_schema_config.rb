@@ -3,6 +3,14 @@
 module Turbopuffer
   module Models
     class AttributeSchemaConfig < Turbopuffer::Internal::Type::BaseModel
+      # @!attribute type
+      #   The data type of the attribute. Valid values: string, int, uint, float, uuid,
+      #   datetime, bool, []string, []int, []uint, []float, []uuid, []datetime, []bool,
+      #   [DIMS]f16, [DIMS]f32.
+      #
+      #   @return [String]
+      required :type, String
+
       # @!attribute ann
       #   Whether to create an approximate nearest neighbor index for the attribute. Can
       #   be a boolean or a detailed configuration object.
@@ -30,19 +38,13 @@ module Turbopuffer
       #   @return [Boolean, nil]
       optional :regex, Turbopuffer::Internal::Type::Boolean
 
-      # @!attribute type
-      #   The data type of the attribute. Valid values: string, int, uint, float, uuid,
-      #   datetime, bool, []string, []int, []uint, []float, []uuid, []datetime, []bool,
-      #   [DIMS]f16, [DIMS]f32.
-      #
-      #   @return [String, nil]
-      optional :type, String
-
-      # @!method initialize(ann: nil, filterable: nil, full_text_search: nil, regex: nil, type: nil)
+      # @!method initialize(type:, ann: nil, filterable: nil, full_text_search: nil, regex: nil)
       #   Some parameter documentations has been truncated, see
       #   {Turbopuffer::Models::AttributeSchemaConfig} for more details.
       #
       #   Detailed configuration for an attribute attached to a document.
+      #
+      #   @param type [String] The data type of the attribute. Valid values: string, int, uint, float, uuid, da
       #
       #   @param ann [Boolean, Turbopuffer::Models::AttributeSchemaConfig::Ann::AnnConfig] Whether to create an approximate nearest neighbor index for the attribute. Can b
       #
@@ -51,8 +53,6 @@ module Turbopuffer
       #   @param full_text_search [Boolean, Turbopuffer::Models::FullTextSearchConfig] Whether this attribute can be used as part of a BM25 full-text search. Requires
       #
       #   @param regex [Boolean] Whether to enable Regex filters on this attribute.
-      #
-      #   @param type [String] The data type of the attribute. Valid values: string, int, uint, float, uuid, da
 
       # Whether to create an approximate nearest neighbor index for the attribute. Can
       # be a boolean or a detailed configuration object.
