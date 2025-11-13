@@ -13,7 +13,9 @@ module Turbopuffer
       optional :namespace, String
 
       # @!attribute copy_from_namespace
-      #   The namespace to copy documents from.
+      #   The namespace to copy documents from. When copying, you can optionally specify
+      #   an `encryption` parameter to encrypt the destination namespace with a different
+      #   CMEK key than the source namespace.
       #
       #   @return [String, nil]
       optional :copy_from_namespace, String
@@ -110,7 +112,7 @@ module Turbopuffer
       #
       #   @param namespace [String]
       #
-      #   @param copy_from_namespace [String] The namespace to copy documents from.
+      #   @param copy_from_namespace [String] The namespace to copy documents from. When copying, you can optionally specify a
       #
       #   @param delete_by_filter [Object] The filter specifying which documents to delete.
       #
