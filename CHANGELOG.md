@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.7.0 (2025-11-13)
+
+Full Changelog: [v1.6.0...v1.7.0](https://github.com/turbopuffer/turbopuffer-ruby/compare/v1.6.0...v1.7.0)
+
+### Features
+
+* Allow for a CMEK key to be specified in copy_from_namespace ([5c29fe0](https://github.com/turbopuffer/turbopuffer-ruby/commit/5c29fe01f4fb0e9795d92e7c0d27fbc3fc9c2c52))
+
 ## 1.6.0 (2025-11-06)
 
 Full Changelog: [v1.5.0...v1.6.0](https://github.com/turbopuffer/turbopuffer-ruby/compare/v1.5.0...v1.6.0)
