@@ -262,7 +262,9 @@ module Turbopuffer
       def write(
         # Path param: The name of the namespace.
         namespace: nil,
-        # Body param: The namespace to copy documents from.
+        # Body param: The namespace to copy documents from. When copying, you can
+        # optionally specify an `encryption` parameter to encrypt the destination
+        # namespace with a different CMEK key than the source namespace.
         copy_from_namespace: nil,
         # Body param: The filter specifying which documents to delete.
         delete_by_filter: nil,
