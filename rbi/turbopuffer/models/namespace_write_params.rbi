@@ -20,13 +20,28 @@ module Turbopuffer
       sig { params(namespace: String).void }
       attr_writer :namespace
 
-      # The namespace to copy documents from. When copying, you can optionally specify
-      # an `encryption` parameter to encrypt the destination namespace with a different
-      # CMEK key than the source namespace.
-      sig { returns(T.nilable(String)) }
+      # The namespace to copy documents from.
+      sig do
+        returns(
+          T.nilable(
+            T.any(
+              String,
+              Turbopuffer::NamespaceWriteParams::CopyFromNamespace::CopyFromNamespaceConfig
+            )
+          )
+        )
+      end
       attr_reader :copy_from_namespace
 
-      sig { params(copy_from_namespace: String).void }
+      sig do
+        params(
+          copy_from_namespace:
+            T.any(
+              String,
+              Turbopuffer::NamespaceWriteParams::CopyFromNamespace::CopyFromNamespaceConfig::OrHash
+            )
+        ).void
+      end
       attr_writer :copy_from_namespace
 
       # The filter specifying which documents to delete.
@@ -159,7 +174,11 @@ module Turbopuffer
       sig do
         params(
           namespace: String,
-          copy_from_namespace: String,
+          copy_from_namespace:
+            T.any(
+              String,
+              Turbopuffer::NamespaceWriteParams::CopyFromNamespace::CopyFromNamespaceConfig::OrHash
+            ),
           delete_by_filter: T.anything,
           delete_condition: T.anything,
           deletes: T::Array[Turbopuffer::ID::Variants],
@@ -184,9 +203,7 @@ module Turbopuffer
       end
       def self.new(
         namespace: nil,
-        # The namespace to copy documents from. When copying, you can optionally specify
-        # an `encryption` parameter to encrypt the destination namespace with a different
-        # CMEK key than the source namespace.
+        # The namespace to copy documents from.
         copy_from_namespace: nil,
         # The filter specifying which documents to delete.
         delete_by_filter: nil,
@@ -226,7 +243,11 @@ module Turbopuffer
         override.returns(
           {
             namespace: String,
-            copy_from_namespace: String,
+            copy_from_namespace:
+              T.any(
+                String,
+                Turbopuffer::NamespaceWriteParams::CopyFromNamespace::CopyFromNamespaceConfig
+              ),
             delete_by_filter: T.anything,
             delete_condition: T.anything,
             deletes: T::Array[Turbopuffer::ID::Variants],
@@ -250,6 +271,68 @@ module Turbopuffer
         )
       end
       def to_hash
+      end
+
+      # The namespace to copy documents from.
+      module CopyFromNamespace
+        extend Turbopuffer::Internal::Type::Union
+
+        Variants =
+          T.type_alias do
+            T.any(
+              String,
+              Turbopuffer::NamespaceWriteParams::CopyFromNamespace::CopyFromNamespaceConfig
+            )
+          end
+
+        class CopyFromNamespaceConfig < Turbopuffer::Internal::Type::BaseModel
+          OrHash =
+            T.type_alias do
+              T.any(
+                Turbopuffer::NamespaceWriteParams::CopyFromNamespace::CopyFromNamespaceConfig,
+                Turbopuffer::Internal::AnyHash
+              )
+            end
+
+          # An API key for the organization containing the source namespace
+          sig { returns(String) }
+          attr_accessor :source_api_key
+
+          # The namespace to copy documents from.
+          sig { returns(String) }
+          attr_accessor :source_namespace
+
+          sig do
+            params(source_api_key: String, source_namespace: String).returns(
+              T.attached_class
+            )
+          end
+          def self.new(
+            # An API key for the organization containing the source namespace
+            source_api_key:,
+            # The namespace to copy documents from.
+            source_namespace:
+          )
+          end
+
+          sig do
+            override.returns(
+              { source_api_key: String, source_namespace: String }
+            )
+          end
+          def to_hash
+          end
+        end
+
+        sig do
+          override.returns(
+            T::Array[
+              Turbopuffer::NamespaceWriteParams::CopyFromNamespace::Variants
+            ]
+          )
+        end
+        def self.variants
+        end
       end
 
       class Encryption < Turbopuffer::Internal::Type::BaseModel

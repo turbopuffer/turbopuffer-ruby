@@ -235,8 +235,12 @@ module Turbopuffer
       # Create, update, or delete documents.
       sig do
         params(
-          namespace: T.nilable(String),
-          copy_from_namespace: String,
+          namespace: String,
+          copy_from_namespace:
+            T.any(
+              String,
+              Turbopuffer::NamespaceWriteParams::CopyFromNamespace::CopyFromNamespaceConfig::OrHash
+            ),
           delete_by_filter: T.anything,
           delete_condition: T.anything,
           deletes: T::Array[Turbopuffer::ID::Variants],
@@ -262,9 +266,7 @@ module Turbopuffer
       def write(
         # Path param: The name of the namespace.
         namespace: nil,
-        # Body param: The namespace to copy documents from. When copying, you can
-        # optionally specify an `encryption` parameter to encrypt the destination
-        # namespace with a different CMEK key than the source namespace.
+        # Body param: The namespace to copy documents from.
         copy_from_namespace: nil,
         # Body param: The filter specifying which documents to delete.
         delete_by_filter: nil,

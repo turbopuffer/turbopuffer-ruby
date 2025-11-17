@@ -77,7 +77,7 @@ module Turbopuffer
 
       def write: (
         ?namespace: String,
-        ?copy_from_namespace: String,
+        ?copy_from_namespace: Turbopuffer::Models::NamespaceWriteParams::copy_from_namespace,
         ?delete_by_filter: top,
         ?delete_condition: top,
         ?deletes: ::Array[Turbopuffer::Models::id],

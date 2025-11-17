@@ -3,7 +3,7 @@ module Turbopuffer
     type namespace_write_params =
       {
         namespace: String,
-        copy_from_namespace: String,
+        copy_from_namespace: Turbopuffer::Models::NamespaceWriteParams::copy_from_namespace,
         delete_by_filter: top,
         delete_condition: top,
         deletes: ::Array[Turbopuffer::Models::id],
@@ -29,9 +29,11 @@ module Turbopuffer
 
       def namespace=: (String) -> String
 
-      attr_reader copy_from_namespace: String?
+      attr_reader copy_from_namespace: Turbopuffer::Models::NamespaceWriteParams::copy_from_namespace?
 
-      def copy_from_namespace=: (String) -> String
+      def copy_from_namespace=: (
+        Turbopuffer::Models::NamespaceWriteParams::copy_from_namespace
+      ) -> Turbopuffer::Models::NamespaceWriteParams::copy_from_namespace
 
       attr_reader delete_by_filter: top?
 
@@ -101,7 +103,7 @@ module Turbopuffer
 
       def initialize: (
         ?namespace: String,
-        ?copy_from_namespace: String,
+        ?copy_from_namespace: Turbopuffer::Models::NamespaceWriteParams::copy_from_namespace,
         ?delete_by_filter: top,
         ?delete_condition: top,
         ?deletes: ::Array[Turbopuffer::Models::id],
@@ -121,7 +123,7 @@ module Turbopuffer
 
       def to_hash: -> {
         namespace: String,
-        copy_from_namespace: String,
+        copy_from_namespace: Turbopuffer::Models::NamespaceWriteParams::copy_from_namespace,
         delete_by_filter: top,
         delete_condition: top,
         deletes: ::Array[Turbopuffer::Models::id],
@@ -138,6 +140,32 @@ module Turbopuffer
         upsert_rows: ::Array[Turbopuffer::Row],
         request_options: Turbopuffer::RequestOptions
       }
+
+      type copy_from_namespace =
+        String
+        | Turbopuffer::NamespaceWriteParams::CopyFromNamespace::CopyFromNamespaceConfig
+
+      module CopyFromNamespace
+        extend Turbopuffer::Internal::Type::Union
+
+        type copy_from_namespace_config =
+          { source_api_key: String, source_namespace: String }
+
+        class CopyFromNamespaceConfig < Turbopuffer::Internal::Type::BaseModel
+          attr_accessor source_api_key: String
+
+          attr_accessor source_namespace: String
+
+          def initialize: (
+            source_api_key: String,
+            source_namespace: String
+          ) -> void
+
+          def to_hash: -> { source_api_key: String, source_namespace: String }
+        end
+
+        def self?.variants: -> ::Array[Turbopuffer::Models::NamespaceWriteParams::copy_from_namespace]
+      end
 
       type encryption =
         { cmek: Turbopuffer::NamespaceWriteParams::Encryption::Cmek }
