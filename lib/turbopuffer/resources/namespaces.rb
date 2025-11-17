@@ -309,7 +309,7 @@ module Turbopuffer
       #
       # @param namespace [String] Path param: The name of the namespace.
       #
-      # @param copy_from_namespace [String] Body param: The namespace to copy documents from. When copying, you can optional
+      # @param copy_from_namespace [String, Turbopuffer::Models::NamespaceWriteParams::CopyFromNamespace::CopyFromNamespaceConfig] Body param: The namespace to copy documents from.
       #
       # @param delete_by_filter [Object] Body param: The filter specifying which documents to delete.
       #
