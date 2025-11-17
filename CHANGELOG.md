@@ -1,5 +1,14 @@
 # Changelog
 
+## 1.7.0 (2025-11-17)
+
+Full Changelog: [v1.6.0...v1.7.0](https://github.com/turbopuffer/turbopuffer-ruby/compare/v1.6.0...v1.7.0)
+
+### Features
+
+* Allow for a CMEK key to be specified in copy_from_namespace ([5c29fe0](https://github.com/turbopuffer/turbopuffer-ruby/commit/5c29fe01f4fb0e9795d92e7c0d27fbc3fc9c2c52))
+* spec: add support for cross-org CFN to SDKs ([eb1028c](https://github.com/turbopuffer/turbopuffer-ruby/commit/eb1028cf9c62e50a1d62866eb399a51fd12424e8))
+
 ## 1.6.0 (2025-11-06)
 
 Full Changelog: [v1.5.0...v1.6.0](https://github.com/turbopuffer/turbopuffer-ruby/compare/v1.5.0...v1.6.0)
