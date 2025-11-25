@@ -3,6 +3,13 @@
 module Turbopuffer
   module Models
     class FullTextSearchConfig < Turbopuffer::Internal::Type::BaseModel
+      # @!attribute ascii_folding
+      #   Whether to convert each non-ASCII character in a token to its ASCII equivalent,
+      #   if one exists (e.g., à -> a). Defaults to `false` (i.e., no folding).
+      #
+      #   @return [Boolean, nil]
+      optional :ascii_folding, Turbopuffer::Internal::Type::Boolean
+
       # @!attribute b
       #   The `b` document length normalization parameter for BM25. Defaults to `0.75`.
       #
@@ -57,11 +64,13 @@ module Turbopuffer
       #   @return [Symbol, Turbopuffer::Models::Tokenizer, nil]
       optional :tokenizer, enum: -> { Turbopuffer::Tokenizer }
 
-      # @!method initialize(b: nil, case_sensitive: nil, k1: nil, language: nil, max_token_length: nil, remove_stopwords: nil, stemming: nil, tokenizer: nil)
+      # @!method initialize(ascii_folding: nil, b: nil, case_sensitive: nil, k1: nil, language: nil, max_token_length: nil, remove_stopwords: nil, stemming: nil, tokenizer: nil)
       #   Some parameter documentations has been truncated, see
       #   {Turbopuffer::Models::FullTextSearchConfig} for more details.
       #
       #   Configuration options for full-text search.
+      #
+      #   @param ascii_folding [Boolean] Whether to convert each non-ASCII character in a token to its ASCII equivalent,
       #
       #   @param b [Float] The `b` document length normalization parameter for BM25. Defaults to `0.75`.
       #
