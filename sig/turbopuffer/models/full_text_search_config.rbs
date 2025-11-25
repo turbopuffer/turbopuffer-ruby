@@ -2,6 +2,7 @@ module Turbopuffer
   module Models
     type full_text_search_config =
       {
+        ascii_folding: bool,
         b: Float,
         case_sensitive: bool,
         :k1 => Float,
@@ -13,6 +14,10 @@ module Turbopuffer
       }
 
     class FullTextSearchConfig < Turbopuffer::Internal::Type::BaseModel
+      attr_reader ascii_folding: bool?
+
+      def ascii_folding=: (bool) -> bool
+
       attr_reader b: Float?
 
       def b=: (Float) -> Float
@@ -50,6 +55,7 @@ module Turbopuffer
       ) -> Turbopuffer::Models::tokenizer
 
       def initialize: (
+        ?ascii_folding: bool,
         ?b: Float,
         ?case_sensitive: bool,
         ?k1: Float,
@@ -61,6 +67,7 @@ module Turbopuffer
       ) -> void
 
       def to_hash: -> {
+        ascii_folding: bool,
         b: Float,
         case_sensitive: bool,
         :k1 => Float,
