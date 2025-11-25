@@ -1,5 +1,18 @@
 # Changelog
 
+## 1.8.0 (2025-11-25)
+
+Full Changelog: [v1.7.0...v1.8.0](https://github.com/turbopuffer/turbopuffer-ruby/compare/v1.7.0...v1.8.0)
+
+### Features
+
+* site: add ascii_folding to docs and SDKs ([3559081](https://github.com/turbopuffer/turbopuffer-ruby/commit/3559081d051884e7ce9b926cd87cedcdda4f8d31))
+
+
+### Chores
+
+* explicitly require "base64" gem ([eff4748](https://github.com/turbopuffer/turbopuffer-ruby/commit/eff47486ca1e5fa6742cd3f40a17822f2499429a))
+
 ## 1.7.0 (2025-11-17)
 
 Full Changelog: [v1.6.0...v1.7.0](https://github.com/turbopuffer/turbopuffer-ruby/compare/v1.6.0...v1.7.0)
