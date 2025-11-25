@@ -11,6 +11,14 @@ module Turbopuffer
           )
         end
 
+      # Whether to convert each non-ASCII character in a token to its ASCII equivalent,
+      # if one exists (e.g., à -> a). Defaults to `false` (i.e., no folding).
+      sig { returns(T.nilable(T::Boolean)) }
+      attr_reader :ascii_folding
+
+      sig { params(ascii_folding: T::Boolean).void }
+      attr_writer :ascii_folding
+
       # The `b` document length normalization parameter for BM25. Defaults to `0.75`.
       sig { returns(T.nilable(Float)) }
       attr_reader :b
@@ -76,6 +84,7 @@ module Turbopuffer
       # Configuration options for full-text search.
       sig do
         params(
+          ascii_folding: T::Boolean,
           b: Float,
           case_sensitive: T::Boolean,
           k1: Float,
@@ -87,6 +96,9 @@ module Turbopuffer
         ).returns(T.attached_class)
       end
       def self.new(
+        # Whether to convert each non-ASCII character in a token to its ASCII equivalent,
+        # if one exists (e.g., à -> a). Defaults to `false` (i.e., no folding).
+        ascii_folding: nil,
         # The `b` document length normalization parameter for BM25. Defaults to `0.75`.
         b: nil,
         # Whether searching is case-sensitive. Defaults to `false` (i.e.
@@ -115,6 +127,7 @@ module Turbopuffer
       sig do
         override.returns(
           {
+            ascii_folding: T::Boolean,
             b: Float,
             case_sensitive: T::Boolean,
             k1: Float,
