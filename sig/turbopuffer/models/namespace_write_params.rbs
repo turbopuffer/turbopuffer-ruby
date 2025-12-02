@@ -163,19 +163,34 @@ module Turbopuffer
         extend Turbopuffer::Internal::Type::Union
 
         type copy_from_namespace_config =
-          { source_api_key: String, source_namespace: String }
+          {
+            source_namespace: String,
+            source_api_key: String,
+            source_region: String
+          }
 
         class CopyFromNamespaceConfig < Turbopuffer::Internal::Type::BaseModel
-          attr_accessor source_api_key: String
-
           attr_accessor source_namespace: String
 
+          attr_reader source_api_key: String?
+
+          def source_api_key=: (String) -> String
+
+          attr_reader source_region: String?
+
+          def source_region=: (String) -> String
+
           def initialize: (
-            source_api_key: String,
-            source_namespace: String
+            source_namespace: String,
+            ?source_api_key: String,
+            ?source_region: String
           ) -> void
 
-          def to_hash: -> { source_api_key: String, source_namespace: String }
+          def to_hash: -> {
+            source_namespace: String,
+            source_api_key: String,
+            source_region: String
+          }
         end
 
         def self?.variants: -> ::Array[Turbopuffer::Models::NamespaceWriteParams::copy_from_namespace]
