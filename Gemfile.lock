@@ -11,7 +11,7 @@ GIT
 PATH
   remote: .
   specs:
-    turbopuffer (1.8.0)
+    turbopuffer (1.9.0)
       connection_pool
 
 GEM

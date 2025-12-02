@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.9.0 (2025-12-02)
+
+Full Changelog: [v1.8.0...v1.9.0](https://github.com/turbopuffer/turbopuffer-ruby/compare/v1.8.0...v1.9.0)
+
+### Features
+
+* sdks: add &lt;patch|delete&gt;_by_filter_allow_partial options ([cd557aa](https://github.com/turbopuffer/turbopuffer-ruby/commit/cd557aaa7482c6d23a744d582e4f377616c2078f))
+
 ## 1.8.0 (2025-11-25)
 
 Full Changelog: [v1.7.0...v1.8.0](https://github.com/turbopuffer/turbopuffer-ruby/compare/v1.7.0...v1.8.0)
