@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.9.1 (2025-12-02)
+
+Full Changelog: [v1.9.0...v1.9.1](https://github.com/turbopuffer/turbopuffer-ruby/compare/v1.9.0...v1.9.1)
+
+### Documentation
+
+* add cross-region copy_from_namespace to write API docs ([bf6a887](https://github.com/turbopuffer/turbopuffer-ruby/commit/bf6a8873718ce040cf6677bca238069fff8a4950))
+
 ## 1.9.0 (2025-12-02)
 
 Full Changelog: [v1.8.0...v1.9.0](https://github.com/turbopuffer/turbopuffer-ruby/compare/v1.8.0...v1.9.0)
