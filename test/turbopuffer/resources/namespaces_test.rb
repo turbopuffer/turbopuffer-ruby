@@ -168,6 +168,7 @@ class Turbopuffer::Test::Resources::NamespacesTest < Turbopuffer::Test::Resource
         status: Symbol,
         rows_deleted: Integer | nil,
         rows_patched: Integer | nil,
+        rows_remaining: Turbopuffer::Internal::Type::Boolean | nil,
         rows_upserted: Integer | nil
       }
     end

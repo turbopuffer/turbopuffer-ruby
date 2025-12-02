@@ -5,12 +5,14 @@ module Turbopuffer
         namespace: String,
         copy_from_namespace: Turbopuffer::Models::NamespaceWriteParams::copy_from_namespace,
         delete_by_filter: top,
+        delete_by_filter_allow_partial: bool,
         delete_condition: top,
         deletes: ::Array[Turbopuffer::Models::id],
         disable_backpressure: bool,
         distance_metric: Turbopuffer::Models::distance_metric,
         encryption: Turbopuffer::NamespaceWriteParams::Encryption,
         patch_by_filter: Turbopuffer::NamespaceWriteParams::PatchByFilter,
+        patch_by_filter_allow_partial: bool,
         patch_columns: Turbopuffer::Columns,
         patch_condition: top,
         patch_rows: ::Array[Turbopuffer::Row],
@@ -38,6 +40,10 @@ module Turbopuffer
       attr_reader delete_by_filter: top?
 
       def delete_by_filter=: (top) -> top
+
+      attr_reader delete_by_filter_allow_partial: bool?
+
+      def delete_by_filter_allow_partial=: (bool) -> bool
 
       attr_reader delete_condition: top?
 
@@ -70,6 +76,10 @@ module Turbopuffer
       def patch_by_filter=: (
         Turbopuffer::NamespaceWriteParams::PatchByFilter
       ) -> Turbopuffer::NamespaceWriteParams::PatchByFilter
+
+      attr_reader patch_by_filter_allow_partial: bool?
+
+      def patch_by_filter_allow_partial=: (bool) -> bool
 
       attr_reader patch_columns: Turbopuffer::Columns?
 
@@ -105,12 +115,14 @@ module Turbopuffer
         ?namespace: String,
         ?copy_from_namespace: Turbopuffer::Models::NamespaceWriteParams::copy_from_namespace,
         ?delete_by_filter: top,
+        ?delete_by_filter_allow_partial: bool,
         ?delete_condition: top,
         ?deletes: ::Array[Turbopuffer::Models::id],
         ?disable_backpressure: bool,
         ?distance_metric: Turbopuffer::Models::distance_metric,
         ?encryption: Turbopuffer::NamespaceWriteParams::Encryption,
         ?patch_by_filter: Turbopuffer::NamespaceWriteParams::PatchByFilter,
+        ?patch_by_filter_allow_partial: bool,
         ?patch_columns: Turbopuffer::Columns,
         ?patch_condition: top,
         ?patch_rows: ::Array[Turbopuffer::Row],
@@ -125,12 +137,14 @@ module Turbopuffer
         namespace: String,
         copy_from_namespace: Turbopuffer::Models::NamespaceWriteParams::copy_from_namespace,
         delete_by_filter: top,
+        delete_by_filter_allow_partial: bool,
         delete_condition: top,
         deletes: ::Array[Turbopuffer::Models::id],
         disable_backpressure: bool,
         distance_metric: Turbopuffer::Models::distance_metric,
         encryption: Turbopuffer::NamespaceWriteParams::Encryption,
         patch_by_filter: Turbopuffer::NamespaceWriteParams::PatchByFilter,
+        patch_by_filter_allow_partial: bool,
         patch_columns: Turbopuffer::Columns,
         patch_condition: top,
         patch_rows: ::Array[Turbopuffer::Row],

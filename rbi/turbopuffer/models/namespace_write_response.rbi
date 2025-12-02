@@ -44,6 +44,13 @@ module Turbopuffer
       sig { params(rows_patched: Integer).void }
       attr_writer :rows_patched
 
+      # Whether more documents match the filter for partial operations.
+      sig { returns(T.nilable(T::Boolean)) }
+      attr_reader :rows_remaining
+
+      sig { params(rows_remaining: T::Boolean).void }
+      attr_writer :rows_remaining
+
       # The number of rows upserted by the write request.
       sig { returns(T.nilable(Integer)) }
       attr_reader :rows_upserted
@@ -59,6 +66,7 @@ module Turbopuffer
           rows_affected: Integer,
           rows_deleted: Integer,
           rows_patched: Integer,
+          rows_remaining: T::Boolean,
           rows_upserted: Integer,
           status: Symbol
         ).returns(T.attached_class)
@@ -74,6 +82,8 @@ module Turbopuffer
         rows_deleted: nil,
         # The number of rows patched by the write request.
         rows_patched: nil,
+        # Whether more documents match the filter for partial operations.
+        rows_remaining: nil,
         # The number of rows upserted by the write request.
         rows_upserted: nil,
         # The status of the request.
@@ -90,6 +100,7 @@ module Turbopuffer
             status: Symbol,
             rows_deleted: Integer,
             rows_patched: Integer,
+            rows_remaining: T::Boolean,
             rows_upserted: Integer
           }
         )
