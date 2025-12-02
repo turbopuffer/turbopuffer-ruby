@@ -51,6 +51,13 @@ module Turbopuffer
       sig { params(delete_by_filter: T.anything).void }
       attr_writer :delete_by_filter
 
+      # Allow partial completion when filter matches too many documents.
+      sig { returns(T.nilable(T::Boolean)) }
+      attr_reader :delete_by_filter_allow_partial
+
+      sig { params(delete_by_filter_allow_partial: T::Boolean).void }
+      attr_writer :delete_by_filter_allow_partial
+
       # A condition evaluated against the current value of each document targeted by a
       # delete write. Only documents that pass the condition are deleted.
       sig { returns(T.nilable(T.anything)) }
@@ -105,6 +112,13 @@ module Turbopuffer
         ).void
       end
       attr_writer :patch_by_filter
+
+      # Allow partial completion when filter matches too many documents.
+      sig { returns(T.nilable(T::Boolean)) }
+      attr_reader :patch_by_filter_allow_partial
+
+      sig { params(patch_by_filter_allow_partial: T::Boolean).void }
+      attr_writer :patch_by_filter_allow_partial
 
       # A list of documents in columnar format. Each key is a column name, mapped to an
       # array of values for that column.
@@ -180,6 +194,7 @@ module Turbopuffer
               Turbopuffer::NamespaceWriteParams::CopyFromNamespace::CopyFromNamespaceConfig::OrHash
             ),
           delete_by_filter: T.anything,
+          delete_by_filter_allow_partial: T::Boolean,
           delete_condition: T.anything,
           deletes: T::Array[Turbopuffer::ID::Variants],
           disable_backpressure: T::Boolean,
@@ -187,6 +202,7 @@ module Turbopuffer
           encryption: Turbopuffer::NamespaceWriteParams::Encryption::OrHash,
           patch_by_filter:
             Turbopuffer::NamespaceWriteParams::PatchByFilter::OrHash,
+          patch_by_filter_allow_partial: T::Boolean,
           patch_columns: Turbopuffer::Columns::OrHash,
           patch_condition: T.anything,
           patch_rows: T::Array[Turbopuffer::Row::OrHash],
@@ -207,6 +223,8 @@ module Turbopuffer
         copy_from_namespace: nil,
         # The filter specifying which documents to delete.
         delete_by_filter: nil,
+        # Allow partial completion when filter matches too many documents.
+        delete_by_filter_allow_partial: nil,
         # A condition evaluated against the current value of each document targeted by a
         # delete write. Only documents that pass the condition are deleted.
         delete_condition: nil,
@@ -219,6 +237,8 @@ module Turbopuffer
         encryption: nil,
         # The patch and filter specifying which documents to patch.
         patch_by_filter: nil,
+        # Allow partial completion when filter matches too many documents.
+        patch_by_filter_allow_partial: nil,
         # A list of documents in columnar format. Each key is a column name, mapped to an
         # array of values for that column.
         patch_columns: nil,
@@ -249,12 +269,14 @@ module Turbopuffer
                 Turbopuffer::NamespaceWriteParams::CopyFromNamespace::CopyFromNamespaceConfig
               ),
             delete_by_filter: T.anything,
+            delete_by_filter_allow_partial: T::Boolean,
             delete_condition: T.anything,
             deletes: T::Array[Turbopuffer::ID::Variants],
             disable_backpressure: T::Boolean,
             distance_metric: Turbopuffer::DistanceMetric::OrSymbol,
             encryption: Turbopuffer::NamespaceWriteParams::Encryption,
             patch_by_filter: Turbopuffer::NamespaceWriteParams::PatchByFilter,
+            patch_by_filter_allow_partial: T::Boolean,
             patch_columns: Turbopuffer::Columns,
             patch_condition: T.anything,
             patch_rows: T::Array[Turbopuffer::Row],

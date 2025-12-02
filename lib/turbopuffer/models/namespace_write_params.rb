@@ -24,6 +24,12 @@ module Turbopuffer
       #   @return [Object, nil]
       optional :delete_by_filter, Turbopuffer::Internal::Type::Unknown
 
+      # @!attribute delete_by_filter_allow_partial
+      #   Allow partial completion when filter matches too many documents.
+      #
+      #   @return [Boolean, nil]
+      optional :delete_by_filter_allow_partial, Turbopuffer::Internal::Type::Boolean
+
       # @!attribute delete_condition
       #   A condition evaluated against the current value of each document targeted by a
       #   delete write. Only documents that pass the condition are deleted.
@@ -59,6 +65,12 @@ module Turbopuffer
       #
       #   @return [Turbopuffer::Models::NamespaceWriteParams::PatchByFilter, nil]
       optional :patch_by_filter, -> { Turbopuffer::NamespaceWriteParams::PatchByFilter }
+
+      # @!attribute patch_by_filter_allow_partial
+      #   Allow partial completion when filter matches too many documents.
+      #
+      #   @return [Boolean, nil]
+      optional :patch_by_filter_allow_partial, Turbopuffer::Internal::Type::Boolean
 
       # @!attribute patch_columns
       #   A list of documents in columnar format. Each key is a column name, mapped to an
@@ -104,7 +116,7 @@ module Turbopuffer
       #   @return [Array<Turbopuffer::Models::Row>, nil]
       optional :upsert_rows, -> { Turbopuffer::Internal::Type::ArrayOf[Turbopuffer::Row] }
 
-      # @!method initialize(namespace: nil, copy_from_namespace: nil, delete_by_filter: nil, delete_condition: nil, deletes: nil, disable_backpressure: nil, distance_metric: nil, encryption: nil, patch_by_filter: nil, patch_columns: nil, patch_condition: nil, patch_rows: nil, schema: nil, upsert_columns: nil, upsert_condition: nil, upsert_rows: nil, request_options: {})
+      # @!method initialize(namespace: nil, copy_from_namespace: nil, delete_by_filter: nil, delete_by_filter_allow_partial: nil, delete_condition: nil, deletes: nil, disable_backpressure: nil, distance_metric: nil, encryption: nil, patch_by_filter: nil, patch_by_filter_allow_partial: nil, patch_columns: nil, patch_condition: nil, patch_rows: nil, schema: nil, upsert_columns: nil, upsert_condition: nil, upsert_rows: nil, request_options: {})
       #   Some parameter documentations has been truncated, see
       #   {Turbopuffer::Models::NamespaceWriteParams} for more details.
       #
@@ -113,6 +125,8 @@ module Turbopuffer
       #   @param copy_from_namespace [String, Turbopuffer::Models::NamespaceWriteParams::CopyFromNamespace::CopyFromNamespaceConfig] The namespace to copy documents from.
       #
       #   @param delete_by_filter [Object] The filter specifying which documents to delete.
+      #
+      #   @param delete_by_filter_allow_partial [Boolean] Allow partial completion when filter matches too many documents.
       #
       #   @param delete_condition [Object] A condition evaluated against the current value of each document targeted by a d
       #
@@ -125,6 +139,8 @@ module Turbopuffer
       #   @param encryption [Turbopuffer::Models::NamespaceWriteParams::Encryption] The encryption configuration for a namespace.
       #
       #   @param patch_by_filter [Turbopuffer::Models::NamespaceWriteParams::PatchByFilter] The patch and filter specifying which documents to patch.
+      #
+      #   @param patch_by_filter_allow_partial [Boolean] Allow partial completion when filter matches too many documents.
       #
       #   @param patch_columns [Turbopuffer::Models::Columns] A list of documents in columnar format. Each key is a column name, mapped to an
       #
