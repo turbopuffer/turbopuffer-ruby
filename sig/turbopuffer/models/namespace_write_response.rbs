@@ -8,6 +8,7 @@ module Turbopuffer
         status: :OK,
         rows_deleted: Integer,
         rows_patched: Integer,
+        rows_remaining: bool,
         rows_upserted: Integer
       }
 
@@ -28,6 +29,10 @@ module Turbopuffer
 
       def rows_patched=: (Integer) -> Integer
 
+      attr_reader rows_remaining: bool?
+
+      def rows_remaining=: (bool) -> bool
+
       attr_reader rows_upserted: Integer?
 
       def rows_upserted=: (Integer) -> Integer
@@ -38,6 +43,7 @@ module Turbopuffer
         rows_affected: Integer,
         ?rows_deleted: Integer,
         ?rows_patched: Integer,
+        ?rows_remaining: bool,
         ?rows_upserted: Integer,
         ?status: :OK
       ) -> void
@@ -49,6 +55,7 @@ module Turbopuffer
         status: :OK,
         rows_deleted: Integer,
         rows_patched: Integer,
+        rows_remaining: bool,
         rows_upserted: Integer
       }
     end
