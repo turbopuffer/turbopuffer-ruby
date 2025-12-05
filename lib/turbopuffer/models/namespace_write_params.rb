@@ -175,13 +175,13 @@ module Turbopuffer
           required :source_namespace, String
 
           # @!attribute source_api_key
-          #   (Optional) An API key for the organization containing the source namespace
+          #   An API key for the organization containing the source namespace
           #
           #   @return [String, nil]
           optional :source_api_key, String
 
           # @!attribute source_region
-          #   (Optional) The region of the source namespace.
+          #   The region of the source namespace.
           #
           #   @return [String, nil]
           optional :source_region, String
@@ -189,9 +189,9 @@ module Turbopuffer
           # @!method initialize(source_namespace:, source_api_key: nil, source_region: nil)
           #   @param source_namespace [String] The namespace to copy documents from.
           #
-          #   @param source_api_key [String] (Optional) An API key for the organization containing the source namespace
+          #   @param source_api_key [String] An API key for the organization containing the source namespace
           #
-          #   @param source_region [String] (Optional) The region of the source namespace.
+          #   @param source_region [String] The region of the source namespace.
         end
 
         # @!method self.variants

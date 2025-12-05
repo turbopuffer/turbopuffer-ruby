@@ -320,14 +320,14 @@ module Turbopuffer
           sig { returns(String) }
           attr_accessor :source_namespace
 
-          # (Optional) An API key for the organization containing the source namespace
+          # An API key for the organization containing the source namespace
           sig { returns(T.nilable(String)) }
           attr_reader :source_api_key
 
           sig { params(source_api_key: String).void }
           attr_writer :source_api_key
 
-          # (Optional) The region of the source namespace.
+          # The region of the source namespace.
           sig { returns(T.nilable(String)) }
           attr_reader :source_region
 
@@ -344,9 +344,9 @@ module Turbopuffer
           def self.new(
             # The namespace to copy documents from.
             source_namespace:,
-            # (Optional) An API key for the organization containing the source namespace
+            # An API key for the organization containing the source namespace
             source_api_key: nil,
-            # (Optional) The region of the source namespace.
+            # The region of the source namespace.
             source_region: nil
           )
           end
