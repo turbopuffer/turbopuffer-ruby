@@ -74,7 +74,7 @@ module Turbopuffer
       attr_writer :stemming
 
       # The tokenizer to use for full-text search on an attribute. Defaults to
-      # `word_v2`.
+      # `word_v3`.
       sig { returns(T.nilable(Turbopuffer::Tokenizer::OrSymbol)) }
       attr_reader :tokenizer
 
@@ -119,7 +119,7 @@ module Turbopuffer
         # stem).
         stemming: nil,
         # The tokenizer to use for full-text search on an attribute. Defaults to
-        # `word_v2`.
+        # `word_v3`.
         tokenizer: nil
       )
       end
