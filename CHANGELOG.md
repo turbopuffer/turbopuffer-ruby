@@ -1,5 +1,24 @@
 # Changelog
 
+## 1.10.0 (2025-12-18)
+
+Full Changelog: [v1.9.1...v1.10.0](https://github.com/turbopuffer/turbopuffer-ruby/compare/v1.9.1...v1.10.0)
+
+### Features
+
+* add word_v3 to the spec ([b484b4b](https://github.com/turbopuffer/turbopuffer-ruby/commit/b484b4b23f7ada10116c46ccbc3ed5476077eea4))
+
+
+### Bug Fixes
+
+* calling `break` out of streams should be instantaneous ([42f9fe1](https://github.com/turbopuffer/turbopuffer-ruby/commit/42f9fe1d5160bf02e7299db28cf3d45630dfabe0))
+* issue where json.parse errors when receiving HTTP 204 with nobody ([fcbd409](https://github.com/turbopuffer/turbopuffer-ruby/commit/fcbd409ff069545dffc700c4c05ace36d6c39fe9))
+
+
+### Chores
+
+* codegen updates ([fef9366](https://github.com/turbopuffer/turbopuffer-ruby/commit/fef9366834e72a7b966aa0695718240026b44ebf))
+
 ## 1.9.1 (2025-12-02)
 
 Full Changelog: [v1.9.0...v1.9.1](https://github.com/turbopuffer/turbopuffer-ruby/compare/v1.9.0...v1.9.1)
