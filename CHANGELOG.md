@@ -1,5 +1,14 @@
 # Changelog
 
+## 1.10.1 (2026-01-09)
+
+Full Changelog: [v1.10.0...v1.10.1](https://github.com/turbopuffer/turbopuffer-ruby/compare/v1.10.0...v1.10.1)
+
+### Chores
+
+* **internal:** codegen related update ([9e7e7d2](https://github.com/turbopuffer/turbopuffer-ruby/commit/9e7e7d266eacb75f33f4de588cfc0506be914e6b))
+* move `cgi` into dependencies for ruby 4 ([1aeb65f](https://github.com/turbopuffer/turbopuffer-ruby/commit/1aeb65f39a5ea6ee889d01c3b3cf98546739fd27))
+
 ## 1.10.0 (2025-12-18)
 
 Full Changelog: [v1.9.1...v1.10.0](https://github.com/turbopuffer/turbopuffer-ruby/compare/v1.9.1...v1.10.0)
