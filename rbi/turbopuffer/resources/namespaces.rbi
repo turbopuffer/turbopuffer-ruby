@@ -106,7 +106,7 @@ module Turbopuffer
         ).returns(Turbopuffer::Models::NamespaceMultiQueryResponse)
       end
       def multi_query(
-        # Body param:
+        # Body param
         queries:,
         # Path param: The name of the namespace.
         namespace: nil,
@@ -277,7 +277,7 @@ module Turbopuffer
         # Body param: A condition evaluated against the current value of each document
         # targeted by a delete write. Only documents that pass the condition are deleted.
         delete_condition: nil,
-        # Body param:
+        # Body param
         deletes: nil,
         # Body param: Disables write throttling (HTTP 429 responses) during high-volume
         # ingestion.
@@ -296,7 +296,7 @@ module Turbopuffer
         # Body param: A condition evaluated against the current value of each document
         # targeted by a patch write. Only documents that pass the condition are patched.
         patch_condition: nil,
-        # Body param:
+        # Body param
         patch_rows: nil,
         # Body param: The schema of the attributes attached to the documents.
         schema: nil,
@@ -307,7 +307,7 @@ module Turbopuffer
         # targeted by an upsert write. Only documents that pass the condition are
         # upserted.
         upsert_condition: nil,
-        # Body param:
+        # Body param
         upsert_rows: nil,
         request_options: {}
       )

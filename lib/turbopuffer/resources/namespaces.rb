@@ -131,7 +131,7 @@ module Turbopuffer
       #
       # @overload multi_query(queries:, namespace: nil, consistency: nil, vector_encoding: nil, request_options: {})
       #
-      # @param queries [Array<Turbopuffer::Models::Query>] Body param:
+      # @param queries [Array<Turbopuffer::Models::Query>] Body param
       #
       # @param namespace [String] Path param: The name of the namespace.
       #
@@ -317,7 +317,7 @@ module Turbopuffer
       #
       # @param delete_condition [Object] Body param: A condition evaluated against the current value of each document tar
       #
-      # @param deletes [Array<String, Integer>] Body param:
+      # @param deletes [Array<String, Integer>] Body param
       #
       # @param disable_backpressure [Boolean] Body param: Disables write throttling (HTTP 429 responses) during high-volume in
       #
@@ -333,7 +333,7 @@ module Turbopuffer
       #
       # @param patch_condition [Object] Body param: A condition evaluated against the current value of each document tar
       #
-      # @param patch_rows [Array<Turbopuffer::Models::Row>] Body param:
+      # @param patch_rows [Array<Turbopuffer::Models::Row>] Body param
       #
       # @param schema [Hash{Symbol=>String, Turbopuffer::Models::AttributeSchemaConfig}] Body param: The schema of the attributes attached to the documents.
       #
@@ -341,7 +341,7 @@ module Turbopuffer
       #
       # @param upsert_condition [Object] Body param: A condition evaluated against the current value of each document tar
       #
-      # @param upsert_rows [Array<Turbopuffer::Models::Row>] Body param:
+      # @param upsert_rows [Array<Turbopuffer::Models::Row>] Body param
       #
       # @param request_options [Turbopuffer::RequestOptions, Hash{Symbol=>Object}, nil]
       #
