@@ -169,6 +169,19 @@ On timeout, `Turbopuffer::Errors::APITimeoutError` is raised.
 
 Note that requests that time out are retried by default.
 
+### Compression
+
+By default, the client does not request compressed responses. To enable compression:
+
+```ruby
+turbopuffer = Turbopuffer::Client.new(
+  compression: true
+)
+
+# Or, configure per-request:
+turbopuffer.namespaces(prefix: "foo", request_options: {compression: true})
+```
+
 ## Advanced concepts
 
 ### BaseModel

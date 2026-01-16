@@ -49,6 +49,10 @@ module Turbopuffer
     sig { returns(T.nilable(Float)) }
     attr_accessor :timeout
 
+    # Whether to request compressed responses.
+    sig { returns(T.nilable(T::Boolean)) }
+    attr_accessor :compression
+
     # Returns a new instance of RequestOptions.
     sig do
       params(values: Turbopuffer::Internal::AnyHash).returns(T.attached_class)
