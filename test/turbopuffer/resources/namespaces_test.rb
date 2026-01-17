@@ -166,10 +166,13 @@ class Turbopuffer::Test::Resources::NamespacesTest < Turbopuffer::Test::Resource
         message: String,
         rows_affected: Integer,
         status: Symbol,
+        deleted_ids: ^(Turbopuffer::Internal::Type::ArrayOf[union: Turbopuffer::ID]) | nil,
+        patched_ids: ^(Turbopuffer::Internal::Type::ArrayOf[union: Turbopuffer::ID]) | nil,
         rows_deleted: Integer | nil,
         rows_patched: Integer | nil,
         rows_remaining: Turbopuffer::Internal::Type::Boolean | nil,
-        rows_upserted: Integer | nil
+        rows_upserted: Integer | nil,
+        upserted_ids: ^(Turbopuffer::Internal::Type::ArrayOf[union: Turbopuffer::ID]) | nil
       }
     end
   end

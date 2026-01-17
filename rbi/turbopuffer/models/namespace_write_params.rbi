@@ -142,6 +142,15 @@ module Turbopuffer
       sig { params(patch_rows: T::Array[Turbopuffer::Row::OrHash]).void }
       attr_writer :patch_rows
 
+      # If true, return the IDs of affected rows (deleted, patched, upserted) in the
+      # response. For filtered and conditional writes, only IDs for writes that
+      # succeeded will be included.
+      sig { returns(T.nilable(T::Boolean)) }
+      attr_reader :return_affected_ids
+
+      sig { params(return_affected_ids: T::Boolean).void }
+      attr_writer :return_affected_ids
+
       # The schema of the attributes attached to the documents.
       sig do
         returns(
@@ -206,6 +215,7 @@ module Turbopuffer
           patch_columns: Turbopuffer::Columns::OrHash,
           patch_condition: T.anything,
           patch_rows: T::Array[Turbopuffer::Row::OrHash],
+          return_affected_ids: T::Boolean,
           schema:
             T::Hash[
               Symbol,
@@ -246,6 +256,10 @@ module Turbopuffer
         # patch write. Only documents that pass the condition are patched.
         patch_condition: nil,
         patch_rows: nil,
+        # If true, return the IDs of affected rows (deleted, patched, upserted) in the
+        # response. For filtered and conditional writes, only IDs for writes that
+        # succeeded will be included.
+        return_affected_ids: nil,
         # The schema of the attributes attached to the documents.
         schema: nil,
         # A list of documents in columnar format. Each key is a column name, mapped to an
@@ -280,6 +294,7 @@ module Turbopuffer
             patch_columns: Turbopuffer::Columns,
             patch_condition: T.anything,
             patch_rows: T::Array[Turbopuffer::Row],
+            return_affected_ids: T::Boolean,
             schema:
               T::Hash[
                 Symbol,

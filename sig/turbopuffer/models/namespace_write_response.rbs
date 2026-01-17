@@ -6,10 +6,13 @@ module Turbopuffer
         message: String,
         rows_affected: Integer,
         status: :OK,
+        deleted_ids: ::Array[Turbopuffer::Models::id],
+        patched_ids: ::Array[Turbopuffer::Models::id],
         rows_deleted: Integer,
         rows_patched: Integer,
         rows_remaining: bool,
-        rows_upserted: Integer
+        rows_upserted: Integer,
+        upserted_ids: ::Array[Turbopuffer::Models::id]
       }
 
     class NamespaceWriteResponse < Turbopuffer::Internal::Type::BaseModel
@@ -20,6 +23,18 @@ module Turbopuffer
       attr_accessor rows_affected: Integer
 
       attr_accessor status: :OK
+
+      attr_reader deleted_ids: ::Array[Turbopuffer::Models::id]?
+
+      def deleted_ids=: (
+        ::Array[Turbopuffer::Models::id]
+      ) -> ::Array[Turbopuffer::Models::id]
+
+      attr_reader patched_ids: ::Array[Turbopuffer::Models::id]?
+
+      def patched_ids=: (
+        ::Array[Turbopuffer::Models::id]
+      ) -> ::Array[Turbopuffer::Models::id]
 
       attr_reader rows_deleted: Integer?
 
@@ -37,14 +52,23 @@ module Turbopuffer
 
       def rows_upserted=: (Integer) -> Integer
 
+      attr_reader upserted_ids: ::Array[Turbopuffer::Models::id]?
+
+      def upserted_ids=: (
+        ::Array[Turbopuffer::Models::id]
+      ) -> ::Array[Turbopuffer::Models::id]
+
       def initialize: (
         billing: Turbopuffer::WriteBilling,
         message: String,
         rows_affected: Integer,
+        ?deleted_ids: ::Array[Turbopuffer::Models::id],
+        ?patched_ids: ::Array[Turbopuffer::Models::id],
         ?rows_deleted: Integer,
         ?rows_patched: Integer,
         ?rows_remaining: bool,
         ?rows_upserted: Integer,
+        ?upserted_ids: ::Array[Turbopuffer::Models::id],
         ?status: :OK
       ) -> void
 
@@ -53,10 +77,13 @@ module Turbopuffer
         message: String,
         rows_affected: Integer,
         status: :OK,
+        deleted_ids: ::Array[Turbopuffer::Models::id],
+        patched_ids: ::Array[Turbopuffer::Models::id],
         rows_deleted: Integer,
         rows_patched: Integer,
         rows_remaining: bool,
-        rows_upserted: Integer
+        rows_upserted: Integer,
+        upserted_ids: ::Array[Turbopuffer::Models::id]
       }
     end
   end
