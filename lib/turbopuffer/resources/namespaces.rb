@@ -305,7 +305,7 @@ module Turbopuffer
       #
       # Create, update, or delete documents.
       #
-      # @overload write(namespace: nil, copy_from_namespace: nil, delete_by_filter: nil, delete_by_filter_allow_partial: nil, delete_condition: nil, deletes: nil, disable_backpressure: nil, distance_metric: nil, encryption: nil, patch_by_filter: nil, patch_by_filter_allow_partial: nil, patch_columns: nil, patch_condition: nil, patch_rows: nil, schema: nil, upsert_columns: nil, upsert_condition: nil, upsert_rows: nil, request_options: {})
+      # @overload write(namespace: nil, copy_from_namespace: nil, delete_by_filter: nil, delete_by_filter_allow_partial: nil, delete_condition: nil, deletes: nil, disable_backpressure: nil, distance_metric: nil, encryption: nil, patch_by_filter: nil, patch_by_filter_allow_partial: nil, patch_columns: nil, patch_condition: nil, patch_rows: nil, return_affected_ids: nil, schema: nil, upsert_columns: nil, upsert_condition: nil, upsert_rows: nil, request_options: {})
       #
       # @param namespace [String] Path param: The name of the namespace.
       #
@@ -334,6 +334,8 @@ module Turbopuffer
       # @param patch_condition [Object] Body param: A condition evaluated against the current value of each document tar
       #
       # @param patch_rows [Array<Turbopuffer::Models::Row>] Body param
+      #
+      # @param return_affected_ids [Boolean] Body param: If true, return the IDs of affected rows (deleted, patched, upserted
       #
       # @param schema [Hash{Symbol=>String, Turbopuffer::Models::AttributeSchemaConfig}] Body param: The schema of the attributes attached to the documents.
       #

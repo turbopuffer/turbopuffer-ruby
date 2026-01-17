@@ -90,6 +90,7 @@ module Turbopuffer
         ?patch_columns: Turbopuffer::Columns,
         ?patch_condition: top,
         ?patch_rows: ::Array[Turbopuffer::Row],
+        ?return_affected_ids: bool,
         ?schema: ::Hash[Symbol, Turbopuffer::Models::attribute_schema],
         ?upsert_columns: Turbopuffer::Columns,
         ?upsert_condition: top,
