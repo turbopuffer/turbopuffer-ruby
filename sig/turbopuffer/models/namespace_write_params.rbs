@@ -16,6 +16,7 @@ module Turbopuffer
         patch_columns: Turbopuffer::Columns,
         patch_condition: top,
         patch_rows: ::Array[Turbopuffer::Row],
+        return_affected_ids: bool,
         schema: ::Hash[Symbol, Turbopuffer::Models::attribute_schema],
         upsert_columns: Turbopuffer::Columns,
         upsert_condition: top,
@@ -93,6 +94,10 @@ module Turbopuffer
 
       def patch_rows=: (::Array[Turbopuffer::Row]) -> ::Array[Turbopuffer::Row]
 
+      attr_reader return_affected_ids: bool?
+
+      def return_affected_ids=: (bool) -> bool
+
       attr_reader schema: ::Hash[Symbol, Turbopuffer::Models::attribute_schema]?
 
       def schema=: (
@@ -126,6 +131,7 @@ module Turbopuffer
         ?patch_columns: Turbopuffer::Columns,
         ?patch_condition: top,
         ?patch_rows: ::Array[Turbopuffer::Row],
+        ?return_affected_ids: bool,
         ?schema: ::Hash[Symbol, Turbopuffer::Models::attribute_schema],
         ?upsert_columns: Turbopuffer::Columns,
         ?upsert_condition: top,
@@ -148,6 +154,7 @@ module Turbopuffer
         patch_columns: Turbopuffer::Columns,
         patch_condition: top,
         patch_rows: ::Array[Turbopuffer::Row],
+        return_affected_ids: bool,
         schema: ::Hash[Symbol, Turbopuffer::Models::attribute_schema],
         upsert_columns: Turbopuffer::Columns,
         upsert_condition: top,

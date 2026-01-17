@@ -254,6 +254,7 @@ module Turbopuffer
           patch_columns: Turbopuffer::Columns::OrHash,
           patch_condition: T.anything,
           patch_rows: T::Array[Turbopuffer::Row::OrHash],
+          return_affected_ids: T::Boolean,
           schema:
             T::Hash[
               Symbol,
@@ -298,6 +299,10 @@ module Turbopuffer
         patch_condition: nil,
         # Body param
         patch_rows: nil,
+        # Body param: If true, return the IDs of affected rows (deleted, patched,
+        # upserted) in the response. For filtered and conditional writes, only IDs for
+        # writes that succeeded will be included.
+        return_affected_ids: nil,
         # Body param: The schema of the attributes attached to the documents.
         schema: nil,
         # Body param: A list of documents in columnar format. Each key is a column name,

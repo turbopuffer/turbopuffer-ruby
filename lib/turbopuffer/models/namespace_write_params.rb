@@ -91,6 +91,14 @@ module Turbopuffer
       #   @return [Array<Turbopuffer::Models::Row>, nil]
       optional :patch_rows, -> { Turbopuffer::Internal::Type::ArrayOf[Turbopuffer::Row] }
 
+      # @!attribute return_affected_ids
+      #   If true, return the IDs of affected rows (deleted, patched, upserted) in the
+      #   response. For filtered and conditional writes, only IDs for writes that
+      #   succeeded will be included.
+      #
+      #   @return [Boolean, nil]
+      optional :return_affected_ids, Turbopuffer::Internal::Type::Boolean
+
       # @!attribute schema
       #   The schema of the attributes attached to the documents.
       #
@@ -116,7 +124,7 @@ module Turbopuffer
       #   @return [Array<Turbopuffer::Models::Row>, nil]
       optional :upsert_rows, -> { Turbopuffer::Internal::Type::ArrayOf[Turbopuffer::Row] }
 
-      # @!method initialize(namespace: nil, copy_from_namespace: nil, delete_by_filter: nil, delete_by_filter_allow_partial: nil, delete_condition: nil, deletes: nil, disable_backpressure: nil, distance_metric: nil, encryption: nil, patch_by_filter: nil, patch_by_filter_allow_partial: nil, patch_columns: nil, patch_condition: nil, patch_rows: nil, schema: nil, upsert_columns: nil, upsert_condition: nil, upsert_rows: nil, request_options: {})
+      # @!method initialize(namespace: nil, copy_from_namespace: nil, delete_by_filter: nil, delete_by_filter_allow_partial: nil, delete_condition: nil, deletes: nil, disable_backpressure: nil, distance_metric: nil, encryption: nil, patch_by_filter: nil, patch_by_filter_allow_partial: nil, patch_columns: nil, patch_condition: nil, patch_rows: nil, return_affected_ids: nil, schema: nil, upsert_columns: nil, upsert_condition: nil, upsert_rows: nil, request_options: {})
       #   Some parameter documentations has been truncated, see
       #   {Turbopuffer::Models::NamespaceWriteParams} for more details.
       #
@@ -147,6 +155,8 @@ module Turbopuffer
       #   @param patch_condition [Object] A condition evaluated against the current value of each document targeted by a p
       #
       #   @param patch_rows [Array<Turbopuffer::Models::Row>]
+      #
+      #   @param return_affected_ids [Boolean] If true, return the IDs of affected rows (deleted, patched, upserted) in the res
       #
       #   @param schema [Hash{Symbol=>String, Turbopuffer::Models::AttributeSchemaConfig}] The schema of the attributes attached to the documents.
       #
