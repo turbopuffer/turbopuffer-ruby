@@ -1,5 +1,22 @@
 # Changelog
 
+## 1.11.0 (2026-01-22)
+
+Full Changelog: [v1.10.1...v1.11.0](https://github.com/turbopuffer/turbopuffer-ruby/compare/v1.10.1...v1.11.0)
+
+### Features
+
+* [TPUF-1097] tpuf: return failed IDs for conditional writes ([5b8d225](https://github.com/turbopuffer/turbopuffer-ruby/commit/5b8d2252d81caecd59c3d44458def2a107a263ed))
+* Apigen integration ([11ae24b](https://github.com/turbopuffer/turbopuffer-ruby/commit/11ae24be6ffab51d5676abca1e5082a962037ccd))
+* disable response compression by default ([#34](https://github.com/turbopuffer/turbopuffer-ruby/issues/34)) ([2ca1437](https://github.com/turbopuffer/turbopuffer-ruby/commit/2ca143712013e6eab35e9de8847ad7e644dbbf58))
+
+
+### Chores
+
+* configure new SDK language ([abc9dfe](https://github.com/turbopuffer/turbopuffer-ruby/commit/abc9dfe9d94f2d3d5cda214f1c9f4625a002cdb1))
+* fix typo in descriptions ([5ce373b](https://github.com/turbopuffer/turbopuffer-ruby/commit/5ce373b8c0de6f51917446464420cb51c021c067))
+* **internal:** update `actions/checkout` version ([09e5d5c](https://github.com/turbopuffer/turbopuffer-ruby/commit/09e5d5c35c7e9254227e3c4005849543c4f51b9e))
+
 ## 1.10.1 (2026-01-09)
 
 Full Changelog: [v1.10.0...v1.10.1](https://github.com/turbopuffer/turbopuffer-ruby/compare/v1.10.0...v1.10.1)
