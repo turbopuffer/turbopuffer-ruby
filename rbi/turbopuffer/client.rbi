@@ -65,6 +65,7 @@ module Turbopuffer
         region: T.nilable(String),
         default_namespace: T.nilable(String),
         base_url: T.nilable(String),
+        compression: T::Boolean,
         max_retries: Integer,
         timeout: Float,
         initial_retry_delay: Float,
@@ -80,6 +81,8 @@ module Turbopuffer
       # Override the default base URL for the API, e.g.,
       # `"https://api.example.com/v2/"`. Defaults to `ENV["TURBOPUFFER_BASE_URL"]`
       base_url: ENV["TURBOPUFFER_BASE_URL"],
+      # Whether to request compressed responses. Defaults to false.
+      compression: false,
       # Max number of retries to attempt after a failed retryable request.
       max_retries: Turbopuffer::Client::DEFAULT_MAX_RETRIES,
       timeout: Turbopuffer::Client::DEFAULT_TIMEOUT_IN_SECONDS,

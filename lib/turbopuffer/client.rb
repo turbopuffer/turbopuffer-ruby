@@ -82,6 +82,8 @@ module Turbopuffer
     # @param base_url [String, nil] Override the default base URL for the API, e.g.,
     # `"https://api.example.com/v2/"`. Defaults to `ENV["TURBOPUFFER_BASE_URL"]`
     #
+    # @param compression [Boolean] Whether to request compressed responses. Defaults to false.
+    #
     # @param max_retries [Integer] Max number of retries to attempt after a failed retryable request.
     #
     # @param timeout [Float]
@@ -94,6 +96,7 @@ module Turbopuffer
       region: ENV["TURBOPUFFER_REGION"],
       default_namespace: nil,
       base_url: ENV["TURBOPUFFER_BASE_URL"],
+      compression: false,
       max_retries: self.class::DEFAULT_MAX_RETRIES,
       timeout: self.class::DEFAULT_TIMEOUT_IN_SECONDS,
       initial_retry_delay: self.class::DEFAULT_INITIAL_RETRY_DELAY,
@@ -123,7 +126,8 @@ module Turbopuffer
         timeout: timeout,
         max_retries: max_retries,
         initial_retry_delay: initial_retry_delay,
-        max_retry_delay: max_retry_delay
+        max_retry_delay: max_retry_delay,
+        headers: compression ? {} : {"accept-encoding" => "identity"}
       )
     end
   end
