@@ -65,6 +65,12 @@ module Turbopuffer
     #   @return [Float, nil]
     optional :timeout, Float
 
+    # @!attribute compression
+    #   Whether to request compressed responses.
+    #
+    #   @return [Boolean, nil]
+    optional :compression, Turbopuffer::Internal::Type::Boolean
+
     # @!method initialize(values = {})
     #   Returns a new instance of RequestOptions.
     #

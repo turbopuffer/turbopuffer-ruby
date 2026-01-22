@@ -11,7 +11,8 @@ module Turbopuffer
       extra_headers: ::Hash[String, String?]?,
       extra_body: top?,
       max_retries: Integer?,
-      timeout: Float?
+      timeout: Float?,
+      compression: bool?
     }
 
   class RequestOptions < Turbopuffer::Internal::Type::BaseModel
@@ -28,6 +29,8 @@ module Turbopuffer
     attr_accessor max_retries: Integer?
 
     attr_accessor timeout: Float?
+
+    attr_accessor compression: bool?
 
     def initialize: (
       ?Turbopuffer::request_options | ::Hash[Symbol, top] values

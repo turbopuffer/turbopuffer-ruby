@@ -266,6 +266,8 @@ module Turbopuffer
         #
         #   @option opts [Float, nil] :timeout
         #
+        #   @option opts [Boolean, nil] :compression
+        #
         # @return [Hash{Symbol=>Object}]
         private def build_request(req, opts)
           method, uninterpolated_path = req.fetch_values(:method, :path)
@@ -274,9 +276,20 @@ module Turbopuffer
 
           query = Turbopuffer::Internal::Util.deep_merge(req[:query].to_h, opts[:extra_query].to_h)
 
+          compression_headers =
+            case opts[:compression]
+            when true
+              {"accept-encoding" => nil}
+            when false
+              {"accept-encoding" => "identity"}
+            else
+              {}
+            end
+
           headers = Turbopuffer::Internal::Util.normalized_headers(
             @headers,
             auth_headers,
+            compression_headers,
             req[:headers].to_h,
             opts[:extra_headers].to_h
           )
