@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.11.1 (2026-01-28)
+
+Full Changelog: [v1.11.0...v1.11.1](https://github.com/turbopuffer/turbopuffer-ruby/compare/v1.11.0...v1.11.1)
+
+### Bug Fixes
+
+* **docs:** fix mcp installation instructions for remote servers ([754db38](https://github.com/turbopuffer/turbopuffer-ruby/commit/754db38608cb849745555b57ecfab7ebff7e357c))
+
 ## 1.11.0 (2026-01-22)
 
 Full Changelog: [v1.10.1...v1.11.0](https://github.com/turbopuffer/turbopuffer-ruby/compare/v1.10.1...v1.11.0)
