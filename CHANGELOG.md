@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.11.2 (2026-02-02)
+
+Full Changelog: [v1.11.1...v1.11.2](https://github.com/turbopuffer/turbopuffer-ruby/compare/v1.11.1...v1.11.2)
+
+### Bug Fixes
+
+* **client:** always add content-length to post body, even when empty ([ccd1efa](https://github.com/turbopuffer/turbopuffer-ruby/commit/ccd1efabdea8c75198f6db192883b4ba577be570))
+
 ## 1.11.1 (2026-01-28)
 
 Full Changelog: [v1.11.0...v1.11.1](https://github.com/turbopuffer/turbopuffer-ruby/compare/v1.11.0...v1.11.1)
