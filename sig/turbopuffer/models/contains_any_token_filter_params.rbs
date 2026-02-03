@@ -1,0 +1,15 @@
+module Turbopuffer
+  module Models
+    type contains_any_token_filter_params = { last_as_prefix: bool }
+
+    class ContainsAnyTokenFilterParams < Turbopuffer::Internal::Type::BaseModel
+      attr_reader last_as_prefix: bool?
+
+      def last_as_prefix=: (bool) -> bool
+
+      def initialize: (?last_as_prefix: bool) -> void
+
+      def to_hash: -> { last_as_prefix: bool }
+    end
+  end
+end
