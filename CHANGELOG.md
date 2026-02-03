@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.12.0 (2026-02-03)
+
+Full Changelog: [v1.11.2...v1.12.0](https://github.com/turbopuffer/turbopuffer-ruby/compare/v1.11.2...v1.12.0)
+
+### Features
+
+* ContainsAnyToken last_as_prefix docs ([c8c63c7](https://github.com/turbopuffer/turbopuffer-ruby/commit/c8c63c787618c2cd65d894c57a234c4e11632a45))
+
 ## 1.11.2 (2026-02-02)
 
 Full Changelog: [v1.11.1...v1.11.2](https://github.com/turbopuffer/turbopuffer-ruby/compare/v1.11.1...v1.11.2)
