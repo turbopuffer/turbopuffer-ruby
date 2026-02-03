@@ -22,6 +22,9 @@ module Turbopuffer
   ContainsAllTokensFilterParams =
     Turbopuffer::Models::ContainsAllTokensFilterParams
 
+  ContainsAnyTokenFilterParams =
+    Turbopuffer::Models::ContainsAnyTokenFilterParams
+
   DistanceMetric = Turbopuffer::Models::DistanceMetric
 
   FullTextSearch = Turbopuffer::Models::FullTextSearch
