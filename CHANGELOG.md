@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.12.1 (2026-02-04)
+
+Full Changelog: [v1.12.0...v1.12.1](https://github.com/turbopuffer/turbopuffer-ruby/compare/v1.12.0...v1.12.1)
+
+### Chores
+
+* **docs:** remove www prefix ([ffdfaf2](https://github.com/turbopuffer/turbopuffer-ruby/commit/ffdfaf26086a5f39be1adabb62dd361f3773fae4))
+
 ## 1.12.0 (2026-02-03)
 
 Full Changelog: [v1.11.2...v1.12.0](https://github.com/turbopuffer/turbopuffer-ruby/compare/v1.11.2...v1.12.0)
