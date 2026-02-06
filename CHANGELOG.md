@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.12.2 (2026-02-06)
+
+Full Changelog: [v1.12.1...v1.12.2](https://github.com/turbopuffer/turbopuffer-ruby/compare/v1.12.1...v1.12.2)
+
+### Bug Fixes
+
+* **client:** loosen json header parsing ([93077e3](https://github.com/turbopuffer/turbopuffer-ruby/commit/93077e35351b42ec7f90e4817f65af7bf34bf443))
+
 ## 1.12.1 (2026-02-04)
 
 Full Changelog: [v1.12.0...v1.12.1](https://github.com/turbopuffer/turbopuffer-ruby/compare/v1.12.0...v1.12.1)
