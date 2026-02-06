@@ -58,6 +58,12 @@ module Turbopuffer
       #   @return [Boolean, Array<String>, nil]
       optional :include_attributes, union: -> { Turbopuffer::IncludeAttributes }
 
+      # @!attribute limit
+      #   Limit configuration for query results.
+      #
+      #   @return [Integer, Turbopuffer::Models::NamespaceQueryParams::Limit::Limit, nil]
+      optional :limit, union: -> { Turbopuffer::NamespaceQueryParams::Limit }
+
       # @!attribute rank_by
       #   How to rank the documents in the namespace.
       #
@@ -76,7 +82,7 @@ module Turbopuffer
       #   @return [Symbol, Turbopuffer::Models::VectorEncoding, nil]
       optional :vector_encoding, enum: -> { Turbopuffer::VectorEncoding }
 
-      # @!method initialize(namespace: nil, aggregate_by: nil, consistency: nil, distance_metric: nil, exclude_attributes: nil, filters: nil, group_by: nil, include_attributes: nil, rank_by: nil, top_k: nil, vector_encoding: nil, request_options: {})
+      # @!method initialize(namespace: nil, aggregate_by: nil, consistency: nil, distance_metric: nil, exclude_attributes: nil, filters: nil, group_by: nil, include_attributes: nil, limit: nil, rank_by: nil, top_k: nil, vector_encoding: nil, request_options: {})
       #   Some parameter documentations has been truncated, see
       #   {Turbopuffer::Models::NamespaceQueryParams} for more details.
       #
@@ -95,6 +101,8 @@ module Turbopuffer
       #   @param group_by [Array<String>] Groups documents by the specified attributes (the "group key") before computing
       #
       #   @param include_attributes [Boolean, Array<String>] Whether to include attributes in the response.
+      #
+      #   @param limit [Integer, Turbopuffer::Models::NamespaceQueryParams::Limit::Limit] Limit configuration for query results.
       #
       #   @param rank_by [Object] How to rank the documents in the namespace.
       #
@@ -131,6 +139,53 @@ module Turbopuffer
           # @!method self.values
           #   @return [Array<Symbol>]
         end
+      end
+
+      # Limit configuration for query results.
+      module Limit
+        extend Turbopuffer::Internal::Type::Union
+
+        variant Integer
+
+        variant -> { Turbopuffer::NamespaceQueryParams::Limit::Limit }
+
+        class Limit < Turbopuffer::Internal::Type::BaseModel
+          # @!attribute total
+          #   The total number of results to return.
+          #
+          #   @return [Integer]
+          required :total, Integer
+
+          # @!attribute per
+          #
+          #   @return [Turbopuffer::Models::NamespaceQueryParams::Limit::Limit::Per, nil]
+          optional :per, -> { Turbopuffer::NamespaceQueryParams::Limit::Limit::Per }
+
+          # @!method initialize(total:, per: nil)
+          #   @param total [Integer] The total number of results to return.
+          #
+          #   @param per [Turbopuffer::Models::NamespaceQueryParams::Limit::Limit::Per]
+
+          # @see Turbopuffer::Models::NamespaceQueryParams::Limit::Limit#per
+          class Per < Turbopuffer::Internal::Type::BaseModel
+            # @!attribute attributes
+            #
+            #   @return [Array<String>]
+            required :attributes, Turbopuffer::Internal::Type::ArrayOf[String]
+
+            # @!attribute limit
+            #
+            #   @return [Integer]
+            required :limit, Integer
+
+            # @!method initialize(attributes:, limit:)
+            #   @param attributes [Array<String>]
+            #   @param limit [Integer]
+          end
+        end
+
+        # @!method self.variants
+        #   @return [Array(Integer, Turbopuffer::Models::NamespaceQueryParams::Limit::Limit)]
       end
     end
   end

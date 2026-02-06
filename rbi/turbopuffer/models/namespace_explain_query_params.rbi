@@ -88,6 +88,30 @@ module Turbopuffer
       end
       attr_writer :include_attributes
 
+      # Limit configuration for query results.
+      sig do
+        returns(
+          T.nilable(
+            T.any(
+              Integer,
+              Turbopuffer::NamespaceExplainQueryParams::Limit::Limit
+            )
+          )
+        )
+      end
+      attr_reader :limit
+
+      sig do
+        params(
+          limit:
+            T.any(
+              Integer,
+              Turbopuffer::NamespaceExplainQueryParams::Limit::Limit::OrHash
+            )
+        ).void
+      end
+      attr_writer :limit
+
       # How to rank the documents in the namespace.
       sig { returns(T.nilable(T.anything)) }
       attr_reader :rank_by
@@ -122,6 +146,11 @@ module Turbopuffer
           filters: T.anything,
           group_by: T::Array[String],
           include_attributes: Turbopuffer::IncludeAttributes::Variants,
+          limit:
+            T.any(
+              Integer,
+              Turbopuffer::NamespaceExplainQueryParams::Limit::Limit::OrHash
+            ),
           rank_by: T.anything,
           top_k: Integer,
           vector_encoding: Turbopuffer::VectorEncoding::OrSymbol,
@@ -148,6 +177,8 @@ module Turbopuffer
         group_by: nil,
         # Whether to include attributes in the response.
         include_attributes: nil,
+        # Limit configuration for query results.
+        limit: nil,
         # How to rank the documents in the namespace.
         rank_by: nil,
         # The number of results to return.
@@ -169,6 +200,11 @@ module Turbopuffer
             filters: T.anything,
             group_by: T::Array[String],
             include_attributes: Turbopuffer::IncludeAttributes::Variants,
+            limit:
+              T.any(
+                Integer,
+                Turbopuffer::NamespaceExplainQueryParams::Limit::Limit
+              ),
             rank_by: T.anything,
             top_k: Integer,
             vector_encoding: Turbopuffer::VectorEncoding::OrSymbol,
@@ -266,6 +302,113 @@ module Turbopuffer
           end
           def self.values
           end
+        end
+      end
+
+      # Limit configuration for query results.
+      module Limit
+        extend Turbopuffer::Internal::Type::Union
+
+        Variants =
+          T.type_alias do
+            T.any(
+              Integer,
+              Turbopuffer::NamespaceExplainQueryParams::Limit::Limit
+            )
+          end
+
+        class Limit < Turbopuffer::Internal::Type::BaseModel
+          OrHash =
+            T.type_alias do
+              T.any(
+                Turbopuffer::NamespaceExplainQueryParams::Limit::Limit,
+                Turbopuffer::Internal::AnyHash
+              )
+            end
+
+          # The total number of results to return.
+          sig { returns(Integer) }
+          attr_accessor :total
+
+          sig do
+            returns(
+              T.nilable(
+                Turbopuffer::NamespaceExplainQueryParams::Limit::Limit::Per
+              )
+            )
+          end
+          attr_reader :per
+
+          sig do
+            params(
+              per:
+                Turbopuffer::NamespaceExplainQueryParams::Limit::Limit::Per::OrHash
+            ).void
+          end
+          attr_writer :per
+
+          sig do
+            params(
+              total: Integer,
+              per:
+                Turbopuffer::NamespaceExplainQueryParams::Limit::Limit::Per::OrHash
+            ).returns(T.attached_class)
+          end
+          def self.new(
+            # The total number of results to return.
+            total:,
+            per: nil
+          )
+          end
+
+          sig do
+            override.returns(
+              {
+                total: Integer,
+                per: Turbopuffer::NamespaceExplainQueryParams::Limit::Limit::Per
+              }
+            )
+          end
+          def to_hash
+          end
+
+          class Per < Turbopuffer::Internal::Type::BaseModel
+            OrHash =
+              T.type_alias do
+                T.any(
+                  Turbopuffer::NamespaceExplainQueryParams::Limit::Limit::Per,
+                  Turbopuffer::Internal::AnyHash
+                )
+              end
+
+            sig { returns(T::Array[String]) }
+            attr_accessor :attributes
+
+            sig { returns(Integer) }
+            attr_accessor :limit
+
+            sig do
+              params(attributes: T::Array[String], limit: Integer).returns(
+                T.attached_class
+              )
+            end
+            def self.new(attributes:, limit:)
+            end
+
+            sig do
+              override.returns({ attributes: T::Array[String], limit: Integer })
+            end
+            def to_hash
+            end
+          end
+        end
+
+        sig do
+          override.returns(
+            T::Array[Turbopuffer::NamespaceExplainQueryParams::Limit::Variants]
+          )
+        end
+        def self.variants
         end
       end
     end
