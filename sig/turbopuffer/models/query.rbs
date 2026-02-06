@@ -8,6 +8,7 @@ module Turbopuffer
         filters: top,
         group_by: ::Array[String],
         include_attributes: Turbopuffer::Models::include_attributes,
+        limit: Turbopuffer::Models::Query::limit,
         rank_by: top,
         top_k: Integer
       }
@@ -41,6 +42,12 @@ module Turbopuffer
         Turbopuffer::Models::include_attributes
       ) -> Turbopuffer::Models::include_attributes
 
+      attr_reader limit: Turbopuffer::Models::Query::limit?
+
+      def limit=: (
+        Turbopuffer::Models::Query::limit
+      ) -> Turbopuffer::Models::Query::limit
+
       attr_reader rank_by: top?
 
       def rank_by=: (top) -> top
@@ -56,6 +63,7 @@ module Turbopuffer
         ?filters: top,
         ?group_by: ::Array[String],
         ?include_attributes: Turbopuffer::Models::include_attributes,
+        ?limit: Turbopuffer::Models::Query::limit,
         ?rank_by: top,
         ?top_k: Integer
       ) -> void
@@ -67,9 +75,56 @@ module Turbopuffer
         filters: top,
         group_by: ::Array[String],
         include_attributes: Turbopuffer::Models::include_attributes,
+        limit: Turbopuffer::Models::Query::limit,
         rank_by: top,
         top_k: Integer
       }
+
+      type limit = Integer | Turbopuffer::Query::Limit::Limit
+
+      module Limit
+        extend Turbopuffer::Internal::Type::Union
+
+        type limit =
+          { total: Integer, per: Turbopuffer::Query::Limit::Limit::Per }
+
+        class Limit < Turbopuffer::Internal::Type::BaseModel
+          attr_accessor total: Integer
+
+          attr_reader per: Turbopuffer::Query::Limit::Limit::Per?
+
+          def per=: (
+            Turbopuffer::Query::Limit::Limit::Per
+          ) -> Turbopuffer::Query::Limit::Limit::Per
+
+          def initialize: (
+            total: Integer,
+            ?per: Turbopuffer::Query::Limit::Limit::Per
+          ) -> void
+
+          def to_hash: -> {
+            total: Integer,
+            per: Turbopuffer::Query::Limit::Limit::Per
+          }
+
+          type per = { attributes: ::Array[String], limit: Integer }
+
+          class Per < Turbopuffer::Internal::Type::BaseModel
+            attr_accessor attributes: ::Array[String]
+
+            attr_accessor limit: Integer
+
+            def initialize: (
+              attributes: ::Array[String],
+              limit: Integer
+            ) -> void
+
+            def to_hash: -> { attributes: ::Array[String], limit: Integer }
+          end
+        end
+
+        def self?.variants: -> ::Array[Turbopuffer::Models::Query::limit]
+      end
     end
   end
 end

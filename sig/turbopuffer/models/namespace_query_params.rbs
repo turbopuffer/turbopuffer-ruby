@@ -10,6 +10,7 @@ module Turbopuffer
         filters: top,
         group_by: ::Array[String],
         include_attributes: Turbopuffer::Models::include_attributes,
+        limit: Turbopuffer::Models::NamespaceQueryParams::limit,
         rank_by: top,
         top_k: Integer,
         vector_encoding: Turbopuffer::Models::vector_encoding
@@ -58,6 +59,12 @@ module Turbopuffer
         Turbopuffer::Models::include_attributes
       ) -> Turbopuffer::Models::include_attributes
 
+      attr_reader limit: Turbopuffer::Models::NamespaceQueryParams::limit?
+
+      def limit=: (
+        Turbopuffer::Models::NamespaceQueryParams::limit
+      ) -> Turbopuffer::Models::NamespaceQueryParams::limit
+
       attr_reader rank_by: top?
 
       def rank_by=: (top) -> top
@@ -81,6 +88,7 @@ module Turbopuffer
         ?filters: top,
         ?group_by: ::Array[String],
         ?include_attributes: Turbopuffer::Models::include_attributes,
+        ?limit: Turbopuffer::Models::NamespaceQueryParams::limit,
         ?rank_by: top,
         ?top_k: Integer,
         ?vector_encoding: Turbopuffer::Models::vector_encoding,
@@ -96,6 +104,7 @@ module Turbopuffer
         filters: top,
         group_by: ::Array[String],
         include_attributes: Turbopuffer::Models::include_attributes,
+        limit: Turbopuffer::Models::NamespaceQueryParams::limit,
         rank_by: top,
         top_k: Integer,
         vector_encoding: Turbopuffer::Models::vector_encoding,
@@ -133,6 +142,55 @@ module Turbopuffer
 
           def self?.values: -> ::Array[Turbopuffer::Models::NamespaceQueryParams::Consistency::level]
         end
+      end
+
+      type limit = Integer | Turbopuffer::NamespaceQueryParams::Limit::Limit
+
+      module Limit
+        extend Turbopuffer::Internal::Type::Union
+
+        type limit =
+          {
+            total: Integer,
+            per: Turbopuffer::NamespaceQueryParams::Limit::Limit::Per
+          }
+
+        class Limit < Turbopuffer::Internal::Type::BaseModel
+          attr_accessor total: Integer
+
+          attr_reader per: Turbopuffer::NamespaceQueryParams::Limit::Limit::Per?
+
+          def per=: (
+            Turbopuffer::NamespaceQueryParams::Limit::Limit::Per
+          ) -> Turbopuffer::NamespaceQueryParams::Limit::Limit::Per
+
+          def initialize: (
+            total: Integer,
+            ?per: Turbopuffer::NamespaceQueryParams::Limit::Limit::Per
+          ) -> void
+
+          def to_hash: -> {
+            total: Integer,
+            per: Turbopuffer::NamespaceQueryParams::Limit::Limit::Per
+          }
+
+          type per = { attributes: ::Array[String], limit: Integer }
+
+          class Per < Turbopuffer::Internal::Type::BaseModel
+            attr_accessor attributes: ::Array[String]
+
+            attr_accessor limit: Integer
+
+            def initialize: (
+              attributes: ::Array[String],
+              limit: Integer
+            ) -> void
+
+            def to_hash: -> { attributes: ::Array[String], limit: Integer }
+          end
+        end
+
+        def self?.variants: -> ::Array[Turbopuffer::Models::NamespaceQueryParams::limit]
       end
     end
   end

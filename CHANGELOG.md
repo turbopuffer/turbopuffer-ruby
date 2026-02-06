@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.13.0 (2026-02-06)
+
+Full Changelog: [v1.12.2...v1.13.0](https://github.com/turbopuffer/turbopuffer-ruby/compare/v1.12.2...v1.13.0)
+
+### Features
+
+* add support for `limit` query parameter ([e7de801](https://github.com/turbopuffer/turbopuffer-ruby/commit/e7de80171a0d67759c0f04d15bf1f47f4bde6a6f))
+
 ## 1.12.2 (2026-02-06)
 
 Full Changelog: [v1.12.1...v1.12.2](https://github.com/turbopuffer/turbopuffer-ruby/compare/v1.12.1...v1.12.2)
