@@ -60,17 +60,11 @@ module Turbopuffer
       end
       attr_writer :include_attributes
 
-      # Limit configuration for query results.
-      sig do
-        returns(T.nilable(T.any(Integer, Turbopuffer::Query::Limit::Limit)))
-      end
+      # Limits the documents returned by a query.
+      sig { returns(T.nilable(T.any(Integer, Turbopuffer::Limit))) }
       attr_reader :limit
 
-      sig do
-        params(
-          limit: T.any(Integer, Turbopuffer::Query::Limit::Limit::OrHash)
-        ).void
-      end
+      sig { params(limit: T.any(Integer, Turbopuffer::Limit::OrHash)).void }
       attr_writer :limit
 
       # How to rank the documents in the namespace.
@@ -96,7 +90,7 @@ module Turbopuffer
           filters: T.anything,
           group_by: T::Array[String],
           include_attributes: Turbopuffer::IncludeAttributes::Variants,
-          limit: T.any(Integer, Turbopuffer::Query::Limit::Limit::OrHash),
+          limit: T.any(Integer, Turbopuffer::Limit::OrHash),
           rank_by: T.anything,
           top_k: Integer
         ).returns(T.attached_class)
@@ -118,7 +112,7 @@ module Turbopuffer
         group_by: nil,
         # Whether to include attributes in the response.
         include_attributes: nil,
-        # Limit configuration for query results.
+        # Limits the documents returned by a query.
         limit: nil,
         # How to rank the documents in the namespace.
         rank_by: nil,
@@ -136,7 +130,7 @@ module Turbopuffer
             filters: T.anything,
             group_by: T::Array[String],
             include_attributes: Turbopuffer::IncludeAttributes::Variants,
-            limit: T.any(Integer, Turbopuffer::Query::Limit::Limit),
+            limit: T.any(Integer, Turbopuffer::Limit),
             rank_by: T.anything,
             top_k: Integer
           }
@@ -145,85 +139,11 @@ module Turbopuffer
       def to_hash
       end
 
-      # Limit configuration for query results.
+      # Limits the documents returned by a query.
       module Limit
         extend Turbopuffer::Internal::Type::Union
 
-        Variants =
-          T.type_alias { T.any(Integer, Turbopuffer::Query::Limit::Limit) }
-
-        class Limit < Turbopuffer::Internal::Type::BaseModel
-          OrHash =
-            T.type_alias do
-              T.any(
-                Turbopuffer::Query::Limit::Limit,
-                Turbopuffer::Internal::AnyHash
-              )
-            end
-
-          # The total number of results to return.
-          sig { returns(Integer) }
-          attr_accessor :total
-
-          sig { returns(T.nilable(Turbopuffer::Query::Limit::Limit::Per)) }
-          attr_reader :per
-
-          sig do
-            params(per: Turbopuffer::Query::Limit::Limit::Per::OrHash).void
-          end
-          attr_writer :per
-
-          sig do
-            params(
-              total: Integer,
-              per: Turbopuffer::Query::Limit::Limit::Per::OrHash
-            ).returns(T.attached_class)
-          end
-          def self.new(
-            # The total number of results to return.
-            total:,
-            per: nil
-          )
-          end
-
-          sig do
-            override.returns(
-              { total: Integer, per: Turbopuffer::Query::Limit::Limit::Per }
-            )
-          end
-          def to_hash
-          end
-
-          class Per < Turbopuffer::Internal::Type::BaseModel
-            OrHash =
-              T.type_alias do
-                T.any(
-                  Turbopuffer::Query::Limit::Limit::Per,
-                  Turbopuffer::Internal::AnyHash
-                )
-              end
-
-            sig { returns(T::Array[String]) }
-            attr_accessor :attributes
-
-            sig { returns(Integer) }
-            attr_accessor :limit
-
-            sig do
-              params(attributes: T::Array[String], limit: Integer).returns(
-                T.attached_class
-              )
-            end
-            def self.new(attributes:, limit:)
-            end
-
-            sig do
-              override.returns({ attributes: T::Array[String], limit: Integer })
-            end
-            def to_hash
-            end
-          end
-        end
+        Variants = T.type_alias { T.any(Integer, Turbopuffer::Limit) }
 
         sig { override.returns(T::Array[Turbopuffer::Query::Limit::Variants]) }
         def self.variants

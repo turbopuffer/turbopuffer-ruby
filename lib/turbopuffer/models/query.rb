@@ -44,9 +44,9 @@ module Turbopuffer
       optional :include_attributes, union: -> { Turbopuffer::IncludeAttributes }
 
       # @!attribute limit
-      #   Limit configuration for query results.
+      #   Limits the documents returned by a query.
       #
-      #   @return [Integer, Turbopuffer::Models::Query::Limit::Limit, nil]
+      #   @return [Integer, Turbopuffer::Models::Limit, nil]
       optional :limit, union: -> { Turbopuffer::Query::Limit }
 
       # @!attribute rank_by
@@ -79,13 +79,13 @@ module Turbopuffer
       #
       #   @param include_attributes [Boolean, Array<String>] Whether to include attributes in the response.
       #
-      #   @param limit [Integer, Turbopuffer::Models::Query::Limit::Limit] Limit configuration for query results.
+      #   @param limit [Integer, Turbopuffer::Models::Limit] Limits the documents returned by a query.
       #
       #   @param rank_by [Object] How to rank the documents in the namespace.
       #
       #   @param top_k [Integer] The number of results to return.
 
-      # Limit configuration for query results.
+      # Limits the documents returned by a query.
       #
       # @see Turbopuffer::Models::Query#limit
       module Limit
@@ -93,45 +93,11 @@ module Turbopuffer
 
         variant Integer
 
-        variant -> { Turbopuffer::Query::Limit::Limit }
-
-        class Limit < Turbopuffer::Internal::Type::BaseModel
-          # @!attribute total
-          #   The total number of results to return.
-          #
-          #   @return [Integer]
-          required :total, Integer
-
-          # @!attribute per
-          #
-          #   @return [Turbopuffer::Models::Query::Limit::Limit::Per, nil]
-          optional :per, -> { Turbopuffer::Query::Limit::Limit::Per }
-
-          # @!method initialize(total:, per: nil)
-          #   @param total [Integer] The total number of results to return.
-          #
-          #   @param per [Turbopuffer::Models::Query::Limit::Limit::Per]
-
-          # @see Turbopuffer::Models::Query::Limit::Limit#per
-          class Per < Turbopuffer::Internal::Type::BaseModel
-            # @!attribute attributes
-            #
-            #   @return [Array<String>]
-            required :attributes, Turbopuffer::Internal::Type::ArrayOf[String]
-
-            # @!attribute limit
-            #
-            #   @return [Integer]
-            required :limit, Integer
-
-            # @!method initialize(attributes:, limit:)
-            #   @param attributes [Array<String>]
-            #   @param limit [Integer]
-          end
-        end
+        # Limits the documents returned by a query.
+        variant -> { Turbopuffer::Limit }
 
         # @!method self.variants
-        #   @return [Array(Integer, Turbopuffer::Models::Query::Limit::Limit)]
+        #   @return [Array(Integer, Turbopuffer::Models::Limit)]
       end
     end
   end

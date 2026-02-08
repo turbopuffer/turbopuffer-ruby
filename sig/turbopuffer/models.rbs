@@ -29,6 +29,8 @@ module Turbopuffer
 
   module Language = Turbopuffer::Models::Language
 
+  class Limit = Turbopuffer::Models::Limit
+
   class NamespaceDeleteAllParams = Turbopuffer::Models::NamespaceDeleteAllParams
 
   class NamespaceExplainQueryParams = Turbopuffer::Models::NamespaceExplainQueryParams

@@ -51,7 +51,7 @@ module Turbopuffer
       #
       # @param include_attributes [Boolean, Array<String>] Body param: Whether to include attributes in the response.
       #
-      # @param limit [Integer, Turbopuffer::Models::NamespaceExplainQueryParams::Limit::Limit] Body param: Limit configuration for query results.
+      # @param limit [Integer, Turbopuffer::Models::Limit] Body param: Limits the documents returned by a query.
       #
       # @param rank_by [Object] Body param: How to rank the documents in the namespace.
       #
@@ -184,7 +184,7 @@ module Turbopuffer
       #
       # @param include_attributes [Boolean, Array<String>] Body param: Whether to include attributes in the response.
       #
-      # @param limit [Integer, Turbopuffer::Models::NamespaceQueryParams::Limit::Limit] Body param: Limit configuration for query results.
+      # @param limit [Integer, Turbopuffer::Models::Limit] Body param: Limits the documents returned by a query.
       #
       # @param rank_by [Object] Body param: How to rank the documents in the namespace.
       #

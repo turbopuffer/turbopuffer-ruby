@@ -29,11 +29,7 @@ module Turbopuffer
           filters: T.anything,
           group_by: T::Array[String],
           include_attributes: Turbopuffer::IncludeAttributes::Variants,
-          limit:
-            T.any(
-              Integer,
-              Turbopuffer::NamespaceExplainQueryParams::Limit::Limit::OrHash
-            ),
+          limit: T.any(Integer, Turbopuffer::Limit::OrHash),
           rank_by: T.anything,
           top_k: Integer,
           vector_encoding: Turbopuffer::VectorEncoding::OrSymbol,
@@ -61,7 +57,7 @@ module Turbopuffer
         group_by: nil,
         # Body param: Whether to include attributes in the response.
         include_attributes: nil,
-        # Body param: Limit configuration for query results.
+        # Body param: Limits the documents returned by a query.
         limit: nil,
         # Body param: How to rank the documents in the namespace.
         rank_by: nil,
@@ -136,11 +132,7 @@ module Turbopuffer
           filters: T.anything,
           group_by: T::Array[String],
           include_attributes: Turbopuffer::IncludeAttributes::Variants,
-          limit:
-            T.any(
-              Integer,
-              Turbopuffer::NamespaceQueryParams::Limit::Limit::OrHash
-            ),
+          limit: T.any(Integer, Turbopuffer::Limit::OrHash),
           rank_by: T.anything,
           top_k: Integer,
           vector_encoding: Turbopuffer::VectorEncoding::OrSymbol,
@@ -168,7 +160,7 @@ module Turbopuffer
         group_by: nil,
         # Body param: Whether to include attributes in the response.
         include_attributes: nil,
-        # Body param: Limit configuration for query results.
+        # Body param: Limits the documents returned by a query.
         limit: nil,
         # Body param: How to rank the documents in the namespace.
         rank_by: nil,
