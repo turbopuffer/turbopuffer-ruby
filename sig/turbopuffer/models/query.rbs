@@ -80,48 +80,10 @@ module Turbopuffer
         top_k: Integer
       }
 
-      type limit = Integer | Turbopuffer::Query::Limit::Limit
+      type limit = Integer | Turbopuffer::Limit
 
       module Limit
         extend Turbopuffer::Internal::Type::Union
-
-        type limit =
-          { total: Integer, per: Turbopuffer::Query::Limit::Limit::Per }
-
-        class Limit < Turbopuffer::Internal::Type::BaseModel
-          attr_accessor total: Integer
-
-          attr_reader per: Turbopuffer::Query::Limit::Limit::Per?
-
-          def per=: (
-            Turbopuffer::Query::Limit::Limit::Per
-          ) -> Turbopuffer::Query::Limit::Limit::Per
-
-          def initialize: (
-            total: Integer,
-            ?per: Turbopuffer::Query::Limit::Limit::Per
-          ) -> void
-
-          def to_hash: -> {
-            total: Integer,
-            per: Turbopuffer::Query::Limit::Limit::Per
-          }
-
-          type per = { attributes: ::Array[String], limit: Integer }
-
-          class Per < Turbopuffer::Internal::Type::BaseModel
-            attr_accessor attributes: ::Array[String]
-
-            attr_accessor limit: Integer
-
-            def initialize: (
-              attributes: ::Array[String],
-              limit: Integer
-            ) -> void
-
-            def to_hash: -> { attributes: ::Array[String], limit: Integer }
-          end
-        end
 
         def self?.variants: -> ::Array[Turbopuffer::Models::Query::limit]
       end
