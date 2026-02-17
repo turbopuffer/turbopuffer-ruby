@@ -17,6 +17,8 @@ module Turbopuffer
 
   class ContainsAnyTokenFilterParams = Turbopuffer::Models::ContainsAnyTokenFilterParams
 
+  class DecayParams = Turbopuffer::Models::DecayParams
+
   module DistanceMetric = Turbopuffer::Models::DistanceMetric
 
   module FullTextSearch = Turbopuffer::Models::FullTextSearch
@@ -62,6 +64,8 @@ module Turbopuffer
   class QueryPerformance = Turbopuffer::Models::QueryPerformance
 
   class Row = Turbopuffer::Models::Row
+
+  class SaturateParams = Turbopuffer::Models::SaturateParams
 
   module Tokenizer = Turbopuffer::Models::Tokenizer
 
