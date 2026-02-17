@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.14.0 (2026-02-17)
+
+Full Changelog: [v1.13.0...v1.14.0](https://github.com/turbopuffer/turbopuffer-ruby/compare/v1.13.0...v1.14.0)
+
+### Features
+
+* Add ranking-by-attribute to the spec. ([7341bcb](https://github.com/turbopuffer/turbopuffer-ruby/commit/7341bcb0b8de0c9652e60788db87163787762275))
+
 ## 1.13.0 (2026-02-08)
 
 Full Changelog: [v1.12.2...v1.13.0](https://github.com/turbopuffer/turbopuffer-ruby/compare/v1.12.2...v1.13.0)
