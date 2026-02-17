@@ -1,0 +1,19 @@
+module Turbopuffer
+  module Models
+    type saturate_params = { exponent: Float, midpoint: top }
+
+    class SaturateParams < Turbopuffer::Internal::Type::BaseModel
+      attr_reader exponent: Float?
+
+      def exponent=: (Float) -> Float
+
+      attr_reader midpoint: top?
+
+      def midpoint=: (top) -> top
+
+      def initialize: (?exponent: Float, ?midpoint: top) -> void
+
+      def to_hash: -> { exponent: Float, midpoint: top }
+    end
+  end
+end
