@@ -1,5 +1,14 @@
 # Changelog
 
+## 1.14.1 (2026-02-19)
+
+Full Changelog: [v1.14.0...v1.14.1](https://github.com/turbopuffer/turbopuffer-ruby/compare/v1.14.0...v1.14.1)
+
+### Chores
+
+* **internal:** remove mock server code ([073b9d0](https://github.com/turbopuffer/turbopuffer-ruby/commit/073b9d07da2a20d0313a9bb7aaa1233f08d3cd32))
+* update mock server docs ([50a7ba1](https://github.com/turbopuffer/turbopuffer-ruby/commit/50a7ba122d8268837cb64bb653f9e81ba945cec5))
+
 ## 1.14.0 (2026-02-17)
 
 Full Changelog: [v1.13.0...v1.14.0](https://github.com/turbopuffer/turbopuffer-ruby/compare/v1.13.0...v1.14.0)
