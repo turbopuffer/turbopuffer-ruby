@@ -179,7 +179,6 @@ module Turbopuffer
           filters: T.anything,
           include_ground_truth: T::Boolean,
           num: Integer,
-          queries: T::Array[Float],
           top_k: Integer,
           request_options: Turbopuffer::RequestOptions::OrHash
         ).returns(Turbopuffer::Models::NamespaceRecallResponse)
@@ -194,9 +193,6 @@ module Turbopuffer
         include_ground_truth: nil,
         # Body param: The number of searches to run.
         num: nil,
-        # Body param: Use specific query vectors for the measurement. If omitted, sampled
-        # from the index.
-        queries: nil,
         # Body param: Search for `top_k` nearest neighbors.
         top_k: nil,
         request_options: {}
