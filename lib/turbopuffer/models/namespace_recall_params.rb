@@ -31,20 +31,13 @@ module Turbopuffer
       #   @return [Integer, nil]
       optional :num, Integer
 
-      # @!attribute queries
-      #   Use specific query vectors for the measurement. If omitted, sampled from the
-      #   index.
-      #
-      #   @return [Array<Float>, nil]
-      optional :queries, Turbopuffer::Internal::Type::ArrayOf[Float]
-
       # @!attribute top_k
       #   Search for `top_k` nearest neighbors.
       #
       #   @return [Integer, nil]
       optional :top_k, Integer
 
-      # @!method initialize(namespace: nil, filters: nil, include_ground_truth: nil, num: nil, queries: nil, top_k: nil, request_options: {})
+      # @!method initialize(namespace: nil, filters: nil, include_ground_truth: nil, num: nil, top_k: nil, request_options: {})
       #   Some parameter documentations has been truncated, see
       #   {Turbopuffer::Models::NamespaceRecallParams} for more details.
       #
@@ -55,8 +48,6 @@ module Turbopuffer
       #   @param include_ground_truth [Boolean] Include ground truth data (query vectors and true nearest neighbors) in the resp
       #
       #   @param num [Integer] The number of searches to run.
-      #
-      #   @param queries [Array<Float>] Use specific query vectors for the measurement. If omitted, sampled from the ind
       #
       #   @param top_k [Integer] Search for `top_k` nearest neighbors.
       #

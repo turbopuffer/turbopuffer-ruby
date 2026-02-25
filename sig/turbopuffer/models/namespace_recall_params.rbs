@@ -6,7 +6,6 @@ module Turbopuffer
         filters: top,
         include_ground_truth: bool,
         num: Integer,
-        queries: ::Array[Float],
         top_k: Integer
       }
       & Turbopuffer::Internal::Type::request_parameters
@@ -31,10 +30,6 @@ module Turbopuffer
 
       def num=: (Integer) -> Integer
 
-      attr_reader queries: ::Array[Float]?
-
-      def queries=: (::Array[Float]) -> ::Array[Float]
-
       attr_reader top_k: Integer?
 
       def top_k=: (Integer) -> Integer
@@ -44,7 +39,6 @@ module Turbopuffer
         ?filters: top,
         ?include_ground_truth: bool,
         ?num: Integer,
-        ?queries: ::Array[Float],
         ?top_k: Integer,
         ?request_options: Turbopuffer::request_opts
       ) -> void
@@ -54,7 +48,6 @@ module Turbopuffer
         filters: top,
         include_ground_truth: bool,
         num: Integer,
-        queries: ::Array[Float],
         top_k: Integer,
         request_options: Turbopuffer::RequestOptions
       }
