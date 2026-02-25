@@ -42,14 +42,6 @@ module Turbopuffer
       sig { params(num: Integer).void }
       attr_writer :num
 
-      # Use specific query vectors for the measurement. If omitted, sampled from the
-      # index.
-      sig { returns(T.nilable(T::Array[Float])) }
-      attr_reader :queries
-
-      sig { params(queries: T::Array[Float]).void }
-      attr_writer :queries
-
       # Search for `top_k` nearest neighbors.
       sig { returns(T.nilable(Integer)) }
       attr_reader :top_k
@@ -63,7 +55,6 @@ module Turbopuffer
           filters: T.anything,
           include_ground_truth: T::Boolean,
           num: Integer,
-          queries: T::Array[Float],
           top_k: Integer,
           request_options: Turbopuffer::RequestOptions::OrHash
         ).returns(T.attached_class)
@@ -77,9 +68,6 @@ module Turbopuffer
         include_ground_truth: nil,
         # The number of searches to run.
         num: nil,
-        # Use specific query vectors for the measurement. If omitted, sampled from the
-        # index.
-        queries: nil,
         # Search for `top_k` nearest neighbors.
         top_k: nil,
         request_options: {}
@@ -93,7 +81,6 @@ module Turbopuffer
             filters: T.anything,
             include_ground_truth: T::Boolean,
             num: Integer,
-            queries: T::Array[Float],
             top_k: Integer,
             request_options: Turbopuffer::RequestOptions
           }
