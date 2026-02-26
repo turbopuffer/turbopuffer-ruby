@@ -147,20 +147,22 @@ class TurbopufferTest < Minitest::Test
   end
 
   def test_client_retry_after_date
+    time_now = Time.now
+
     stub_request(:get, "http://localhost/v1/namespaces").to_return_json(
       status: 500,
-      headers: {"retry-after" => (Time.now + 10).httpdate},
+      headers: {"retry-after" => (time_now + 10).httpdate},
       body: {}
     )
 
     turbopuffer =
       Turbopuffer::Client.new(base_url: "http://localhost", api_key: "tpuf_A1...", max_retries: 1)
 
+    Thread.current.thread_variable_set(:time_now, time_now)
     assert_raises(Turbopuffer::Errors::InternalServerError) do
-      Thread.current.thread_variable_set(:time_now, Time.now)
       turbopuffer.namespaces
-      Thread.current.thread_variable_set(:time_now, nil)
     end
+    Thread.current.thread_variable_set(:time_now, nil)
 
     assert_requested(:any, /./, times: 2)
     assert_in_delta(10, Thread.current.thread_variable_get(:mock_sleep).last, 1.0)
