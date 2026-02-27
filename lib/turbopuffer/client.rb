@@ -52,10 +52,11 @@ module Turbopuffer
     # @see Turbopuffer::Models::ClientNamespacesParams
     def namespaces(params = {})
       parsed, options = Turbopuffer::ClientNamespacesParams.dump_request(params)
+      query = Turbopuffer::Internal::Util.encode_query_params(parsed)
       request(
         method: :get,
         path: "v1/namespaces",
-        query: parsed,
+        query: query,
         page: Turbopuffer::Internal::NamespacePage,
         model: Turbopuffer::NamespaceSummary,
         options: options
