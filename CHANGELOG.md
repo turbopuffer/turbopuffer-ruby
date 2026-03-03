@@ -1,5 +1,24 @@
 # Changelog
 
+## 1.15.0 (2026-03-03)
+
+Full Changelog: [v1.14.1...v1.15.0](https://github.com/turbopuffer/turbopuffer-ruby/compare/v1.14.1...v1.15.0)
+
+### Features
+
+* Remove `queries` from recall endpoint ([04d1dcd](https://github.com/turbopuffer/turbopuffer-ruby/commit/04d1dcd4e57ff0ba0a278011fa7d3834f3fec681))
+
+
+### Bug Fixes
+
+* **client:** serialize query parameters properly ([2b88e7d](https://github.com/turbopuffer/turbopuffer-ruby/commit/2b88e7dcb9c4b09eee1019993a01e6818102357c))
+* properly mock time in ruby ci tests ([1a1f81d](https://github.com/turbopuffer/turbopuffer-ruby/commit/1a1f81d3952a0e040ecf572724152ebd76ad6092))
+
+
+### Chores
+
+* **ci:** add build step ([7b0fe2f](https://github.com/turbopuffer/turbopuffer-ruby/commit/7b0fe2ff926fe87953963e314fc9534ce243fce0))
+
 ## 1.14.1 (2026-02-19)
 
 Full Changelog: [v1.14.0...v1.14.1](https://github.com/turbopuffer/turbopuffer-ruby/compare/v1.14.0...v1.14.1)
