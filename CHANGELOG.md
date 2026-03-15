@@ -1,5 +1,18 @@
 # Changelog
 
+## 1.16.0 (2026-03-15)
+
+Full Changelog: [v1.15.0...v1.16.0](https://github.com/turbopuffer/turbopuffer-ruby/compare/v1.15.0...v1.16.0)
+
+### Features
+
+* spec: host MCP on stainless ([8627719](https://github.com/turbopuffer/turbopuffer-ruby/commit/862771973985668cbb26e9ff89b8e32fd6a71c19))
+
+
+### Chores
+
+* **ci:** skip uploading artifacts on stainless-internal branches ([00cde42](https://github.com/turbopuffer/turbopuffer-ruby/commit/00cde42296d0cd795c1dfebf938a40f47285e1b6))
+
 ## 1.15.0 (2026-03-03)
 
 Full Changelog: [v1.14.1...v1.15.0](https://github.com/turbopuffer/turbopuffer-ruby/compare/v1.14.1...v1.15.0)
