@@ -8,6 +8,7 @@ module Turbopuffer
         status: :OK,
         deleted_ids: ::Array[Turbopuffer::Models::id],
         patched_ids: ::Array[Turbopuffer::Models::id],
+        performance: Turbopuffer::WritePerformance,
         rows_deleted: Integer,
         rows_patched: Integer,
         rows_remaining: bool,
@@ -35,6 +36,12 @@ module Turbopuffer
       def patched_ids=: (
         ::Array[Turbopuffer::Models::id]
       ) -> ::Array[Turbopuffer::Models::id]
+
+      attr_reader performance: Turbopuffer::WritePerformance?
+
+      def performance=: (
+        Turbopuffer::WritePerformance
+      ) -> Turbopuffer::WritePerformance
 
       attr_reader rows_deleted: Integer?
 
@@ -64,6 +71,7 @@ module Turbopuffer
         rows_affected: Integer,
         ?deleted_ids: ::Array[Turbopuffer::Models::id],
         ?patched_ids: ::Array[Turbopuffer::Models::id],
+        ?performance: Turbopuffer::WritePerformance,
         ?rows_deleted: Integer,
         ?rows_patched: Integer,
         ?rows_remaining: bool,
@@ -79,6 +87,7 @@ module Turbopuffer
         status: :OK,
         deleted_ids: ::Array[Turbopuffer::Models::id],
         patched_ids: ::Array[Turbopuffer::Models::id],
+        performance: Turbopuffer::WritePerformance,
         rows_deleted: Integer,
         rows_patched: Integer,
         rows_remaining: bool,

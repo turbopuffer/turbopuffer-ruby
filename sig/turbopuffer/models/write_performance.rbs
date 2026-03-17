@@ -1,0 +1,13 @@
+module Turbopuffer
+  module Models
+    type write_performance = { server_total_ms: Integer }
+
+    class WritePerformance < Turbopuffer::Internal::Type::BaseModel
+      attr_accessor server_total_ms: Integer
+
+      def initialize: (server_total_ms: Integer) -> void
+
+      def to_hash: -> { server_total_ms: Integer }
+    end
+  end
+end
