@@ -46,6 +46,13 @@ module Turbopuffer
       sig { params(patched_ids: T::Array[Turbopuffer::ID::Variants]).void }
       attr_writer :patched_ids
 
+      # The performance information for a write request.
+      sig { returns(T.nilable(Turbopuffer::WritePerformance)) }
+      attr_reader :performance
+
+      sig { params(performance: Turbopuffer::WritePerformance::OrHash).void }
+      attr_writer :performance
+
       # The number of rows deleted by the write request.
       sig { returns(T.nilable(Integer)) }
       attr_reader :rows_deleted
@@ -90,6 +97,7 @@ module Turbopuffer
           rows_affected: Integer,
           deleted_ids: T::Array[Turbopuffer::ID::Variants],
           patched_ids: T::Array[Turbopuffer::ID::Variants],
+          performance: Turbopuffer::WritePerformance::OrHash,
           rows_deleted: Integer,
           rows_patched: Integer,
           rows_remaining: T::Boolean,
@@ -111,6 +119,8 @@ module Turbopuffer
         # The IDs of documents that were patched. Only included when `return_affected_ids`
         # is true and at least one document was patched.
         patched_ids: nil,
+        # The performance information for a write request.
+        performance: nil,
         # The number of rows deleted by the write request.
         rows_deleted: nil,
         # The number of rows patched by the write request.
@@ -136,6 +146,7 @@ module Turbopuffer
             status: Symbol,
             deleted_ids: T::Array[Turbopuffer::ID::Variants],
             patched_ids: T::Array[Turbopuffer::ID::Variants],
+            performance: Turbopuffer::WritePerformance,
             rows_deleted: Integer,
             rows_patched: Integer,
             rows_remaining: T::Boolean,
