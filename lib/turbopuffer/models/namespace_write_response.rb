@@ -42,6 +42,12 @@ module Turbopuffer
       #   @return [Array<String, Integer>, nil]
       optional :patched_ids, -> { Turbopuffer::Internal::Type::ArrayOf[union: Turbopuffer::ID] }
 
+      # @!attribute performance
+      #   The performance information for a write request.
+      #
+      #   @return [Turbopuffer::Models::WritePerformance, nil]
+      optional :performance, -> { Turbopuffer::WritePerformance }
+
       # @!attribute rows_deleted
       #   The number of rows deleted by the write request.
       #
@@ -73,7 +79,7 @@ module Turbopuffer
       #   @return [Array<String, Integer>, nil]
       optional :upserted_ids, -> { Turbopuffer::Internal::Type::ArrayOf[union: Turbopuffer::ID] }
 
-      # @!method initialize(billing:, message:, rows_affected:, deleted_ids: nil, patched_ids: nil, rows_deleted: nil, rows_patched: nil, rows_remaining: nil, rows_upserted: nil, upserted_ids: nil, status: :OK)
+      # @!method initialize(billing:, message:, rows_affected:, deleted_ids: nil, patched_ids: nil, performance: nil, rows_deleted: nil, rows_patched: nil, rows_remaining: nil, rows_upserted: nil, upserted_ids: nil, status: :OK)
       #   Some parameter documentations has been truncated, see
       #   {Turbopuffer::Models::NamespaceWriteResponse} for more details.
       #
@@ -88,6 +94,8 @@ module Turbopuffer
       #   @param deleted_ids [Array<String, Integer>] The IDs of documents that were deleted. Only included when `return_affected_ids`
       #
       #   @param patched_ids [Array<String, Integer>] The IDs of documents that were patched. Only included when `return_affected_ids`
+      #
+      #   @param performance [Turbopuffer::Models::WritePerformance] The performance information for a write request.
       #
       #   @param rows_deleted [Integer] The number of rows deleted by the write request.
       #

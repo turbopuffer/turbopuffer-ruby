@@ -115,4 +115,6 @@ module Turbopuffer
   VectorEncoding = Turbopuffer::Models::VectorEncoding
 
   WriteBilling = Turbopuffer::Models::WriteBilling
+
+  WritePerformance = Turbopuffer::Models::WritePerformance
 end

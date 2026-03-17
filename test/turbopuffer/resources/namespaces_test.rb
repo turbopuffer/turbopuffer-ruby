@@ -168,6 +168,7 @@ class Turbopuffer::Test::Resources::NamespacesTest < Turbopuffer::Test::Resource
         status: Symbol,
         deleted_ids: ^(Turbopuffer::Internal::Type::ArrayOf[union: Turbopuffer::ID]) | nil,
         patched_ids: ^(Turbopuffer::Internal::Type::ArrayOf[union: Turbopuffer::ID]) | nil,
+        performance: Turbopuffer::WritePerformance | nil,
         rows_deleted: Integer | nil,
         rows_patched: Integer | nil,
         rows_remaining: Turbopuffer::Internal::Type::Boolean | nil,
