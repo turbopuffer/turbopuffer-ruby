@@ -1,5 +1,24 @@
 # Changelog
 
+## 1.17.0 (2026-03-18)
+
+Full Changelog: [v1.16.0...v1.17.0](https://github.com/turbopuffer/turbopuffer-ruby/compare/v1.16.0...v1.17.0)
+
+### Features
+
+* Response performance object ([c3ca5e3](https://github.com/turbopuffer/turbopuffer-ruby/commit/c3ca5e32f6cc4cfcdc29bc30e8cd11cd6e5550ef))
+* tpuf: add branching to openapi spec ([7abdd2f](https://github.com/turbopuffer/turbopuffer-ruby/commit/7abdd2fb4f0fc1d2776dae20510b969e6c144b8b))
+
+
+### Bug Fixes
+
+* **client:** use higher retry delay precision ([bf9becb](https://github.com/turbopuffer/turbopuffer-ruby/commit/bf9becb1a4c0ef1d654e403b75032657a4dbde49))
+
+
+### Chores
+
+* **internal:** tweak CI branches ([f11cac6](https://github.com/turbopuffer/turbopuffer-ruby/commit/f11cac6b51f4c31c1c013537032ac67711c5e39d))
+
 ## 1.16.0 (2026-03-15)
 
 Full Changelog: [v1.15.0...v1.16.0](https://github.com/turbopuffer/turbopuffer-ruby/compare/v1.15.0...v1.16.0)
