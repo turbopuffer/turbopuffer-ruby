@@ -6,7 +6,7 @@ module Turbopuffer
 
     DEFAULT_TIMEOUT_IN_SECONDS = T.let(60.0, Float)
 
-    DEFAULT_INITIAL_RETRY_DELAY = T.let(0.3, Float)
+    DEFAULT_INITIAL_RETRY_DELAY = T.let(0.25, Float)
 
     DEFAULT_MAX_RETRY_DELAY = T.let(8.0, Float)
 

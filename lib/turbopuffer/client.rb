@@ -10,7 +10,7 @@ module Turbopuffer
 
     # Default initial retry delay in seconds.
     # Overall delay is calculated using exponential backoff + jitter.
-    DEFAULT_INITIAL_RETRY_DELAY = 0.3
+    DEFAULT_INITIAL_RETRY_DELAY = 0.25
 
     # Default max retry delay in seconds.
     DEFAULT_MAX_RETRY_DELAY = 8.0
