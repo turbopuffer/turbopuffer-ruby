@@ -20,6 +20,13 @@ module Turbopuffer
       sig { params(namespace: String).void }
       attr_writer :namespace
 
+      # The namespace to create an instant, copy-on-write clone of.
+      sig { returns(T.nilable(String)) }
+      attr_reader :branch_from_namespace
+
+      sig { params(branch_from_namespace: String).void }
+      attr_writer :branch_from_namespace
+
       # The namespace to copy documents from.
       sig do
         returns(
@@ -197,6 +204,7 @@ module Turbopuffer
       sig do
         params(
           namespace: String,
+          branch_from_namespace: String,
           copy_from_namespace:
             T.any(
               String,
@@ -229,6 +237,8 @@ module Turbopuffer
       end
       def self.new(
         namespace: nil,
+        # The namespace to create an instant, copy-on-write clone of.
+        branch_from_namespace: nil,
         # The namespace to copy documents from.
         copy_from_namespace: nil,
         # The filter specifying which documents to delete.
@@ -277,6 +287,7 @@ module Turbopuffer
         override.returns(
           {
             namespace: String,
+            branch_from_namespace: String,
             copy_from_namespace:
               T.any(
                 String,
