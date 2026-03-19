@@ -15,8 +15,8 @@ module Turbopuffer
       # @!attribute branch_from_namespace
       #   The namespace to create an instant, copy-on-write clone of.
       #
-      #   @return [String, nil]
-      optional :branch_from_namespace, String
+      #   @return [String, Turbopuffer::Models::BranchFromNamespaceParams::BranchFromNamespaceConfig, nil]
+      optional :branch_from_namespace, union: -> { Turbopuffer::BranchFromNamespaceParams }
 
       # @!attribute copy_from_namespace
       #   The namespace to copy documents from.
@@ -136,7 +136,7 @@ module Turbopuffer
       #
       #   @param namespace [String]
       #
-      #   @param branch_from_namespace [String] The namespace to create an instant, copy-on-write clone of.
+      #   @param branch_from_namespace [String, Turbopuffer::Models::BranchFromNamespaceParams::BranchFromNamespaceConfig] The namespace to create an instant, copy-on-write clone of.
       #
       #   @param copy_from_namespace [String, Turbopuffer::Models::NamespaceWriteParams::CopyFromNamespace::CopyFromNamespaceConfig] The namespace to copy documents from.
       #

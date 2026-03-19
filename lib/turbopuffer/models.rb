@@ -50,6 +50,8 @@ module Turbopuffer
 
   Bm25ClauseParams = Turbopuffer::Models::Bm25ClauseParams
 
+  BranchFromNamespaceParams = Turbopuffer::Models::BranchFromNamespaceParams
+
   ClientNamespacesParams = Turbopuffer::Models::ClientNamespacesParams
 
   Columns = Turbopuffer::Models::Columns
