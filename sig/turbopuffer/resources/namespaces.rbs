@@ -78,7 +78,7 @@ module Turbopuffer
 
       def write: (
         ?namespace: String,
-        ?branch_from_namespace: String,
+        ?branch_from_namespace: Turbopuffer::Models::branch_from_namespace_params,
         ?copy_from_namespace: Turbopuffer::Models::NamespaceWriteParams::copy_from_namespace,
         ?delete_by_filter: top,
         ?delete_by_filter_allow_partial: bool,

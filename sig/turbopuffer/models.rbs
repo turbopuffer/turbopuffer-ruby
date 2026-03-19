@@ -9,6 +9,8 @@ module Turbopuffer
 
   class Bm25ClauseParams = Turbopuffer::Models::Bm25ClauseParams
 
+  module BranchFromNamespaceParams = Turbopuffer::Models::BranchFromNamespaceParams
+
   class ClientNamespacesParams = Turbopuffer::Models::ClientNamespacesParams
 
   class Columns = Turbopuffer::Models::Columns
