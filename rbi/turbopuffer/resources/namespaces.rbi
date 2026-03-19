@@ -238,7 +238,11 @@ module Turbopuffer
       sig do
         params(
           namespace: String,
-          branch_from_namespace: String,
+          branch_from_namespace:
+            T.any(
+              String,
+              Turbopuffer::BranchFromNamespaceParams::BranchFromNamespaceConfig::OrHash
+            ),
           copy_from_namespace:
             T.any(
               String,

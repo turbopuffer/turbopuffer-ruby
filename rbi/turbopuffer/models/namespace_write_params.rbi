@@ -21,10 +21,27 @@ module Turbopuffer
       attr_writer :namespace
 
       # The namespace to create an instant, copy-on-write clone of.
-      sig { returns(T.nilable(String)) }
+      sig do
+        returns(
+          T.nilable(
+            T.any(
+              String,
+              Turbopuffer::BranchFromNamespaceParams::BranchFromNamespaceConfig
+            )
+          )
+        )
+      end
       attr_reader :branch_from_namespace
 
-      sig { params(branch_from_namespace: String).void }
+      sig do
+        params(
+          branch_from_namespace:
+            T.any(
+              String,
+              Turbopuffer::BranchFromNamespaceParams::BranchFromNamespaceConfig::OrHash
+            )
+        ).void
+      end
       attr_writer :branch_from_namespace
 
       # The namespace to copy documents from.
@@ -204,7 +221,11 @@ module Turbopuffer
       sig do
         params(
           namespace: String,
-          branch_from_namespace: String,
+          branch_from_namespace:
+            T.any(
+              String,
+              Turbopuffer::BranchFromNamespaceParams::BranchFromNamespaceConfig::OrHash
+            ),
           copy_from_namespace:
             T.any(
               String,
@@ -287,7 +308,11 @@ module Turbopuffer
         override.returns(
           {
             namespace: String,
-            branch_from_namespace: String,
+            branch_from_namespace:
+              T.any(
+                String,
+                Turbopuffer::BranchFromNamespaceParams::BranchFromNamespaceConfig
+              ),
             copy_from_namespace:
               T.any(
                 String,

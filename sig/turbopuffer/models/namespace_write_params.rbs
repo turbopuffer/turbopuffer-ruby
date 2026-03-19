@@ -3,7 +3,7 @@ module Turbopuffer
     type namespace_write_params =
       {
         namespace: String,
-        branch_from_namespace: String,
+        branch_from_namespace: Turbopuffer::Models::branch_from_namespace_params,
         copy_from_namespace: Turbopuffer::Models::NamespaceWriteParams::copy_from_namespace,
         delete_by_filter: top,
         delete_by_filter_allow_partial: bool,
@@ -33,9 +33,11 @@ module Turbopuffer
 
       def namespace=: (String) -> String
 
-      attr_reader branch_from_namespace: String?
+      attr_reader branch_from_namespace: Turbopuffer::Models::branch_from_namespace_params?
 
-      def branch_from_namespace=: (String) -> String
+      def branch_from_namespace=: (
+        Turbopuffer::Models::branch_from_namespace_params
+      ) -> Turbopuffer::Models::branch_from_namespace_params
 
       attr_reader copy_from_namespace: Turbopuffer::Models::NamespaceWriteParams::copy_from_namespace?
 
@@ -123,7 +125,7 @@ module Turbopuffer
 
       def initialize: (
         ?namespace: String,
-        ?branch_from_namespace: String,
+        ?branch_from_namespace: Turbopuffer::Models::branch_from_namespace_params,
         ?copy_from_namespace: Turbopuffer::Models::NamespaceWriteParams::copy_from_namespace,
         ?delete_by_filter: top,
         ?delete_by_filter_allow_partial: bool,
@@ -147,7 +149,7 @@ module Turbopuffer
 
       def to_hash: -> {
         namespace: String,
-        branch_from_namespace: String,
+        branch_from_namespace: Turbopuffer::Models::branch_from_namespace_params,
         copy_from_namespace: Turbopuffer::Models::NamespaceWriteParams::copy_from_namespace,
         delete_by_filter: top,
         delete_by_filter_allow_partial: bool,

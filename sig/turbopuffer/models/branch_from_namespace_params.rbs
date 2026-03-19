@@ -1,0 +1,22 @@
+module Turbopuffer
+  module Models
+    type branch_from_namespace_params =
+      String | Turbopuffer::BranchFromNamespaceParams::BranchFromNamespaceConfig
+
+    module BranchFromNamespaceParams
+      extend Turbopuffer::Internal::Type::Union
+
+      type branch_from_namespace_config = { source_namespace: String }
+
+      class BranchFromNamespaceConfig < Turbopuffer::Internal::Type::BaseModel
+        attr_accessor source_namespace: String
+
+        def initialize: (source_namespace: String) -> void
+
+        def to_hash: -> { source_namespace: String }
+      end
+
+      def self?.variants: -> ::Array[Turbopuffer::Models::branch_from_namespace_params]
+    end
+  end
+end
