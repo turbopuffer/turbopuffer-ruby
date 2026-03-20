@@ -21,8 +21,8 @@ module Turbopuffer
       # @!attribute copy_from_namespace
       #   The namespace to copy documents from.
       #
-      #   @return [String, Turbopuffer::Models::NamespaceWriteParams::CopyFromNamespace::CopyFromNamespaceConfig, nil]
-      optional :copy_from_namespace, union: -> { Turbopuffer::NamespaceWriteParams::CopyFromNamespace }
+      #   @return [String, Turbopuffer::Models::CopyFromNamespaceParams::CopyFromNamespaceConfig, nil]
+      optional :copy_from_namespace, union: -> { Turbopuffer::CopyFromNamespaceParams }
 
       # @!attribute delete_by_filter
       #   The filter specifying which documents to delete.
@@ -138,7 +138,7 @@ module Turbopuffer
       #
       #   @param branch_from_namespace [String, Turbopuffer::Models::BranchFromNamespaceParams::BranchFromNamespaceConfig] The namespace to create an instant, copy-on-write clone of.
       #
-      #   @param copy_from_namespace [String, Turbopuffer::Models::NamespaceWriteParams::CopyFromNamespace::CopyFromNamespaceConfig] The namespace to copy documents from.
+      #   @param copy_from_namespace [String, Turbopuffer::Models::CopyFromNamespaceParams::CopyFromNamespaceConfig] The namespace to copy documents from.
       #
       #   @param delete_by_filter [Object] The filter specifying which documents to delete.
       #
@@ -175,46 +175,6 @@ module Turbopuffer
       #   @param upsert_rows [Array<Turbopuffer::Models::Row>]
       #
       #   @param request_options [Turbopuffer::RequestOptions, Hash{Symbol=>Object}]
-
-      # The namespace to copy documents from.
-      module CopyFromNamespace
-        extend Turbopuffer::Internal::Type::Union
-
-        # The namespace to copy documents from.
-        variant String
-
-        variant -> { Turbopuffer::NamespaceWriteParams::CopyFromNamespace::CopyFromNamespaceConfig }
-
-        class CopyFromNamespaceConfig < Turbopuffer::Internal::Type::BaseModel
-          # @!attribute source_namespace
-          #   The namespace to copy documents from.
-          #
-          #   @return [String]
-          required :source_namespace, String
-
-          # @!attribute source_api_key
-          #   (Optional) An API key for the organization containing the source namespace
-          #
-          #   @return [String, nil]
-          optional :source_api_key, String
-
-          # @!attribute source_region
-          #   (Optional) The region of the source namespace.
-          #
-          #   @return [String, nil]
-          optional :source_region, String
-
-          # @!method initialize(source_namespace:, source_api_key: nil, source_region: nil)
-          #   @param source_namespace [String] The namespace to copy documents from.
-          #
-          #   @param source_api_key [String] (Optional) An API key for the organization containing the source namespace
-          #
-          #   @param source_region [String] (Optional) The region of the source namespace.
-        end
-
-        # @!method self.variants
-        #   @return [Array(String, Turbopuffer::Models::NamespaceWriteParams::CopyFromNamespace::CopyFromNamespaceConfig)]
-      end
 
       class Encryption < Turbopuffer::Internal::Type::BaseModel
         # @!attribute cmek
