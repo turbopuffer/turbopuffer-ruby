@@ -1,5 +1,14 @@
 # Changelog
 
+## 1.18.0 (2026-03-20)
+
+Full Changelog: [v1.17.0...v1.18.0](https://github.com/turbopuffer/turbopuffer-ruby/compare/v1.17.0...v1.18.0)
+
+### Features
+
+* spec: disable CopyFromNamespace syntax sugar in Go ([93d9e4b](https://github.com/turbopuffer/turbopuffer-ruby/commit/93d9e4b4501ed7f444f2365b09baa5231349edf8))
+* tpuf-engine: add verbose form of branch_from_namespace ([1ae049a](https://github.com/turbopuffer/turbopuffer-ruby/commit/1ae049ad623d519817d4d9b71228f5f4e7a55aec))
+
 ## 1.17.0 (2026-03-18)
 
 Full Changelog: [v1.16.0...v1.17.0](https://github.com/turbopuffer/turbopuffer-ruby/compare/v1.16.0...v1.17.0)
