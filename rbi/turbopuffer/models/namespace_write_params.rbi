@@ -50,7 +50,7 @@ module Turbopuffer
           T.nilable(
             T.any(
               String,
-              Turbopuffer::NamespaceWriteParams::CopyFromNamespace::CopyFromNamespaceConfig
+              Turbopuffer::CopyFromNamespaceParams::CopyFromNamespaceConfig
             )
           )
         )
@@ -62,7 +62,7 @@ module Turbopuffer
           copy_from_namespace:
             T.any(
               String,
-              Turbopuffer::NamespaceWriteParams::CopyFromNamespace::CopyFromNamespaceConfig::OrHash
+              Turbopuffer::CopyFromNamespaceParams::CopyFromNamespaceConfig::OrHash
             )
         ).void
       end
@@ -229,7 +229,7 @@ module Turbopuffer
           copy_from_namespace:
             T.any(
               String,
-              Turbopuffer::NamespaceWriteParams::CopyFromNamespace::CopyFromNamespaceConfig::OrHash
+              Turbopuffer::CopyFromNamespaceParams::CopyFromNamespaceConfig::OrHash
             ),
           delete_by_filter: T.anything,
           delete_by_filter_allow_partial: T::Boolean,
@@ -316,7 +316,7 @@ module Turbopuffer
             copy_from_namespace:
               T.any(
                 String,
-                Turbopuffer::NamespaceWriteParams::CopyFromNamespace::CopyFromNamespaceConfig
+                Turbopuffer::CopyFromNamespaceParams::CopyFromNamespaceConfig
               ),
             delete_by_filter: T.anything,
             delete_by_filter_allow_partial: T::Boolean,
@@ -344,86 +344,6 @@ module Turbopuffer
         )
       end
       def to_hash
-      end
-
-      # The namespace to copy documents from.
-      module CopyFromNamespace
-        extend Turbopuffer::Internal::Type::Union
-
-        Variants =
-          T.type_alias do
-            T.any(
-              String,
-              Turbopuffer::NamespaceWriteParams::CopyFromNamespace::CopyFromNamespaceConfig
-            )
-          end
-
-        class CopyFromNamespaceConfig < Turbopuffer::Internal::Type::BaseModel
-          OrHash =
-            T.type_alias do
-              T.any(
-                Turbopuffer::NamespaceWriteParams::CopyFromNamespace::CopyFromNamespaceConfig,
-                Turbopuffer::Internal::AnyHash
-              )
-            end
-
-          # The namespace to copy documents from.
-          sig { returns(String) }
-          attr_accessor :source_namespace
-
-          # (Optional) An API key for the organization containing the source namespace
-          sig { returns(T.nilable(String)) }
-          attr_reader :source_api_key
-
-          sig { params(source_api_key: String).void }
-          attr_writer :source_api_key
-
-          # (Optional) The region of the source namespace.
-          sig { returns(T.nilable(String)) }
-          attr_reader :source_region
-
-          sig { params(source_region: String).void }
-          attr_writer :source_region
-
-          sig do
-            params(
-              source_namespace: String,
-              source_api_key: String,
-              source_region: String
-            ).returns(T.attached_class)
-          end
-          def self.new(
-            # The namespace to copy documents from.
-            source_namespace:,
-            # (Optional) An API key for the organization containing the source namespace
-            source_api_key: nil,
-            # (Optional) The region of the source namespace.
-            source_region: nil
-          )
-          end
-
-          sig do
-            override.returns(
-              {
-                source_namespace: String,
-                source_api_key: String,
-                source_region: String
-              }
-            )
-          end
-          def to_hash
-          end
-        end
-
-        sig do
-          override.returns(
-            T::Array[
-              Turbopuffer::NamespaceWriteParams::CopyFromNamespace::Variants
-            ]
-          )
-        end
-        def self.variants
-        end
       end
 
       class Encryption < Turbopuffer::Internal::Type::BaseModel
