@@ -246,7 +246,7 @@ module Turbopuffer
           copy_from_namespace:
             T.any(
               String,
-              Turbopuffer::NamespaceWriteParams::CopyFromNamespace::CopyFromNamespaceConfig::OrHash
+              Turbopuffer::CopyFromNamespaceParams::CopyFromNamespaceConfig::OrHash
             ),
           delete_by_filter: T.anything,
           delete_by_filter_allow_partial: T::Boolean,

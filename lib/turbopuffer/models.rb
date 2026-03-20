@@ -60,6 +60,8 @@ module Turbopuffer
 
   ContainsAnyTokenFilterParams = Turbopuffer::Models::ContainsAnyTokenFilterParams
 
+  CopyFromNamespaceParams = Turbopuffer::Models::CopyFromNamespaceParams
+
   DecayParams = Turbopuffer::Models::DecayParams
 
   DistanceMetric = Turbopuffer::Models::DistanceMetric
