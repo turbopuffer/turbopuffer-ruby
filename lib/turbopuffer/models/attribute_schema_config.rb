@@ -32,13 +32,19 @@ module Turbopuffer
       #   @return [Boolean, Turbopuffer::Models::FullTextSearchConfig, nil]
       optional :full_text_search, union: -> { Turbopuffer::FullTextSearch }
 
+      # @!attribute glob
+      #   Whether to enable Glob filters on this attribute.
+      #
+      #   @return [Boolean, nil]
+      optional :glob, Turbopuffer::Internal::Type::Boolean
+
       # @!attribute regex
       #   Whether to enable Regex filters on this attribute.
       #
       #   @return [Boolean, nil]
       optional :regex, Turbopuffer::Internal::Type::Boolean
 
-      # @!method initialize(type:, ann: nil, filterable: nil, full_text_search: nil, regex: nil)
+      # @!method initialize(type:, ann: nil, filterable: nil, full_text_search: nil, glob: nil, regex: nil)
       #   Some parameter documentations has been truncated, see
       #   {Turbopuffer::Models::AttributeSchemaConfig} for more details.
       #
@@ -51,6 +57,8 @@ module Turbopuffer
       #   @param filterable [Boolean] Whether or not the attributes can be used in filters.
       #
       #   @param full_text_search [Boolean, Turbopuffer::Models::FullTextSearchConfig] Whether this attribute can be used as part of a BM25 full-text search. Requires
+      #
+      #   @param glob [Boolean] Whether to enable Glob filters on this attribute.
       #
       #   @param regex [Boolean] Whether to enable Regex filters on this attribute.
 
