@@ -6,6 +6,7 @@ module Turbopuffer
         ann: Turbopuffer::Models::AttributeSchemaConfig::ann,
         filterable: bool,
         full_text_search: Turbopuffer::Models::full_text_search,
+        glob: bool,
         regex: bool
       }
 
@@ -28,6 +29,10 @@ module Turbopuffer
         Turbopuffer::Models::full_text_search
       ) -> Turbopuffer::Models::full_text_search
 
+      attr_reader glob: bool?
+
+      def glob=: (bool) -> bool
+
       attr_reader regex: bool?
 
       def regex=: (bool) -> bool
@@ -37,6 +42,7 @@ module Turbopuffer
         ?ann: Turbopuffer::Models::AttributeSchemaConfig::ann,
         ?filterable: bool,
         ?full_text_search: Turbopuffer::Models::full_text_search,
+        ?glob: bool,
         ?regex: bool
       ) -> void
 
@@ -45,6 +51,7 @@ module Turbopuffer
         ann: Turbopuffer::Models::AttributeSchemaConfig::ann,
         filterable: bool,
         full_text_search: Turbopuffer::Models::full_text_search,
+        glob: bool,
         regex: bool
       }
 

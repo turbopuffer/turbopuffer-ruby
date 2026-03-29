@@ -65,6 +65,13 @@ module Turbopuffer
       end
       attr_writer :full_text_search
 
+      # Whether to enable Glob filters on this attribute.
+      sig { returns(T.nilable(T::Boolean)) }
+      attr_reader :glob
+
+      sig { params(glob: T::Boolean).void }
+      attr_writer :glob
+
       # Whether to enable Regex filters on this attribute.
       sig { returns(T.nilable(T::Boolean)) }
       attr_reader :regex
@@ -84,6 +91,7 @@ module Turbopuffer
           filterable: T::Boolean,
           full_text_search:
             T.any(T::Boolean, Turbopuffer::FullTextSearchConfig::OrHash),
+          glob: T::Boolean,
           regex: T::Boolean
         ).returns(T.attached_class)
       end
@@ -101,6 +109,8 @@ module Turbopuffer
         # the `string` or `[]string` type, and by default, BM25-enabled attributes are not
         # filterable. You can override this by setting `filterable: true`.
         full_text_search: nil,
+        # Whether to enable Glob filters on this attribute.
+        glob: nil,
         # Whether to enable Regex filters on this attribute.
         regex: nil
       )
@@ -118,6 +128,7 @@ module Turbopuffer
             filterable: T::Boolean,
             full_text_search:
               T.any(T::Boolean, Turbopuffer::FullTextSearchConfig),
+            glob: T::Boolean,
             regex: T::Boolean
           }
         )
