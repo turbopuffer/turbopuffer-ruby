@@ -70,6 +70,12 @@ module Turbopuffer
         ?request_options: Turbopuffer::request_opts
       ) -> Turbopuffer::Models::namespace_schema_response
 
+      def update_metadata: (
+        ?namespace: String,
+        ?pinning: Turbopuffer::Models::NamespaceMetadataPatch::pinning?,
+        ?request_options: Turbopuffer::request_opts
+      ) -> Turbopuffer::NamespaceMetadata
+
       def update_schema: (
         ?namespace: String,
         ?schema: ::Hash[Symbol, Turbopuffer::Models::attribute_schema],

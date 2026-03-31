@@ -1,0 +1,15 @@
+module Turbopuffer
+  module Models
+    type pinning_config = { replicas: Integer }
+
+    class PinningConfig < Turbopuffer::Internal::Type::BaseModel
+      attr_reader replicas: Integer?
+
+      def replicas=: (Integer) -> Integer
+
+      def initialize: (?replicas: Integer) -> void
+
+      def to_hash: -> { replicas: Integer }
+    end
+  end
+end

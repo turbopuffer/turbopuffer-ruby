@@ -88,6 +88,8 @@ module Turbopuffer
 
   NamespaceMetadataParams = Turbopuffer::Models::NamespaceMetadataParams
 
+  NamespaceMetadataPatch = Turbopuffer::Models::NamespaceMetadataPatch
+
   NamespaceMultiQueryParams = Turbopuffer::Models::NamespaceMultiQueryParams
 
   NamespaceQueryParams = Turbopuffer::Models::NamespaceQueryParams
@@ -98,9 +100,13 @@ module Turbopuffer
 
   NamespaceSummary = Turbopuffer::Models::NamespaceSummary
 
+  NamespaceUpdateMetadataParams = Turbopuffer::Models::NamespaceUpdateMetadataParams
+
   NamespaceUpdateSchemaParams = Turbopuffer::Models::NamespaceUpdateSchemaParams
 
   NamespaceWriteParams = Turbopuffer::Models::NamespaceWriteParams
+
+  PinningConfig = Turbopuffer::Models::PinningConfig
 
   Query = Turbopuffer::Models::Query
 

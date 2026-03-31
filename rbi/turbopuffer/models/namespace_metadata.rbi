@@ -36,6 +36,13 @@ module Turbopuffer
       sig { returns(Time) }
       attr_accessor :updated_at
 
+      # Configuration for namespace pinning.
+      sig { returns(T.nilable(Turbopuffer::PinningConfig)) }
+      attr_reader :pinning
+
+      sig { params(pinning: Turbopuffer::PinningConfig::OrHash).void }
+      attr_writer :pinning
+
       # Metadata about a namespace.
       sig do
         params(
@@ -53,7 +60,8 @@ module Turbopuffer
               Turbopuffer::NamespaceMetadata::Index::IndexUpdating::OrHash
             ),
           schema: T::Hash[Symbol, Turbopuffer::AttributeSchemaConfig::OrHash],
-          updated_at: Time
+          updated_at: Time,
+          pinning: Turbopuffer::PinningConfig::OrHash
         ).returns(T.attached_class)
       end
       def self.new(
@@ -70,7 +78,9 @@ module Turbopuffer
         # The schema of the namespace.
         schema:,
         # The timestamp when the namespace was last modified by a write operation.
-        updated_at:
+        updated_at:,
+        # Configuration for namespace pinning.
+        pinning: nil
       )
       end
 
@@ -83,7 +93,8 @@ module Turbopuffer
             encryption: Turbopuffer::NamespaceMetadata::Encryption::Variants,
             index: Turbopuffer::NamespaceMetadata::Index::Variants,
             schema: T::Hash[Symbol, Turbopuffer::AttributeSchemaConfig],
-            updated_at: Time
+            updated_at: Time,
+            pinning: Turbopuffer::PinningConfig
           }
         )
       end

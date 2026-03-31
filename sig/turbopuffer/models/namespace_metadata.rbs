@@ -8,7 +8,8 @@ module Turbopuffer
         encryption: Turbopuffer::Models::NamespaceMetadata::encryption,
         index: Turbopuffer::Models::NamespaceMetadata::index,
         schema: ::Hash[Symbol, Turbopuffer::AttributeSchemaConfig],
-        updated_at: Time
+        updated_at: Time,
+        pinning: Turbopuffer::PinningConfig
       }
 
     class NamespaceMetadata < Turbopuffer::Internal::Type::BaseModel
@@ -26,6 +27,10 @@ module Turbopuffer
 
       attr_accessor updated_at: Time
 
+      attr_reader pinning: Turbopuffer::PinningConfig?
+
+      def pinning=: (Turbopuffer::PinningConfig) -> Turbopuffer::PinningConfig
+
       def initialize: (
         approx_logical_bytes: Integer,
         approx_row_count: Integer,
@@ -33,7 +38,8 @@ module Turbopuffer
         encryption: Turbopuffer::Models::NamespaceMetadata::encryption,
         index: Turbopuffer::Models::NamespaceMetadata::index,
         schema: ::Hash[Symbol, Turbopuffer::AttributeSchemaConfig],
-        updated_at: Time
+        updated_at: Time,
+        ?pinning: Turbopuffer::PinningConfig
       ) -> void
 
       def to_hash: -> {
@@ -43,7 +49,8 @@ module Turbopuffer
         encryption: Turbopuffer::Models::NamespaceMetadata::encryption,
         index: Turbopuffer::Models::NamespaceMetadata::index,
         schema: ::Hash[Symbol, Turbopuffer::AttributeSchemaConfig],
-        updated_at: Time
+        updated_at: Time,
+        pinning: Turbopuffer::PinningConfig
       }
 
       type encryption =
