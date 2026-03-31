@@ -46,7 +46,13 @@ module Turbopuffer
       #   @return [Time]
       required :updated_at, Time
 
-      # @!method initialize(approx_logical_bytes:, approx_row_count:, created_at:, encryption:, index:, schema:, updated_at:)
+      # @!attribute pinning
+      #   Configuration for namespace pinning.
+      #
+      #   @return [Turbopuffer::Models::PinningConfig, nil]
+      optional :pinning, -> { Turbopuffer::PinningConfig }
+
+      # @!method initialize(approx_logical_bytes:, approx_row_count:, created_at:, encryption:, index:, schema:, updated_at:, pinning: nil)
       #   Some parameter documentations has been truncated, see
       #   {Turbopuffer::Models::NamespaceMetadata} for more details.
       #
@@ -65,6 +71,8 @@ module Turbopuffer
       #   @param schema [Hash{Symbol=>Turbopuffer::Models::AttributeSchemaConfig}] The schema of the namespace.
       #
       #   @param updated_at [Time] The timestamp when the namespace was last modified by a write operation.
+      #
+      #   @param pinning [Turbopuffer::Models::PinningConfig] Configuration for namespace pinning.
 
       # Indicates that the namespace is encrypted with a customer-managed encryption key
       # (CMEK).

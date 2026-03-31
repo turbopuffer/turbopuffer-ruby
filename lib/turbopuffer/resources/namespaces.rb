@@ -274,6 +274,37 @@ module Turbopuffer
         )
       end
 
+      # Some parameter documentations has been truncated, see
+      # {Turbopuffer::Models::NamespaceUpdateMetadataParams} for more details.
+      #
+      # Update metadata configuration for a namespace.
+      #
+      # @overload update_metadata(namespace: nil, pinning: nil, request_options: {})
+      #
+      # @param namespace [String] Path param: The name of the namespace.
+      #
+      # @param pinning [Boolean, Turbopuffer::Models::PinningConfig, nil] Body param: Configuration for namespace pinning.
+      #
+      # @param request_options [Turbopuffer::RequestOptions, Hash{Symbol=>Object}, nil]
+      #
+      # @return [Turbopuffer::Models::NamespaceMetadata]
+      #
+      # @see Turbopuffer::Models::NamespaceUpdateMetadataParams
+      def update_metadata(params = {})
+        parsed, options = Turbopuffer::NamespaceUpdateMetadataParams.dump_request(params)
+        namespace =
+          parsed.delete(:namespace) do
+            @client.default_namespace
+          end
+        @client.request(
+          method: :patch,
+          path: ["v1/namespaces/%1$s/metadata", namespace],
+          body: parsed,
+          model: Turbopuffer::NamespaceMetadata,
+          options: options
+        )
+      end
+
       # Update namespace schema.
       #
       # @overload update_schema(namespace: nil, schema: nil, request_options: {})

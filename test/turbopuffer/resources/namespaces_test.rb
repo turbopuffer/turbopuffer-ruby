@@ -69,7 +69,8 @@ class Turbopuffer::Test::Resources::NamespacesTest < Turbopuffer::Test::Resource
         encryption: Turbopuffer::NamespaceMetadata::Encryption,
         index: Turbopuffer::NamespaceMetadata::Index,
         schema: ^(Turbopuffer::Internal::Type::HashOf[Turbopuffer::AttributeSchemaConfig]),
-        updated_at: Time
+        updated_at: Time,
+        pinning: Turbopuffer::PinningConfig | nil
       }
     end
   end
@@ -138,6 +139,29 @@ class Turbopuffer::Test::Resources::NamespacesTest < Turbopuffer::Test::Resource
 
     assert_pattern do
       response => ^(Turbopuffer::Internal::Type::HashOf[Turbopuffer::AttributeSchemaConfig])
+    end
+  end
+
+  def test_update_metadata_required_params
+    skip("Mock server tests are disabled")
+
+    response = @turbopuffer.namespaces.update_metadata(namespace: "namespace")
+
+    assert_pattern do
+      response => Turbopuffer::NamespaceMetadata
+    end
+
+    assert_pattern do
+      response => {
+        approx_logical_bytes: Integer,
+        approx_row_count: Integer,
+        created_at: Time,
+        encryption: Turbopuffer::NamespaceMetadata::Encryption,
+        index: Turbopuffer::NamespaceMetadata::Index,
+        schema: ^(Turbopuffer::Internal::Type::HashOf[Turbopuffer::AttributeSchemaConfig]),
+        updated_at: Time,
+        pinning: Turbopuffer::PinningConfig | nil
+      }
     end
   end
 
