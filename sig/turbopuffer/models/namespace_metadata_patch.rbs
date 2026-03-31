@@ -1,0 +1,26 @@
+module Turbopuffer
+  module Models
+    type namespace_metadata_patch =
+      { pinning: Turbopuffer::Models::NamespaceMetadataPatch::pinning? }
+
+    class NamespaceMetadataPatch < Turbopuffer::Internal::Type::BaseModel
+      attr_accessor pinning: Turbopuffer::Models::NamespaceMetadataPatch::pinning?
+
+      def initialize: (
+        ?pinning: Turbopuffer::Models::NamespaceMetadataPatch::pinning?
+      ) -> void
+
+      def to_hash: -> {
+        pinning: Turbopuffer::Models::NamespaceMetadataPatch::pinning?
+      }
+
+      type pinning = bool | Turbopuffer::PinningConfig
+
+      module Pinning
+        extend Turbopuffer::Internal::Type::Union
+
+        def self?.variants: -> ::Array[Turbopuffer::Models::NamespaceMetadataPatch::pinning]
+      end
+    end
+  end
+end

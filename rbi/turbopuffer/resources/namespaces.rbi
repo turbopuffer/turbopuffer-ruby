@@ -213,6 +213,29 @@ module Turbopuffer
       )
       end
 
+      # Update metadata configuration for a namespace.
+      sig do
+        params(
+          namespace: String,
+          pinning:
+            T.nilable(T.any(T::Boolean, Turbopuffer::PinningConfig::OrHash)),
+          request_options: Turbopuffer::RequestOptions::OrHash
+        ).returns(Turbopuffer::NamespaceMetadata)
+      end
+      def update_metadata(
+        # Path param: The name of the namespace.
+        namespace: nil,
+        # Body param: Configuration for namespace pinning.
+        #
+        # - Missing field: no change to pinning configuration
+        # - `null` or `false`: explicitly remove pinning
+        # - `true`: enable pinning with default configuration
+        # - Object: set pinning configuration
+        pinning: nil,
+        request_options: {}
+      )
+      end
+
       # Update namespace schema.
       sig do
         params(
