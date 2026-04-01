@@ -179,6 +179,7 @@ module Turbopuffer
           filters: T.anything,
           include_ground_truth: T::Boolean,
           num: Integer,
+          rank_by: T.anything,
           top_k: Integer,
           request_options: Turbopuffer::RequestOptions::OrHash
         ).returns(Turbopuffer::Models::NamespaceRecallResponse)
@@ -193,6 +194,9 @@ module Turbopuffer
         include_ground_truth: nil,
         # Body param: The number of searches to run.
         num: nil,
+        # Body param: The ranking function to evaluate recall for. If provided, `num` must
+        # be either null or 1.
+        rank_by: nil,
         # Body param: Search for `top_k` nearest neighbors.
         top_k: nil,
         request_options: {}

@@ -42,6 +42,14 @@ module Turbopuffer
       sig { params(num: Integer).void }
       attr_writer :num
 
+      # The ranking function to evaluate recall for. If provided, `num` must be either
+      # null or 1.
+      sig { returns(T.nilable(T.anything)) }
+      attr_reader :rank_by
+
+      sig { params(rank_by: T.anything).void }
+      attr_writer :rank_by
+
       # Search for `top_k` nearest neighbors.
       sig { returns(T.nilable(Integer)) }
       attr_reader :top_k
@@ -55,6 +63,7 @@ module Turbopuffer
           filters: T.anything,
           include_ground_truth: T::Boolean,
           num: Integer,
+          rank_by: T.anything,
           top_k: Integer,
           request_options: Turbopuffer::RequestOptions::OrHash
         ).returns(T.attached_class)
@@ -68,6 +77,9 @@ module Turbopuffer
         include_ground_truth: nil,
         # The number of searches to run.
         num: nil,
+        # The ranking function to evaluate recall for. If provided, `num` must be either
+        # null or 1.
+        rank_by: nil,
         # Search for `top_k` nearest neighbors.
         top_k: nil,
         request_options: {}
@@ -81,6 +93,7 @@ module Turbopuffer
             filters: T.anything,
             include_ground_truth: T::Boolean,
             num: Integer,
+            rank_by: T.anything,
             top_k: Integer,
             request_options: Turbopuffer::RequestOptions
           }

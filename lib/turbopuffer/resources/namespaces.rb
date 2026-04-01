@@ -217,7 +217,7 @@ module Turbopuffer
       #
       # Evaluate recall.
       #
-      # @overload recall(namespace: nil, filters: nil, include_ground_truth: nil, num: nil, top_k: nil, request_options: {})
+      # @overload recall(namespace: nil, filters: nil, include_ground_truth: nil, num: nil, rank_by: nil, top_k: nil, request_options: {})
       #
       # @param namespace [String] Path param: The name of the namespace.
       #
@@ -226,6 +226,8 @@ module Turbopuffer
       # @param include_ground_truth [Boolean] Body param: Include ground truth data (query vectors and true nearest neighbors)
       #
       # @param num [Integer] Body param: The number of searches to run.
+      #
+      # @param rank_by [Object] Body param: The ranking function to evaluate recall for. If provided, `num` must
       #
       # @param top_k [Integer] Body param: Search for `top_k` nearest neighbors.
       #
