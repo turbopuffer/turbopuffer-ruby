@@ -31,13 +31,20 @@ module Turbopuffer
       #   @return [Integer, nil]
       optional :num, Integer
 
+      # @!attribute rank_by
+      #   The ranking function to evaluate recall for. If provided, `num` must be either
+      #   null or 1.
+      #
+      #   @return [Object, nil]
+      optional :rank_by, Turbopuffer::Internal::Type::Unknown
+
       # @!attribute top_k
       #   Search for `top_k` nearest neighbors.
       #
       #   @return [Integer, nil]
       optional :top_k, Integer
 
-      # @!method initialize(namespace: nil, filters: nil, include_ground_truth: nil, num: nil, top_k: nil, request_options: {})
+      # @!method initialize(namespace: nil, filters: nil, include_ground_truth: nil, num: nil, rank_by: nil, top_k: nil, request_options: {})
       #   Some parameter documentations has been truncated, see
       #   {Turbopuffer::Models::NamespaceRecallParams} for more details.
       #
@@ -48,6 +55,8 @@ module Turbopuffer
       #   @param include_ground_truth [Boolean] Include ground truth data (query vectors and true nearest neighbors) in the resp
       #
       #   @param num [Integer] The number of searches to run.
+      #
+      #   @param rank_by [Object] The ranking function to evaluate recall for. If provided, `num` must be either n
       #
       #   @param top_k [Integer] Search for `top_k` nearest neighbors.
       #
