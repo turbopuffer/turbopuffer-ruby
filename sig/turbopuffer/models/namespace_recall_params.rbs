@@ -6,6 +6,7 @@ module Turbopuffer
         filters: top,
         include_ground_truth: bool,
         num: Integer,
+        rank_by: top,
         top_k: Integer
       }
       & Turbopuffer::Internal::Type::request_parameters
@@ -30,6 +31,10 @@ module Turbopuffer
 
       def num=: (Integer) -> Integer
 
+      attr_reader rank_by: top?
+
+      def rank_by=: (top) -> top
+
       attr_reader top_k: Integer?
 
       def top_k=: (Integer) -> Integer
@@ -39,6 +44,7 @@ module Turbopuffer
         ?filters: top,
         ?include_ground_truth: bool,
         ?num: Integer,
+        ?rank_by: top,
         ?top_k: Integer,
         ?request_options: Turbopuffer::request_opts
       ) -> void
@@ -48,6 +54,7 @@ module Turbopuffer
         filters: top,
         include_ground_truth: bool,
         num: Integer,
+        rank_by: top,
         top_k: Integer,
         request_options: Turbopuffer::RequestOptions
       }

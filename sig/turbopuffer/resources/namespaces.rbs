@@ -61,6 +61,7 @@ module Turbopuffer
         ?filters: top,
         ?include_ground_truth: bool,
         ?num: Integer,
+        ?rank_by: top,
         ?top_k: Integer,
         ?request_options: Turbopuffer::request_opts
       ) -> Turbopuffer::Models::NamespaceRecallResponse
