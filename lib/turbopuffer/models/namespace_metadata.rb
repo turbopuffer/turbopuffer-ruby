@@ -47,10 +47,11 @@ module Turbopuffer
       required :updated_at, Time
 
       # @!attribute pinning
-      #   Configuration for namespace pinning.
+      #   Configuration for namespace pinning, along with the current status of the pinned
+      #   namespace.
       #
-      #   @return [Turbopuffer::Models::PinningConfig, nil]
-      optional :pinning, -> { Turbopuffer::PinningConfig }
+      #   @return [Turbopuffer::Models::NamespaceMetadata::Pinning, nil]
+      optional :pinning, -> { Turbopuffer::NamespaceMetadata::Pinning }
 
       # @!method initialize(approx_logical_bytes:, approx_row_count:, created_at:, encryption:, index:, schema:, updated_at:, pinning: nil)
       #   Some parameter documentations has been truncated, see
@@ -72,7 +73,7 @@ module Turbopuffer
       #
       #   @param updated_at [Time] The timestamp when the namespace was last modified by a write operation.
       #
-      #   @param pinning [Turbopuffer::Models::PinningConfig] Configuration for namespace pinning.
+      #   @param pinning [Turbopuffer::Models::NamespaceMetadata::Pinning] Configuration for namespace pinning, along with the current status of the pinned
 
       # Indicates that the namespace is encrypted with a customer-managed encryption key
       # (CMEK).
@@ -168,6 +169,54 @@ module Turbopuffer
 
         # @!method self.variants
         #   @return [Array(Turbopuffer::Models::NamespaceMetadata::Index::IndexUpToDate, Turbopuffer::Models::NamespaceMetadata::Index::IndexUpdating)]
+      end
+
+      # @see Turbopuffer::Models::NamespaceMetadata#pinning
+      class Pinning < Turbopuffer::Models::PinningConfig
+        # @!attribute status
+        #   Operational status for a pinned namespace.
+        #
+        #   @return [Turbopuffer::Models::NamespaceMetadata::Pinning::Status, nil]
+        optional :status, -> { Turbopuffer::NamespaceMetadata::Pinning::Status }
+
+        # @!method initialize(status: nil)
+        #   Configuration for namespace pinning, along with the current status of the pinned
+        #   namespace.
+        #
+        #   @param status [Turbopuffer::Models::NamespaceMetadata::Pinning::Status] Operational status for a pinned namespace.
+
+        class Status < Turbopuffer::Internal::Type::BaseModel
+          # @!attribute ready_replicas
+          #   The number of replicas that are warm and serving traffic.
+          #
+          #   @return [Integer]
+          required :ready_replicas, Integer
+
+          # @!attribute updated_at
+          #   The timestamp of the latest pinning status snapshot.
+          #
+          #   @return [Time]
+          required :updated_at, Time
+
+          # @!attribute utilization
+          #   Aggregate utilization for the pinned namespace, reported as a value between 0.0
+          #   and 1.0.
+          #
+          #   @return [Float]
+          required :utilization, Float
+
+          # @!method initialize(ready_replicas:, updated_at:, utilization:)
+          #   Some parameter documentations has been truncated, see
+          #   {Turbopuffer::Models::NamespaceMetadata::Pinning::Status} for more details.
+          #
+          #   Operational status for a pinned namespace.
+          #
+          #   @param ready_replicas [Integer] The number of replicas that are warm and serving traffic.
+          #
+          #   @param updated_at [Time] The timestamp of the latest pinning status snapshot.
+          #
+          #   @param utilization [Float] Aggregate utilization for the pinned namespace, reported as a value between 0.0
+        end
       end
     end
   end
