@@ -1,5 +1,30 @@
 # Changelog
 
+## 1.19.0 (2026-04-06)
+
+Full Changelog: [v1.18.0...v1.19.0](https://github.com/turbopuffer/turbopuffer-ruby/compare/v1.18.0...v1.19.0)
+
+### Features
+
+* add update_metadata method to configure pinning ([f59a80b](https://github.com/turbopuffer/turbopuffer-ruby/commit/f59a80b8ff95b181a07d7bf2feb9715bf6ed2080))
+* docs for glob/regex acceleration ([bafcf09](https://github.com/turbopuffer/turbopuffer-ruby/commit/bafcf09b3b25db23394a76cf6acb688f471a35ea))
+* Multiple Vector Columns Docs ([76392ee](https://github.com/turbopuffer/turbopuffer-ruby/commit/76392ee17ea6ea2d177b7002ca791c27bff394d6))
+* spec: include pinning status in /metadata response ([0ff4fa4](https://github.com/turbopuffer/turbopuffer-ruby/commit/0ff4fa4877dea26f3c5786891632b060e97ad7a2))
+
+
+### Bug Fixes
+
+* align path encoding with RFC 3986 section 3.3 ([77633f8](https://github.com/turbopuffer/turbopuffer-ruby/commit/77633f885d255631ce1d4b48075c87f5120973ab))
+* **internal:** correct multipart form field name encoding ([7f54d40](https://github.com/turbopuffer/turbopuffer-ruby/commit/7f54d4035b422d568d640ad74d0a311135743927))
+* variable name typo ([7b17a7a](https://github.com/turbopuffer/turbopuffer-ruby/commit/7b17a7a9830198e0ffa46c406bdf87ea865f5863))
+
+
+### Chores
+
+* **ci:** skip lint on metadata-only changes ([016dab3](https://github.com/turbopuffer/turbopuffer-ruby/commit/016dab37b9e2e92fb14dfea9e814590f329a7cc5))
+* **ci:** support opting out of skipping builds on metadata-only commits ([afc1d7d](https://github.com/turbopuffer/turbopuffer-ruby/commit/afc1d7d3f532ac4d79b73a171308d627e14afd68))
+* **internal:** update gitignore ([cb07b77](https://github.com/turbopuffer/turbopuffer-ruby/commit/cb07b772afcb6337e032217f724cc9d121004adc))
+
 ## 1.18.0 (2026-03-20)
 
 Full Changelog: [v1.17.0...v1.18.0](https://github.com/turbopuffer/turbopuffer-ruby/compare/v1.17.0...v1.18.0)
