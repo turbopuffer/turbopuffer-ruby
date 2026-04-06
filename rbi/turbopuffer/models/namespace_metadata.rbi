@@ -36,11 +36,14 @@ module Turbopuffer
       sig { returns(Time) }
       attr_accessor :updated_at
 
-      # Configuration for namespace pinning.
-      sig { returns(T.nilable(Turbopuffer::PinningConfig)) }
+      # Configuration for namespace pinning, along with the current status of the pinned
+      # namespace.
+      sig { returns(T.nilable(Turbopuffer::NamespaceMetadata::Pinning)) }
       attr_reader :pinning
 
-      sig { params(pinning: Turbopuffer::PinningConfig::OrHash).void }
+      sig do
+        params(pinning: Turbopuffer::NamespaceMetadata::Pinning::OrHash).void
+      end
       attr_writer :pinning
 
       # Metadata about a namespace.
@@ -61,7 +64,7 @@ module Turbopuffer
             ),
           schema: T::Hash[Symbol, Turbopuffer::AttributeSchemaConfig::OrHash],
           updated_at: Time,
-          pinning: Turbopuffer::PinningConfig::OrHash
+          pinning: Turbopuffer::NamespaceMetadata::Pinning::OrHash
         ).returns(T.attached_class)
       end
       def self.new(
@@ -79,7 +82,8 @@ module Turbopuffer
         schema:,
         # The timestamp when the namespace was last modified by a write operation.
         updated_at:,
-        # Configuration for namespace pinning.
+        # Configuration for namespace pinning, along with the current status of the pinned
+        # namespace.
         pinning: nil
       )
       end
@@ -94,7 +98,7 @@ module Turbopuffer
             index: Turbopuffer::NamespaceMetadata::Index::Variants,
             schema: T::Hash[Symbol, Turbopuffer::AttributeSchemaConfig],
             updated_at: Time,
-            pinning: Turbopuffer::PinningConfig
+            pinning: Turbopuffer::NamespaceMetadata::Pinning
           }
         )
       end
@@ -288,6 +292,100 @@ module Turbopuffer
           )
         end
         def self.variants
+        end
+      end
+
+      class Pinning < Turbopuffer::Models::PinningConfig
+        OrHash =
+          T.type_alias do
+            T.any(
+              Turbopuffer::NamespaceMetadata::Pinning,
+              Turbopuffer::Internal::AnyHash
+            )
+          end
+
+        # Operational status for a pinned namespace.
+        sig do
+          returns(T.nilable(Turbopuffer::NamespaceMetadata::Pinning::Status))
+        end
+        attr_reader :status
+
+        sig do
+          params(
+            status: Turbopuffer::NamespaceMetadata::Pinning::Status::OrHash
+          ).void
+        end
+        attr_writer :status
+
+        # Configuration for namespace pinning, along with the current status of the pinned
+        # namespace.
+        sig do
+          params(
+            status: Turbopuffer::NamespaceMetadata::Pinning::Status::OrHash
+          ).returns(T.attached_class)
+        end
+        def self.new(
+          # Operational status for a pinned namespace.
+          status: nil
+        )
+        end
+
+        sig do
+          override.returns(
+            { status: Turbopuffer::NamespaceMetadata::Pinning::Status }
+          )
+        end
+        def to_hash
+        end
+
+        class Status < Turbopuffer::Internal::Type::BaseModel
+          OrHash =
+            T.type_alias do
+              T.any(
+                Turbopuffer::NamespaceMetadata::Pinning::Status,
+                Turbopuffer::Internal::AnyHash
+              )
+            end
+
+          # The number of replicas that are warm and serving traffic.
+          sig { returns(Integer) }
+          attr_accessor :ready_replicas
+
+          # The timestamp of the latest pinning status snapshot.
+          sig { returns(Time) }
+          attr_accessor :updated_at
+
+          # Aggregate utilization for the pinned namespace, reported as a value between 0.0
+          # and 1.0.
+          sig { returns(Float) }
+          attr_accessor :utilization
+
+          # Operational status for a pinned namespace.
+          sig do
+            params(
+              ready_replicas: Integer,
+              updated_at: Time,
+              utilization: Float
+            ).returns(T.attached_class)
+          end
+          def self.new(
+            # The number of replicas that are warm and serving traffic.
+            ready_replicas:,
+            # The timestamp of the latest pinning status snapshot.
+            updated_at:,
+            # Aggregate utilization for the pinned namespace, reported as a value between 0.0
+            # and 1.0.
+            utilization:
+          )
+          end
+
+          sig do
+            override.returns(
+              { ready_replicas: Integer, updated_at: Time, utilization: Float }
+            )
+          end
+          def to_hash
+          end
         end
       end
     end

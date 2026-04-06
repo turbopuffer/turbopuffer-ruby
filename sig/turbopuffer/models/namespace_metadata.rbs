@@ -9,7 +9,7 @@ module Turbopuffer
         index: Turbopuffer::Models::NamespaceMetadata::index,
         schema: ::Hash[Symbol, Turbopuffer::AttributeSchemaConfig],
         updated_at: Time,
-        pinning: Turbopuffer::PinningConfig
+        pinning: Turbopuffer::NamespaceMetadata::Pinning
       }
 
     class NamespaceMetadata < Turbopuffer::Internal::Type::BaseModel
@@ -27,9 +27,11 @@ module Turbopuffer
 
       attr_accessor updated_at: Time
 
-      attr_reader pinning: Turbopuffer::PinningConfig?
+      attr_reader pinning: Turbopuffer::NamespaceMetadata::Pinning?
 
-      def pinning=: (Turbopuffer::PinningConfig) -> Turbopuffer::PinningConfig
+      def pinning=: (
+        Turbopuffer::NamespaceMetadata::Pinning
+      ) -> Turbopuffer::NamespaceMetadata::Pinning
 
       def initialize: (
         approx_logical_bytes: Integer,
@@ -39,7 +41,7 @@ module Turbopuffer
         index: Turbopuffer::Models::NamespaceMetadata::index,
         schema: ::Hash[Symbol, Turbopuffer::AttributeSchemaConfig],
         updated_at: Time,
-        ?pinning: Turbopuffer::PinningConfig
+        ?pinning: Turbopuffer::NamespaceMetadata::Pinning
       ) -> void
 
       def to_hash: -> {
@@ -50,7 +52,7 @@ module Turbopuffer
         index: Turbopuffer::Models::NamespaceMetadata::index,
         schema: ::Hash[Symbol, Turbopuffer::AttributeSchemaConfig],
         updated_at: Time,
-        pinning: Turbopuffer::PinningConfig
+        pinning: Turbopuffer::NamespaceMetadata::Pinning
       }
 
       type encryption =
@@ -128,6 +130,47 @@ module Turbopuffer
         end
 
         def self?.variants: -> ::Array[Turbopuffer::Models::NamespaceMetadata::index]
+      end
+
+      type pinning = { status: Turbopuffer::NamespaceMetadata::Pinning::Status }
+
+      class Pinning < Turbopuffer::Models::PinningConfig
+        def status: -> Turbopuffer::NamespaceMetadata::Pinning::Status?
+
+        def status=: (
+          Turbopuffer::NamespaceMetadata::Pinning::Status _
+        ) -> Turbopuffer::NamespaceMetadata::Pinning::Status
+
+        def initialize: (
+          ?status: Turbopuffer::NamespaceMetadata::Pinning::Status
+        ) -> void
+
+        def to_hash: -> {
+          status: Turbopuffer::NamespaceMetadata::Pinning::Status
+        }
+
+        type status =
+          { ready_replicas: Integer, updated_at: Time, utilization: Float }
+
+        class Status < Turbopuffer::Internal::Type::BaseModel
+          attr_accessor ready_replicas: Integer
+
+          attr_accessor updated_at: Time
+
+          attr_accessor utilization: Float
+
+          def initialize: (
+            ready_replicas: Integer,
+            updated_at: Time,
+            utilization: Float
+          ) -> void
+
+          def to_hash: -> {
+            ready_replicas: Integer,
+            updated_at: Time,
+            utilization: Float
+          }
+        end
       end
     end
   end
