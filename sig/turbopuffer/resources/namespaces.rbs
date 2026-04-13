@@ -33,7 +33,7 @@ module Turbopuffer
       ) -> Turbopuffer::NamespaceMetadata
 
       def multi_query: (
-        queries: ::Array[Turbopuffer::Query],
+        queries: ::Array[Turbopuffer::NamespaceMultiQueryParams::Query],
         ?namespace: String,
         ?consistency: Turbopuffer::NamespaceMultiQueryParams::Consistency,
         ?vector_encoding: Turbopuffer::Models::vector_encoding,

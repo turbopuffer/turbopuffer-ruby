@@ -6,7 +6,7 @@ module Turbopuffer
     module ID
       extend Turbopuffer::Internal::Type::Union
 
-      # A UUID.
+      # A string ID.
       variant String
 
       # An integer ID.

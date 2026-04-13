@@ -32,20 +32,14 @@ module Turbopuffer
         # The vector embeddings of the documents.
         variant -> { Turbopuffer::Models::Columns::Vector::VectorArray }
 
-        # A dense vector encoded as an array of floats.
-        variant -> { Turbopuffer::Models::Columns::Vector::FloatArray }
-
-        # A dense vector encoded as a base64 string.
-        variant String
+        # A vector embedding associated with a document.
+        variant union: -> { Turbopuffer::Vector }
 
         # @!method self.variants
         #   @return [Array(Array<Array<Float>, String>, Array<Float>, String)]
 
         # @type [Turbopuffer::Internal::Type::Converter]
         VectorArray = Turbopuffer::Internal::Type::ArrayOf[union: -> { Turbopuffer::Vector }]
-
-        # @type [Turbopuffer::Internal::Type::Converter]
-        FloatArray = Turbopuffer::Internal::Type::ArrayOf[Float]
       end
     end
   end

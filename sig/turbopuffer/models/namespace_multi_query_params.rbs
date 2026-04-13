@@ -3,7 +3,7 @@ module Turbopuffer
     type namespace_multi_query_params =
       {
         namespace: String,
-        queries: ::Array[Turbopuffer::Query],
+        queries: ::Array[Turbopuffer::NamespaceMultiQueryParams::Query],
         consistency: Turbopuffer::NamespaceMultiQueryParams::Consistency,
         vector_encoding: Turbopuffer::Models::vector_encoding
       }
@@ -17,7 +17,7 @@ module Turbopuffer
 
       def namespace=: (String) -> String
 
-      attr_accessor queries: ::Array[Turbopuffer::Query]
+      attr_accessor queries: ::Array[Turbopuffer::NamespaceMultiQueryParams::Query]
 
       attr_reader consistency: Turbopuffer::NamespaceMultiQueryParams::Consistency?
 
@@ -32,7 +32,7 @@ module Turbopuffer
       ) -> Turbopuffer::Models::vector_encoding
 
       def initialize: (
-        queries: ::Array[Turbopuffer::Query],
+        queries: ::Array[Turbopuffer::NamespaceMultiQueryParams::Query],
         ?namespace: String,
         ?consistency: Turbopuffer::NamespaceMultiQueryParams::Consistency,
         ?vector_encoding: Turbopuffer::Models::vector_encoding,
@@ -41,11 +41,100 @@ module Turbopuffer
 
       def to_hash: -> {
         namespace: String,
-        queries: ::Array[Turbopuffer::Query],
+        queries: ::Array[Turbopuffer::NamespaceMultiQueryParams::Query],
         consistency: Turbopuffer::NamespaceMultiQueryParams::Consistency,
         vector_encoding: Turbopuffer::Models::vector_encoding,
         request_options: Turbopuffer::RequestOptions
       }
+
+      type query =
+        {
+          aggregate_by: ::Hash[Symbol, top],
+          distance_metric: Turbopuffer::Models::distance_metric,
+          exclude_attributes: ::Array[String],
+          filters: top,
+          group_by: ::Array[String],
+          include_attributes: Turbopuffer::Models::include_attributes,
+          limit: Turbopuffer::Models::NamespaceMultiQueryParams::Query::limit,
+          rank_by: top,
+          top_k: Integer
+        }
+
+      class Query < Turbopuffer::Internal::Type::BaseModel
+        attr_reader aggregate_by: ::Hash[Symbol, top]?
+
+        def aggregate_by=: (::Hash[Symbol, top]) -> ::Hash[Symbol, top]
+
+        attr_reader distance_metric: Turbopuffer::Models::distance_metric?
+
+        def distance_metric=: (
+          Turbopuffer::Models::distance_metric
+        ) -> Turbopuffer::Models::distance_metric
+
+        attr_reader exclude_attributes: ::Array[String]?
+
+        def exclude_attributes=: (::Array[String]) -> ::Array[String]
+
+        attr_reader filters: top?
+
+        def filters=: (top) -> top
+
+        attr_reader group_by: ::Array[String]?
+
+        def group_by=: (::Array[String]) -> ::Array[String]
+
+        attr_reader include_attributes: Turbopuffer::Models::include_attributes?
+
+        def include_attributes=: (
+          Turbopuffer::Models::include_attributes
+        ) -> Turbopuffer::Models::include_attributes
+
+        attr_reader limit: Turbopuffer::Models::NamespaceMultiQueryParams::Query::limit?
+
+        def limit=: (
+          Turbopuffer::Models::NamespaceMultiQueryParams::Query::limit
+        ) -> Turbopuffer::Models::NamespaceMultiQueryParams::Query::limit
+
+        attr_reader rank_by: top?
+
+        def rank_by=: (top) -> top
+
+        attr_reader top_k: Integer?
+
+        def top_k=: (Integer) -> Integer
+
+        def initialize: (
+          ?aggregate_by: ::Hash[Symbol, top],
+          ?distance_metric: Turbopuffer::Models::distance_metric,
+          ?exclude_attributes: ::Array[String],
+          ?filters: top,
+          ?group_by: ::Array[String],
+          ?include_attributes: Turbopuffer::Models::include_attributes,
+          ?limit: Turbopuffer::Models::NamespaceMultiQueryParams::Query::limit,
+          ?rank_by: top,
+          ?top_k: Integer
+        ) -> void
+
+        def to_hash: -> {
+          aggregate_by: ::Hash[Symbol, top],
+          distance_metric: Turbopuffer::Models::distance_metric,
+          exclude_attributes: ::Array[String],
+          filters: top,
+          group_by: ::Array[String],
+          include_attributes: Turbopuffer::Models::include_attributes,
+          limit: Turbopuffer::Models::NamespaceMultiQueryParams::Query::limit,
+          rank_by: top,
+          top_k: Integer
+        }
+
+        type limit = Integer | Turbopuffer::Limit
+
+        module Limit
+          extend Turbopuffer::Internal::Type::Union
+
+          def self?.variants: -> ::Array[Turbopuffer::Models::NamespaceMultiQueryParams::Query::limit]
+        end
+      end
 
       type consistency =
         {

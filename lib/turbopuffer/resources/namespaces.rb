@@ -133,7 +133,7 @@ module Turbopuffer
       #
       # @overload multi_query(queries:, namespace: nil, consistency: nil, vector_encoding: nil, request_options: {})
       #
-      # @param queries [Array<Turbopuffer::Models::Query>] Body param
+      # @param queries [Array<Turbopuffer::Models::NamespaceMultiQueryParams::Query>] Body param
       #
       # @param namespace [String] Path param: The name of the namespace.
       #

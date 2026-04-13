@@ -108,8 +108,6 @@ module Turbopuffer
 
   PinningConfig = Turbopuffer::Models::PinningConfig
 
-  Query = Turbopuffer::Models::Query
-
   QueryBilling = Turbopuffer::Models::QueryBilling
 
   QueryPerformance = Turbopuffer::Models::QueryPerformance

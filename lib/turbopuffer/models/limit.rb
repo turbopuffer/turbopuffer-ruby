@@ -41,9 +41,6 @@ module Turbopuffer
         required :limit, Integer
 
         # @!method initialize(attributes:, limit:)
-        #   Some parameter documentations has been truncated, see
-        #   {Turbopuffer::Models::Limit::Per} for more details.
-        #
         #   Limits the number of documents with the same value for a set of attributes (the
         #   "limit key") that can appear in the results.
         #

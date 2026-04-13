@@ -14,8 +14,9 @@ module Turbopuffer
 
       # @!attribute queries
       #
-      #   @return [Array<Turbopuffer::Models::Query>]
-      required :queries, -> { Turbopuffer::Internal::Type::ArrayOf[Turbopuffer::Query] }
+      #   @return [Array<Turbopuffer::Models::NamespaceMultiQueryParams::Query>]
+      required :queries,
+               -> { Turbopuffer::Internal::Type::ArrayOf[Turbopuffer::NamespaceMultiQueryParams::Query] }
 
       # @!attribute consistency
       #   The consistency level for a query.
@@ -30,7 +31,7 @@ module Turbopuffer
       optional :vector_encoding, enum: -> { Turbopuffer::VectorEncoding }
 
       # @!method initialize(queries:, namespace: nil, consistency: nil, vector_encoding: nil, request_options: {})
-      #   @param queries [Array<Turbopuffer::Models::Query>]
+      #   @param queries [Array<Turbopuffer::Models::NamespaceMultiQueryParams::Query>]
       #
       #   @param namespace [String]
       #
@@ -39,6 +40,105 @@ module Turbopuffer
       #   @param vector_encoding [Symbol, Turbopuffer::Models::VectorEncoding] The encoding to use for vectors in the response.
       #
       #   @param request_options [Turbopuffer::RequestOptions, Hash{Symbol=>Object}]
+
+      class Query < Turbopuffer::Internal::Type::BaseModel
+        # @!attribute aggregate_by
+        #   Aggregations to compute over all documents in the namespace that match the
+        #   filters.
+        #
+        #   @return [Hash{Symbol=>Object}, nil]
+        optional :aggregate_by, Turbopuffer::Internal::Type::HashOf[Turbopuffer::Internal::Type::Unknown]
+
+        # @!attribute distance_metric
+        #   A function used to calculate vector similarity.
+        #
+        #   @return [Symbol, Turbopuffer::Models::DistanceMetric, nil]
+        optional :distance_metric, enum: -> { Turbopuffer::DistanceMetric }
+
+        # @!attribute exclude_attributes
+        #   List of attribute names to exclude from the response. All other attributes will
+        #   be included in the response.
+        #
+        #   @return [Array<String>, nil]
+        optional :exclude_attributes, Turbopuffer::Internal::Type::ArrayOf[String]
+
+        # @!attribute filters
+        #   Exact filters for attributes to refine search results for. Think of it as a SQL
+        #   WHERE clause.
+        #
+        #   @return [Object, nil]
+        optional :filters, Turbopuffer::Internal::Type::Unknown
+
+        # @!attribute group_by
+        #   Groups documents by the specified attributes (the "group key") before computing
+        #   aggregates. Aggregates are computed separately for each group.
+        #
+        #   @return [Array<String>, nil]
+        optional :group_by, Turbopuffer::Internal::Type::ArrayOf[String]
+
+        # @!attribute include_attributes
+        #   Whether to include attributes in the response.
+        #
+        #   @return [Boolean, Array<String>, nil]
+        optional :include_attributes, union: -> { Turbopuffer::IncludeAttributes }
+
+        # @!attribute limit
+        #   Limits the documents returned by a query.
+        #
+        #   @return [Integer, Turbopuffer::Models::Limit, nil]
+        optional :limit, union: -> { Turbopuffer::NamespaceMultiQueryParams::Query::Limit }
+
+        # @!attribute rank_by
+        #   How to rank the documents in the namespace.
+        #
+        #   @return [Object, nil]
+        optional :rank_by, Turbopuffer::Internal::Type::Unknown
+
+        # @!attribute top_k
+        #   The number of results to return.
+        #
+        #   @return [Integer, nil]
+        optional :top_k, Integer
+
+        # @!method initialize(aggregate_by: nil, distance_metric: nil, exclude_attributes: nil, filters: nil, group_by: nil, include_attributes: nil, limit: nil, rank_by: nil, top_k: nil)
+        #   Some parameter documentations has been truncated, see
+        #   {Turbopuffer::Models::NamespaceMultiQueryParams::Query} for more details.
+        #
+        #   Query, filter, full-text search and vector search documents.
+        #
+        #   @param aggregate_by [Hash{Symbol=>Object}] Aggregations to compute over all documents in the namespace that match the filte
+        #
+        #   @param distance_metric [Symbol, Turbopuffer::Models::DistanceMetric] A function used to calculate vector similarity.
+        #
+        #   @param exclude_attributes [Array<String>] List of attribute names to exclude from the response. All other attributes will
+        #
+        #   @param filters [Object] Exact filters for attributes to refine search results for. Think of it as a SQL
+        #
+        #   @param group_by [Array<String>] Groups documents by the specified attributes (the "group key") before computing
+        #
+        #   @param include_attributes [Boolean, Array<String>] Whether to include attributes in the response.
+        #
+        #   @param limit [Integer, Turbopuffer::Models::Limit] Limits the documents returned by a query.
+        #
+        #   @param rank_by [Object] How to rank the documents in the namespace.
+        #
+        #   @param top_k [Integer] The number of results to return.
+
+        # Limits the documents returned by a query.
+        #
+        # @see Turbopuffer::Models::NamespaceMultiQueryParams::Query#limit
+        module Limit
+          extend Turbopuffer::Internal::Type::Union
+
+          variant Integer
+
+          # Limits the documents returned by a query.
+          variant -> { Turbopuffer::Limit }
+
+          # @!method self.variants
+          #   @return [Array(Integer, Turbopuffer::Models::Limit)]
+        end
+      end
 
       class Consistency < Turbopuffer::Internal::Type::BaseModel
         # @!attribute level
