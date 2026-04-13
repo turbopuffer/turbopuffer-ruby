@@ -100,7 +100,8 @@ module Turbopuffer
       # Issue multiple concurrent queries filter or search documents.
       sig do
         params(
-          queries: T::Array[Turbopuffer::Query::OrHash],
+          queries:
+            T::Array[Turbopuffer::NamespaceMultiQueryParams::Query::OrHash],
           namespace: String,
           consistency:
             Turbopuffer::NamespaceMultiQueryParams::Consistency::OrHash,

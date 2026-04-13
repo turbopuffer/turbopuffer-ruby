@@ -26,7 +26,7 @@ module Turbopuffer
       }
 
       type vector =
-        ::Array[Turbopuffer::Models::vector] | ::Array[Float] | String
+        ::Array[Turbopuffer::Models::vector] | Turbopuffer::Models::vector
 
       module Vector
         extend Turbopuffer::Internal::Type::Union
@@ -34,8 +34,6 @@ module Turbopuffer
         def self?.variants: -> ::Array[Turbopuffer::Models::Columns::vector]
 
         VectorArray: Turbopuffer::Internal::Type::Converter
-
-        FloatArray: Turbopuffer::Internal::Type::Converter
       end
     end
   end
