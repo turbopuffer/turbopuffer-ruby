@@ -67,8 +67,6 @@ module Turbopuffer
 
   class PinningConfig = Turbopuffer::Models::PinningConfig
 
-  class Query = Turbopuffer::Models::Query
-
   class QueryBilling = Turbopuffer::Models::QueryBilling
 
   class QueryPerformance = Turbopuffer::Models::QueryPerformance

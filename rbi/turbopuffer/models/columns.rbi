@@ -54,8 +54,7 @@ module Turbopuffer
           T.type_alias do
             T.any(
               T::Array[Turbopuffer::Vector::Variants],
-              T::Array[Float],
-              String
+              Turbopuffer::Vector::Variants
             )
           end
 
@@ -68,12 +67,6 @@ module Turbopuffer
         VectorArray =
           T.let(
             Turbopuffer::Internal::Type::ArrayOf[union: Turbopuffer::Vector],
-            Turbopuffer::Internal::Type::Converter
-          )
-
-        FloatArray =
-          T.let(
-            Turbopuffer::Internal::Type::ArrayOf[Float],
             Turbopuffer::Internal::Type::Converter
           )
       end
