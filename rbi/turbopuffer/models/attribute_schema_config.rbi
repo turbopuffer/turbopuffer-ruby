@@ -65,6 +65,13 @@ module Turbopuffer
       end
       attr_writer :full_text_search
 
+      # Whether to enable Fuzzy filters on this attribute.
+      sig { returns(T.nilable(T::Boolean)) }
+      attr_reader :fuzzy
+
+      sig { params(fuzzy: T::Boolean).void }
+      attr_writer :fuzzy
+
       # Whether to enable Glob filters on this attribute.
       sig { returns(T.nilable(T::Boolean)) }
       attr_reader :glob
@@ -91,6 +98,7 @@ module Turbopuffer
           filterable: T::Boolean,
           full_text_search:
             T.any(T::Boolean, Turbopuffer::FullTextSearchConfig::OrHash),
+          fuzzy: T::Boolean,
           glob: T::Boolean,
           regex: T::Boolean
         ).returns(T.attached_class)
@@ -109,6 +117,8 @@ module Turbopuffer
         # the `string` or `[]string` type, and by default, BM25-enabled attributes are not
         # filterable. You can override this by setting `filterable: true`.
         full_text_search: nil,
+        # Whether to enable Fuzzy filters on this attribute.
+        fuzzy: nil,
         # Whether to enable Glob filters on this attribute.
         glob: nil,
         # Whether to enable Regex filters on this attribute.
@@ -128,6 +138,7 @@ module Turbopuffer
             filterable: T::Boolean,
             full_text_search:
               T.any(T::Boolean, Turbopuffer::FullTextSearchConfig),
+            fuzzy: T::Boolean,
             glob: T::Boolean,
             regex: T::Boolean
           }
