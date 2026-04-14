@@ -6,6 +6,7 @@ module Turbopuffer
         ann: Turbopuffer::Models::AttributeSchemaConfig::ann,
         filterable: bool,
         full_text_search: Turbopuffer::Models::full_text_search,
+        fuzzy: bool,
         glob: bool,
         regex: bool
       }
@@ -29,6 +30,10 @@ module Turbopuffer
         Turbopuffer::Models::full_text_search
       ) -> Turbopuffer::Models::full_text_search
 
+      attr_reader fuzzy: bool?
+
+      def fuzzy=: (bool) -> bool
+
       attr_reader glob: bool?
 
       def glob=: (bool) -> bool
@@ -42,6 +47,7 @@ module Turbopuffer
         ?ann: Turbopuffer::Models::AttributeSchemaConfig::ann,
         ?filterable: bool,
         ?full_text_search: Turbopuffer::Models::full_text_search,
+        ?fuzzy: bool,
         ?glob: bool,
         ?regex: bool
       ) -> void
@@ -51,6 +57,7 @@ module Turbopuffer
         ann: Turbopuffer::Models::AttributeSchemaConfig::ann,
         filterable: bool,
         full_text_search: Turbopuffer::Models::full_text_search,
+        fuzzy: bool,
         glob: bool,
         regex: bool
       }
