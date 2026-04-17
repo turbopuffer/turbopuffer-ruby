@@ -37,6 +37,10 @@ module Turbopuffer
 
   class Limit = Turbopuffer::Models::Limit
 
+  class NamespaceBranchFromParams = Turbopuffer::Models::NamespaceBranchFromParams
+
+  class NamespaceCopyFromParams = Turbopuffer::Models::NamespaceCopyFromParams
+
   class NamespaceDeleteAllParams = Turbopuffer::Models::NamespaceDeleteAllParams
 
   class NamespaceExplainQueryParams = Turbopuffer::Models::NamespaceExplainQueryParams

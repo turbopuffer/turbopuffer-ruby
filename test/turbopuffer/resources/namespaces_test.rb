@@ -3,6 +3,60 @@
 require_relative "../test_helper"
 
 class Turbopuffer::Test::Resources::NamespacesTest < Turbopuffer::Test::ResourceTest
+  def test_branch_from_required_params
+    skip("Mock server tests are disabled")
+
+    response = @turbopuffer.namespaces.branch_from(namespace: "namespace", branch_from_namespace: "string")
+
+    assert_pattern do
+      response => Turbopuffer::Models::NamespaceBranchFromResponse
+    end
+
+    assert_pattern do
+      response => {
+        billing: Turbopuffer::WriteBilling,
+        message: String,
+        rows_affected: Integer,
+        status: Symbol,
+        deleted_ids: ^(Turbopuffer::Internal::Type::ArrayOf[union: Turbopuffer::ID]) | nil,
+        patched_ids: ^(Turbopuffer::Internal::Type::ArrayOf[union: Turbopuffer::ID]) | nil,
+        performance: Turbopuffer::WritePerformance | nil,
+        rows_deleted: Integer | nil,
+        rows_patched: Integer | nil,
+        rows_remaining: Turbopuffer::Internal::Type::Boolean | nil,
+        rows_upserted: Integer | nil,
+        upserted_ids: ^(Turbopuffer::Internal::Type::ArrayOf[union: Turbopuffer::ID]) | nil
+      }
+    end
+  end
+
+  def test_copy_from_required_params
+    skip("Mock server tests are disabled")
+
+    response = @turbopuffer.namespaces.copy_from(namespace: "namespace", copy_from_namespace: "string")
+
+    assert_pattern do
+      response => Turbopuffer::Models::NamespaceCopyFromResponse
+    end
+
+    assert_pattern do
+      response => {
+        billing: Turbopuffer::WriteBilling,
+        message: String,
+        rows_affected: Integer,
+        status: Symbol,
+        deleted_ids: ^(Turbopuffer::Internal::Type::ArrayOf[union: Turbopuffer::ID]) | nil,
+        patched_ids: ^(Turbopuffer::Internal::Type::ArrayOf[union: Turbopuffer::ID]) | nil,
+        performance: Turbopuffer::WritePerformance | nil,
+        rows_deleted: Integer | nil,
+        rows_patched: Integer | nil,
+        rows_remaining: Turbopuffer::Internal::Type::Boolean | nil,
+        rows_upserted: Integer | nil,
+        upserted_ids: ^(Turbopuffer::Internal::Type::ArrayOf[union: Turbopuffer::ID]) | nil
+      }
+    end
+  end
+
   def test_delete_all_required_params
     skip("Mock server tests are disabled")
 
