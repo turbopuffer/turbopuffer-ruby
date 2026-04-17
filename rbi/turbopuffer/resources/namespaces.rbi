@@ -3,6 +3,48 @@
 module Turbopuffer
   module Resources
     class Namespaces
+      # Creates an instant, copy-on-write clone of a namespace.
+      sig do
+        params(
+          branch_from_namespace:
+            T.any(
+              String,
+              Turbopuffer::BranchFromNamespaceParams::BranchFromNamespaceConfig::OrHash
+            ),
+          namespace: String,
+          request_options: Turbopuffer::RequestOptions::OrHash
+        ).returns(Turbopuffer::Models::NamespaceBranchFromResponse)
+      end
+      def branch_from(
+        # Body param: The namespace to create an instant, copy-on-write clone of.
+        branch_from_namespace:,
+        # Path param: The name of the namespace.
+        namespace: nil,
+        request_options: {}
+      )
+      end
+
+      # Copy all documents from another namespace into this one.
+      sig do
+        params(
+          copy_from_namespace:
+            T.any(
+              String,
+              Turbopuffer::CopyFromNamespaceParams::CopyFromNamespaceConfig::OrHash
+            ),
+          namespace: String,
+          request_options: Turbopuffer::RequestOptions::OrHash
+        ).returns(Turbopuffer::Models::NamespaceCopyFromResponse)
+      end
+      def copy_from(
+        # Body param: The namespace to copy documents from.
+        copy_from_namespace:,
+        # Path param: The name of the namespace.
+        namespace: nil,
+        request_options: {}
+      )
+      end
+
       # Delete namespace.
       sig do
         params(

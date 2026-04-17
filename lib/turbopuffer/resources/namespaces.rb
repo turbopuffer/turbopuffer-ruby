@@ -3,6 +3,62 @@
 module Turbopuffer
   module Resources
     class Namespaces
+      # Creates an instant, copy-on-write clone of a namespace.
+      #
+      # @overload branch_from(branch_from_namespace:, namespace: nil, request_options: {})
+      #
+      # @param branch_from_namespace [String, Turbopuffer::Models::BranchFromNamespaceParams::BranchFromNamespaceConfig] Body param: The namespace to create an instant, copy-on-write clone of.
+      #
+      # @param namespace [String] Path param: The name of the namespace.
+      #
+      # @param request_options [Turbopuffer::RequestOptions, Hash{Symbol=>Object}, nil]
+      #
+      # @return [Turbopuffer::Models::NamespaceBranchFromResponse]
+      #
+      # @see Turbopuffer::Models::NamespaceBranchFromParams
+      def branch_from(params)
+        parsed, options = Turbopuffer::NamespaceBranchFromParams.dump_request(params)
+        namespace =
+          parsed.delete(:namespace) do
+            @client.default_namespace
+          end
+        @client.request(
+          method: :post,
+          path: ["v2/namespaces/%1$s?stainless_overload=branchFrom", namespace],
+          body: parsed,
+          model: Turbopuffer::Models::NamespaceBranchFromResponse,
+          options: options
+        )
+      end
+
+      # Copy all documents from another namespace into this one.
+      #
+      # @overload copy_from(copy_from_namespace:, namespace: nil, request_options: {})
+      #
+      # @param copy_from_namespace [String, Turbopuffer::Models::CopyFromNamespaceParams::CopyFromNamespaceConfig] Body param: The namespace to copy documents from.
+      #
+      # @param namespace [String] Path param: The name of the namespace.
+      #
+      # @param request_options [Turbopuffer::RequestOptions, Hash{Symbol=>Object}, nil]
+      #
+      # @return [Turbopuffer::Models::NamespaceCopyFromResponse]
+      #
+      # @see Turbopuffer::Models::NamespaceCopyFromParams
+      def copy_from(params)
+        parsed, options = Turbopuffer::NamespaceCopyFromParams.dump_request(params)
+        namespace =
+          parsed.delete(:namespace) do
+            @client.default_namespace
+          end
+        @client.request(
+          method: :post,
+          path: ["v2/namespaces/%1$s?stainless_overload=copyFrom", namespace],
+          body: parsed,
+          model: Turbopuffer::Models::NamespaceCopyFromResponse,
+          options: options
+        )
+      end
+
       # Delete namespace.
       #
       # @overload delete_all(namespace: nil, request_options: {})

@@ -1,0 +1,33 @@
+module Turbopuffer
+  module Models
+    type namespace_copy_from_params =
+      {
+        namespace: String,
+        copy_from_namespace: Turbopuffer::Models::copy_from_namespace_params
+      }
+      & Turbopuffer::Internal::Type::request_parameters
+
+    class NamespaceCopyFromParams < Turbopuffer::Internal::Type::BaseModel
+      extend Turbopuffer::Internal::Type::RequestParameters::Converter
+      include Turbopuffer::Internal::Type::RequestParameters
+
+      attr_reader namespace: String?
+
+      def namespace=: (String) -> String
+
+      attr_accessor copy_from_namespace: Turbopuffer::Models::copy_from_namespace_params
+
+      def initialize: (
+        copy_from_namespace: Turbopuffer::Models::copy_from_namespace_params,
+        ?namespace: String,
+        ?request_options: Turbopuffer::request_opts
+      ) -> void
+
+      def to_hash: -> {
+        namespace: String,
+        copy_from_namespace: Turbopuffer::Models::copy_from_namespace_params,
+        request_options: Turbopuffer::RequestOptions
+      }
+    end
+  end
+end
