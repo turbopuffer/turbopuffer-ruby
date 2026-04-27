@@ -100,6 +100,19 @@ module Turbopuffer
         raise ArgumentError.new("api_key is required, and can be set via environ: \"TURBOPUFFER_API_KEY\"")
       end
 
+      headers = {}
+      custom_headers_env = ENV["TURBOPUFFER_CUSTOM_HEADERS"]
+      unless custom_headers_env.nil?
+        parsed = {}
+        custom_headers_env.split("\n").each do |line|
+          colon = line.index(":")
+          unless colon.nil?
+            parsed[line[0...colon].strip] = line[(colon + 1)..].strip
+          end
+        end
+        headers = parsed.merge(headers)
+      end
+
       @default_namespace = default_namespace&.to_s
       @api_key = api_key.to_s
       @region = region&.to_s
@@ -109,7 +122,8 @@ module Turbopuffer
         timeout: timeout,
         max_retries: max_retries,
         initial_retry_delay: initial_retry_delay,
-        max_retry_delay: max_retry_delay
+        max_retry_delay: max_retry_delay,
+        headers: headers
       )
 
       @namespaces = Turbopuffer::Resources::Namespaces.new(client: self)
