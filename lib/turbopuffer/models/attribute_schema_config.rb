@@ -6,7 +6,7 @@ module Turbopuffer
       # @!attribute type
       #   The data type of the attribute. Valid values: string, int, uint, float, uuid,
       #   datetime, bool, []string, []int, []uint, []float, []uuid, []datetime, []bool,
-      #   [DIMS]f16, [DIMS]f32.
+      #   [DIMS]f16, [DIMS]f32, {}f16.
       #
       #   @return [String]
       required :type, String
@@ -50,7 +50,14 @@ module Turbopuffer
       #   @return [Boolean, nil]
       optional :regex, Turbopuffer::Internal::Type::Boolean
 
-      # @!method initialize(type:, ann: nil, filterable: nil, full_text_search: nil, fuzzy: nil, glob: nil, regex: nil)
+      # @!attribute sparse_knn
+      #   Whether to create a sparse kNN index for the attribute. Requires the `{}f16`
+      #   type.
+      #
+      #   @return [Turbopuffer::Models::AttributeSchemaConfig::SparseKnn, nil]
+      optional :sparse_knn, -> { Turbopuffer::AttributeSchemaConfig::SparseKnn }
+
+      # @!method initialize(type:, ann: nil, filterable: nil, full_text_search: nil, fuzzy: nil, glob: nil, regex: nil, sparse_knn: nil)
       #   Some parameter documentations has been truncated, see
       #   {Turbopuffer::Models::AttributeSchemaConfig} for more details.
       #
@@ -69,6 +76,8 @@ module Turbopuffer
       #   @param glob [Boolean] Whether to enable Glob filters on this attribute.
       #
       #   @param regex [Boolean] Whether to enable Regex filters on this attribute.
+      #
+      #   @param sparse_knn [Turbopuffer::Models::AttributeSchemaConfig::SparseKnn] Whether to create a sparse kNN index for the attribute. Requires the `{}f16` typ
 
       # Whether to create an approximate nearest neighbor index for the attribute. Can
       # be a boolean or a detailed configuration object.
@@ -97,6 +106,21 @@ module Turbopuffer
 
         # @!method self.variants
         #   @return [Array(Boolean, Turbopuffer::Models::AttributeSchemaConfig::Ann::AnnConfig)]
+      end
+
+      # @see Turbopuffer::Models::AttributeSchemaConfig#sparse_knn
+      class SparseKnn < Turbopuffer::Internal::Type::BaseModel
+        # @!attribute distance_metric
+        #   A function used to calculate sparse vector similarity.
+        #
+        #   @return [Symbol, :dot_product]
+        required :distance_metric, const: :dot_product
+
+        # @!method initialize(distance_metric: :dot_product)
+        #   Whether to create a sparse kNN index for the attribute. Requires the `{}f16`
+        #   type.
+        #
+        #   @param distance_metric [Symbol, :dot_product] A function used to calculate sparse vector similarity.
       end
     end
   end
