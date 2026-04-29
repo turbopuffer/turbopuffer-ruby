@@ -25,7 +25,7 @@ module Turbopuffer
         @client.request(
           method: :post,
           path: ["v2/namespaces/%1$s?stainless_overload=branchFrom", namespace],
-          body: parsed,
+          body: {branch_from_namespace: parsed},
           model: Turbopuffer::Models::NamespaceBranchFromResponse,
           options: options
         )
@@ -60,7 +60,7 @@ module Turbopuffer
         @client.request(
           method: :post,
           path: ["v2/namespaces/%1$s?stainless_overload=copyFrom", namespace],
-          body: parsed,
+          body: {copy_from_namespace: parsed},
           model: Turbopuffer::Models::NamespaceCopyFromResponse,
           options: options
         )
