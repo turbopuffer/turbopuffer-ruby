@@ -33,6 +33,8 @@ module Turbopuffer
 
   DistanceMetric = Turbopuffer::Models::DistanceMetric
 
+  Encryption = Turbopuffer::Models::Encryption
+
   FullTextSearch = Turbopuffer::Models::FullTextSearch
 
   FullTextSearchConfig = Turbopuffer::Models::FullTextSearchConfig

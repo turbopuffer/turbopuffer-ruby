@@ -23,11 +23,10 @@ module Turbopuffer
       required :created_at, Time
 
       # @!attribute encryption
-      #   Indicates that the namespace is encrypted with a customer-managed encryption key
-      #   (CMEK).
+      #   The encryption configuration for a namespace.
       #
-      #   @return [Turbopuffer::Models::NamespaceMetadata::Encryption::Sse, Turbopuffer::Models::NamespaceMetadata::Encryption::Cmek]
-      required :encryption, union: -> { Turbopuffer::NamespaceMetadata::Encryption }
+      #   @return [Turbopuffer::Models::Encryption::CustomerManaged, Turbopuffer::Models::Encryption::Default]
+      required :encryption, union: -> { Turbopuffer::Encryption }
 
       # @!attribute index
       #
@@ -65,7 +64,7 @@ module Turbopuffer
       #
       #   @param created_at [Time] The timestamp when the namespace was created.
       #
-      #   @param encryption [Turbopuffer::Models::NamespaceMetadata::Encryption::Sse, Turbopuffer::Models::NamespaceMetadata::Encryption::Cmek] Indicates that the namespace is encrypted with a customer-managed encryption key
+      #   @param encryption [Turbopuffer::Models::Encryption::CustomerManaged, Turbopuffer::Models::Encryption::Default] The encryption configuration for a namespace.
       #
       #   @param index [Turbopuffer::Models::NamespaceMetadata::Index::IndexUpToDate, Turbopuffer::Models::NamespaceMetadata::Index::IndexUpdating]
       #
@@ -74,58 +73,6 @@ module Turbopuffer
       #   @param updated_at [Time] The timestamp when the namespace was last modified by a write operation.
       #
       #   @param pinning [Turbopuffer::Models::NamespaceMetadata::Pinning] Configuration for namespace pinning, along with the current status of the pinned
-
-      # Indicates that the namespace is encrypted with a customer-managed encryption key
-      # (CMEK).
-      #
-      # @see Turbopuffer::Models::NamespaceMetadata#encryption
-      module Encryption
-        extend Turbopuffer::Internal::Type::Union
-
-        variant -> { Turbopuffer::NamespaceMetadata::Encryption::Sse }
-
-        # Indicates that the namespace is encrypted with a customer-managed encryption key (CMEK).
-        variant -> { Turbopuffer::NamespaceMetadata::Encryption::Cmek }
-
-        class Sse < Turbopuffer::Internal::Type::BaseModel
-          # @!attribute sse
-          #   Always true. Indicates that the namespace is encrypted with SSE.
-          #
-          #   @return [Boolean]
-          required :sse, Turbopuffer::Internal::Type::Boolean
-
-          # @!method initialize(sse:)
-          #   @param sse [Boolean] Always true. Indicates that the namespace is encrypted with SSE.
-        end
-
-        class Cmek < Turbopuffer::Internal::Type::BaseModel
-          # @!attribute cmek
-          #
-          #   @return [Turbopuffer::Models::NamespaceMetadata::Encryption::Cmek::Cmek]
-          required :cmek, -> { Turbopuffer::NamespaceMetadata::Encryption::Cmek::Cmek }
-
-          # @!method initialize(cmek:)
-          #   Indicates that the namespace is encrypted with a customer-managed encryption key
-          #   (CMEK).
-          #
-          #   @param cmek [Turbopuffer::Models::NamespaceMetadata::Encryption::Cmek::Cmek]
-
-          # @see Turbopuffer::Models::NamespaceMetadata::Encryption::Cmek#cmek
-          class Cmek < Turbopuffer::Internal::Type::BaseModel
-            # @!attribute key_name
-            #   The name of the CMEK key in use.
-            #
-            #   @return [String]
-            required :key_name, String
-
-            # @!method initialize(key_name:)
-            #   @param key_name [String] The name of the CMEK key in use.
-          end
-        end
-
-        # @!method self.variants
-        #   @return [Array(Turbopuffer::Models::NamespaceMetadata::Encryption::Sse, Turbopuffer::Models::NamespaceMetadata::Encryption::Cmek)]
-      end
 
       # @see Turbopuffer::Models::NamespaceMetadata#index
       module Index

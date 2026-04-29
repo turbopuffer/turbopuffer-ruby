@@ -25,6 +25,8 @@ module Turbopuffer
 
   module DistanceMetric = Turbopuffer::Models::DistanceMetric
 
+  module Encryption = Turbopuffer::Models::Encryption
+
   module FullTextSearch = Turbopuffer::Models::FullTextSearch
 
   class FullTextSearchConfig = Turbopuffer::Models::FullTextSearchConfig

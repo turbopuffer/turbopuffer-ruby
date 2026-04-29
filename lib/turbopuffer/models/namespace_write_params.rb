@@ -63,8 +63,8 @@ module Turbopuffer
       # @!attribute encryption
       #   The encryption configuration for a namespace.
       #
-      #   @return [Turbopuffer::Models::NamespaceWriteParams::Encryption, nil]
-      optional :encryption, -> { Turbopuffer::NamespaceWriteParams::Encryption }
+      #   @return [Turbopuffer::Models::Encryption::CustomerManaged, Turbopuffer::Models::Encryption::Default, nil]
+      optional :encryption, union: -> { Turbopuffer::Encryption }
 
       # @!attribute patch_by_filter
       #   The patch and filter specifying which documents to patch.
@@ -152,7 +152,7 @@ module Turbopuffer
       #
       #   @param distance_metric [Symbol, Turbopuffer::Models::DistanceMetric] A function used to calculate vector similarity.
       #
-      #   @param encryption [Turbopuffer::Models::NamespaceWriteParams::Encryption] The encryption configuration for a namespace.
+      #   @param encryption [Turbopuffer::Models::Encryption::CustomerManaged, Turbopuffer::Models::Encryption::Default] The encryption configuration for a namespace.
       #
       #   @param patch_by_filter [Turbopuffer::Models::NamespaceWriteParams::PatchByFilter] The patch and filter specifying which documents to patch.
       #
@@ -175,34 +175,6 @@ module Turbopuffer
       #   @param upsert_rows [Array<Turbopuffer::Models::Row>]
       #
       #   @param request_options [Turbopuffer::RequestOptions, Hash{Symbol=>Object}]
-
-      class Encryption < Turbopuffer::Internal::Type::BaseModel
-        # @!attribute cmek
-        #
-        #   @return [Turbopuffer::Models::NamespaceWriteParams::Encryption::Cmek, nil]
-        optional :cmek, -> { Turbopuffer::NamespaceWriteParams::Encryption::Cmek }
-
-        # @!method initialize(cmek: nil)
-        #   The encryption configuration for a namespace.
-        #
-        #   @param cmek [Turbopuffer::Models::NamespaceWriteParams::Encryption::Cmek]
-
-        # @see Turbopuffer::Models::NamespaceWriteParams::Encryption#cmek
-        class Cmek < Turbopuffer::Internal::Type::BaseModel
-          # @!attribute key_name
-          #   The identifier of the CMEK key to use for encryption. For GCP, the
-          #   fully-qualified resource name of the key. For AWS, the ARN of the key.
-          #
-          #   @return [String]
-          required :key_name, String
-
-          # @!method initialize(key_name:)
-          #   Some parameter documentations has been truncated, see
-          #   {Turbopuffer::Models::NamespaceWriteParams::Encryption::Cmek} for more details.
-          #
-          #   @param key_name [String] The identifier of the CMEK key to use for encryption. For GCP, the fully-qualifi
-        end
-      end
 
       class PatchByFilter < Turbopuffer::Internal::Type::BaseModel
         # @!attribute filters

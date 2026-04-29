@@ -179,7 +179,7 @@ module Turbopuffer
           end
         @client.request(
           method: :get,
-          path: ["v1/namespaces/%1$s/metadata", namespace],
+          path: ["v2/namespaces/%1$s/metadata", namespace],
           model: Turbopuffer::NamespaceMetadata,
           options: options
         )
@@ -356,7 +356,7 @@ module Turbopuffer
           end
         @client.request(
           method: :patch,
-          path: ["v1/namespaces/%1$s/metadata", namespace],
+          path: ["v2/namespaces/%1$s/metadata", namespace],
           body: parsed,
           model: Turbopuffer::NamespaceMetadata,
           options: options
@@ -416,7 +416,7 @@ module Turbopuffer
       #
       # @param distance_metric [Symbol, Turbopuffer::Models::DistanceMetric] Body param: A function used to calculate vector similarity.
       #
-      # @param encryption [Turbopuffer::Models::NamespaceWriteParams::Encryption] Body param: The encryption configuration for a namespace.
+      # @param encryption [Turbopuffer::Models::Encryption::CustomerManaged, Turbopuffer::Models::Encryption::Default] Body param: The encryption configuration for a namespace.
       #
       # @param patch_by_filter [Turbopuffer::Models::NamespaceWriteParams::PatchByFilter] Body param: The patch and filter specifying which documents to patch.
       #
