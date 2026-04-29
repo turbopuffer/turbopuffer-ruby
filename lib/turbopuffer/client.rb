@@ -109,6 +109,19 @@ module Turbopuffer
         raise ArgumentError.new("api_key is required, and can be set via environ: \"TURBOPUFFER_API_KEY\"")
       end
 
+      headers = compression ? {} : {"accept-encoding" => "identity"}
+      custom_headers_env = ENV["TURBOPUFFER_CUSTOM_HEADERS"]
+      unless custom_headers_env.nil?
+        parsed = {}
+        custom_headers_env.split("\n").each do |line|
+          colon = line.index(":")
+          unless colon.nil?
+            parsed[line[0...colon].strip] = line[(colon + 1)..].strip
+          end
+        end
+        headers = parsed.merge(headers)
+      end
+
       if base_url.include?("{region}")
         if region.nil?
           raise ArgumentError.new("region is required when base_url contains {region} placeholder: #{base_url}")
@@ -128,7 +141,7 @@ module Turbopuffer
         max_retries: max_retries,
         initial_retry_delay: initial_retry_delay,
         max_retry_delay: max_retry_delay,
-        headers: compression ? {} : {"accept-encoding" => "identity"}
+        headers: headers
       )
     end
   end
