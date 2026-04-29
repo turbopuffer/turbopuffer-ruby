@@ -13,7 +13,7 @@ module Turbopuffer
 
       # The data type of the attribute. Valid values: string, int, uint, float, uuid,
       # datetime, bool, []string, []int, []uint, []float, []uuid, []datetime, []bool,
-      # [DIMS]f16, [DIMS]f32.
+      # [DIMS]f16, [DIMS]f32, {}f16.
       sig { returns(String) }
       attr_accessor :type
 
@@ -86,6 +86,18 @@ module Turbopuffer
       sig { params(regex: T::Boolean).void }
       attr_writer :regex
 
+      # Whether to create a sparse kNN index for the attribute. Requires the `{}f16`
+      # type.
+      sig { returns(T.nilable(Turbopuffer::AttributeSchemaConfig::SparseKnn)) }
+      attr_reader :sparse_knn
+
+      sig do
+        params(
+          sparse_knn: Turbopuffer::AttributeSchemaConfig::SparseKnn::OrHash
+        ).void
+      end
+      attr_writer :sparse_knn
+
       # Detailed configuration for an attribute attached to a document.
       sig do
         params(
@@ -100,13 +112,14 @@ module Turbopuffer
             T.any(T::Boolean, Turbopuffer::FullTextSearchConfig::OrHash),
           fuzzy: T::Boolean,
           glob: T::Boolean,
-          regex: T::Boolean
+          regex: T::Boolean,
+          sparse_knn: Turbopuffer::AttributeSchemaConfig::SparseKnn::OrHash
         ).returns(T.attached_class)
       end
       def self.new(
         # The data type of the attribute. Valid values: string, int, uint, float, uuid,
         # datetime, bool, []string, []int, []uint, []float, []uuid, []datetime, []bool,
-        # [DIMS]f16, [DIMS]f32.
+        # [DIMS]f16, [DIMS]f32, {}f16.
         type:,
         # Whether to create an approximate nearest neighbor index for the attribute. Can
         # be a boolean or a detailed configuration object.
@@ -122,7 +135,10 @@ module Turbopuffer
         # Whether to enable Glob filters on this attribute.
         glob: nil,
         # Whether to enable Regex filters on this attribute.
-        regex: nil
+        regex: nil,
+        # Whether to create a sparse kNN index for the attribute. Requires the `{}f16`
+        # type.
+        sparse_knn: nil
       )
       end
 
@@ -140,7 +156,8 @@ module Turbopuffer
               T.any(T::Boolean, Turbopuffer::FullTextSearchConfig),
             fuzzy: T::Boolean,
             glob: T::Boolean,
-            regex: T::Boolean
+            regex: T::Boolean,
+            sparse_knn: Turbopuffer::AttributeSchemaConfig::SparseKnn
           }
         )
       end
@@ -205,6 +222,33 @@ module Turbopuffer
           )
         end
         def self.variants
+        end
+      end
+
+      class SparseKnn < Turbopuffer::Internal::Type::BaseModel
+        OrHash =
+          T.type_alias do
+            T.any(
+              Turbopuffer::AttributeSchemaConfig::SparseKnn,
+              Turbopuffer::Internal::AnyHash
+            )
+          end
+
+        # A function used to calculate sparse vector similarity.
+        sig { returns(Symbol) }
+        attr_accessor :distance_metric
+
+        # Whether to create a sparse kNN index for the attribute. Requires the `{}f16`
+        # type.
+        sig { params(distance_metric: Symbol).returns(T.attached_class) }
+        def self.new(
+          # A function used to calculate sparse vector similarity.
+          distance_metric: :dot_product
+        )
+        end
+
+        sig { override.returns({ distance_metric: Symbol }) }
+        def to_hash
         end
       end
     end
