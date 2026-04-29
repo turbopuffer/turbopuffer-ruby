@@ -113,14 +113,14 @@ module Turbopuffer
         # @!attribute distance_metric
         #   A function used to calculate sparse vector similarity.
         #
-        #   @return [Symbol, :dot_product]
-        required :distance_metric, const: :dot_product
+        #   @return [Symbol, Turbopuffer::Models::SparseDistanceMetric]
+        required :distance_metric, enum: -> { Turbopuffer::SparseDistanceMetric }
 
-        # @!method initialize(distance_metric: :dot_product)
+        # @!method initialize(distance_metric:)
         #   Whether to create a sparse kNN index for the attribute. Requires the `{}f16`
         #   type.
         #
-        #   @param distance_metric [Symbol, :dot_product] A function used to calculate sparse vector similarity.
+        #   @param distance_metric [Symbol, Turbopuffer::Models::SparseDistanceMetric] A function used to calculate sparse vector similarity.
       end
     end
   end

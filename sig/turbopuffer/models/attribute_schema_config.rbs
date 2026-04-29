@@ -98,14 +98,19 @@ module Turbopuffer
         def self?.variants: -> ::Array[Turbopuffer::Models::AttributeSchemaConfig::ann]
       end
 
-      type sparse_knn = { distance_metric: :dot_product }
+      type sparse_knn =
+        { distance_metric: Turbopuffer::Models::sparse_distance_metric }
 
       class SparseKnn < Turbopuffer::Internal::Type::BaseModel
-        attr_accessor distance_metric: :dot_product
+        attr_accessor distance_metric: Turbopuffer::Models::sparse_distance_metric
 
-        def initialize: (?distance_metric: :dot_product) -> void
+        def initialize: (
+          distance_metric: Turbopuffer::Models::sparse_distance_metric
+        ) -> void
 
-        def to_hash: -> { distance_metric: :dot_product }
+        def to_hash: -> {
+          distance_metric: Turbopuffer::Models::sparse_distance_metric
+        }
       end
     end
   end

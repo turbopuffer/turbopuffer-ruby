@@ -91,6 +91,8 @@ module Turbopuffer
 
   SaturateParams = Turbopuffer::Models::SaturateParams
 
+  SparseDistanceMetric = Turbopuffer::Models::SparseDistanceMetric
+
   Tokenizer = Turbopuffer::Models::Tokenizer
 
   Vector = Turbopuffer::Models::Vector
