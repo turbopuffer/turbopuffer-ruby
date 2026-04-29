@@ -8,7 +8,8 @@ module Turbopuffer
         full_text_search: Turbopuffer::Models::full_text_search,
         fuzzy: bool,
         glob: bool,
-        regex: bool
+        regex: bool,
+        sparse_knn: Turbopuffer::AttributeSchemaConfig::SparseKnn
       }
 
     class AttributeSchemaConfig < Turbopuffer::Internal::Type::BaseModel
@@ -42,6 +43,12 @@ module Turbopuffer
 
       def regex=: (bool) -> bool
 
+      attr_reader sparse_knn: Turbopuffer::AttributeSchemaConfig::SparseKnn?
+
+      def sparse_knn=: (
+        Turbopuffer::AttributeSchemaConfig::SparseKnn
+      ) -> Turbopuffer::AttributeSchemaConfig::SparseKnn
+
       def initialize: (
         type: String,
         ?ann: Turbopuffer::Models::AttributeSchemaConfig::ann,
@@ -49,7 +56,8 @@ module Turbopuffer
         ?full_text_search: Turbopuffer::Models::full_text_search,
         ?fuzzy: bool,
         ?glob: bool,
-        ?regex: bool
+        ?regex: bool,
+        ?sparse_knn: Turbopuffer::AttributeSchemaConfig::SparseKnn
       ) -> void
 
       def to_hash: -> {
@@ -59,7 +67,8 @@ module Turbopuffer
         full_text_search: Turbopuffer::Models::full_text_search,
         fuzzy: bool,
         glob: bool,
-        regex: bool
+        regex: bool,
+        sparse_knn: Turbopuffer::AttributeSchemaConfig::SparseKnn
       }
 
       type ann = bool | Turbopuffer::AttributeSchemaConfig::Ann::AnnConfig
@@ -87,6 +96,16 @@ module Turbopuffer
         end
 
         def self?.variants: -> ::Array[Turbopuffer::Models::AttributeSchemaConfig::ann]
+      end
+
+      type sparse_knn = { distance_metric: :dot_product }
+
+      class SparseKnn < Turbopuffer::Internal::Type::BaseModel
+        attr_accessor distance_metric: :dot_product
+
+        def initialize: (?distance_metric: :dot_product) -> void
+
+        def to_hash: -> { distance_metric: :dot_product }
       end
     end
   end
