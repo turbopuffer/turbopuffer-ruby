@@ -5,7 +5,7 @@ module Turbopuffer
         approx_logical_bytes: Integer,
         approx_row_count: Integer,
         created_at: Time,
-        encryption: Turbopuffer::Models::NamespaceMetadata::encryption,
+        encryption: Turbopuffer::Models::encryption,
         index: Turbopuffer::Models::NamespaceMetadata::index,
         schema: ::Hash[Symbol, Turbopuffer::AttributeSchemaConfig],
         updated_at: Time,
@@ -19,7 +19,7 @@ module Turbopuffer
 
       attr_accessor created_at: Time
 
-      attr_accessor encryption: Turbopuffer::Models::NamespaceMetadata::encryption
+      attr_accessor encryption: Turbopuffer::Models::encryption
 
       attr_accessor index: Turbopuffer::Models::NamespaceMetadata::index
 
@@ -37,7 +37,7 @@ module Turbopuffer
         approx_logical_bytes: Integer,
         approx_row_count: Integer,
         created_at: Time,
-        encryption: Turbopuffer::Models::NamespaceMetadata::encryption,
+        encryption: Turbopuffer::Models::encryption,
         index: Turbopuffer::Models::NamespaceMetadata::index,
         schema: ::Hash[Symbol, Turbopuffer::AttributeSchemaConfig],
         updated_at: Time,
@@ -48,57 +48,12 @@ module Turbopuffer
         approx_logical_bytes: Integer,
         approx_row_count: Integer,
         created_at: Time,
-        encryption: Turbopuffer::Models::NamespaceMetadata::encryption,
+        encryption: Turbopuffer::Models::encryption,
         index: Turbopuffer::Models::NamespaceMetadata::index,
         schema: ::Hash[Symbol, Turbopuffer::AttributeSchemaConfig],
         updated_at: Time,
         pinning: Turbopuffer::NamespaceMetadata::Pinning
       }
-
-      type encryption =
-        Turbopuffer::NamespaceMetadata::Encryption::Sse
-        | Turbopuffer::NamespaceMetadata::Encryption::Cmek
-
-      module Encryption
-        extend Turbopuffer::Internal::Type::Union
-
-        type sse = { sse: bool }
-
-        class Sse < Turbopuffer::Internal::Type::BaseModel
-          attr_accessor sse: bool
-
-          def initialize: (sse: bool) -> void
-
-          def to_hash: -> { sse: bool }
-        end
-
-        type cmek =
-          { cmek: Turbopuffer::NamespaceMetadata::Encryption::Cmek::Cmek }
-
-        class Cmek < Turbopuffer::Internal::Type::BaseModel
-          attr_accessor cmek: Turbopuffer::NamespaceMetadata::Encryption::Cmek::Cmek
-
-          def initialize: (
-            cmek: Turbopuffer::NamespaceMetadata::Encryption::Cmek::Cmek
-          ) -> void
-
-          def to_hash: -> {
-            cmek: Turbopuffer::NamespaceMetadata::Encryption::Cmek::Cmek
-          }
-
-          type cmek = { key_name: String }
-
-          class Cmek < Turbopuffer::Internal::Type::BaseModel
-            attr_accessor key_name: String
-
-            def initialize: (key_name: String) -> void
-
-            def to_hash: -> { key_name: String }
-          end
-        end
-
-        def self?.variants: -> ::Array[Turbopuffer::Models::NamespaceMetadata::encryption]
-      end
 
       type index =
         Turbopuffer::NamespaceMetadata::Index::IndexUpToDate

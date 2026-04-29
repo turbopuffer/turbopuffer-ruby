@@ -11,7 +11,7 @@ module Turbopuffer
         deletes: ::Array[Turbopuffer::Models::id],
         disable_backpressure: bool,
         distance_metric: Turbopuffer::Models::distance_metric,
-        encryption: Turbopuffer::NamespaceWriteParams::Encryption,
+        encryption: Turbopuffer::Models::encryption,
         patch_by_filter: Turbopuffer::NamespaceWriteParams::PatchByFilter,
         patch_by_filter_allow_partial: bool,
         patch_columns: Turbopuffer::Columns,
@@ -73,11 +73,11 @@ module Turbopuffer
         Turbopuffer::Models::distance_metric
       ) -> Turbopuffer::Models::distance_metric
 
-      attr_reader encryption: Turbopuffer::NamespaceWriteParams::Encryption?
+      attr_reader encryption: Turbopuffer::Models::encryption?
 
       def encryption=: (
-        Turbopuffer::NamespaceWriteParams::Encryption
-      ) -> Turbopuffer::NamespaceWriteParams::Encryption
+        Turbopuffer::Models::encryption
+      ) -> Turbopuffer::Models::encryption
 
       attr_reader patch_by_filter: Turbopuffer::NamespaceWriteParams::PatchByFilter?
 
@@ -133,7 +133,7 @@ module Turbopuffer
         ?deletes: ::Array[Turbopuffer::Models::id],
         ?disable_backpressure: bool,
         ?distance_metric: Turbopuffer::Models::distance_metric,
-        ?encryption: Turbopuffer::NamespaceWriteParams::Encryption,
+        ?encryption: Turbopuffer::Models::encryption,
         ?patch_by_filter: Turbopuffer::NamespaceWriteParams::PatchByFilter,
         ?patch_by_filter_allow_partial: bool,
         ?patch_columns: Turbopuffer::Columns,
@@ -157,7 +157,7 @@ module Turbopuffer
         deletes: ::Array[Turbopuffer::Models::id],
         disable_backpressure: bool,
         distance_metric: Turbopuffer::Models::distance_metric,
-        encryption: Turbopuffer::NamespaceWriteParams::Encryption,
+        encryption: Turbopuffer::Models::encryption,
         patch_by_filter: Turbopuffer::NamespaceWriteParams::PatchByFilter,
         patch_by_filter_allow_partial: bool,
         patch_columns: Turbopuffer::Columns,
@@ -170,35 +170,6 @@ module Turbopuffer
         upsert_rows: ::Array[Turbopuffer::Row],
         request_options: Turbopuffer::RequestOptions
       }
-
-      type encryption =
-        { cmek: Turbopuffer::NamespaceWriteParams::Encryption::Cmek }
-
-      class Encryption < Turbopuffer::Internal::Type::BaseModel
-        attr_reader cmek: Turbopuffer::NamespaceWriteParams::Encryption::Cmek?
-
-        def cmek=: (
-          Turbopuffer::NamespaceWriteParams::Encryption::Cmek
-        ) -> Turbopuffer::NamespaceWriteParams::Encryption::Cmek
-
-        def initialize: (
-          ?cmek: Turbopuffer::NamespaceWriteParams::Encryption::Cmek
-        ) -> void
-
-        def to_hash: -> {
-          cmek: Turbopuffer::NamespaceWriteParams::Encryption::Cmek
-        }
-
-        type cmek = { key_name: String }
-
-        class Cmek < Turbopuffer::Internal::Type::BaseModel
-          attr_accessor key_name: String
-
-          def initialize: (key_name: String) -> void
-
-          def to_hash: -> { key_name: String }
-        end
-      end
 
       type patch_by_filter = { filters: top, patch: ::Hash[Symbol, top] }
 

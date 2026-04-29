@@ -324,7 +324,11 @@ module Turbopuffer
           deletes: T::Array[Turbopuffer::ID::Variants],
           disable_backpressure: T::Boolean,
           distance_metric: Turbopuffer::DistanceMetric::OrSymbol,
-          encryption: Turbopuffer::NamespaceWriteParams::Encryption::OrHash,
+          encryption:
+            T.any(
+              Turbopuffer::Encryption::CustomerManaged::OrHash,
+              Turbopuffer::Encryption::Default::OrHash
+            ),
           patch_by_filter:
             Turbopuffer::NamespaceWriteParams::PatchByFilter::OrHash,
           patch_by_filter_allow_partial: T::Boolean,
