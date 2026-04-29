@@ -1,0 +1,13 @@
+module Turbopuffer
+  module Models
+    type sparse_distance_metric = :dot_product
+
+    module SparseDistanceMetric
+      extend Turbopuffer::Internal::Type::Enum
+
+      DOT_PRODUCT: :dot_product
+
+      def self?.values: -> ::Array[Turbopuffer::Models::sparse_distance_metric]
+    end
+  end
+end

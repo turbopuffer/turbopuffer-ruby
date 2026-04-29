@@ -235,19 +235,27 @@ module Turbopuffer
           end
 
         # A function used to calculate sparse vector similarity.
-        sig { returns(Symbol) }
+        sig { returns(Turbopuffer::SparseDistanceMetric::OrSymbol) }
         attr_accessor :distance_metric
 
         # Whether to create a sparse kNN index for the attribute. Requires the `{}f16`
         # type.
-        sig { params(distance_metric: Symbol).returns(T.attached_class) }
+        sig do
+          params(
+            distance_metric: Turbopuffer::SparseDistanceMetric::OrSymbol
+          ).returns(T.attached_class)
+        end
         def self.new(
           # A function used to calculate sparse vector similarity.
-          distance_metric: :dot_product
+          distance_metric:
         )
         end
 
-        sig { override.returns({ distance_metric: Symbol }) }
+        sig do
+          override.returns(
+            { distance_metric: Turbopuffer::SparseDistanceMetric::OrSymbol }
+          )
+        end
         def to_hash
         end
       end
