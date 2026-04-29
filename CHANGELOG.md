@@ -1,5 +1,13 @@
 # Changelog
 
+## 2.0.0-alpha.2 (2026-04-29)
+
+Full Changelog: [v2.0.0-alpha.1...v2.0.0-alpha.2](https://github.com/turbopuffer/turbopuffer-ruby/compare/v2.0.0-alpha.1...v2.0.0-alpha.2)
+
+### Features
+
+* Spec: Add sparse_distance_metric to the list of models. ([81f2998](https://github.com/turbopuffer/turbopuffer-ruby/commit/81f29982fb72e5f90923a35975841633b40aacc5))
+
 ## 2.0.0-alpha.1 (2026-04-29)
 
 Full Changelog: [v1.19.0...v2.0.0-alpha.1](https://github.com/turbopuffer/turbopuffer-ruby/compare/v1.19.0...v2.0.0-alpha.1)
