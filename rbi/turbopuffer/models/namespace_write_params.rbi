@@ -113,12 +113,25 @@ module Turbopuffer
       attr_writer :distance_metric
 
       # The encryption configuration for a namespace.
-      sig { returns(T.nilable(Turbopuffer::NamespaceWriteParams::Encryption)) }
+      sig do
+        returns(
+          T.nilable(
+            T.any(
+              Turbopuffer::Encryption::CustomerManaged,
+              Turbopuffer::Encryption::Default
+            )
+          )
+        )
+      end
       attr_reader :encryption
 
       sig do
         params(
-          encryption: Turbopuffer::NamespaceWriteParams::Encryption::OrHash
+          encryption:
+            T.any(
+              Turbopuffer::Encryption::CustomerManaged::OrHash,
+              Turbopuffer::Encryption::Default::OrHash
+            )
         ).void
       end
       attr_writer :encryption
@@ -237,7 +250,11 @@ module Turbopuffer
           deletes: T::Array[Turbopuffer::ID::Variants],
           disable_backpressure: T::Boolean,
           distance_metric: Turbopuffer::DistanceMetric::OrSymbol,
-          encryption: Turbopuffer::NamespaceWriteParams::Encryption::OrHash,
+          encryption:
+            T.any(
+              Turbopuffer::Encryption::CustomerManaged::OrHash,
+              Turbopuffer::Encryption::Default::OrHash
+            ),
           patch_by_filter:
             Turbopuffer::NamespaceWriteParams::PatchByFilter::OrHash,
           patch_by_filter_allow_partial: T::Boolean,
@@ -324,7 +341,11 @@ module Turbopuffer
             deletes: T::Array[Turbopuffer::ID::Variants],
             disable_backpressure: T::Boolean,
             distance_metric: Turbopuffer::DistanceMetric::OrSymbol,
-            encryption: Turbopuffer::NamespaceWriteParams::Encryption,
+            encryption:
+              T.any(
+                Turbopuffer::Encryption::CustomerManaged,
+                Turbopuffer::Encryption::Default
+              ),
             patch_by_filter: Turbopuffer::NamespaceWriteParams::PatchByFilter,
             patch_by_filter_allow_partial: T::Boolean,
             patch_columns: Turbopuffer::Columns,
@@ -344,74 +365,6 @@ module Turbopuffer
         )
       end
       def to_hash
-      end
-
-      class Encryption < Turbopuffer::Internal::Type::BaseModel
-        OrHash =
-          T.type_alias do
-            T.any(
-              Turbopuffer::NamespaceWriteParams::Encryption,
-              Turbopuffer::Internal::AnyHash
-            )
-          end
-
-        sig do
-          returns(
-            T.nilable(Turbopuffer::NamespaceWriteParams::Encryption::Cmek)
-          )
-        end
-        attr_reader :cmek
-
-        sig do
-          params(
-            cmek: Turbopuffer::NamespaceWriteParams::Encryption::Cmek::OrHash
-          ).void
-        end
-        attr_writer :cmek
-
-        # The encryption configuration for a namespace.
-        sig do
-          params(
-            cmek: Turbopuffer::NamespaceWriteParams::Encryption::Cmek::OrHash
-          ).returns(T.attached_class)
-        end
-        def self.new(cmek: nil)
-        end
-
-        sig do
-          override.returns(
-            { cmek: Turbopuffer::NamespaceWriteParams::Encryption::Cmek }
-          )
-        end
-        def to_hash
-        end
-
-        class Cmek < Turbopuffer::Internal::Type::BaseModel
-          OrHash =
-            T.type_alias do
-              T.any(
-                Turbopuffer::NamespaceWriteParams::Encryption::Cmek,
-                Turbopuffer::Internal::AnyHash
-              )
-            end
-
-          # The identifier of the CMEK key to use for encryption. For GCP, the
-          # fully-qualified resource name of the key. For AWS, the ARN of the key.
-          sig { returns(String) }
-          attr_accessor :key_name
-
-          sig { params(key_name: String).returns(T.attached_class) }
-          def self.new(
-            # The identifier of the CMEK key to use for encryption. For GCP, the
-            # fully-qualified resource name of the key. For AWS, the ARN of the key.
-            key_name:
-          )
-          end
-
-          sig { override.returns({ key_name: String }) }
-          def to_hash
-          end
-        end
       end
 
       class PatchByFilter < Turbopuffer::Internal::Type::BaseModel

@@ -1,0 +1,35 @@
+module Turbopuffer
+  module Models
+    type encryption =
+      Turbopuffer::Encryption::CustomerManaged
+      | Turbopuffer::Encryption::Default
+
+    module Encryption
+      extend Turbopuffer::Internal::Type::Union
+
+      type customer_managed = { key_name: String, mode: :"customer-managed" }
+
+      class CustomerManaged < Turbopuffer::Internal::Type::BaseModel
+        attr_accessor key_name: String
+
+        attr_accessor mode: :"customer-managed"
+
+        def initialize: (key_name: String, ?mode: :"customer-managed") -> void
+
+        def to_hash: -> { key_name: String, mode: :"customer-managed" }
+      end
+
+      type default = { mode: :default }
+
+      class Default < Turbopuffer::Internal::Type::BaseModel
+        attr_accessor mode: :default
+
+        def initialize: (?mode: :default) -> void
+
+        def to_hash: -> { mode: :default }
+      end
+
+      def self?.variants: -> ::Array[Turbopuffer::Models::encryption]
+    end
+  end
+end
