@@ -12,14 +12,14 @@ module Turbopuffer
       #   @return [String, nil]
       optional :namespace, String
 
-      # @!attribute branch_from_namespace
+      # @!attribute source_namespace
       #   The namespace to create an instant, copy-on-write clone of.
       #
-      #   @return [String, Turbopuffer::Models::BranchFromNamespaceParams::BranchFromNamespaceConfig]
-      required :branch_from_namespace, union: -> { Turbopuffer::BranchFromNamespaceParams }
+      #   @return [String]
+      required :source_namespace, String
 
-      # @!method initialize(branch_from_namespace:, namespace: nil, request_options: {})
-      #   @param branch_from_namespace [String, Turbopuffer::Models::BranchFromNamespaceParams::BranchFromNamespaceConfig] The namespace to create an instant, copy-on-write clone of.
+      # @!method initialize(source_namespace:, namespace: nil, request_options: {})
+      #   @param source_namespace [String] The namespace to create an instant, copy-on-write clone of.
       #
       #   @param namespace [String]
       #

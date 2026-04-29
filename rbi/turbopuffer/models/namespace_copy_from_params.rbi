@@ -21,31 +21,40 @@ module Turbopuffer
       attr_writer :namespace
 
       # The namespace to copy documents from.
-      sig do
-        returns(
-          T.any(
-            String,
-            Turbopuffer::CopyFromNamespaceParams::CopyFromNamespaceConfig
-          )
-        )
-      end
-      attr_accessor :copy_from_namespace
+      sig { returns(String) }
+      attr_accessor :source_namespace
+
+      # (Optional) An API key for the organization containing the source namespace
+      sig { returns(T.nilable(String)) }
+      attr_reader :source_api_key
+
+      sig { params(source_api_key: String).void }
+      attr_writer :source_api_key
+
+      # (Optional) The region of the source namespace.
+      sig { returns(T.nilable(String)) }
+      attr_reader :source_region
+
+      sig { params(source_region: String).void }
+      attr_writer :source_region
 
       sig do
         params(
-          copy_from_namespace:
-            T.any(
-              String,
-              Turbopuffer::CopyFromNamespaceParams::CopyFromNamespaceConfig::OrHash
-            ),
+          source_namespace: String,
           namespace: String,
+          source_api_key: String,
+          source_region: String,
           request_options: Turbopuffer::RequestOptions::OrHash
         ).returns(T.attached_class)
       end
       def self.new(
         # The namespace to copy documents from.
-        copy_from_namespace:,
+        source_namespace:,
         namespace: nil,
+        # (Optional) An API key for the organization containing the source namespace
+        source_api_key: nil,
+        # (Optional) The region of the source namespace.
+        source_region: nil,
         request_options: {}
       )
       end
@@ -54,11 +63,9 @@ module Turbopuffer
         override.returns(
           {
             namespace: String,
-            copy_from_namespace:
-              T.any(
-                String,
-                Turbopuffer::CopyFromNamespaceParams::CopyFromNamespaceConfig
-              ),
+            source_namespace: String,
+            source_api_key: String,
+            source_region: String,
             request_options: Turbopuffer::RequestOptions
           }
         )
