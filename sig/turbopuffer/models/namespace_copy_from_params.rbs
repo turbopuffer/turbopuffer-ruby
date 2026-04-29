@@ -3,7 +3,9 @@ module Turbopuffer
     type namespace_copy_from_params =
       {
         namespace: String,
-        copy_from_namespace: Turbopuffer::Models::copy_from_namespace_params
+        source_namespace: String,
+        source_api_key: String,
+        source_region: String
       }
       & Turbopuffer::Internal::Type::request_parameters
 
@@ -15,17 +17,29 @@ module Turbopuffer
 
       def namespace=: (String) -> String
 
-      attr_accessor copy_from_namespace: Turbopuffer::Models::copy_from_namespace_params
+      attr_accessor source_namespace: String
+
+      attr_reader source_api_key: String?
+
+      def source_api_key=: (String) -> String
+
+      attr_reader source_region: String?
+
+      def source_region=: (String) -> String
 
       def initialize: (
-        copy_from_namespace: Turbopuffer::Models::copy_from_namespace_params,
+        source_namespace: String,
         ?namespace: String,
+        ?source_api_key: String,
+        ?source_region: String,
         ?request_options: Turbopuffer::request_opts
       ) -> void
 
       def to_hash: -> {
         namespace: String,
-        copy_from_namespace: Turbopuffer::Models::copy_from_namespace_params,
+        source_namespace: String,
+        source_api_key: String,
+        source_region: String,
         request_options: Turbopuffer::RequestOptions
       }
     end

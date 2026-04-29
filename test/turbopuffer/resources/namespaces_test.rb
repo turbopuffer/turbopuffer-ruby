@@ -6,7 +6,8 @@ class Turbopuffer::Test::Resources::NamespacesTest < Turbopuffer::Test::Resource
   def test_branch_from_required_params
     skip("Mock server tests are disabled")
 
-    response = @turbopuffer.namespaces.branch_from(namespace: "namespace", branch_from_namespace: "string")
+    response =
+      @turbopuffer.namespaces.branch_from(namespace: "namespace", source_namespace: "source_namespace")
 
     assert_pattern do
       response => Turbopuffer::Models::NamespaceBranchFromResponse
@@ -33,7 +34,8 @@ class Turbopuffer::Test::Resources::NamespacesTest < Turbopuffer::Test::Resource
   def test_copy_from_required_params
     skip("Mock server tests are disabled")
 
-    response = @turbopuffer.namespaces.copy_from(namespace: "namespace", copy_from_namespace: "string")
+    response =
+      @turbopuffer.namespaces.copy_from(namespace: "namespace", source_namespace: "source_namespace")
 
     assert_pattern do
       response => Turbopuffer::Models::NamespaceCopyFromResponse

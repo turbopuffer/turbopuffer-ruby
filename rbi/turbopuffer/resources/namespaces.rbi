@@ -6,18 +6,14 @@ module Turbopuffer
       # Creates an instant, copy-on-write clone of a namespace.
       sig do
         params(
-          branch_from_namespace:
-            T.any(
-              String,
-              Turbopuffer::BranchFromNamespaceParams::BranchFromNamespaceConfig::OrHash
-            ),
+          source_namespace: String,
           namespace: String,
           request_options: Turbopuffer::RequestOptions::OrHash
         ).returns(Turbopuffer::Models::NamespaceBranchFromResponse)
       end
       def branch_from(
         # Body param: The namespace to create an instant, copy-on-write clone of.
-        branch_from_namespace:,
+        source_namespace:,
         # Path param: The name of the namespace.
         namespace: nil,
         request_options: {}
@@ -27,20 +23,23 @@ module Turbopuffer
       # Copy all documents from another namespace into this one.
       sig do
         params(
-          copy_from_namespace:
-            T.any(
-              String,
-              Turbopuffer::CopyFromNamespaceParams::CopyFromNamespaceConfig::OrHash
-            ),
+          source_namespace: String,
           namespace: String,
+          source_api_key: String,
+          source_region: String,
           request_options: Turbopuffer::RequestOptions::OrHash
         ).returns(Turbopuffer::Models::NamespaceCopyFromResponse)
       end
       def copy_from(
         # Body param: The namespace to copy documents from.
-        copy_from_namespace:,
+        source_namespace:,
         # Path param: The name of the namespace.
         namespace: nil,
+        # Body param: (Optional) An API key for the organization containing the source
+        # namespace
+        source_api_key: nil,
+        # Body param: (Optional) The region of the source namespace.
+        source_region: nil,
         request_options: {}
       )
       end

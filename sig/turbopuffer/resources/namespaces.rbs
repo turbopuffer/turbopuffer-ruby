@@ -2,14 +2,16 @@ module Turbopuffer
   module Resources
     class Namespaces
       def branch_from: (
-        branch_from_namespace: Turbopuffer::Models::branch_from_namespace_params,
+        source_namespace: String,
         ?namespace: String,
         ?request_options: Turbopuffer::request_opts
       ) -> Turbopuffer::Models::NamespaceBranchFromResponse
 
       def copy_from: (
-        copy_from_namespace: Turbopuffer::Models::copy_from_namespace_params,
+        source_namespace: String,
         ?namespace: String,
+        ?source_api_key: String,
+        ?source_region: String,
         ?request_options: Turbopuffer::request_opts
       ) -> Turbopuffer::Models::NamespaceCopyFromResponse
 

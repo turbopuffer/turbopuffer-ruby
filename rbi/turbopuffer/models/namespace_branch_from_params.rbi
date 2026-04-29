@@ -21,30 +21,19 @@ module Turbopuffer
       attr_writer :namespace
 
       # The namespace to create an instant, copy-on-write clone of.
-      sig do
-        returns(
-          T.any(
-            String,
-            Turbopuffer::BranchFromNamespaceParams::BranchFromNamespaceConfig
-          )
-        )
-      end
-      attr_accessor :branch_from_namespace
+      sig { returns(String) }
+      attr_accessor :source_namespace
 
       sig do
         params(
-          branch_from_namespace:
-            T.any(
-              String,
-              Turbopuffer::BranchFromNamespaceParams::BranchFromNamespaceConfig::OrHash
-            ),
+          source_namespace: String,
           namespace: String,
           request_options: Turbopuffer::RequestOptions::OrHash
         ).returns(T.attached_class)
       end
       def self.new(
         # The namespace to create an instant, copy-on-write clone of.
-        branch_from_namespace:,
+        source_namespace:,
         namespace: nil,
         request_options: {}
       )
@@ -54,11 +43,7 @@ module Turbopuffer
         override.returns(
           {
             namespace: String,
-            branch_from_namespace:
-              T.any(
-                String,
-                Turbopuffer::BranchFromNamespaceParams::BranchFromNamespaceConfig
-              ),
+            source_namespace: String,
             request_options: Turbopuffer::RequestOptions
           }
         )

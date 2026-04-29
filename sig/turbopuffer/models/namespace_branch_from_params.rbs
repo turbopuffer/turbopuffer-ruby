@@ -1,10 +1,7 @@
 module Turbopuffer
   module Models
     type namespace_branch_from_params =
-      {
-        namespace: String,
-        branch_from_namespace: Turbopuffer::Models::branch_from_namespace_params
-      }
+      { namespace: String, source_namespace: String }
       & Turbopuffer::Internal::Type::request_parameters
 
     class NamespaceBranchFromParams < Turbopuffer::Internal::Type::BaseModel
@@ -15,17 +12,17 @@ module Turbopuffer
 
       def namespace=: (String) -> String
 
-      attr_accessor branch_from_namespace: Turbopuffer::Models::branch_from_namespace_params
+      attr_accessor source_namespace: String
 
       def initialize: (
-        branch_from_namespace: Turbopuffer::Models::branch_from_namespace_params,
+        source_namespace: String,
         ?namespace: String,
         ?request_options: Turbopuffer::request_opts
       ) -> void
 
       def to_hash: -> {
         namespace: String,
-        branch_from_namespace: Turbopuffer::Models::branch_from_namespace_params,
+        source_namespace: String,
         request_options: Turbopuffer::RequestOptions
       }
     end

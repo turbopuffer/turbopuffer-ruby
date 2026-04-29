@@ -5,9 +5,9 @@ module Turbopuffer
     class Namespaces
       # Creates an instant, copy-on-write clone of a namespace.
       #
-      # @overload branch_from(branch_from_namespace:, namespace: nil, request_options: {})
+      # @overload branch_from(source_namespace:, namespace: nil, request_options: {})
       #
-      # @param branch_from_namespace [String, Turbopuffer::Models::BranchFromNamespaceParams::BranchFromNamespaceConfig] Body param: The namespace to create an instant, copy-on-write clone of.
+      # @param source_namespace [String] Body param: The namespace to create an instant, copy-on-write clone of.
       #
       # @param namespace [String] Path param: The name of the namespace.
       #
@@ -31,13 +31,20 @@ module Turbopuffer
         )
       end
 
+      # Some parameter documentations has been truncated, see
+      # {Turbopuffer::Models::NamespaceCopyFromParams} for more details.
+      #
       # Copy all documents from another namespace into this one.
       #
-      # @overload copy_from(copy_from_namespace:, namespace: nil, request_options: {})
+      # @overload copy_from(source_namespace:, namespace: nil, source_api_key: nil, source_region: nil, request_options: {})
       #
-      # @param copy_from_namespace [String, Turbopuffer::Models::CopyFromNamespaceParams::CopyFromNamespaceConfig] Body param: The namespace to copy documents from.
+      # @param source_namespace [String] Body param: The namespace to copy documents from.
       #
       # @param namespace [String] Path param: The name of the namespace.
+      #
+      # @param source_api_key [String] Body param: (Optional) An API key for the organization containing the source nam
+      #
+      # @param source_region [String] Body param: (Optional) The region of the source namespace.
       #
       # @param request_options [Turbopuffer::RequestOptions, Hash{Symbol=>Object}, nil]
       #
