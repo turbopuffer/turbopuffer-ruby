@@ -1,5 +1,29 @@
 # Changelog
 
+## 2.0.0-alpha.1 (2026-04-29)
+
+Full Changelog: [v1.19.0...v2.0.0-alpha.1](https://github.com/turbopuffer/turbopuffer-ruby/compare/v1.19.0...v2.0.0-alpha.1)
+
+### Features
+
+* Add sparse vectors to the spec. ([060434a](https://github.com/turbopuffer/turbopuffer-ruby/commit/060434a1516b678fdf8090b9c7d37c9b9102c3f3))
+* Enable Stainless normalizer v2 while keeping Query inlined ([20d751b](https://github.com/turbopuffer/turbopuffer-ruby/commit/20d751b10ff3a74dfc27f5f5baf4ac41ee50f71d))
+* Require `fuzzy: true` in the schema to use the `Fuzzy` filter ([7408995](https://github.com/turbopuffer/turbopuffer-ruby/commit/7408995fefd4c32638309feefe39e1c4d474213b))
+* set up branchFrom and copyFrom sugar in the OpenAPI spec ([3b0df07](https://github.com/turbopuffer/turbopuffer-ruby/commit/3b0df076ee081ed3ddf129be8762d683a949845c))
+* spec: flatten branchFrom/copyFrom sugar endpoint params ([06214bc](https://github.com/turbopuffer/turbopuffer-ruby/commit/06214bcbded87f2c214b3fc7b2cf2309540b197b))
+* spec: update OpenAPI spec for v2 encryption API ([0c2654f](https://github.com/turbopuffer/turbopuffer-ruby/commit/0c2654fdb779231b867c4c40f9ff9e904601ca3c))
+* support setting headers via env ([a0c4d53](https://github.com/turbopuffer/turbopuffer-ruby/commit/a0c4d53342da77dfbf07f60350246ab418926cff))
+
+
+### Bug Fixes
+
+* multipart encoding for file arrays ([bca18a3](https://github.com/turbopuffer/turbopuffer-ruby/commit/bca18a3d40304187b478ec130b274316fb95125a))
+
+
+### Chores
+
+* **internal:** more robust bootstrap script ([0b727d5](https://github.com/turbopuffer/turbopuffer-ruby/commit/0b727d5f42db0363d4143b8a912621c2c892c93f))
+
 ## 1.19.0 (2026-04-06)
 
 Full Changelog: [v1.18.0...v1.19.0](https://github.com/turbopuffer/turbopuffer-ruby/compare/v1.18.0...v1.19.0)
