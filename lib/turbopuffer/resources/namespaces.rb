@@ -363,7 +363,7 @@ module Turbopuffer
           end
         @client.request(
           method: :patch,
-          path: ["v2/namespaces/%1$s/metadata", namespace],
+          path: ["v1/namespaces/%1$s/metadata", namespace],
           body: parsed,
           model: Turbopuffer::NamespaceMetadata,
           options: options
