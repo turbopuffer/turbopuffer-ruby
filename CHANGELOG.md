@@ -1,5 +1,13 @@
 # Changelog
 
+## 2.0.0-alpha.3 (2026-05-08)
+
+Full Changelog: [v2.0.0-alpha.2...v2.0.0-alpha.3](https://github.com/turbopuffer/turbopuffer-ruby/compare/v2.0.0-alpha.2...v2.0.0-alpha.3)
+
+### Features
+
+* spec: move update_metadata to v1 ([531fec9](https://github.com/turbopuffer/turbopuffer-ruby/commit/531fec94c2331f2361af31b5158031a56d23cef1))
+
 ## 2.0.0-alpha.2 (2026-04-29)
 
 Full Changelog: [v2.0.0-alpha.1...v2.0.0-alpha.2](https://github.com/turbopuffer/turbopuffer-ruby/compare/v2.0.0-alpha.1...v2.0.0-alpha.2)
