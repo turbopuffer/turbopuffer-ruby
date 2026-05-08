@@ -1,5 +1,5 @@
 # frozen_string_literal: true
 
 module Turbopuffer
-  VERSION = "2.0.0.pre.alpha.2"
+  VERSION = "2.0.0.pre.alpha.3"
 end
