@@ -1,5 +1,13 @@
 # Changelog
 
+## 2.0.0-alpha.4 (2026-05-10)
+
+Full Changelog: [v2.0.0-alpha.3...v2.0.0-alpha.4](https://github.com/turbopuffer/turbopuffer-ruby/compare/v2.0.0-alpha.3...v2.0.0-alpha.4)
+
+### Features
+
+* spec: rename RankByVector/RankBySparseVector to RankByAnn/RankBySparseKnn ([a3b9c2c](https://github.com/turbopuffer/turbopuffer-ruby/commit/a3b9c2c2eb19716ff6a7ce5da86ee6d6901420ea))
+
 ## 2.0.0-alpha.3 (2026-05-08)
 
 Full Changelog: [v2.0.0-alpha.2...v2.0.0-alpha.3](https://github.com/turbopuffer/turbopuffer-ruby/compare/v2.0.0-alpha.2...v2.0.0-alpha.3)
