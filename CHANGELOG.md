@@ -1,5 +1,13 @@
 # Changelog
 
+## 2.0.0 (2026-05-10)
+
+Full Changelog: [v2.0.0-alpha.4...v2.0.0](https://github.com/turbopuffer/turbopuffer-ruby/compare/v2.0.0-alpha.4...v2.0.0)
+
+### Documentation
+
+* document v2.0 breaking changes in UPGRADING.md ([083dd60](https://github.com/turbopuffer/turbopuffer-ruby/commit/083dd60d68b364c9dcf57f48761fada93e50213a))
+
 ## 2.0.0-alpha.4 (2026-05-10)
 
 Full Changelog: [v2.0.0-alpha.3...v2.0.0-alpha.4](https://github.com/turbopuffer/turbopuffer-ruby/compare/v2.0.0-alpha.3...v2.0.0-alpha.4)
