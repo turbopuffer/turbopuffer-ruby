@@ -6,6 +6,29 @@ changes.
 
 ## v2.0
 
+- The `encryption` parameter has been restructured.
+
+  Old:
+
+  ```rb
+  tpuf.namespace("ns").write(
+    upsert_rows: [...],
+    encryption: { cmek: { key_name: "..." } },
+  )
+  ```
+
+  New:
+
+  ```rb
+  tpuf.namespace("ns").write(
+    upsert_rows: [...],
+    encryption: { mode: "customer-managed", key_name: "..." },
+  )
+  ```
+
+  A new `{ mode: :default }` variant lets you migrate a namespace from CMEK
+  to default encryption.
+
 - The `copy_from_namespace` parameter to the `write` method has been replaced
   with a dedicated `copy_from` method.
 
@@ -43,26 +66,3 @@ changes.
   ```rb
   tpuf.namespace("ns").branch_from(source_namespace: "src")
   ```
-
-- The `encryption` parameter has been restructured.
-
-  Old:
-
-  ```rb
-  tpuf.namespace("ns").write(
-    upsert_rows: [...],
-    encryption: { cmek: { key_name: "..." } },
-  )
-  ```
-
-  New:
-
-  ```rb
-  tpuf.namespace("ns").write(
-    upsert_rows: [...],
-    encryption: { mode: "customer-managed", key_name: "..." },
-  )
-  ```
-
-  A new `{ mode: :default }` variant lets you migrate a namespace from CMEK
-  to default encryption.
