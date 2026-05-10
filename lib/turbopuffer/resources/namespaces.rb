@@ -110,7 +110,7 @@ module Turbopuffer
       #
       # @param filters [Object] Body param: Exact filters for attributes to refine search results for. Think of
       #
-      # @param group_by [Array<String>] Body param: Groups documents by the specified attributes (the "group key") befor
+      # @param group_by [Array<Object>] Body param: Groups documents by the specified attributes (the "group key") befor
       #
       # @param include_attributes [Boolean, Array<String>] Body param: Whether to include attributes in the response.
       #
@@ -243,7 +243,7 @@ module Turbopuffer
       #
       # @param filters [Object] Body param: Exact filters for attributes to refine search results for. Think of
       #
-      # @param group_by [Array<String>] Body param: Groups documents by the specified attributes (the "group key") befor
+      # @param group_by [Array<Object>] Body param: Groups documents by the specified attributes (the "group key") befor
       #
       # @param include_attributes [Boolean, Array<String>] Body param: Whether to include attributes in the response.
       #

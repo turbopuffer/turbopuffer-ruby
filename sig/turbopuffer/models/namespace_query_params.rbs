@@ -8,7 +8,7 @@ module Turbopuffer
         distance_metric: Turbopuffer::Models::distance_metric,
         exclude_attributes: ::Array[String],
         filters: top,
-        group_by: ::Array[String],
+        group_by: ::Array[top],
         include_attributes: Turbopuffer::Models::include_attributes,
         limit: Turbopuffer::Models::NamespaceQueryParams::limit,
         rank_by: top,
@@ -49,9 +49,9 @@ module Turbopuffer
 
       def filters=: (top) -> top
 
-      attr_reader group_by: ::Array[String]?
+      attr_reader group_by: ::Array[top]?
 
-      def group_by=: (::Array[String]) -> ::Array[String]
+      def group_by=: (::Array[top]) -> ::Array[top]
 
       attr_reader include_attributes: Turbopuffer::Models::include_attributes?
 
@@ -86,7 +86,7 @@ module Turbopuffer
         ?distance_metric: Turbopuffer::Models::distance_metric,
         ?exclude_attributes: ::Array[String],
         ?filters: top,
-        ?group_by: ::Array[String],
+        ?group_by: ::Array[top],
         ?include_attributes: Turbopuffer::Models::include_attributes,
         ?limit: Turbopuffer::Models::NamespaceQueryParams::limit,
         ?rank_by: top,
@@ -102,7 +102,7 @@ module Turbopuffer
         distance_metric: Turbopuffer::Models::distance_metric,
         exclude_attributes: ::Array[String],
         filters: top,
-        group_by: ::Array[String],
+        group_by: ::Array[top],
         include_attributes: Turbopuffer::Models::include_attributes,
         limit: Turbopuffer::Models::NamespaceQueryParams::limit,
         rank_by: top,

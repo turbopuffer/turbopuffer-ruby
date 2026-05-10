@@ -71,10 +71,10 @@ module Turbopuffer
 
       # Groups documents by the specified attributes (the "group key") before computing
       # aggregates. Aggregates are computed separately for each group.
-      sig { returns(T.nilable(T::Array[String])) }
+      sig { returns(T.nilable(T::Array[T.anything])) }
       attr_reader :group_by
 
-      sig { params(group_by: T::Array[String]).void }
+      sig { params(group_by: T::Array[T.anything]).void }
       attr_writer :group_by
 
       # Whether to include attributes in the response.
@@ -127,7 +127,7 @@ module Turbopuffer
           distance_metric: Turbopuffer::DistanceMetric::OrSymbol,
           exclude_attributes: T::Array[String],
           filters: T.anything,
-          group_by: T::Array[String],
+          group_by: T::Array[T.anything],
           include_attributes: Turbopuffer::IncludeAttributes::Variants,
           limit: T.any(Integer, Turbopuffer::Limit::OrHash),
           rank_by: T.anything,
@@ -177,7 +177,7 @@ module Turbopuffer
             distance_metric: Turbopuffer::DistanceMetric::OrSymbol,
             exclude_attributes: T::Array[String],
             filters: T.anything,
-            group_by: T::Array[String],
+            group_by: T::Array[T.anything],
             include_attributes: Turbopuffer::IncludeAttributes::Variants,
             limit: T.any(Integer, Turbopuffer::Limit),
             rank_by: T.anything,

@@ -49,8 +49,8 @@ module Turbopuffer
       #   Groups documents by the specified attributes (the "group key") before computing
       #   aggregates. Aggregates are computed separately for each group.
       #
-      #   @return [Array<String>, nil]
-      optional :group_by, Turbopuffer::Internal::Type::ArrayOf[String]
+      #   @return [Array<Object>, nil]
+      optional :group_by, Turbopuffer::Internal::Type::ArrayOf[Turbopuffer::Internal::Type::Unknown]
 
       # @!attribute include_attributes
       #   Whether to include attributes in the response.
@@ -98,7 +98,7 @@ module Turbopuffer
       #
       #   @param filters [Object] Exact filters for attributes to refine search results for. Think of it as a SQL
       #
-      #   @param group_by [Array<String>] Groups documents by the specified attributes (the "group key") before computing
+      #   @param group_by [Array<Object>] Groups documents by the specified attributes (the "group key") before computing
       #
       #   @param include_attributes [Boolean, Array<String>] Whether to include attributes in the response.
       #
