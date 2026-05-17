@@ -1,5 +1,13 @@
 # Changelog
 
+## 2.0.1 (2026-05-17)
+
+Full Changelog: [v2.0.0...v2.0.1](https://github.com/turbopuffer/turbopuffer-ruby/compare/v2.0.0...v2.0.1)
+
+### Bug Fixes
+
+* **client:** elide content type header on requests without body ([c03121e](https://github.com/turbopuffer/turbopuffer-ruby/commit/c03121e22d62d66df81763733244f6c93e1af009))
+
 ## 2.0.0 (2026-05-10)
 
 Full Changelog: [v2.0.0-alpha.4...v2.0.0](https://github.com/turbopuffer/turbopuffer-ruby/compare/v2.0.0-alpha.4...v2.0.0)
