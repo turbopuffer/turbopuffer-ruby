@@ -31,6 +31,10 @@ module Turbopuffer
 
   class FullTextSearchConfig = Turbopuffer::Models::FullTextSearchConfig
 
+  class FuzzyMaxEditDistance = Turbopuffer::Models::FuzzyMaxEditDistance
+
+  class FuzzyParams = Turbopuffer::Models::FuzzyParams
+
   module ID = Turbopuffer::Models::ID
 
   module IncludeAttributes = Turbopuffer::Models::IncludeAttributes
