@@ -1,0 +1,16 @@
+module Turbopuffer
+  module Models
+    type fuzzy_max_edit_distance =
+      { distance: Integer, min_query_chars: Integer }
+
+    class FuzzyMaxEditDistance < Turbopuffer::Internal::Type::BaseModel
+      attr_accessor distance: Integer
+
+      attr_accessor min_query_chars: Integer
+
+      def initialize: (distance: Integer, min_query_chars: Integer) -> void
+
+      def to_hash: -> { distance: Integer, min_query_chars: Integer }
+    end
+  end
+end
