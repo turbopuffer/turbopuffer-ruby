@@ -1,0 +1,18 @@
+module Turbopuffer
+  module Models
+    type fuzzy_params =
+      { max_edit_distance: ::Array[Turbopuffer::FuzzyMaxEditDistance] }
+
+    class FuzzyParams < Turbopuffer::Internal::Type::BaseModel
+      attr_accessor max_edit_distance: ::Array[Turbopuffer::FuzzyMaxEditDistance]
+
+      def initialize: (
+        max_edit_distance: ::Array[Turbopuffer::FuzzyMaxEditDistance]
+      ) -> void
+
+      def to_hash: -> {
+        max_edit_distance: ::Array[Turbopuffer::FuzzyMaxEditDistance]
+      }
+    end
+  end
+end
