@@ -7,6 +7,10 @@ module Turbopuffer
       Turbopuffer::Internal::Type::Converter
     )
 
+  AttributeEmbed = Turbopuffer::Models::AttributeEmbed
+
+  AttributeEmbedConfig = Turbopuffer::Models::AttributeEmbedConfig
+
   AttributeSchema = Turbopuffer::Models::AttributeSchema
 
   AttributeSchemaConfig = Turbopuffer::Models::AttributeSchemaConfig
@@ -32,6 +36,8 @@ module Turbopuffer
   DecayParams = Turbopuffer::Models::DecayParams
 
   DistanceMetric = Turbopuffer::Models::DistanceMetric
+
+  EmbedParams = Turbopuffer::Models::EmbedParams
 
   Encryption = Turbopuffer::Models::Encryption
 

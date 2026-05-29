@@ -1,0 +1,15 @@
+module Turbopuffer
+  module Models
+    type embed_params = { model: String }
+
+    class EmbedParams < Turbopuffer::Internal::Type::BaseModel
+      attr_reader model: String?
+
+      def model=: (String) -> String
+
+      def initialize: (?model: String) -> void
+
+      def to_hash: -> { model: String }
+    end
+  end
+end
