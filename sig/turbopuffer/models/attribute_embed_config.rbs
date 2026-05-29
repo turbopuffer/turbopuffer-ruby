@@ -1,0 +1,26 @@
+module Turbopuffer
+  module Models
+    type attribute_embed_config =
+      { model: String, attribute: String, dims: Integer }
+
+    class AttributeEmbedConfig < Turbopuffer::Internal::Type::BaseModel
+      attr_accessor model: String
+
+      attr_reader attribute: String?
+
+      def attribute=: (String) -> String
+
+      attr_reader dims: Integer?
+
+      def dims=: (Integer) -> Integer
+
+      def initialize: (
+        model: String,
+        ?attribute: String,
+        ?dims: Integer
+      ) -> void
+
+      def to_hash: -> { model: String, attribute: String, dims: Integer }
+    end
+  end
+end

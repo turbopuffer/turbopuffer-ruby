@@ -6,14 +6,14 @@ module Turbopuffer
       # @api private
       #
       # @example
-      #   # `attribute_schema` is a `Turbopuffer::AttributeSchema`
-      #   case attribute_schema
-      #   when Turbopuffer::AttributeType
+      #   # `attribute_embed` is a `Turbopuffer::AttributeEmbed`
+      #   case attribute_embed
+      #   when String
       #     # ...
-      #   when Turbopuffer::AttributeSchemaConfig
-      #     puts(attribute_schema.type)
+      #   when Turbopuffer::AttributeEmbedConfig
+      #     puts(attribute_embed.model)
       #   else
-      #     puts(attribute_schema)
+      #     puts(attribute_embed)
       #   end
       module Union
         include Turbopuffer::Internal::Type::Converter

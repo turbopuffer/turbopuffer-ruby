@@ -18,6 +18,14 @@ module Turbopuffer
       #   @return [Boolean, Turbopuffer::Models::AttributeSchemaConfig::Ann::AnnConfig, nil]
       optional :ann, union: -> { Turbopuffer::AttributeSchemaConfig::Ann }
 
+      # @!attribute embed
+      #   Whether to automatically embed this string attribute into a vector attribute.
+      #   Can be a model name, a detailed configuration object, or `null` to remove an
+      #   existing embedding configuration.
+      #
+      #   @return [String, Turbopuffer::Models::AttributeEmbedConfig, nil]
+      optional :embed, union: -> { Turbopuffer::AttributeEmbed }, nil?: true
+
       # @!attribute filterable
       #   Whether or not the attributes can be used in filters.
       #
@@ -57,7 +65,7 @@ module Turbopuffer
       #   @return [Turbopuffer::Models::AttributeSchemaConfig::SparseKnn, nil]
       optional :sparse_knn, -> { Turbopuffer::AttributeSchemaConfig::SparseKnn }
 
-      # @!method initialize(type:, ann: nil, filterable: nil, full_text_search: nil, fuzzy: nil, glob: nil, regex: nil, sparse_knn: nil)
+      # @!method initialize(type:, ann: nil, embed: nil, filterable: nil, full_text_search: nil, fuzzy: nil, glob: nil, regex: nil, sparse_knn: nil)
       #   Some parameter documentations has been truncated, see
       #   {Turbopuffer::Models::AttributeSchemaConfig} for more details.
       #
@@ -66,6 +74,8 @@ module Turbopuffer
       #   @param type [String] The data type of the attribute. Valid values: string, int, uint, float, uuid, da
       #
       #   @param ann [Boolean, Turbopuffer::Models::AttributeSchemaConfig::Ann::AnnConfig] Whether to create an approximate nearest neighbor index for the attribute. Can b
+      #
+      #   @param embed [String, Turbopuffer::Models::AttributeEmbedConfig, nil] Whether to automatically embed this string attribute into a vector attribute. Ca
       #
       #   @param filterable [Boolean] Whether or not the attributes can be used in filters.
       #

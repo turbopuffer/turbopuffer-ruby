@@ -1,6 +1,10 @@
 module Turbopuffer
   AggregationGroup: Turbopuffer::Internal::Type::Converter
 
+  module AttributeEmbed = Turbopuffer::Models::AttributeEmbed
+
+  class AttributeEmbedConfig = Turbopuffer::Models::AttributeEmbedConfig
+
   module AttributeSchema = Turbopuffer::Models::AttributeSchema
 
   class AttributeSchemaConfig = Turbopuffer::Models::AttributeSchemaConfig
@@ -24,6 +28,8 @@ module Turbopuffer
   class DecayParams = Turbopuffer::Models::DecayParams
 
   module DistanceMetric = Turbopuffer::Models::DistanceMetric
+
+  class EmbedParams = Turbopuffer::Models::EmbedParams
 
   module Encryption = Turbopuffer::Models::Encryption
 
