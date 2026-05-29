@@ -4,6 +4,7 @@ module Turbopuffer
       {
         type: String,
         ann: Turbopuffer::Models::AttributeSchemaConfig::ann,
+        embed: Turbopuffer::Models::attribute_embed?,
         filterable: bool,
         full_text_search: Turbopuffer::Models::full_text_search,
         fuzzy: bool,
@@ -20,6 +21,8 @@ module Turbopuffer
       def ann=: (
         Turbopuffer::Models::AttributeSchemaConfig::ann
       ) -> Turbopuffer::Models::AttributeSchemaConfig::ann
+
+      attr_accessor embed: Turbopuffer::Models::attribute_embed?
 
       attr_reader filterable: bool?
 
@@ -52,6 +55,7 @@ module Turbopuffer
       def initialize: (
         type: String,
         ?ann: Turbopuffer::Models::AttributeSchemaConfig::ann,
+        ?embed: Turbopuffer::Models::attribute_embed?,
         ?filterable: bool,
         ?full_text_search: Turbopuffer::Models::full_text_search,
         ?fuzzy: bool,
@@ -63,6 +67,7 @@ module Turbopuffer
       def to_hash: -> {
         type: String,
         ann: Turbopuffer::Models::AttributeSchemaConfig::ann,
+        embed: Turbopuffer::Models::attribute_embed?,
         filterable: bool,
         full_text_search: Turbopuffer::Models::full_text_search,
         fuzzy: bool,

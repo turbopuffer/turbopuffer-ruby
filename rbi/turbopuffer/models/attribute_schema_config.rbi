@@ -42,6 +42,14 @@ module Turbopuffer
       end
       attr_writer :ann
 
+      # Whether to automatically embed this string attribute into a vector attribute.
+      # Can be a model name, a detailed configuration object, or `null` to remove an
+      # existing embedding configuration.
+      sig do
+        returns(T.nilable(T.any(String, Turbopuffer::AttributeEmbedConfig)))
+      end
+      attr_accessor :embed
+
       # Whether or not the attributes can be used in filters.
       sig { returns(T.nilable(T::Boolean)) }
       attr_reader :filterable
@@ -107,6 +115,8 @@ module Turbopuffer
               T::Boolean,
               Turbopuffer::AttributeSchemaConfig::Ann::AnnConfig::OrHash
             ),
+          embed:
+            T.nilable(T.any(String, Turbopuffer::AttributeEmbedConfig::OrHash)),
           filterable: T::Boolean,
           full_text_search:
             T.any(T::Boolean, Turbopuffer::FullTextSearchConfig::OrHash),
@@ -124,6 +134,10 @@ module Turbopuffer
         # Whether to create an approximate nearest neighbor index for the attribute. Can
         # be a boolean or a detailed configuration object.
         ann: nil,
+        # Whether to automatically embed this string attribute into a vector attribute.
+        # Can be a model name, a detailed configuration object, or `null` to remove an
+        # existing embedding configuration.
+        embed: nil,
         # Whether or not the attributes can be used in filters.
         filterable: nil,
         # Whether this attribute can be used as part of a BM25 full-text search. Requires
@@ -151,6 +165,7 @@ module Turbopuffer
                 T::Boolean,
                 Turbopuffer::AttributeSchemaConfig::Ann::AnnConfig
               ),
+            embed: T.nilable(T.any(String, Turbopuffer::AttributeEmbedConfig)),
             filterable: T::Boolean,
             full_text_search:
               T.any(T::Boolean, Turbopuffer::FullTextSearchConfig),

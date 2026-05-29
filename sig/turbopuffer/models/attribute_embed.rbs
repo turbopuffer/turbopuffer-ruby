@@ -1,0 +1,11 @@
+module Turbopuffer
+  module Models
+    type attribute_embed = String | Turbopuffer::AttributeEmbedConfig
+
+    module AttributeEmbed
+      extend Turbopuffer::Internal::Type::Union
+
+      def self?.variants: -> ::Array[Turbopuffer::Models::attribute_embed]
+    end
+  end
+end
