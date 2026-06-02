@@ -1,5 +1,21 @@
 # Changelog
 
+## 2.1.0-alpha.1 (2026-06-02)
+
+Full Changelog: [v2.0.1...v2.1.0-alpha.1](https://github.com/turbopuffer/turbopuffer-ruby/compare/v2.0.1...v2.1.0-alpha.1)
+
+### Features
+
+* openapi: spec for `rerank_by: ["RRF"]` ([5a0e680](https://github.com/turbopuffer/turbopuffer-ruby/commit/5a0e68006df01e1a91eaceaf4040cf2b9a72d7d3))
+* rename /docs/auth to /docs/overview ([15afd7a](https://github.com/turbopuffer/turbopuffer-ruby/commit/15afd7a27db0bf537ec330c0447f5ca75420e59d))
+* spec: add SDK support for native embedding ([097137a](https://github.com/turbopuffer/turbopuffer-ruby/commit/097137a21639a6d207951b4403661bd5636883d4))
+* spec: force generation of FuzzyParams stainless models ([d30149d](https://github.com/turbopuffer/turbopuffer-ruby/commit/d30149d6f02b06f2e104d7469e23a4362792c0a8))
+
+
+### Chores
+
+* fix API docs links ([#59](https://github.com/turbopuffer/turbopuffer-ruby/issues/59)) ([434f523](https://github.com/turbopuffer/turbopuffer-ruby/commit/434f523237eff7209b3f0ffc2abde8d04d80abe1))
+
 ## 2.0.1 (2026-05-18)
 
 Full Changelog: [v2.0.0...v2.0.1](https://github.com/turbopuffer/turbopuffer-ruby/compare/v2.0.0...v2.0.1)
