@@ -146,6 +146,7 @@ module Turbopuffer
           namespace: String,
           consistency:
             Turbopuffer::NamespaceMultiQueryParams::Consistency::OrHash,
+          rerank_by: T.anything,
           vector_encoding: Turbopuffer::VectorEncoding::OrSymbol,
           request_options: Turbopuffer::RequestOptions::OrHash
         ).returns(Turbopuffer::Models::NamespaceMultiQueryResponse)
@@ -157,6 +158,9 @@ module Turbopuffer
         namespace: nil,
         # Body param: The consistency level for a query.
         consistency: nil,
+        # Body param: How to combine the rows returned by each sub-query into a single
+        # ranked list.
+        rerank_by: nil,
         # Body param: The encoding to use for vectors in the response.
         vector_encoding: nil,
         request_options: {}

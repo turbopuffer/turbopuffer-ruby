@@ -37,6 +37,13 @@ module Turbopuffer
       end
       attr_writer :consistency
 
+      # How to combine the rows returned by each sub-query into a single ranked list.
+      sig { returns(T.nilable(T.anything)) }
+      attr_reader :rerank_by
+
+      sig { params(rerank_by: T.anything).void }
+      attr_writer :rerank_by
+
       # The encoding to use for vectors in the response.
       sig { returns(T.nilable(Turbopuffer::VectorEncoding::OrSymbol)) }
       attr_reader :vector_encoding
@@ -53,6 +60,7 @@ module Turbopuffer
           namespace: String,
           consistency:
             Turbopuffer::NamespaceMultiQueryParams::Consistency::OrHash,
+          rerank_by: T.anything,
           vector_encoding: Turbopuffer::VectorEncoding::OrSymbol,
           request_options: Turbopuffer::RequestOptions::OrHash
         ).returns(T.attached_class)
@@ -62,6 +70,8 @@ module Turbopuffer
         namespace: nil,
         # The consistency level for a query.
         consistency: nil,
+        # How to combine the rows returned by each sub-query into a single ranked list.
+        rerank_by: nil,
         # The encoding to use for vectors in the response.
         vector_encoding: nil,
         request_options: {}
@@ -74,6 +84,7 @@ module Turbopuffer
             namespace: String,
             queries: T::Array[Turbopuffer::NamespaceMultiQueryParams::Query],
             consistency: Turbopuffer::NamespaceMultiQueryParams::Consistency,
+            rerank_by: T.anything,
             vector_encoding: Turbopuffer::VectorEncoding::OrSymbol,
             request_options: Turbopuffer::RequestOptions
           }
