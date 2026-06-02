@@ -50,6 +50,7 @@ module Turbopuffer
         queries: ::Array[Turbopuffer::NamespaceMultiQueryParams::Query],
         ?namespace: String,
         ?consistency: Turbopuffer::NamespaceMultiQueryParams::Consistency,
+        ?rerank_by: top,
         ?vector_encoding: Turbopuffer::Models::vector_encoding,
         ?request_options: Turbopuffer::request_opts
       ) -> Turbopuffer::Models::NamespaceMultiQueryResponse

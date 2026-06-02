@@ -99,6 +99,8 @@ module Turbopuffer
 
   Row = Turbopuffer::Models::Row
 
+  RrfParams = Turbopuffer::Models::RrfParams
+
   SaturateParams = Turbopuffer::Models::SaturateParams
 
   SparseDistanceMetric = Turbopuffer::Models::SparseDistanceMetric
