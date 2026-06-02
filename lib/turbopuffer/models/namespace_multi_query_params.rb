@@ -24,18 +24,26 @@ module Turbopuffer
       #   @return [Turbopuffer::Models::NamespaceMultiQueryParams::Consistency, nil]
       optional :consistency, -> { Turbopuffer::NamespaceMultiQueryParams::Consistency }
 
+      # @!attribute rerank_by
+      #   How to combine the rows returned by each sub-query into a single ranked list.
+      #
+      #   @return [Object, nil]
+      optional :rerank_by, Turbopuffer::Internal::Type::Unknown
+
       # @!attribute vector_encoding
       #   The encoding to use for vectors in the response.
       #
       #   @return [Symbol, Turbopuffer::Models::VectorEncoding, nil]
       optional :vector_encoding, enum: -> { Turbopuffer::VectorEncoding }
 
-      # @!method initialize(queries:, namespace: nil, consistency: nil, vector_encoding: nil, request_options: {})
+      # @!method initialize(queries:, namespace: nil, consistency: nil, rerank_by: nil, vector_encoding: nil, request_options: {})
       #   @param queries [Array<Turbopuffer::Models::NamespaceMultiQueryParams::Query>]
       #
       #   @param namespace [String]
       #
       #   @param consistency [Turbopuffer::Models::NamespaceMultiQueryParams::Consistency] The consistency level for a query.
+      #
+      #   @param rerank_by [Object] How to combine the rows returned by each sub-query into a single ranked list.
       #
       #   @param vector_encoding [Symbol, Turbopuffer::Models::VectorEncoding] The encoding to use for vectors in the response.
       #

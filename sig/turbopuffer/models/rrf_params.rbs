@@ -1,0 +1,15 @@
+module Turbopuffer
+  module Models
+    type rrf_params = { rank_constant: Integer }
+
+    class RrfParams < Turbopuffer::Internal::Type::BaseModel
+      attr_reader rank_constant: Integer?
+
+      def rank_constant=: (Integer) -> Integer
+
+      def initialize: (?rank_constant: Integer) -> void
+
+      def to_hash: -> { rank_constant: Integer }
+    end
+  end
+end
