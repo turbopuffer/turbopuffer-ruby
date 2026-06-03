@@ -309,6 +309,8 @@ module Turbopuffer
             headers["x-stainless-timeout"] = timeout.to_s
           end
 
+          Turbopuffer::Internal::RespondAsync.prepare_headers(headers)
+
           headers.reject! { |_, v| v.to_s.empty? }
 
           body =
@@ -501,11 +503,17 @@ module Turbopuffer
 
           # Don't send the current retry count in the headers if the caller modified the header defaults.
           send_retry_header = request.fetch(:headers)["x-stainless-retry-count"] == "0"
-          status, response, stream = send_request(
+          _, response, stream = send_request(
             request,
             redirect_count: 0,
             retry_count: 0,
             send_retry_header: send_retry_header
+          )
+          status, response, stream = Turbopuffer::Internal::RespondAsync.maybe_poll(
+            self,
+            request,
+            response,
+            stream
           )
 
           headers = Turbopuffer::Internal::Util.normalized_headers(response.each_header.to_h)
