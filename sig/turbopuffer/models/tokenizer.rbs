@@ -1,7 +1,12 @@
 module Turbopuffer
   module Models
     type tokenizer =
-      :pre_tokenized_array | :word_v0 | :word_v1 | :word_v2 | :word_v3
+      :pre_tokenized_array
+      | :word_v0
+      | :word_v1
+      | :word_v2
+      | :word_v3
+      | :word_v4
 
     module Tokenizer
       extend Turbopuffer::Internal::Type::Enum
@@ -11,6 +16,7 @@ module Turbopuffer
       WORD_V1: :word_v1
       WORD_V2: :word_v2
       WORD_V3: :word_v3
+      WORD_V4: :word_v4
 
       def self?.values: -> ::Array[Turbopuffer::Models::tokenizer]
     end
