@@ -1,5 +1,13 @@
 # Changelog
 
+## 2.1.0 (2026-06-03)
+
+Full Changelog: [v2.1.0-alpha.1...v2.1.0](https://github.com/turbopuffer/turbopuffer-ruby/compare/v2.1.0-alpha.1...v2.1.0)
+
+### Features
+
+* spec: add support for word_v4 tokenizer ([26742f8](https://github.com/turbopuffer/turbopuffer-ruby/commit/26742f83e6e29055f521320f8f6c111fe040ac38))
+
 ## 2.1.0-alpha.1 (2026-06-02)
 
 Full Changelog: [v2.0.1...v2.1.0-alpha.1](https://github.com/turbopuffer/turbopuffer-ruby/compare/v2.0.1...v2.1.0-alpha.1)
