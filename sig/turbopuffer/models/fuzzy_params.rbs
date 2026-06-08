@@ -1,17 +1,26 @@
 module Turbopuffer
   module Models
     type fuzzy_params =
-      { max_edit_distance: ::Array[Turbopuffer::FuzzyMaxEditDistance] }
+      {
+        max_edit_distance: ::Array[Turbopuffer::FuzzyMaxEditDistance],
+        case_sensitive: bool
+      }
 
     class FuzzyParams < Turbopuffer::Internal::Type::BaseModel
       attr_accessor max_edit_distance: ::Array[Turbopuffer::FuzzyMaxEditDistance]
 
+      attr_reader case_sensitive: bool?
+
+      def case_sensitive=: (bool) -> bool
+
       def initialize: (
-        max_edit_distance: ::Array[Turbopuffer::FuzzyMaxEditDistance]
+        max_edit_distance: ::Array[Turbopuffer::FuzzyMaxEditDistance],
+        ?case_sensitive: bool
       ) -> void
 
       def to_hash: -> {
-        max_edit_distance: ::Array[Turbopuffer::FuzzyMaxEditDistance]
+        max_edit_distance: ::Array[Turbopuffer::FuzzyMaxEditDistance],
+        case_sensitive: bool
       }
     end
   end
