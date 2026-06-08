@@ -1,5 +1,14 @@
 # Changelog
 
+## 2.2.0 (2026-06-08)
+
+Full Changelog: [v2.1.0...v2.2.0](https://github.com/turbopuffer/turbopuffer-ruby/compare/v2.1.0...v2.2.0)
+
+### Features
+
+* stainless: update sdks to support case-insensitive fuzzy filter ([d02bb79](https://github.com/turbopuffer/turbopuffer-ruby/commit/d02bb79d809f3b2285020f3aac4a3441ac1e38b2))
+* transparent async polling ([#61](https://github.com/turbopuffer/turbopuffer-ruby/issues/61)) ([d93c499](https://github.com/turbopuffer/turbopuffer-ruby/commit/d93c49924d0df4bb4be9935f2090ce6fa26da18e))
+
 ## 2.1.0 (2026-06-03)
 
 Full Changelog: [v2.1.0-alpha.1...v2.1.0](https://github.com/turbopuffer/turbopuffer-ruby/compare/v2.1.0-alpha.1...v2.1.0)
