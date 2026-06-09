@@ -36,11 +36,13 @@ module Turbopuffer
       #
       # Copy all documents from another namespace into this one.
       #
-      # @overload copy_from(source_namespace:, namespace: nil, source_api_key: nil, source_region: nil, request_options: {})
+      # @overload copy_from(source_namespace:, namespace: nil, dest_encryption: nil, source_api_key: nil, source_region: nil, request_options: {})
       #
       # @param source_namespace [String] Body param: The namespace to copy documents from.
       #
       # @param namespace [String] Path param: The name of the namespace.
+      #
+      # @param dest_encryption [Turbopuffer::Models::Encryption::CustomerManaged, Turbopuffer::Models::Encryption::Default] Body param: (Optional) The encryption configuration for the destination namespac
       #
       # @param source_api_key [String] Body param: (Optional) An API key for the organization containing the source nam
       #

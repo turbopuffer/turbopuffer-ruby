@@ -10,6 +10,7 @@ module Turbopuffer
       def copy_from: (
         source_namespace: String,
         ?namespace: String,
+        ?dest_encryption: Turbopuffer::Models::encryption,
         ?source_api_key: String,
         ?source_region: String,
         ?request_options: Turbopuffer::request_opts

@@ -18,6 +18,12 @@ module Turbopuffer
       #   @return [String]
       required :source_namespace, String
 
+      # @!attribute dest_encryption
+      #   (Optional) The encryption configuration for the destination namespace.
+      #
+      #   @return [Turbopuffer::Models::Encryption::CustomerManaged, Turbopuffer::Models::Encryption::Default, nil]
+      optional :dest_encryption, union: -> { Turbopuffer::Encryption }
+
       # @!attribute source_api_key
       #   (Optional) An API key for the organization containing the source namespace
       #
@@ -30,10 +36,12 @@ module Turbopuffer
       #   @return [String, nil]
       optional :source_region, String
 
-      # @!method initialize(source_namespace:, namespace: nil, source_api_key: nil, source_region: nil, request_options: {})
+      # @!method initialize(source_namespace:, namespace: nil, dest_encryption: nil, source_api_key: nil, source_region: nil, request_options: {})
       #   @param source_namespace [String] The namespace to copy documents from.
       #
       #   @param namespace [String]
+      #
+      #   @param dest_encryption [Turbopuffer::Models::Encryption::CustomerManaged, Turbopuffer::Models::Encryption::Default] (Optional) The encryption configuration for the destination namespace.
       #
       #   @param source_api_key [String] (Optional) An API key for the organization containing the source namespace
       #
