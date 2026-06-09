@@ -4,6 +4,7 @@ module Turbopuffer
       {
         namespace: String,
         source_namespace: String,
+        dest_encryption: Turbopuffer::Models::encryption,
         source_api_key: String,
         source_region: String
       }
@@ -19,6 +20,12 @@ module Turbopuffer
 
       attr_accessor source_namespace: String
 
+      attr_reader dest_encryption: Turbopuffer::Models::encryption?
+
+      def dest_encryption=: (
+        Turbopuffer::Models::encryption
+      ) -> Turbopuffer::Models::encryption
+
       attr_reader source_api_key: String?
 
       def source_api_key=: (String) -> String
@@ -30,6 +37,7 @@ module Turbopuffer
       def initialize: (
         source_namespace: String,
         ?namespace: String,
+        ?dest_encryption: Turbopuffer::Models::encryption,
         ?source_api_key: String,
         ?source_region: String,
         ?request_options: Turbopuffer::request_opts
@@ -38,6 +46,7 @@ module Turbopuffer
       def to_hash: -> {
         namespace: String,
         source_namespace: String,
+        dest_encryption: Turbopuffer::Models::encryption,
         source_api_key: String,
         source_region: String,
         request_options: Turbopuffer::RequestOptions
