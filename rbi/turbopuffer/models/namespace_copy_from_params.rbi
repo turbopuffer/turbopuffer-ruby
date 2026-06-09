@@ -24,6 +24,30 @@ module Turbopuffer
       sig { returns(String) }
       attr_accessor :source_namespace
 
+      # (Optional) The encryption configuration for the destination namespace.
+      sig do
+        returns(
+          T.nilable(
+            T.any(
+              Turbopuffer::Encryption::CustomerManaged,
+              Turbopuffer::Encryption::Default
+            )
+          )
+        )
+      end
+      attr_reader :dest_encryption
+
+      sig do
+        params(
+          dest_encryption:
+            T.any(
+              Turbopuffer::Encryption::CustomerManaged::OrHash,
+              Turbopuffer::Encryption::Default::OrHash
+            )
+        ).void
+      end
+      attr_writer :dest_encryption
+
       # (Optional) An API key for the organization containing the source namespace
       sig { returns(T.nilable(String)) }
       attr_reader :source_api_key
@@ -42,6 +66,11 @@ module Turbopuffer
         params(
           source_namespace: String,
           namespace: String,
+          dest_encryption:
+            T.any(
+              Turbopuffer::Encryption::CustomerManaged::OrHash,
+              Turbopuffer::Encryption::Default::OrHash
+            ),
           source_api_key: String,
           source_region: String,
           request_options: Turbopuffer::RequestOptions::OrHash
@@ -51,6 +80,8 @@ module Turbopuffer
         # The namespace to copy documents from.
         source_namespace:,
         namespace: nil,
+        # (Optional) The encryption configuration for the destination namespace.
+        dest_encryption: nil,
         # (Optional) An API key for the organization containing the source namespace
         source_api_key: nil,
         # (Optional) The region of the source namespace.
@@ -64,6 +95,11 @@ module Turbopuffer
           {
             namespace: String,
             source_namespace: String,
+            dest_encryption:
+              T.any(
+                Turbopuffer::Encryption::CustomerManaged,
+                Turbopuffer::Encryption::Default
+              ),
             source_api_key: String,
             source_region: String,
             request_options: Turbopuffer::RequestOptions

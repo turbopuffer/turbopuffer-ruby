@@ -25,6 +25,11 @@ module Turbopuffer
         params(
           source_namespace: String,
           namespace: String,
+          dest_encryption:
+            T.any(
+              Turbopuffer::Encryption::CustomerManaged::OrHash,
+              Turbopuffer::Encryption::Default::OrHash
+            ),
           source_api_key: String,
           source_region: String,
           request_options: Turbopuffer::RequestOptions::OrHash
@@ -35,6 +40,9 @@ module Turbopuffer
         source_namespace:,
         # Path param: The name of the namespace.
         namespace: nil,
+        # Body param: (Optional) The encryption configuration for the destination
+        # namespace.
+        dest_encryption: nil,
         # Body param: (Optional) An API key for the organization containing the source
         # namespace
         source_api_key: nil,
