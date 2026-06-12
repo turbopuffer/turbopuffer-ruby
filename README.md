@@ -17,7 +17,7 @@ Use the turbopuffer MCP Server to enable AI assistants to interact with this API
 
 Documentation for releases of this gem can be found [on RubyDoc](https://gemdocs.org/gems/turbopuffer).
 
-The REST API documentation can be found at [turbopuffer.com/docs/overview](https://turbopuffer.com/docs/overview).
+The REST API documentation can be found at [turbopuffer.com/docs/api-overview](https://turbopuffer.com/docs/api-overview).
 
 ## Installation
 
