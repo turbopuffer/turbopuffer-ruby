@@ -1,5 +1,23 @@
 # Changelog
 
+## 2.3.0 (2026-06-16)
+
+Full Changelog: [v2.2.0...v2.3.0](https://github.com/turbopuffer/turbopuffer-ruby/compare/v2.2.0...v2.3.0)
+
+### Features
+
+* tpuf-engine: support dest_encryption in copy_from_namespace ([ef8ce32](https://github.com/turbopuffer/turbopuffer-ruby/commit/ef8ce322607fe8fd30b259d5012582b776ec1b09))
+
+
+### Bug Fixes
+
+* **client:** send content-type header for requests with an omitted optional body ([d2c5ed1](https://github.com/turbopuffer/turbopuffer-ruby/commit/d2c5ed1ec19aa3c371c1bce215f9b77ac5910dd7))
+
+
+### Documentation
+
+* rename /docs/overview to /docs/api-overview ([c049a0c](https://github.com/turbopuffer/turbopuffer-ruby/commit/c049a0c4a712f9de2081da5f387a8036acc04fcf))
+
 ## 2.2.0 (2026-06-08)
 
 Full Changelog: [v2.1.0...v2.2.0](https://github.com/turbopuffer/turbopuffer-ruby/compare/v2.1.0...v2.2.0)
