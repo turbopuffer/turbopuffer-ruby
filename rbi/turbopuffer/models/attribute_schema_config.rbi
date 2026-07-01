@@ -210,21 +210,38 @@ module Turbopuffer
           end
           attr_writer :distance_metric
 
+          # Opt in to late-interaction (MUVERA) indexing. Only valid on fixed-dim `[][N]f32`
+          # vector array attributes, and is required to enable an ANN index on such
+          # attributes. Defaults to `false`.
+          sig { returns(T.nilable(T::Boolean)) }
+          attr_reader :late_interaction
+
+          sig { params(late_interaction: T::Boolean).void }
+          attr_writer :late_interaction
+
           # Configuration options for ANN (Approximate Nearest Neighbor) indexing.
           sig do
             params(
-              distance_metric: Turbopuffer::DistanceMetric::OrSymbol
+              distance_metric: Turbopuffer::DistanceMetric::OrSymbol,
+              late_interaction: T::Boolean
             ).returns(T.attached_class)
           end
           def self.new(
             # A function used to calculate vector similarity.
-            distance_metric: nil
+            distance_metric: nil,
+            # Opt in to late-interaction (MUVERA) indexing. Only valid on fixed-dim `[][N]f32`
+            # vector array attributes, and is required to enable an ANN index on such
+            # attributes. Defaults to `false`.
+            late_interaction: nil
           )
           end
 
           sig do
             override.returns(
-              { distance_metric: Turbopuffer::DistanceMetric::OrSymbol }
+              {
+                distance_metric: Turbopuffer::DistanceMetric::OrSymbol,
+                late_interaction: T::Boolean
+              }
             )
           end
           def to_hash

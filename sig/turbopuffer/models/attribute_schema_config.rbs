@@ -82,7 +82,10 @@ module Turbopuffer
         extend Turbopuffer::Internal::Type::Union
 
         type ann_config =
-          { distance_metric: Turbopuffer::Models::distance_metric }
+          {
+            distance_metric: Turbopuffer::Models::distance_metric,
+            late_interaction: bool
+          }
 
         class AnnConfig < Turbopuffer::Internal::Type::BaseModel
           attr_reader distance_metric: Turbopuffer::Models::distance_metric?
@@ -91,12 +94,18 @@ module Turbopuffer
             Turbopuffer::Models::distance_metric
           ) -> Turbopuffer::Models::distance_metric
 
+          attr_reader late_interaction: bool?
+
+          def late_interaction=: (bool) -> bool
+
           def initialize: (
-            ?distance_metric: Turbopuffer::Models::distance_metric
+            ?distance_metric: Turbopuffer::Models::distance_metric,
+            ?late_interaction: bool
           ) -> void
 
           def to_hash: -> {
-            distance_metric: Turbopuffer::Models::distance_metric
+            distance_metric: Turbopuffer::Models::distance_metric,
+            late_interaction: bool
           }
         end
 
