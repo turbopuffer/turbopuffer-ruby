@@ -52,7 +52,16 @@ module Turbopuffer
       #   @return [Turbopuffer::Models::NamespaceMetadata::Pinning, nil]
       optional :pinning, -> { Turbopuffer::NamespaceMetadata::Pinning }
 
-      # @!method initialize(approx_logical_bytes:, approx_row_count:, created_at:, encryption:, index:, schema:, updated_at:, pinning: nil)
+      # @!attribute sharding
+      #   Configuration for namespace sharding, which partitions a namespace's documents
+      #   across multiple internal shards to scale indexing and query throughput beyond a
+      #   single machine. Sharding can only be configured on a namespace's inaugural
+      #   write, and cannot be added to or changed on an existing namespace.
+      #
+      #   @return [Turbopuffer::Models::ShardingConfig, nil]
+      optional :sharding, -> { Turbopuffer::ShardingConfig }
+
+      # @!method initialize(approx_logical_bytes:, approx_row_count:, created_at:, encryption:, index:, schema:, updated_at:, pinning: nil, sharding: nil)
       #   Some parameter documentations has been truncated, see
       #   {Turbopuffer::Models::NamespaceMetadata} for more details.
       #
@@ -73,6 +82,8 @@ module Turbopuffer
       #   @param updated_at [Time] The timestamp when the namespace was last modified by a write operation.
       #
       #   @param pinning [Turbopuffer::Models::NamespaceMetadata::Pinning] Configuration for namespace pinning, along with the current status of the pinned
+      #
+      #   @param sharding [Turbopuffer::Models::ShardingConfig] Configuration for namespace sharding, which partitions a namespace's documents a
 
       # @see Turbopuffer::Models::NamespaceMetadata#index
       module Index

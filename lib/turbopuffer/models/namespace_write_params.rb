@@ -111,6 +111,15 @@ module Turbopuffer
       #   @return [Hash{Symbol=>String, Turbopuffer::Models::AttributeSchemaConfig}, nil]
       optional :schema, -> { Turbopuffer::Internal::Type::HashOf[union: Turbopuffer::AttributeSchema] }
 
+      # @!attribute sharding
+      #   Configuration for namespace sharding, which partitions a namespace's documents
+      #   across multiple internal shards to scale indexing and query throughput beyond a
+      #   single machine. Sharding can only be configured on a namespace's inaugural
+      #   write, and cannot be added to or changed on an existing namespace.
+      #
+      #   @return [Turbopuffer::Models::ShardingConfig, nil]
+      optional :sharding, -> { Turbopuffer::ShardingConfig }
+
       # @!attribute upsert_columns
       #   A list of documents in columnar format. Each key is a column name, mapped to an
       #   array of values for that column.
@@ -130,7 +139,7 @@ module Turbopuffer
       #   @return [Array<Turbopuffer::Models::Row>, nil]
       optional :upsert_rows, -> { Turbopuffer::Internal::Type::ArrayOf[Turbopuffer::Row] }
 
-      # @!method initialize(namespace: nil, branch_from_namespace: nil, copy_from_namespace: nil, delete_by_filter: nil, delete_by_filter_allow_partial: nil, delete_condition: nil, deletes: nil, disable_backpressure: nil, distance_metric: nil, encryption: nil, patch_by_filter: nil, patch_by_filter_allow_partial: nil, patch_columns: nil, patch_condition: nil, patch_rows: nil, return_affected_ids: nil, schema: nil, upsert_columns: nil, upsert_condition: nil, upsert_rows: nil, request_options: {})
+      # @!method initialize(namespace: nil, branch_from_namespace: nil, copy_from_namespace: nil, delete_by_filter: nil, delete_by_filter_allow_partial: nil, delete_condition: nil, deletes: nil, disable_backpressure: nil, distance_metric: nil, encryption: nil, patch_by_filter: nil, patch_by_filter_allow_partial: nil, patch_columns: nil, patch_condition: nil, patch_rows: nil, return_affected_ids: nil, schema: nil, sharding: nil, upsert_columns: nil, upsert_condition: nil, upsert_rows: nil, request_options: {})
       #   Some parameter documentations has been truncated, see
       #   {Turbopuffer::Models::NamespaceWriteParams} for more details.
       #
@@ -167,6 +176,8 @@ module Turbopuffer
       #   @param return_affected_ids [Boolean] If true, return the IDs of affected rows (deleted, patched, upserted) in the res
       #
       #   @param schema [Hash{Symbol=>String, Turbopuffer::Models::AttributeSchemaConfig}] The schema of the attributes attached to the documents.
+      #
+      #   @param sharding [Turbopuffer::Models::ShardingConfig] Configuration for namespace sharding, which partitions a namespace's documents a
       #
       #   @param upsert_columns [Turbopuffer::Models::Columns] A list of documents in columnar format. Each key is a column name, mapped to an
       #

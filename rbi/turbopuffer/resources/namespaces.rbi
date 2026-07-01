@@ -352,6 +352,7 @@ module Turbopuffer
               Symbol,
               T.any(String, Turbopuffer::AttributeSchemaConfig::OrHash)
             ],
+          sharding: Turbopuffer::ShardingConfig::OrHash,
           upsert_columns: Turbopuffer::Columns::OrHash,
           upsert_condition: T.anything,
           upsert_rows: T::Array[Turbopuffer::Row::OrHash],
@@ -399,6 +400,11 @@ module Turbopuffer
         return_affected_ids: nil,
         # Body param: The schema of the attributes attached to the documents.
         schema: nil,
+        # Body param: Configuration for namespace sharding, which partitions a namespace's
+        # documents across multiple internal shards to scale indexing and query throughput
+        # beyond a single machine. Sharding can only be configured on a namespace's
+        # inaugural write, and cannot be added to or changed on an existing namespace.
+        sharding: nil,
         # Body param: A list of documents in columnar format. Each key is a column name,
         # mapped to an array of values for that column.
         upsert_columns: nil,
