@@ -126,7 +126,8 @@ class Turbopuffer::Test::Resources::NamespacesTest < Turbopuffer::Test::Resource
         index: Turbopuffer::NamespaceMetadata::Index,
         schema: ^(Turbopuffer::Internal::Type::HashOf[Turbopuffer::AttributeSchemaConfig]),
         updated_at: Time,
-        pinning: Turbopuffer::NamespaceMetadata::Pinning | nil
+        pinning: Turbopuffer::NamespaceMetadata::Pinning | nil,
+        sharding: Turbopuffer::ShardingConfig | nil
       }
     end
   end
@@ -216,7 +217,8 @@ class Turbopuffer::Test::Resources::NamespacesTest < Turbopuffer::Test::Resource
         index: Turbopuffer::NamespaceMetadata::Index,
         schema: ^(Turbopuffer::Internal::Type::HashOf[Turbopuffer::AttributeSchemaConfig]),
         updated_at: Time,
-        pinning: Turbopuffer::NamespaceMetadata::Pinning | nil
+        pinning: Turbopuffer::NamespaceMetadata::Pinning | nil,
+        sharding: Turbopuffer::ShardingConfig | nil
       }
     end
   end

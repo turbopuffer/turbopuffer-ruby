@@ -9,7 +9,8 @@ module Turbopuffer
         index: Turbopuffer::Models::NamespaceMetadata::index,
         schema: ::Hash[Symbol, Turbopuffer::AttributeSchemaConfig],
         updated_at: Time,
-        pinning: Turbopuffer::NamespaceMetadata::Pinning
+        pinning: Turbopuffer::NamespaceMetadata::Pinning,
+        sharding: Turbopuffer::ShardingConfig
       }
 
     class NamespaceMetadata < Turbopuffer::Internal::Type::BaseModel
@@ -33,6 +34,12 @@ module Turbopuffer
         Turbopuffer::NamespaceMetadata::Pinning
       ) -> Turbopuffer::NamespaceMetadata::Pinning
 
+      attr_reader sharding: Turbopuffer::ShardingConfig?
+
+      def sharding=: (
+        Turbopuffer::ShardingConfig
+      ) -> Turbopuffer::ShardingConfig
+
       def initialize: (
         approx_logical_bytes: Integer,
         approx_row_count: Integer,
@@ -41,7 +48,8 @@ module Turbopuffer
         index: Turbopuffer::Models::NamespaceMetadata::index,
         schema: ::Hash[Symbol, Turbopuffer::AttributeSchemaConfig],
         updated_at: Time,
-        ?pinning: Turbopuffer::NamespaceMetadata::Pinning
+        ?pinning: Turbopuffer::NamespaceMetadata::Pinning,
+        ?sharding: Turbopuffer::ShardingConfig
       ) -> void
 
       def to_hash: -> {
@@ -52,7 +60,8 @@ module Turbopuffer
         index: Turbopuffer::Models::NamespaceMetadata::index,
         schema: ::Hash[Symbol, Turbopuffer::AttributeSchemaConfig],
         updated_at: Time,
-        pinning: Turbopuffer::NamespaceMetadata::Pinning
+        pinning: Turbopuffer::NamespaceMetadata::Pinning,
+        sharding: Turbopuffer::ShardingConfig
       }
 
       type index =

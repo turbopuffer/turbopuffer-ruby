@@ -45,6 +45,16 @@ module Turbopuffer
       end
       attr_writer :pinning
 
+      # Configuration for namespace sharding, which partitions a namespace's documents
+      # across multiple internal shards to scale indexing and query throughput beyond a
+      # single machine. Sharding can only be configured on a namespace's inaugural
+      # write, and cannot be added to or changed on an existing namespace.
+      sig { returns(T.nilable(Turbopuffer::ShardingConfig)) }
+      attr_reader :sharding
+
+      sig { params(sharding: Turbopuffer::ShardingConfig::OrHash).void }
+      attr_writer :sharding
+
       # Metadata about a namespace.
       sig do
         params(
@@ -63,7 +73,8 @@ module Turbopuffer
             ),
           schema: T::Hash[Symbol, Turbopuffer::AttributeSchemaConfig::OrHash],
           updated_at: Time,
-          pinning: Turbopuffer::NamespaceMetadata::Pinning::OrHash
+          pinning: Turbopuffer::NamespaceMetadata::Pinning::OrHash,
+          sharding: Turbopuffer::ShardingConfig::OrHash
         ).returns(T.attached_class)
       end
       def self.new(
@@ -82,7 +93,12 @@ module Turbopuffer
         updated_at:,
         # Configuration for namespace pinning, along with the current status of the pinned
         # namespace.
-        pinning: nil
+        pinning: nil,
+        # Configuration for namespace sharding, which partitions a namespace's documents
+        # across multiple internal shards to scale indexing and query throughput beyond a
+        # single machine. Sharding can only be configured on a namespace's inaugural
+        # write, and cannot be added to or changed on an existing namespace.
+        sharding: nil
       )
       end
 
@@ -96,7 +112,8 @@ module Turbopuffer
             index: Turbopuffer::NamespaceMetadata::Index::Variants,
             schema: T::Hash[Symbol, Turbopuffer::AttributeSchemaConfig],
             updated_at: Time,
-            pinning: Turbopuffer::NamespaceMetadata::Pinning
+            pinning: Turbopuffer::NamespaceMetadata::Pinning,
+            sharding: Turbopuffer::ShardingConfig
           }
         )
       end

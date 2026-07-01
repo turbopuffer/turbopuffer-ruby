@@ -117,6 +117,7 @@ module Turbopuffer
         ?patch_rows: ::Array[Turbopuffer::Row],
         ?return_affected_ids: bool,
         ?schema: ::Hash[Symbol, Turbopuffer::Models::attribute_schema],
+        ?sharding: Turbopuffer::ShardingConfig,
         ?upsert_columns: Turbopuffer::Columns,
         ?upsert_condition: top,
         ?upsert_rows: ::Array[Turbopuffer::Row],

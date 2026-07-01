@@ -93,6 +93,8 @@ module Turbopuffer
 
   class SaturateParams = Turbopuffer::Models::SaturateParams
 
+  class ShardingConfig = Turbopuffer::Models::ShardingConfig
+
   module SparseDistanceMetric = Turbopuffer::Models::SparseDistanceMetric
 
   module Tokenizer = Turbopuffer::Models::Tokenizer
