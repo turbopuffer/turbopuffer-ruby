@@ -108,10 +108,23 @@ module Turbopuffer
           #   @return [Symbol, Turbopuffer::Models::DistanceMetric, nil]
           optional :distance_metric, enum: -> { Turbopuffer::DistanceMetric }
 
-          # @!method initialize(distance_metric: nil)
+          # @!attribute late_interaction
+          #   Opt in to late-interaction (MUVERA) indexing. Only valid on fixed-dim `[][N]f32`
+          #   vector array attributes, and is required to enable an ANN index on such
+          #   attributes. Defaults to `false`.
+          #
+          #   @return [Boolean, nil]
+          optional :late_interaction, Turbopuffer::Internal::Type::Boolean
+
+          # @!method initialize(distance_metric: nil, late_interaction: nil)
+          #   Some parameter documentations has been truncated, see
+          #   {Turbopuffer::Models::AttributeSchemaConfig::Ann::AnnConfig} for more details.
+          #
           #   Configuration options for ANN (Approximate Nearest Neighbor) indexing.
           #
           #   @param distance_metric [Symbol, Turbopuffer::Models::DistanceMetric] A function used to calculate vector similarity.
+          #
+          #   @param late_interaction [Boolean] Opt in to late-interaction (MUVERA) indexing. Only valid on fixed-dim `[][N]f32`
         end
 
         # @!method self.variants
