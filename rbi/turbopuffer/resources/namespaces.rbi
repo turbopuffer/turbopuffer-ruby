@@ -71,6 +71,11 @@ module Turbopuffer
         params(
           namespace: String,
           aggregate_by: T::Hash[Symbol, T.anything],
+          compute_attributes:
+            T::Hash[
+              Symbol,
+              Turbopuffer::NamespaceExplainQueryParams::ComputeAttribute::Variants
+            ],
           consistency:
             Turbopuffer::NamespaceExplainQueryParams::Consistency::OrHash,
           distance_metric: Turbopuffer::DistanceMetric::OrSymbol,
@@ -91,6 +96,10 @@ module Turbopuffer
         # Body param: Aggregations to compute over all documents in the namespace that
         # match the filters.
         aggregate_by: nil,
+        # Body param: Computes additional values on documents returned by a query. Each
+        # key is the name of the computed attribute; each value is an expression
+        # describing how to compute it.
+        compute_attributes: nil,
         # Body param: The consistency level for a query.
         consistency: nil,
         # Body param: A function used to calculate vector similarity.
@@ -180,6 +189,11 @@ module Turbopuffer
         params(
           namespace: String,
           aggregate_by: T::Hash[Symbol, T.anything],
+          compute_attributes:
+            T::Hash[
+              Symbol,
+              Turbopuffer::NamespaceQueryParams::ComputeAttribute::Variants
+            ],
           consistency: Turbopuffer::NamespaceQueryParams::Consistency::OrHash,
           distance_metric: Turbopuffer::DistanceMetric::OrSymbol,
           exclude_attributes: T::Array[String],
@@ -199,6 +213,10 @@ module Turbopuffer
         # Body param: Aggregations to compute over all documents in the namespace that
         # match the filters.
         aggregate_by: nil,
+        # Body param: Computes additional values on documents returned by a query. Each
+        # key is the name of the computed attribute; each value is an expression
+        # describing how to compute it.
+        compute_attributes: nil,
         # Body param: The consistency level for a query.
         consistency: nil,
         # Body param: A function used to calculate vector similarity.

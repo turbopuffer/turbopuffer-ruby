@@ -57,6 +57,15 @@ module Turbopuffer
         #   @return [Hash{Symbol=>Object}, nil]
         optional :aggregate_by, Turbopuffer::Internal::Type::HashOf[Turbopuffer::Internal::Type::Unknown]
 
+        # @!attribute compute_attributes
+        #   Computes additional values on documents returned by a query. Each key is the
+        #   name of the computed attribute; each value is an expression describing how to
+        #   compute it.
+        #
+        #   @return [Hash{Symbol=>Array<Object>, Array<Array<Object>>}, nil]
+        optional :compute_attributes,
+                 -> { Turbopuffer::Internal::Type::HashOf[union: Turbopuffer::NamespaceMultiQueryParams::Query::ComputeAttribute] }
+
         # @!attribute distance_metric
         #   A function used to calculate vector similarity.
         #
@@ -108,13 +117,15 @@ module Turbopuffer
         #   @return [Integer, nil]
         optional :top_k, Integer
 
-        # @!method initialize(aggregate_by: nil, distance_metric: nil, exclude_attributes: nil, filters: nil, group_by: nil, include_attributes: nil, limit: nil, rank_by: nil, top_k: nil)
+        # @!method initialize(aggregate_by: nil, compute_attributes: nil, distance_metric: nil, exclude_attributes: nil, filters: nil, group_by: nil, include_attributes: nil, limit: nil, rank_by: nil, top_k: nil)
         #   Some parameter documentations has been truncated, see
         #   {Turbopuffer::Models::NamespaceMultiQueryParams::Query} for more details.
         #
         #   Query, filter, full-text search and vector search documents.
         #
         #   @param aggregate_by [Hash{Symbol=>Object}] Aggregations to compute over all documents in the namespace that match the filte
+        #
+        #   @param compute_attributes [Hash{Symbol=>Array<Object>, Array<Array<Object>>}] Computes additional values on documents returned by a query. Each key is the nam
         #
         #   @param distance_metric [Symbol, Turbopuffer::Models::DistanceMetric] A function used to calculate vector similarity.
         #
@@ -131,6 +142,23 @@ module Turbopuffer
         #   @param rank_by [Object] How to rank the documents in the namespace.
         #
         #   @param top_k [Integer] The number of results to return.
+
+        # An expression describing how to compute an additional attribute.
+        module ComputeAttribute
+          extend Turbopuffer::Internal::Type::Union
+
+          # Matches if all the tokens in the input string are present in the attribute value, in the correct order (i.e., as a phrase). Requires that the attribute is configured for full-text search.
+          variant -> { Turbopuffer::Models::NamespaceMultiQueryParams::Query::ComputeAttribute::RankByAttributeArray }
+
+          # Order by multiple attributes. Results are sorted by the first attribute, then by the second attribute for ties, and so on.
+          variant Turbopuffer::Internal::Type::ArrayOf[Turbopuffer::Internal::Type::ArrayOf[Turbopuffer::Internal::Type::Unknown]]
+
+          # @!method self.variants
+          #   @return [Array(Array<Object>, Array<Array<Object>>)]
+
+          # @type [Turbopuffer::Internal::Type::Converter]
+          RankByAttributeArray = Turbopuffer::Internal::Type::ArrayOf[Turbopuffer::Internal::Type::Unknown]
+        end
 
         # Limits the documents returned by a query.
         #

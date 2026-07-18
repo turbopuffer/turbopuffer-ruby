@@ -4,6 +4,7 @@ module Turbopuffer
       {
         namespace: String,
         aggregate_by: ::Hash[Symbol, top],
+        compute_attributes: ::Hash[Symbol, Turbopuffer::Models::NamespaceQueryParams::compute_attribute],
         consistency: Turbopuffer::NamespaceQueryParams::Consistency,
         distance_metric: Turbopuffer::Models::distance_metric,
         exclude_attributes: ::Array[String],
@@ -28,6 +29,12 @@ module Turbopuffer
       attr_reader aggregate_by: ::Hash[Symbol, top]?
 
       def aggregate_by=: (::Hash[Symbol, top]) -> ::Hash[Symbol, top]
+
+      attr_reader compute_attributes: ::Hash[Symbol, Turbopuffer::Models::NamespaceQueryParams::compute_attribute]?
+
+      def compute_attributes=: (
+        ::Hash[Symbol, Turbopuffer::Models::NamespaceQueryParams::compute_attribute]
+      ) -> ::Hash[Symbol, Turbopuffer::Models::NamespaceQueryParams::compute_attribute]
 
       attr_reader consistency: Turbopuffer::NamespaceQueryParams::Consistency?
 
@@ -82,6 +89,7 @@ module Turbopuffer
       def initialize: (
         ?namespace: String,
         ?aggregate_by: ::Hash[Symbol, top],
+        ?compute_attributes: ::Hash[Symbol, Turbopuffer::Models::NamespaceQueryParams::compute_attribute],
         ?consistency: Turbopuffer::NamespaceQueryParams::Consistency,
         ?distance_metric: Turbopuffer::Models::distance_metric,
         ?exclude_attributes: ::Array[String],
@@ -98,6 +106,7 @@ module Turbopuffer
       def to_hash: -> {
         namespace: String,
         aggregate_by: ::Hash[Symbol, top],
+        compute_attributes: ::Hash[Symbol, Turbopuffer::Models::NamespaceQueryParams::compute_attribute],
         consistency: Turbopuffer::NamespaceQueryParams::Consistency,
         distance_metric: Turbopuffer::Models::distance_metric,
         exclude_attributes: ::Array[String],
@@ -110,6 +119,16 @@ module Turbopuffer
         vector_encoding: Turbopuffer::Models::vector_encoding,
         request_options: Turbopuffer::RequestOptions
       }
+
+      type compute_attribute = ::Array[top] | ::Array[::Array[top]]
+
+      module ComputeAttribute
+        extend Turbopuffer::Internal::Type::Union
+
+        def self?.variants: -> ::Array[Turbopuffer::Models::NamespaceQueryParams::compute_attribute]
+
+        RankByAttributeArray: Turbopuffer::Internal::Type::Converter
+      end
 
       type consistency =
         { level: Turbopuffer::Models::NamespaceQueryParams::Consistency::level }
