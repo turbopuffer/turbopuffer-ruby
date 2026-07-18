@@ -98,11 +98,13 @@ module Turbopuffer
       #
       # Explain a query plan.
       #
-      # @overload explain_query(namespace: nil, aggregate_by: nil, consistency: nil, distance_metric: nil, exclude_attributes: nil, filters: nil, group_by: nil, include_attributes: nil, limit: nil, rank_by: nil, top_k: nil, vector_encoding: nil, request_options: {})
+      # @overload explain_query(namespace: nil, aggregate_by: nil, compute_attributes: nil, consistency: nil, distance_metric: nil, exclude_attributes: nil, filters: nil, group_by: nil, include_attributes: nil, limit: nil, rank_by: nil, top_k: nil, vector_encoding: nil, request_options: {})
       #
       # @param namespace [String] Path param: The name of the namespace.
       #
       # @param aggregate_by [Hash{Symbol=>Object}] Body param: Aggregations to compute over all documents in the namespace that mat
+      #
+      # @param compute_attributes [Hash{Symbol=>Array<Object>, Array<Array<Object>>}] Body param: Computes additional values on documents returned by a query. Each ke
       #
       # @param consistency [Turbopuffer::Models::NamespaceExplainQueryParams::Consistency] Body param: The consistency level for a query.
       #
@@ -236,11 +238,13 @@ module Turbopuffer
       #
       # Query, filter, full-text search and vector search documents.
       #
-      # @overload query(namespace: nil, aggregate_by: nil, consistency: nil, distance_metric: nil, exclude_attributes: nil, filters: nil, group_by: nil, include_attributes: nil, limit: nil, rank_by: nil, top_k: nil, vector_encoding: nil, request_options: {})
+      # @overload query(namespace: nil, aggregate_by: nil, compute_attributes: nil, consistency: nil, distance_metric: nil, exclude_attributes: nil, filters: nil, group_by: nil, include_attributes: nil, limit: nil, rank_by: nil, top_k: nil, vector_encoding: nil, request_options: {})
       #
       # @param namespace [String] Path param: The name of the namespace.
       #
       # @param aggregate_by [Hash{Symbol=>Object}] Body param: Aggregations to compute over all documents in the namespace that mat
+      #
+      # @param compute_attributes [Hash{Symbol=>Array<Object>, Array<Array<Object>>}] Body param: Computes additional values on documents returned by a query. Each ke
       #
       # @param consistency [Turbopuffer::Models::NamespaceQueryParams::Consistency] Body param: The consistency level for a query.
       #

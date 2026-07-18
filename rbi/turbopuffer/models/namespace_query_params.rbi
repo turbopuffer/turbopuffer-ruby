@@ -28,6 +28,32 @@ module Turbopuffer
       sig { params(aggregate_by: T::Hash[Symbol, T.anything]).void }
       attr_writer :aggregate_by
 
+      # Computes additional values on documents returned by a query. Each key is the
+      # name of the computed attribute; each value is an expression describing how to
+      # compute it.
+      sig do
+        returns(
+          T.nilable(
+            T::Hash[
+              Symbol,
+              Turbopuffer::NamespaceQueryParams::ComputeAttribute::Variants
+            ]
+          )
+        )
+      end
+      attr_reader :compute_attributes
+
+      sig do
+        params(
+          compute_attributes:
+            T::Hash[
+              Symbol,
+              Turbopuffer::NamespaceQueryParams::ComputeAttribute::Variants
+            ]
+        ).void
+      end
+      attr_writer :compute_attributes
+
       # The consistency level for a query.
       sig { returns(T.nilable(Turbopuffer::NamespaceQueryParams::Consistency)) }
       attr_reader :consistency
@@ -117,6 +143,11 @@ module Turbopuffer
         params(
           namespace: String,
           aggregate_by: T::Hash[Symbol, T.anything],
+          compute_attributes:
+            T::Hash[
+              Symbol,
+              Turbopuffer::NamespaceQueryParams::ComputeAttribute::Variants
+            ],
           consistency: Turbopuffer::NamespaceQueryParams::Consistency::OrHash,
           distance_metric: Turbopuffer::DistanceMetric::OrSymbol,
           exclude_attributes: T::Array[String],
@@ -135,6 +166,10 @@ module Turbopuffer
         # Aggregations to compute over all documents in the namespace that match the
         # filters.
         aggregate_by: nil,
+        # Computes additional values on documents returned by a query. Each key is the
+        # name of the computed attribute; each value is an expression describing how to
+        # compute it.
+        compute_attributes: nil,
         # The consistency level for a query.
         consistency: nil,
         # A function used to calculate vector similarity.
@@ -167,6 +202,11 @@ module Turbopuffer
           {
             namespace: String,
             aggregate_by: T::Hash[Symbol, T.anything],
+            compute_attributes:
+              T::Hash[
+                Symbol,
+                Turbopuffer::NamespaceQueryParams::ComputeAttribute::Variants
+              ],
             consistency: Turbopuffer::NamespaceQueryParams::Consistency,
             distance_metric: Turbopuffer::DistanceMetric::OrSymbol,
             exclude_attributes: T::Array[String],
@@ -182,6 +222,34 @@ module Turbopuffer
         )
       end
       def to_hash
+      end
+
+      # An expression describing how to compute an additional attribute.
+      module ComputeAttribute
+        extend Turbopuffer::Internal::Type::Union
+
+        Variants =
+          T.type_alias do
+            T.any(T::Array[T.anything], T::Array[T::Array[T.anything]])
+          end
+
+        sig do
+          override.returns(
+            T::Array[
+              Turbopuffer::NamespaceQueryParams::ComputeAttribute::Variants
+            ]
+          )
+        end
+        def self.variants
+        end
+
+        RankByAttributeArray =
+          T.let(
+            Turbopuffer::Internal::Type::ArrayOf[
+              Turbopuffer::Internal::Type::Unknown
+            ],
+            Turbopuffer::Internal::Type::Converter
+          )
       end
 
       class Consistency < Turbopuffer::Internal::Type::BaseModel
