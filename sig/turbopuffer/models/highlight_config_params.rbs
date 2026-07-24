@@ -1,6 +1,6 @@
 module Turbopuffer
   module Models
-    type highlight_config =
+    type highlight_config_params =
       {
         fragment_by: Turbopuffer::Models::highlight_fragment_by,
         fragment_limit: Integer,
@@ -8,7 +8,7 @@ module Turbopuffer
         rank_fragments_by: top
       }
 
-    class HighlightConfig < Turbopuffer::Internal::Type::BaseModel
+    class HighlightConfigParams < Turbopuffer::Internal::Type::BaseModel
       attr_reader fragment_by: Turbopuffer::Models::highlight_fragment_by?
 
       def fragment_by=: (

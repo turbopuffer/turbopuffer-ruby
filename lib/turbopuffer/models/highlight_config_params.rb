@@ -2,7 +2,7 @@
 
 module Turbopuffer
   module Models
-    class HighlightConfig < Turbopuffer::Internal::Type::BaseModel
+    class HighlightConfigParams < Turbopuffer::Internal::Type::BaseModel
       # @!attribute fragment_by
       #   How to split a text attribute into fragments for highlighting.
       #
@@ -30,7 +30,7 @@ module Turbopuffer
 
       # @!method initialize(fragment_by: nil, fragment_limit: nil, include_offsets: nil, rank_fragments_by: nil)
       #   Some parameter documentations has been truncated, see
-      #   {Turbopuffer::Models::HighlightConfig} for more details.
+      #   {Turbopuffer::Models::HighlightConfigParams} for more details.
       #
       #   Additional (optional) parameters for the Highlight compute expression.
       #

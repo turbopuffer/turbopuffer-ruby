@@ -2,10 +2,13 @@
 
 module Turbopuffer
   module Models
-    class HighlightConfig < Turbopuffer::Internal::Type::BaseModel
+    class HighlightConfigParams < Turbopuffer::Internal::Type::BaseModel
       OrHash =
         T.type_alias do
-          T.any(Turbopuffer::HighlightConfig, Turbopuffer::Internal::AnyHash)
+          T.any(
+            Turbopuffer::HighlightConfigParams,
+            Turbopuffer::Internal::AnyHash
+          )
         end
 
       # How to split a text attribute into fragments for highlighting.

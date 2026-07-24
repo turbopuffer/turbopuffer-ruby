@@ -49,7 +49,7 @@ module Turbopuffer
 
   FuzzyParams = Turbopuffer::Models::FuzzyParams
 
-  HighlightConfig = Turbopuffer::Models::HighlightConfig
+  HighlightConfigParams = Turbopuffer::Models::HighlightConfigParams
 
   HighlightFragmentBy = Turbopuffer::Models::HighlightFragmentBy
 
