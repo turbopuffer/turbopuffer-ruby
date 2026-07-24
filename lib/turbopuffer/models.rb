@@ -82,6 +82,12 @@ module Turbopuffer
 
   FuzzyParams = Turbopuffer::Models::FuzzyParams
 
+  HighlightConfig = Turbopuffer::Models::HighlightConfig
+
+  HighlightFragmentBy = Turbopuffer::Models::HighlightFragmentBy
+
+  HighlightOffsetUnits = Turbopuffer::Models::HighlightOffsetUnits
+
   ID = Turbopuffer::Models::ID
 
   IncludeAttributes = Turbopuffer::Models::IncludeAttributes

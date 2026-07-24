@@ -1,0 +1,47 @@
+module Turbopuffer
+  module Models
+    type highlight_config =
+      {
+        fragment_by: Turbopuffer::Models::highlight_fragment_by,
+        fragment_limit: Integer,
+        include_offsets: Turbopuffer::Models::highlight_offset_units,
+        rank_fragments_by: top
+      }
+
+    class HighlightConfig < Turbopuffer::Internal::Type::BaseModel
+      attr_reader fragment_by: Turbopuffer::Models::highlight_fragment_by?
+
+      def fragment_by=: (
+        Turbopuffer::Models::highlight_fragment_by
+      ) -> Turbopuffer::Models::highlight_fragment_by
+
+      attr_reader fragment_limit: Integer?
+
+      def fragment_limit=: (Integer) -> Integer
+
+      attr_reader include_offsets: Turbopuffer::Models::highlight_offset_units?
+
+      def include_offsets=: (
+        Turbopuffer::Models::highlight_offset_units
+      ) -> Turbopuffer::Models::highlight_offset_units
+
+      attr_reader rank_fragments_by: top?
+
+      def rank_fragments_by=: (top) -> top
+
+      def initialize: (
+        ?fragment_by: Turbopuffer::Models::highlight_fragment_by,
+        ?fragment_limit: Integer,
+        ?include_offsets: Turbopuffer::Models::highlight_offset_units,
+        ?rank_fragments_by: top
+      ) -> void
+
+      def to_hash: -> {
+        fragment_by: Turbopuffer::Models::highlight_fragment_by,
+        fragment_limit: Integer,
+        include_offsets: Turbopuffer::Models::highlight_offset_units,
+        rank_fragments_by: top
+      }
+    end
+  end
+end
