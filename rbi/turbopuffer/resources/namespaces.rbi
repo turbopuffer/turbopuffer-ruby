@@ -71,11 +71,7 @@ module Turbopuffer
         params(
           namespace: String,
           aggregate_by: T::Hash[Symbol, T.anything],
-          compute_attributes:
-            T::Hash[
-              Symbol,
-              Turbopuffer::NamespaceExplainQueryParams::ComputeAttribute::Variants
-            ],
+          compute_attributes: T::Hash[Symbol, T.anything],
           consistency:
             Turbopuffer::NamespaceExplainQueryParams::Consistency::OrHash,
           distance_metric: Turbopuffer::DistanceMetric::OrSymbol,
@@ -189,11 +185,7 @@ module Turbopuffer
         params(
           namespace: T.nilable(String),
           aggregate_by: T::Hash[Symbol, T.anything],
-          compute_attributes:
-            T::Hash[
-              Symbol,
-              Turbopuffer::NamespaceQueryParams::ComputeAttribute::Variants
-            ],
+          compute_attributes: T::Hash[Symbol, T.anything],
           consistency: Turbopuffer::NamespaceQueryParams::Consistency::OrHash,
           distance_metric: Turbopuffer::DistanceMetric::OrSymbol,
           exclude_attributes: T::Array[String],

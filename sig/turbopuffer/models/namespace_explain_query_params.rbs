@@ -4,7 +4,7 @@ module Turbopuffer
       {
         namespace: String,
         aggregate_by: ::Hash[Symbol, top],
-        compute_attributes: ::Hash[Symbol, Turbopuffer::Models::NamespaceExplainQueryParams::compute_attribute],
+        compute_attributes: ::Hash[Symbol, top],
         consistency: Turbopuffer::NamespaceExplainQueryParams::Consistency,
         distance_metric: Turbopuffer::Models::distance_metric,
         exclude_attributes: ::Array[String],
@@ -30,11 +30,9 @@ module Turbopuffer
 
       def aggregate_by=: (::Hash[Symbol, top]) -> ::Hash[Symbol, top]
 
-      attr_reader compute_attributes: ::Hash[Symbol, Turbopuffer::Models::NamespaceExplainQueryParams::compute_attribute]?
+      attr_reader compute_attributes: ::Hash[Symbol, top]?
 
-      def compute_attributes=: (
-        ::Hash[Symbol, Turbopuffer::Models::NamespaceExplainQueryParams::compute_attribute]
-      ) -> ::Hash[Symbol, Turbopuffer::Models::NamespaceExplainQueryParams::compute_attribute]
+      def compute_attributes=: (::Hash[Symbol, top]) -> ::Hash[Symbol, top]
 
       attr_reader consistency: Turbopuffer::NamespaceExplainQueryParams::Consistency?
 
@@ -89,7 +87,7 @@ module Turbopuffer
       def initialize: (
         ?namespace: String,
         ?aggregate_by: ::Hash[Symbol, top],
-        ?compute_attributes: ::Hash[Symbol, Turbopuffer::Models::NamespaceExplainQueryParams::compute_attribute],
+        ?compute_attributes: ::Hash[Symbol, top],
         ?consistency: Turbopuffer::NamespaceExplainQueryParams::Consistency,
         ?distance_metric: Turbopuffer::Models::distance_metric,
         ?exclude_attributes: ::Array[String],
@@ -106,7 +104,7 @@ module Turbopuffer
       def to_hash: -> {
         namespace: String,
         aggregate_by: ::Hash[Symbol, top],
-        compute_attributes: ::Hash[Symbol, Turbopuffer::Models::NamespaceExplainQueryParams::compute_attribute],
+        compute_attributes: ::Hash[Symbol, top],
         consistency: Turbopuffer::NamespaceExplainQueryParams::Consistency,
         distance_metric: Turbopuffer::Models::distance_metric,
         exclude_attributes: ::Array[String],
@@ -119,16 +117,6 @@ module Turbopuffer
         vector_encoding: Turbopuffer::Models::vector_encoding,
         request_options: Turbopuffer::RequestOptions
       }
-
-      type compute_attribute = ::Array[top] | ::Array[::Array[top]]
-
-      module ComputeAttribute
-        extend Turbopuffer::Internal::Type::Union
-
-        def self?.variants: -> ::Array[Turbopuffer::Models::NamespaceExplainQueryParams::compute_attribute]
-
-        RankByAttributeArray: Turbopuffer::Internal::Type::Converter
-      end
 
       type consistency =
         {

@@ -113,27 +113,10 @@ module Turbopuffer
         # Computes additional values on documents returned by a query. Each key is the
         # name of the computed attribute; each value is an expression describing how to
         # compute it.
-        sig do
-          returns(
-            T.nilable(
-              T::Hash[
-                Symbol,
-                Turbopuffer::NamespaceMultiQueryParams::Query::ComputeAttribute::Variants
-              ]
-            )
-          )
-        end
+        sig { returns(T.nilable(T::Hash[Symbol, T.anything])) }
         attr_reader :compute_attributes
 
-        sig do
-          params(
-            compute_attributes:
-              T::Hash[
-                Symbol,
-                Turbopuffer::NamespaceMultiQueryParams::Query::ComputeAttribute::Variants
-              ]
-          ).void
-        end
+        sig { params(compute_attributes: T::Hash[Symbol, T.anything]).void }
         attr_writer :compute_attributes
 
         # A function used to calculate vector similarity.
@@ -205,11 +188,7 @@ module Turbopuffer
         sig do
           params(
             aggregate_by: T::Hash[Symbol, T.anything],
-            compute_attributes:
-              T::Hash[
-                Symbol,
-                Turbopuffer::NamespaceMultiQueryParams::Query::ComputeAttribute::Variants
-              ],
+            compute_attributes: T::Hash[Symbol, T.anything],
             distance_metric: Turbopuffer::DistanceMetric::OrSymbol,
             exclude_attributes: T::Array[String],
             filters: T.anything,
@@ -254,11 +233,7 @@ module Turbopuffer
           override.returns(
             {
               aggregate_by: T::Hash[Symbol, T.anything],
-              compute_attributes:
-                T::Hash[
-                  Symbol,
-                  Turbopuffer::NamespaceMultiQueryParams::Query::ComputeAttribute::Variants
-                ],
+              compute_attributes: T::Hash[Symbol, T.anything],
               distance_metric: Turbopuffer::DistanceMetric::OrSymbol,
               exclude_attributes: T::Array[String],
               filters: T.anything,
@@ -271,34 +246,6 @@ module Turbopuffer
           )
         end
         def to_hash
-        end
-
-        # An expression describing how to compute an additional attribute.
-        module ComputeAttribute
-          extend Turbopuffer::Internal::Type::Union
-
-          Variants =
-            T.type_alias do
-              T.any(T::Array[T.anything], T::Array[T::Array[T.anything]])
-            end
-
-          sig do
-            override.returns(
-              T::Array[
-                Turbopuffer::NamespaceMultiQueryParams::Query::ComputeAttribute::Variants
-              ]
-            )
-          end
-          def self.variants
-          end
-
-          RankByAttributeArray =
-            T.let(
-              Turbopuffer::Internal::Type::ArrayOf[
-                Turbopuffer::Internal::Type::Unknown
-              ],
-              Turbopuffer::Internal::Type::Converter
-            )
         end
 
         # Limits the documents returned by a query.

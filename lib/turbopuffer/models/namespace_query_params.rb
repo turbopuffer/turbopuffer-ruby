@@ -24,9 +24,8 @@ module Turbopuffer
       #   name of the computed attribute; each value is an expression describing how to
       #   compute it.
       #
-      #   @return [Hash{Symbol=>Array<Object>, Array<Array<Object>>}, nil]
-      optional :compute_attributes,
-               -> { Turbopuffer::Internal::Type::HashOf[union: Turbopuffer::NamespaceQueryParams::ComputeAttribute] }
+      #   @return [Hash{Symbol=>Object}, nil]
+      optional :compute_attributes, Turbopuffer::Internal::Type::HashOf[Turbopuffer::Internal::Type::Unknown]
 
       # @!attribute consistency
       #   The consistency level for a query.
@@ -99,7 +98,7 @@ module Turbopuffer
       #
       #   @param aggregate_by [Hash{Symbol=>Object}] Aggregations to compute over all documents in the namespace that match the filte
       #
-      #   @param compute_attributes [Hash{Symbol=>Array<Object>, Array<Array<Object>>}] Computes additional values on documents returned by a query. Each key is the nam
+      #   @param compute_attributes [Hash{Symbol=>Object}] Computes additional values on documents returned by a query. Each key is the nam
       #
       #   @param consistency [Turbopuffer::Models::NamespaceQueryParams::Consistency] The consistency level for a query.
       #
@@ -122,23 +121,6 @@ module Turbopuffer
       #   @param vector_encoding [Symbol, Turbopuffer::Models::VectorEncoding] The encoding to use for vectors in the response.
       #
       #   @param request_options [Turbopuffer::RequestOptions, Hash{Symbol=>Object}]
-
-      # An expression describing how to compute an additional attribute.
-      module ComputeAttribute
-        extend Turbopuffer::Internal::Type::Union
-
-        # Matches if all the tokens in the input string are present in the attribute value, in the correct order (i.e., as a phrase). Requires that the attribute is configured for full-text search.
-        variant -> { Turbopuffer::Models::NamespaceQueryParams::ComputeAttribute::RankByAttributeArray }
-
-        # Order by multiple attributes. Results are sorted by the first attribute, then by the second attribute for ties, and so on.
-        variant Turbopuffer::Internal::Type::ArrayOf[Turbopuffer::Internal::Type::ArrayOf[Turbopuffer::Internal::Type::Unknown]]
-
-        # @!method self.variants
-        #   @return [Array(Array<Object>, Array<Array<Object>>)]
-
-        # @type [Turbopuffer::Internal::Type::Converter]
-        RankByAttributeArray = Turbopuffer::Internal::Type::ArrayOf[Turbopuffer::Internal::Type::Unknown]
-      end
 
       class Consistency < Turbopuffer::Internal::Type::BaseModel
         # @!attribute level
