@@ -57,7 +57,7 @@ module Turbopuffer
       type query =
         {
           aggregate_by: ::Hash[Symbol, top],
-          compute_attributes: ::Hash[Symbol, Turbopuffer::Models::NamespaceMultiQueryParams::Query::compute_attribute],
+          compute_attributes: ::Hash[Symbol, top],
           distance_metric: Turbopuffer::Models::distance_metric,
           exclude_attributes: ::Array[String],
           filters: top,
@@ -73,11 +73,9 @@ module Turbopuffer
 
         def aggregate_by=: (::Hash[Symbol, top]) -> ::Hash[Symbol, top]
 
-        attr_reader compute_attributes: ::Hash[Symbol, Turbopuffer::Models::NamespaceMultiQueryParams::Query::compute_attribute]?
+        attr_reader compute_attributes: ::Hash[Symbol, top]?
 
-        def compute_attributes=: (
-          ::Hash[Symbol, Turbopuffer::Models::NamespaceMultiQueryParams::Query::compute_attribute]
-        ) -> ::Hash[Symbol, Turbopuffer::Models::NamespaceMultiQueryParams::Query::compute_attribute]
+        def compute_attributes=: (::Hash[Symbol, top]) -> ::Hash[Symbol, top]
 
         attr_reader distance_metric: Turbopuffer::Models::distance_metric?
 
@@ -119,7 +117,7 @@ module Turbopuffer
 
         def initialize: (
           ?aggregate_by: ::Hash[Symbol, top],
-          ?compute_attributes: ::Hash[Symbol, Turbopuffer::Models::NamespaceMultiQueryParams::Query::compute_attribute],
+          ?compute_attributes: ::Hash[Symbol, top],
           ?distance_metric: Turbopuffer::Models::distance_metric,
           ?exclude_attributes: ::Array[String],
           ?filters: top,
@@ -132,7 +130,7 @@ module Turbopuffer
 
         def to_hash: -> {
           aggregate_by: ::Hash[Symbol, top],
-          compute_attributes: ::Hash[Symbol, Turbopuffer::Models::NamespaceMultiQueryParams::Query::compute_attribute],
+          compute_attributes: ::Hash[Symbol, top],
           distance_metric: Turbopuffer::Models::distance_metric,
           exclude_attributes: ::Array[String],
           filters: top,
@@ -142,16 +140,6 @@ module Turbopuffer
           rank_by: top,
           top_k: Integer
         }
-
-        type compute_attribute = ::Array[top] | ::Array[::Array[top]]
-
-        module ComputeAttribute
-          extend Turbopuffer::Internal::Type::Union
-
-          def self?.variants: -> ::Array[Turbopuffer::Models::NamespaceMultiQueryParams::Query::compute_attribute]
-
-          RankByAttributeArray: Turbopuffer::Internal::Type::Converter
-        end
 
         type limit = Integer | Turbopuffer::Limit
 

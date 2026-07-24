@@ -62,9 +62,8 @@ module Turbopuffer
         #   name of the computed attribute; each value is an expression describing how to
         #   compute it.
         #
-        #   @return [Hash{Symbol=>Array<Object>, Array<Array<Object>>}, nil]
-        optional :compute_attributes,
-                 -> { Turbopuffer::Internal::Type::HashOf[union: Turbopuffer::NamespaceMultiQueryParams::Query::ComputeAttribute] }
+        #   @return [Hash{Symbol=>Object}, nil]
+        optional :compute_attributes, Turbopuffer::Internal::Type::HashOf[Turbopuffer::Internal::Type::Unknown]
 
         # @!attribute distance_metric
         #   A function used to calculate vector similarity.
@@ -125,7 +124,7 @@ module Turbopuffer
         #
         #   @param aggregate_by [Hash{Symbol=>Object}] Aggregations to compute over all documents in the namespace that match the filte
         #
-        #   @param compute_attributes [Hash{Symbol=>Array<Object>, Array<Array<Object>>}] Computes additional values on documents returned by a query. Each key is the nam
+        #   @param compute_attributes [Hash{Symbol=>Object}] Computes additional values on documents returned by a query. Each key is the nam
         #
         #   @param distance_metric [Symbol, Turbopuffer::Models::DistanceMetric] A function used to calculate vector similarity.
         #
@@ -142,23 +141,6 @@ module Turbopuffer
         #   @param rank_by [Object] How to rank the documents in the namespace.
         #
         #   @param top_k [Integer] The number of results to return.
-
-        # An expression describing how to compute an additional attribute.
-        module ComputeAttribute
-          extend Turbopuffer::Internal::Type::Union
-
-          # Matches if all the tokens in the input string are present in the attribute value, in the correct order (i.e., as a phrase). Requires that the attribute is configured for full-text search.
-          variant -> { Turbopuffer::Models::NamespaceMultiQueryParams::Query::ComputeAttribute::RankByAttributeArray }
-
-          # Order by multiple attributes. Results are sorted by the first attribute, then by the second attribute for ties, and so on.
-          variant Turbopuffer::Internal::Type::ArrayOf[Turbopuffer::Internal::Type::ArrayOf[Turbopuffer::Internal::Type::Unknown]]
-
-          # @!method self.variants
-          #   @return [Array(Array<Object>, Array<Array<Object>>)]
-
-          # @type [Turbopuffer::Internal::Type::Converter]
-          RankByAttributeArray = Turbopuffer::Internal::Type::ArrayOf[Turbopuffer::Internal::Type::Unknown]
-        end
 
         # Limits the documents returned by a query.
         #

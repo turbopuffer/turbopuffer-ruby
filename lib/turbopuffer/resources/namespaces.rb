@@ -104,7 +104,7 @@ module Turbopuffer
       #
       # @param aggregate_by [Hash{Symbol=>Object}] Body param: Aggregations to compute over all documents in the namespace that mat
       #
-      # @param compute_attributes [Hash{Symbol=>Array<Object>, Array<Array<Object>>}] Body param: Computes additional values on documents returned by a query. Each ke
+      # @param compute_attributes [Hash{Symbol=>Object}] Body param: Computes additional values on documents returned by a query. Each ke
       #
       # @param consistency [Turbopuffer::Models::NamespaceExplainQueryParams::Consistency] Body param: The consistency level for a query.
       #
@@ -244,7 +244,7 @@ module Turbopuffer
       #
       # @param aggregate_by [Hash{Symbol=>Object}] Body param: Aggregations to compute over all documents in the namespace that mat
       #
-      # @param compute_attributes [Hash{Symbol=>Array<Object>, Array<Array<Object>>}] Body param: Computes additional values on documents returned by a query. Each ke
+      # @param compute_attributes [Hash{Symbol=>Object}] Body param: Computes additional values on documents returned by a query. Each ke
       #
       # @param consistency [Turbopuffer::Models::NamespaceQueryParams::Consistency] Body param: The consistency level for a query.
       #
