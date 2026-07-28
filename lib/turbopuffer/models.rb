@@ -60,6 +60,8 @@ module Turbopuffer
 
   Columns = Turbopuffer::Models::Columns
 
+  ComputeAttributes = Turbopuffer::Models::ComputeAttributes
+
   ContainsAllTokensFilterParams = Turbopuffer::Models::ContainsAllTokensFilterParams
 
   ContainsAnyTokenFilterParams = Turbopuffer::Models::ContainsAnyTokenFilterParams

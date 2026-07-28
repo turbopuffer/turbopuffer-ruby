@@ -24,8 +24,9 @@ module Turbopuffer
       #   name of the computed attribute; each value is an expression describing how to
       #   compute it.
       #
-      #   @return [Hash{Symbol=>Object}, nil]
-      optional :compute_attributes, Turbopuffer::Internal::Type::HashOf[Turbopuffer::Internal::Type::Unknown]
+      #   @return [Hash{Symbol=>Turbopuffer::Models::ComputeAttributes}, nil]
+      optional :compute_attributes,
+               Turbopuffer::Internal::Type::HashOf[union: -> { Turbopuffer::ComputeAttributes }]
 
       # @!attribute consistency
       #   The consistency level for a query.
@@ -98,7 +99,7 @@ module Turbopuffer
       #
       #   @param aggregate_by [Hash{Symbol=>Object}] Aggregations to compute over all documents in the namespace that match the filte
       #
-      #   @param compute_attributes [Hash{Symbol=>Object}] Computes additional values on documents returned by a query. Each key is the nam
+      #   @param compute_attributes [Hash{Symbol=>Turbopuffer::Models::ComputeAttributes}] Computes additional values on documents returned by a query. Each key is the nam
       #
       #   @param consistency [Turbopuffer::Models::NamespaceExplainQueryParams::Consistency] The consistency level for a query.
       #

@@ -24,7 +24,7 @@ module Turbopuffer
       def explain_query: (
         ?namespace: String,
         ?aggregate_by: ::Hash[Symbol, top],
-        ?compute_attributes: ::Hash[Symbol, top],
+        ?compute_attributes: ::Hash[Symbol, Turbopuffer::Models::compute_attributes],
         ?consistency: Turbopuffer::NamespaceExplainQueryParams::Consistency,
         ?distance_metric: Turbopuffer::Models::distance_metric,
         ?exclude_attributes: ::Array[String],
@@ -60,7 +60,7 @@ module Turbopuffer
       def query: (
         ?namespace: String,
         ?aggregate_by: ::Hash[Symbol, top],
-        ?compute_attributes: ::Hash[Symbol, top],
+        ?compute_attributes: ::Hash[Symbol, Turbopuffer::Models::compute_attributes],
         ?consistency: Turbopuffer::NamespaceQueryParams::Consistency,
         ?distance_metric: Turbopuffer::Models::distance_metric,
         ?exclude_attributes: ::Array[String],

@@ -1,0 +1,18 @@
+module Turbopuffer
+  module Models
+    type compute_attributes =
+      ::Array[top] | ::Array[top] | ::Array[top] | top
+
+    module ComputeAttributes
+      extend Turbopuffer::Internal::Type::Union
+
+      def self?.variants: -> ::Array[Turbopuffer::Models::compute_attributes]
+
+      VectorDist: Turbopuffer::Internal::Type::Converter
+
+      Highlight: Turbopuffer::Internal::Type::Converter
+
+      HighlightWithConfig: Turbopuffer::Internal::Type::Converter
+    end
+  end
+end

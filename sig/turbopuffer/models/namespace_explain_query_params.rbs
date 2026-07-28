@@ -4,7 +4,7 @@ module Turbopuffer
       {
         namespace: String,
         aggregate_by: ::Hash[Symbol, top],
-        compute_attributes: ::Hash[Symbol, top],
+        compute_attributes: ::Hash[Symbol, Turbopuffer::Models::compute_attributes],
         consistency: Turbopuffer::NamespaceExplainQueryParams::Consistency,
         distance_metric: Turbopuffer::Models::distance_metric,
         exclude_attributes: ::Array[String],
@@ -30,9 +30,9 @@ module Turbopuffer
 
       def aggregate_by=: (::Hash[Symbol, top]) -> ::Hash[Symbol, top]
 
-      attr_reader compute_attributes: ::Hash[Symbol, top]?
+      attr_reader compute_attributes: ::Hash[Symbol, Turbopuffer::Models::compute_attributes]?
 
-      def compute_attributes=: (::Hash[Symbol, top]) -> ::Hash[Symbol, top]
+      def compute_attributes=: (::Hash[Symbol, Turbopuffer::Models::compute_attributes]) -> ::Hash[Symbol, Turbopuffer::Models::compute_attributes]
 
       attr_reader consistency: Turbopuffer::NamespaceExplainQueryParams::Consistency?
 
@@ -87,7 +87,7 @@ module Turbopuffer
       def initialize: (
         ?namespace: String,
         ?aggregate_by: ::Hash[Symbol, top],
-        ?compute_attributes: ::Hash[Symbol, top],
+        ?compute_attributes: ::Hash[Symbol, Turbopuffer::Models::compute_attributes],
         ?consistency: Turbopuffer::NamespaceExplainQueryParams::Consistency,
         ?distance_metric: Turbopuffer::Models::distance_metric,
         ?exclude_attributes: ::Array[String],
@@ -104,7 +104,7 @@ module Turbopuffer
       def to_hash: -> {
         namespace: String,
         aggregate_by: ::Hash[Symbol, top],
-        compute_attributes: ::Hash[Symbol, top],
+        compute_attributes: ::Hash[Symbol, Turbopuffer::Models::compute_attributes],
         consistency: Turbopuffer::NamespaceExplainQueryParams::Consistency,
         distance_metric: Turbopuffer::Models::distance_metric,
         exclude_attributes: ::Array[String],

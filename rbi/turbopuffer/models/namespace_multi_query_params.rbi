@@ -113,10 +113,10 @@ module Turbopuffer
         # Computes additional values on documents returned by a query. Each key is the
         # name of the computed attribute; each value is an expression describing how to
         # compute it.
-        sig { returns(T.nilable(T::Hash[Symbol, T.anything])) }
+        sig { returns(T.nilable(T::Hash[Symbol, Turbopuffer::ComputeAttributes::Variants])) }
         attr_reader :compute_attributes
 
-        sig { params(compute_attributes: T::Hash[Symbol, T.anything]).void }
+        sig { params(compute_attributes: T::Hash[Symbol, Turbopuffer::ComputeAttributes::Variants]).void }
         attr_writer :compute_attributes
 
         # A function used to calculate vector similarity.
@@ -188,7 +188,7 @@ module Turbopuffer
         sig do
           params(
             aggregate_by: T::Hash[Symbol, T.anything],
-            compute_attributes: T::Hash[Symbol, T.anything],
+            compute_attributes: T::Hash[Symbol, Turbopuffer::ComputeAttributes::Variants],
             distance_metric: Turbopuffer::DistanceMetric::OrSymbol,
             exclude_attributes: T::Array[String],
             filters: T.anything,
@@ -233,7 +233,7 @@ module Turbopuffer
           override.returns(
             {
               aggregate_by: T::Hash[Symbol, T.anything],
-              compute_attributes: T::Hash[Symbol, T.anything],
+              compute_attributes: T::Hash[Symbol, Turbopuffer::ComputeAttributes::Variants],
               distance_metric: Turbopuffer::DistanceMetric::OrSymbol,
               exclude_attributes: T::Array[String],
               filters: T.anything,

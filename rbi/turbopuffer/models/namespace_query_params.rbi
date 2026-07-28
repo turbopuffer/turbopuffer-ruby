@@ -31,10 +31,10 @@ module Turbopuffer
       # Computes additional values on documents returned by a query. Each key is the
       # name of the computed attribute; each value is an expression describing how to
       # compute it.
-      sig { returns(T.nilable(T::Hash[Symbol, T.anything])) }
+      sig { returns(T.nilable(T::Hash[Symbol, Turbopuffer::ComputeAttributes::Variants])) }
       attr_reader :compute_attributes
 
-      sig { params(compute_attributes: T::Hash[Symbol, T.anything]).void }
+      sig { params(compute_attributes: T::Hash[Symbol, Turbopuffer::ComputeAttributes::Variants]).void }
       attr_writer :compute_attributes
 
       # The consistency level for a query.
@@ -126,7 +126,7 @@ module Turbopuffer
         params(
           namespace: String,
           aggregate_by: T::Hash[Symbol, T.anything],
-          compute_attributes: T::Hash[Symbol, T.anything],
+          compute_attributes: T::Hash[Symbol, Turbopuffer::ComputeAttributes::Variants],
           consistency: Turbopuffer::NamespaceQueryParams::Consistency::OrHash,
           distance_metric: Turbopuffer::DistanceMetric::OrSymbol,
           exclude_attributes: T::Array[String],
@@ -181,7 +181,7 @@ module Turbopuffer
           {
             namespace: String,
             aggregate_by: T::Hash[Symbol, T.anything],
-            compute_attributes: T::Hash[Symbol, T.anything],
+            compute_attributes: T::Hash[Symbol, Turbopuffer::ComputeAttributes::Variants],
             consistency: Turbopuffer::NamespaceQueryParams::Consistency,
             distance_metric: Turbopuffer::DistanceMetric::OrSymbol,
             exclude_attributes: T::Array[String],
