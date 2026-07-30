@@ -15,15 +15,34 @@ module Turbopuffer
       sig { params(rank_constant: Integer).void }
       attr_writer :rank_constant
 
+      # A positive weight for each subquery, in the same order as `queries`. The number
+      # of weights must match the number of subqueries. When omitted, every subquery has
+      # a weight of `1`.
+      sig { returns(T.nilable(T::Array[Float])) }
+      attr_reader :weights
+
+      sig { params(weights: T::Array[Float]).void }
+      attr_writer :weights
+
       # Configuration options for RRF.
-      sig { params(rank_constant: Integer).returns(T.attached_class) }
+      sig do
+        params(rank_constant: Integer, weights: T::Array[Float]).returns(
+          T.attached_class
+        )
+      end
       def self.new(
         # RRF rank constant (`k`). Must be greater than zero. Defaults to `60`.
-        rank_constant: nil
+        rank_constant: nil,
+        # A positive weight for each subquery, in the same order as `queries`. The number
+        # of weights must match the number of subqueries. When omitted, every subquery has
+        # a weight of `1`.
+        weights: nil
       )
       end
 
-      sig { override.returns({ rank_constant: Integer }) }
+      sig do
+        override.returns({ rank_constant: Integer, weights: T::Array[Float] })
+      end
       def to_hash
       end
     end

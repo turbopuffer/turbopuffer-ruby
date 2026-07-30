@@ -19,6 +19,14 @@ module Turbopuffer
       #   @return [Hash{Symbol=>Object}, nil]
       optional :aggregate_by, Turbopuffer::Internal::Type::HashOf[Turbopuffer::Internal::Type::Unknown]
 
+      # @!attribute compute_attributes
+      #   Computes additional values on documents returned by a query. Each key is the
+      #   name of the computed attribute; each value is an expression describing how to
+      #   compute it.
+      #
+      #   @return [Hash{Symbol=>Object}, nil]
+      optional :compute_attributes, Turbopuffer::Internal::Type::HashOf[Turbopuffer::Internal::Type::Unknown]
+
       # @!attribute consistency
       #   The consistency level for a query.
       #
@@ -82,13 +90,15 @@ module Turbopuffer
       #   @return [Symbol, Turbopuffer::Models::VectorEncoding, nil]
       optional :vector_encoding, enum: -> { Turbopuffer::VectorEncoding }
 
-      # @!method initialize(namespace: nil, aggregate_by: nil, consistency: nil, distance_metric: nil, exclude_attributes: nil, filters: nil, group_by: nil, include_attributes: nil, limit: nil, rank_by: nil, top_k: nil, vector_encoding: nil, request_options: {})
+      # @!method initialize(namespace: nil, aggregate_by: nil, compute_attributes: nil, consistency: nil, distance_metric: nil, exclude_attributes: nil, filters: nil, group_by: nil, include_attributes: nil, limit: nil, rank_by: nil, top_k: nil, vector_encoding: nil, request_options: {})
       #   Some parameter documentations has been truncated, see
       #   {Turbopuffer::Models::NamespaceQueryParams} for more details.
       #
       #   @param namespace [String]
       #
       #   @param aggregate_by [Hash{Symbol=>Object}] Aggregations to compute over all documents in the namespace that match the filte
+      #
+      #   @param compute_attributes [Hash{Symbol=>Object}] Computes additional values on documents returned by a query. Each key is the nam
       #
       #   @param consistency [Turbopuffer::Models::NamespaceQueryParams::Consistency] The consistency level for a query.
       #

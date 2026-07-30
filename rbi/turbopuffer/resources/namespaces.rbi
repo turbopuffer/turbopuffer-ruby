@@ -71,6 +71,7 @@ module Turbopuffer
         params(
           namespace: String,
           aggregate_by: T::Hash[Symbol, T.anything],
+          compute_attributes: T::Hash[Symbol, T.anything],
           consistency:
             Turbopuffer::NamespaceExplainQueryParams::Consistency::OrHash,
           distance_metric: Turbopuffer::DistanceMetric::OrSymbol,
@@ -91,6 +92,10 @@ module Turbopuffer
         # Body param: Aggregations to compute over all documents in the namespace that
         # match the filters.
         aggregate_by: nil,
+        # Body param: Computes additional values on documents returned by a query. Each
+        # key is the name of the computed attribute; each value is an expression
+        # describing how to compute it.
+        compute_attributes: nil,
         # Body param: The consistency level for a query.
         consistency: nil,
         # Body param: A function used to calculate vector similarity.
@@ -180,6 +185,7 @@ module Turbopuffer
         params(
           namespace: T.nilable(String),
           aggregate_by: T::Hash[Symbol, T.anything],
+          compute_attributes: T::Hash[Symbol, T.anything],
           consistency: Turbopuffer::NamespaceQueryParams::Consistency::OrHash,
           distance_metric: Turbopuffer::DistanceMetric::OrSymbol,
           exclude_attributes: T::Array[String],
@@ -199,6 +205,10 @@ module Turbopuffer
         # Body param: Aggregations to compute over all documents in the namespace that
         # match the filters.
         aggregate_by: nil,
+        # Body param: Computes additional values on documents returned by a query. Each
+        # key is the name of the computed attribute; each value is an expression
+        # describing how to compute it.
+        compute_attributes: nil,
         # Body param: The consistency level for a query.
         consistency: nil,
         # Body param: A function used to calculate vector similarity.
@@ -352,6 +362,7 @@ module Turbopuffer
               Symbol,
               T.any(String, Turbopuffer::AttributeSchemaConfig::OrHash)
             ],
+          sharding: Turbopuffer::ShardingConfig::OrHash,
           upsert_columns: Turbopuffer::Columns::OrHash,
           upsert_condition: T.anything,
           upsert_rows: T::Array[Turbopuffer::Row::OrHash],
@@ -399,6 +410,11 @@ module Turbopuffer
         return_affected_ids: nil,
         # Body param: The schema of the attributes attached to the documents.
         schema: nil,
+        # Body param: Configuration for namespace sharding, which partitions a namespace's
+        # documents across multiple internal shards to scale indexing and query throughput
+        # beyond a single machine. Sharding can only be configured on a namespace's
+        # inaugural write, and cannot be added to or changed on an existing namespace.
+        sharding: nil,
         # Body param: A list of documents in columnar format. Each key is a column name,
         # mapped to an array of values for that column.
         upsert_columns: nil,

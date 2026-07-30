@@ -1,0 +1,15 @@
+module Turbopuffer
+  module Models
+    type highlight_offset_units = :"utf-8" | :"utf-16" | :codepoints
+
+    module HighlightOffsetUnits
+      extend Turbopuffer::Internal::Type::Enum
+
+      UTF_8: :"utf-8"
+      UTF_16: :"utf-16"
+      CODEPOINTS: :codepoints
+
+      def self?.values: -> ::Array[Turbopuffer::Models::highlight_offset_units]
+    end
+  end
+end

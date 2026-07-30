@@ -110,6 +110,15 @@ module Turbopuffer
         sig { params(aggregate_by: T::Hash[Symbol, T.anything]).void }
         attr_writer :aggregate_by
 
+        # Computes additional values on documents returned by a query. Each key is the
+        # name of the computed attribute; each value is an expression describing how to
+        # compute it.
+        sig { returns(T.nilable(T::Hash[Symbol, T.anything])) }
+        attr_reader :compute_attributes
+
+        sig { params(compute_attributes: T::Hash[Symbol, T.anything]).void }
+        attr_writer :compute_attributes
+
         # A function used to calculate vector similarity.
         sig { returns(T.nilable(Turbopuffer::DistanceMetric::OrSymbol)) }
         attr_reader :distance_metric
@@ -179,6 +188,7 @@ module Turbopuffer
         sig do
           params(
             aggregate_by: T::Hash[Symbol, T.anything],
+            compute_attributes: T::Hash[Symbol, T.anything],
             distance_metric: Turbopuffer::DistanceMetric::OrSymbol,
             exclude_attributes: T::Array[String],
             filters: T.anything,
@@ -193,6 +203,10 @@ module Turbopuffer
           # Aggregations to compute over all documents in the namespace that match the
           # filters.
           aggregate_by: nil,
+          # Computes additional values on documents returned by a query. Each key is the
+          # name of the computed attribute; each value is an expression describing how to
+          # compute it.
+          compute_attributes: nil,
           # A function used to calculate vector similarity.
           distance_metric: nil,
           # List of attribute names to exclude from the response. All other attributes will
@@ -219,6 +233,7 @@ module Turbopuffer
           override.returns(
             {
               aggregate_by: T::Hash[Symbol, T.anything],
+              compute_attributes: T::Hash[Symbol, T.anything],
               distance_metric: Turbopuffer::DistanceMetric::OrSymbol,
               exclude_attributes: T::Array[String],
               filters: T.anything,

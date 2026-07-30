@@ -19,6 +19,7 @@ module Turbopuffer
         patch_rows: ::Array[Turbopuffer::Row],
         return_affected_ids: bool,
         schema: ::Hash[Symbol, Turbopuffer::Models::attribute_schema],
+        sharding: Turbopuffer::ShardingConfig,
         upsert_columns: Turbopuffer::Columns,
         upsert_condition: top,
         upsert_rows: ::Array[Turbopuffer::Row]
@@ -111,6 +112,12 @@ module Turbopuffer
         ::Hash[Symbol, Turbopuffer::Models::attribute_schema]
       ) -> ::Hash[Symbol, Turbopuffer::Models::attribute_schema]
 
+      attr_reader sharding: Turbopuffer::ShardingConfig?
+
+      def sharding=: (
+        Turbopuffer::ShardingConfig
+      ) -> Turbopuffer::ShardingConfig
+
       attr_reader upsert_columns: Turbopuffer::Columns?
 
       def upsert_columns=: (Turbopuffer::Columns) -> Turbopuffer::Columns
@@ -141,6 +148,7 @@ module Turbopuffer
         ?patch_rows: ::Array[Turbopuffer::Row],
         ?return_affected_ids: bool,
         ?schema: ::Hash[Symbol, Turbopuffer::Models::attribute_schema],
+        ?sharding: Turbopuffer::ShardingConfig,
         ?upsert_columns: Turbopuffer::Columns,
         ?upsert_condition: top,
         ?upsert_rows: ::Array[Turbopuffer::Row],
@@ -165,6 +173,7 @@ module Turbopuffer
         patch_rows: ::Array[Turbopuffer::Row],
         return_affected_ids: bool,
         schema: ::Hash[Symbol, Turbopuffer::Models::attribute_schema],
+        sharding: Turbopuffer::ShardingConfig,
         upsert_columns: Turbopuffer::Columns,
         upsert_condition: top,
         upsert_rows: ::Array[Turbopuffer::Row],

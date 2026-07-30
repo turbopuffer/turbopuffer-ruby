@@ -57,6 +57,7 @@ module Turbopuffer
       type query =
         {
           aggregate_by: ::Hash[Symbol, top],
+          compute_attributes: ::Hash[Symbol, top],
           distance_metric: Turbopuffer::Models::distance_metric,
           exclude_attributes: ::Array[String],
           filters: top,
@@ -71,6 +72,10 @@ module Turbopuffer
         attr_reader aggregate_by: ::Hash[Symbol, top]?
 
         def aggregate_by=: (::Hash[Symbol, top]) -> ::Hash[Symbol, top]
+
+        attr_reader compute_attributes: ::Hash[Symbol, top]?
+
+        def compute_attributes=: (::Hash[Symbol, top]) -> ::Hash[Symbol, top]
 
         attr_reader distance_metric: Turbopuffer::Models::distance_metric?
 
@@ -112,6 +117,7 @@ module Turbopuffer
 
         def initialize: (
           ?aggregate_by: ::Hash[Symbol, top],
+          ?compute_attributes: ::Hash[Symbol, top],
           ?distance_metric: Turbopuffer::Models::distance_metric,
           ?exclude_attributes: ::Array[String],
           ?filters: top,
@@ -124,6 +130,7 @@ module Turbopuffer
 
         def to_hash: -> {
           aggregate_by: ::Hash[Symbol, top],
+          compute_attributes: ::Hash[Symbol, top],
           distance_metric: Turbopuffer::Models::distance_metric,
           exclude_attributes: ::Array[String],
           filters: top,

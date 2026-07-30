@@ -1,0 +1,13 @@
+module Turbopuffer
+  module Models
+    type sharding_config = { num_shards: Integer }
+
+    class ShardingConfig < Turbopuffer::Internal::Type::BaseModel
+      attr_accessor num_shards: Integer
+
+      def initialize: (num_shards: Integer) -> void
+
+      def to_hash: -> { num_shards: Integer }
+    end
+  end
+end

@@ -49,6 +49,12 @@ module Turbopuffer
 
   FuzzyParams = Turbopuffer::Models::FuzzyParams
 
+  HighlightConfigParams = Turbopuffer::Models::HighlightConfigParams
+
+  HighlightFragmentBy = Turbopuffer::Models::HighlightFragmentBy
+
+  HighlightOffsetUnits = Turbopuffer::Models::HighlightOffsetUnits
+
   ID = Turbopuffer::Models::ID
 
   IncludeAttributes = Turbopuffer::Models::IncludeAttributes
@@ -102,6 +108,8 @@ module Turbopuffer
   RrfParams = Turbopuffer::Models::RrfParams
 
   SaturateParams = Turbopuffer::Models::SaturateParams
+
+  ShardingConfig = Turbopuffer::Models::ShardingConfig
 
   SparseDistanceMetric = Turbopuffer::Models::SparseDistanceMetric
 

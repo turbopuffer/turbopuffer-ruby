@@ -98,11 +98,13 @@ module Turbopuffer
       #
       # Explain a query plan.
       #
-      # @overload explain_query(namespace: nil, aggregate_by: nil, consistency: nil, distance_metric: nil, exclude_attributes: nil, filters: nil, group_by: nil, include_attributes: nil, limit: nil, rank_by: nil, top_k: nil, vector_encoding: nil, request_options: {})
+      # @overload explain_query(namespace: nil, aggregate_by: nil, compute_attributes: nil, consistency: nil, distance_metric: nil, exclude_attributes: nil, filters: nil, group_by: nil, include_attributes: nil, limit: nil, rank_by: nil, top_k: nil, vector_encoding: nil, request_options: {})
       #
       # @param namespace [String] Path param: The name of the namespace.
       #
       # @param aggregate_by [Hash{Symbol=>Object}] Body param: Aggregations to compute over all documents in the namespace that mat
+      #
+      # @param compute_attributes [Hash{Symbol=>Object}] Body param: Computes additional values on documents returned by a query. Each ke
       #
       # @param consistency [Turbopuffer::Models::NamespaceExplainQueryParams::Consistency] Body param: The consistency level for a query.
       #
@@ -236,11 +238,13 @@ module Turbopuffer
       #
       # Query, filter, full-text search and vector search documents.
       #
-      # @overload query(namespace: nil, aggregate_by: nil, consistency: nil, distance_metric: nil, exclude_attributes: nil, filters: nil, group_by: nil, include_attributes: nil, limit: nil, rank_by: nil, top_k: nil, vector_encoding: nil, request_options: {})
+      # @overload query(namespace: nil, aggregate_by: nil, compute_attributes: nil, consistency: nil, distance_metric: nil, exclude_attributes: nil, filters: nil, group_by: nil, include_attributes: nil, limit: nil, rank_by: nil, top_k: nil, vector_encoding: nil, request_options: {})
       #
       # @param namespace [String] Path param: The name of the namespace.
       #
       # @param aggregate_by [Hash{Symbol=>Object}] Body param: Aggregations to compute over all documents in the namespace that mat
+      #
+      # @param compute_attributes [Hash{Symbol=>Object}] Body param: Computes additional values on documents returned by a query. Each ke
       #
       # @param consistency [Turbopuffer::Models::NamespaceQueryParams::Consistency] Body param: The consistency level for a query.
       #
@@ -410,7 +414,7 @@ module Turbopuffer
       #
       # Create, update, or delete documents.
       #
-      # @overload write(namespace: nil, branch_from_namespace: nil, copy_from_namespace: nil, delete_by_filter: nil, delete_by_filter_allow_partial: nil, delete_condition: nil, deletes: nil, disable_backpressure: nil, distance_metric: nil, encryption: nil, patch_by_filter: nil, patch_by_filter_allow_partial: nil, patch_columns: nil, patch_condition: nil, patch_rows: nil, return_affected_ids: nil, schema: nil, upsert_columns: nil, upsert_condition: nil, upsert_rows: nil, request_options: {})
+      # @overload write(namespace: nil, branch_from_namespace: nil, copy_from_namespace: nil, delete_by_filter: nil, delete_by_filter_allow_partial: nil, delete_condition: nil, deletes: nil, disable_backpressure: nil, distance_metric: nil, encryption: nil, patch_by_filter: nil, patch_by_filter_allow_partial: nil, patch_columns: nil, patch_condition: nil, patch_rows: nil, return_affected_ids: nil, schema: nil, sharding: nil, upsert_columns: nil, upsert_condition: nil, upsert_rows: nil, request_options: {})
       #
       # @param namespace [String] Path param: The name of the namespace.
       #
@@ -445,6 +449,8 @@ module Turbopuffer
       # @param return_affected_ids [Boolean] Body param: If true, return the IDs of affected rows (deleted, patched, upserted
       #
       # @param schema [Hash{Symbol=>String, Turbopuffer::Models::AttributeSchemaConfig}] Body param: The schema of the attributes attached to the documents.
+      #
+      # @param sharding [Turbopuffer::Models::ShardingConfig] Body param: Configuration for namespace sharding, which partitions a namespace's
       #
       # @param upsert_columns [Turbopuffer::Models::Columns] Body param: A list of documents in columnar format. Each key is a column name, m
       #
