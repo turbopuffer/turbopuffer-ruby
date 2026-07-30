@@ -1,5 +1,26 @@
 # Changelog
 
+## 2.4.0 (2026-07-30)
+
+Full Changelog: [v2.3.0...v2.4.0](https://github.com/turbopuffer/turbopuffer-ruby/compare/v2.3.0...v2.4.0)
+
+### Features
+
+* openapi: add RRF `weights` parameter ([621628b](https://github.com/turbopuffer/turbopuffer-ruby/commit/621628bc8d9ed54a0ab5006c20ba5f4ae03e966e))
+* spec: add sharding config to the openapi spec ([2228a03](https://github.com/turbopuffer/turbopuffer-ruby/commit/2228a031201ad1b3d20ae1c77d029d665c67e428))
+* spec: expose computed attributes ([597fdde](https://github.com/turbopuffer/turbopuffer-ruby/commit/597fdde888efd50b9873b056ab0c12fab5a9e600))
+* spec: hide HighlightConfig.rank_fragments_by's RankBy ref from Stainless ([59c2734](https://github.com/turbopuffer/turbopuffer-ruby/commit/59c273482fcfccce1fc8f4d8b8d3ae13c0fbbcdc))
+* spec: make compute_attributes value x-stainless-any ([c170466](https://github.com/turbopuffer/turbopuffer-ruby/commit/c17046653f2533e00e9129d4e807a5ab2c3b1cd6))
+* spec: rename HighlightConfig -&gt; HighlightConfigParams ([36413c3](https://github.com/turbopuffer/turbopuffer-ruby/commit/36413c3bebab413e60ab51ba728437e66edaa7ab))
+* **stlc:** configurable CI runner and private-production-repo support in workflow templates ([12b486b](https://github.com/turbopuffer/turbopuffer-ruby/commit/12b486b953bf4521f18eb1187ba20812d30b3cfd))
+* support late_interaction parameter in sdks ([ac90617](https://github.com/turbopuffer/turbopuffer-ruby/commit/ac9061734ae8f47e823c20f381bf925c27634d8e))
+
+
+### Chores
+
+* **internal:** bound formatter parallelism to CPU count ([a56e5af](https://github.com/turbopuffer/turbopuffer-ruby/commit/a56e5af20b69bd39b12fbf2e9db2cd6d9b1b1ee8))
+* remove unused MCP package ([2b81b9a](https://github.com/turbopuffer/turbopuffer-ruby/commit/2b81b9ae116370e14cf1213e056b147277e6cca3))
+
 ## 2.3.0 (2026-06-16)
 
 Full Changelog: [v2.2.0...v2.3.0](https://github.com/turbopuffer/turbopuffer-ruby/compare/v2.2.0...v2.3.0)
