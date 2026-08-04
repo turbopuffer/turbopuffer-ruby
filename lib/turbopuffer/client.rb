@@ -15,7 +15,7 @@ module Turbopuffer
     # Default max retry delay in seconds.
     DEFAULT_MAX_RETRY_DELAY = 8.0
 
-    # API key used for authentication
+    # API key used for authentication.
     # @return [String]
     attr_reader :api_key
 
@@ -68,7 +68,7 @@ module Turbopuffer
 
     # Creates and returns a new client for interacting with the API.
     #
-    # @param api_key [String, nil] API key used for authentication Defaults to `ENV["TURBOPUFFER_API_KEY"]`
+    # @param api_key [String, nil] API key used for authentication. Defaults to `ENV["TURBOPUFFER_API_KEY"]`
     #
     # @param region [String, nil] The turbopuffer region to use. Defaults to `ENV["TURBOPUFFER_REGION"]`
     #
