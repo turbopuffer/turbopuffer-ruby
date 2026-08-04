@@ -10,7 +10,7 @@ module Turbopuffer
 
     DEFAULT_MAX_RETRY_DELAY = T.let(8.0, Float)
 
-    # API key used for authentication
+    # API key used for authentication.
     sig { returns(String) }
     attr_reader :api_key
 
@@ -73,7 +73,7 @@ module Turbopuffer
       ).returns(T.attached_class)
     end
     def self.new(
-      # API key used for authentication Defaults to `ENV["TURBOPUFFER_API_KEY"]`
+      # API key used for authentication. Defaults to `ENV["TURBOPUFFER_API_KEY"]`
       api_key: ENV["TURBOPUFFER_API_KEY"],
       # The turbopuffer region to use. Defaults to `ENV["TURBOPUFFER_REGION"]`
       region: ENV["TURBOPUFFER_REGION"],
