@@ -24,6 +24,12 @@ module Turbopuffer
       #   @return [Turbopuffer::Models::NamespaceMultiQueryParams::Consistency, nil]
       optional :consistency, -> { Turbopuffer::NamespaceMultiQueryParams::Consistency }
 
+      # @!attribute limit
+      #   Limits the total number of reranked documents returned.
+      #
+      #   @return [Integer, Turbopuffer::Models::NamespaceMultiQueryParams::Limit::Total, nil]
+      optional :limit, union: -> { Turbopuffer::NamespaceMultiQueryParams::Limit }
+
       # @!attribute rerank_by
       #   How to combine the rows returned by each sub-query into a single ranked list.
       #
@@ -36,12 +42,14 @@ module Turbopuffer
       #   @return [Symbol, Turbopuffer::Models::VectorEncoding, nil]
       optional :vector_encoding, enum: -> { Turbopuffer::VectorEncoding }
 
-      # @!method initialize(queries:, namespace: nil, consistency: nil, rerank_by: nil, vector_encoding: nil, request_options: {})
+      # @!method initialize(queries:, namespace: nil, consistency: nil, limit: nil, rerank_by: nil, vector_encoding: nil, request_options: {})
       #   @param queries [Array<Turbopuffer::Models::NamespaceMultiQueryParams::Query>]
       #
       #   @param namespace [String]
       #
       #   @param consistency [Turbopuffer::Models::NamespaceMultiQueryParams::Consistency] The consistency level for a query.
+      #
+      #   @param limit [Integer, Turbopuffer::Models::NamespaceMultiQueryParams::Limit::Total] Limits the total number of reranked documents returned.
       #
       #   @param rerank_by [Object] How to combine the rows returned by each sub-query into a single ranked list.
       #
@@ -185,6 +193,28 @@ module Turbopuffer
           # @!method self.values
           #   @return [Array<Symbol>]
         end
+      end
+
+      # Limits the total number of reranked documents returned.
+      module Limit
+        extend Turbopuffer::Internal::Type::Union
+
+        variant Integer
+
+        variant -> { Turbopuffer::NamespaceMultiQueryParams::Limit::Total }
+
+        class Total < Turbopuffer::Internal::Type::BaseModel
+          # @!attribute total
+          #
+          #   @return [Integer]
+          required :total, Integer
+
+          # @!method initialize(total:)
+          #   @param total [Integer]
+        end
+
+        # @!method self.variants
+        #   @return [Array(Integer, Turbopuffer::Models::NamespaceMultiQueryParams::Limit::Total)]
       end
     end
   end
