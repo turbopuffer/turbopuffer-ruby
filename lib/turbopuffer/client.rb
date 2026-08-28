@@ -16,7 +16,7 @@ module Turbopuffer
     DEFAULT_MAX_RETRY_DELAY = 8.0
 
     # Default size of the HTTP connection pool, per origin.
-    DEFAULT_POOL_SIZE = Turbopuffer::Internal::Transport::PooledNetRequester::DEFAULT_MAX_CONNECTIONS
+    DEFAULT_MAX_CONNECTIONS = Turbopuffer::Internal::Transport::PooledNetRequester::DEFAULT_MAX_CONNECTIONS
 
     # API key used for authentication.
     # @return [String]
@@ -96,7 +96,7 @@ module Turbopuffer
     #
     # @param max_retry_delay [Float]
     #
-    # @param pool_size [Integer] Maximum number of HTTP connections held open per origin.
+    # @param max_connections [Integer] Maximum number of HTTP connections held open per origin.
     def initialize(
       api_key: ENV["TURBOPUFFER_API_KEY"],
       region: ENV["TURBOPUFFER_REGION"],
@@ -107,7 +107,7 @@ module Turbopuffer
       timeout: self.class::DEFAULT_TIMEOUT_IN_SECONDS,
       initial_retry_delay: self.class::DEFAULT_INITIAL_RETRY_DELAY,
       max_retry_delay: self.class::DEFAULT_MAX_RETRY_DELAY,
-      pool_size: self.class::DEFAULT_POOL_SIZE
+      max_connections: self.class::DEFAULT_MAX_CONNECTIONS
     )
       base_url ||= "https://{region}.turbopuffer.com"
 
@@ -148,7 +148,7 @@ module Turbopuffer
         initial_retry_delay: initial_retry_delay,
         max_retry_delay: max_retry_delay,
         headers: headers,
-        pool_size: pool_size
+        max_connections: max_connections
       )
     end
   end

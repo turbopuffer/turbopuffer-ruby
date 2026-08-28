@@ -10,7 +10,7 @@ module Turbopuffer
 
     DEFAULT_MAX_RETRY_DELAY = T.let(8.0, Float)
 
-    DEFAULT_POOL_SIZE = T.let(
+    DEFAULT_MAX_CONNECTIONS = T.let(
       Turbopuffer::Internal::Transport::PooledNetRequester::DEFAULT_MAX_CONNECTIONS,
       Integer
     )
@@ -75,7 +75,7 @@ module Turbopuffer
         timeout: Float,
         initial_retry_delay: Float,
         max_retry_delay: Float,
-        pool_size: Integer
+        max_connections: Integer
       ).returns(T.attached_class)
     end
     def self.new(
@@ -95,7 +95,7 @@ module Turbopuffer
       initial_retry_delay: Turbopuffer::Client::DEFAULT_INITIAL_RETRY_DELAY,
       max_retry_delay: Turbopuffer::Client::DEFAULT_MAX_RETRY_DELAY,
       # Maximum number of HTTP connections held open per origin.
-      pool_size: Turbopuffer::Client::DEFAULT_POOL_SIZE
+      max_connections: Turbopuffer::Client::DEFAULT_MAX_CONNECTIONS
     )
     end
   end

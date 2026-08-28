@@ -162,7 +162,7 @@ module Turbopuffer
                 )
               ],
             idempotency_header: T.nilable(String),
-            pool_size: Integer
+            max_connections: Integer
           ).returns(T.attached_class)
         end
         def self.new(
@@ -173,7 +173,7 @@ module Turbopuffer
           max_retry_delay: 0.0,
           headers: {},
           idempotency_header: nil,
-          pool_size:
+          max_connections:
             Turbopuffer::Internal::Transport::PooledNetRequester::DEFAULT_MAX_CONNECTIONS
         )
         end

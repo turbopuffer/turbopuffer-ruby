@@ -8,7 +8,7 @@ module Turbopuffer
 
     DEFAULT_MAX_RETRY_DELAY: Float
 
-    DEFAULT_POOL_SIZE: Integer
+    DEFAULT_MAX_CONNECTIONS: Integer
 
     attr_reader api_key: String
 
@@ -39,7 +39,7 @@ module Turbopuffer
       ?timeout: Float,
       ?initial_retry_delay: Float,
       ?max_retry_delay: Float,
-      ?pool_size: Integer
+      ?max_connections: Integer
     ) -> void
   end
 end
