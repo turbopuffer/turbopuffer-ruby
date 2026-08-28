@@ -8,6 +8,8 @@ module Turbopuffer
 
     DEFAULT_MAX_RETRY_DELAY: Float
 
+    DEFAULT_POOL_SIZE: Integer
+
     attr_reader api_key: String
 
     attr_reader region: String?
@@ -36,7 +38,8 @@ module Turbopuffer
       ?max_retries: Integer,
       ?timeout: Float,
       ?initial_retry_delay: Float,
-      ?max_retry_delay: Float
+      ?max_retry_delay: Float,
+      ?pool_size: Integer
     ) -> void
   end
 end

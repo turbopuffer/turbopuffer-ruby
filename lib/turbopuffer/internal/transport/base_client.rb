@@ -187,6 +187,7 @@ module Turbopuffer
         # @param max_retry_delay [Float]
         # @param headers [Hash{String=>String, Integer, Array<String, Integer, nil>, nil}]
         # @param idempotency_header [String, nil]
+        # @param pool_size [Integer]
         def initialize(
           base_url:,
           timeout: 0.0,
@@ -194,9 +195,10 @@ module Turbopuffer
           initial_retry_delay: 0.0,
           max_retry_delay: 0.0,
           headers: {},
-          idempotency_header: nil
+          idempotency_header: nil,
+          pool_size: Turbopuffer::Internal::Transport::PooledNetRequester::DEFAULT_MAX_CONNECTIONS
         )
-          @requester = Turbopuffer::Internal::Transport::PooledNetRequester.new
+          @requester = Turbopuffer::Internal::Transport::PooledNetRequester.new(size: pool_size)
           @headers = Turbopuffer::Internal::Util.normalized_headers(
             self.class::PLATFORM_HEADERS,
             {

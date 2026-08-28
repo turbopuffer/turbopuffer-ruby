@@ -10,6 +10,11 @@ module Turbopuffer
 
     DEFAULT_MAX_RETRY_DELAY = T.let(8.0, Float)
 
+    DEFAULT_POOL_SIZE = T.let(
+      Turbopuffer::Internal::Transport::PooledNetRequester::DEFAULT_MAX_CONNECTIONS,
+      Integer
+    )
+
     # API key used for authentication.
     sig { returns(String) }
     attr_reader :api_key
@@ -69,7 +74,8 @@ module Turbopuffer
         max_retries: Integer,
         timeout: Float,
         initial_retry_delay: Float,
-        max_retry_delay: Float
+        max_retry_delay: Float,
+        pool_size: Integer
       ).returns(T.attached_class)
     end
     def self.new(
@@ -87,7 +93,9 @@ module Turbopuffer
       max_retries: Turbopuffer::Client::DEFAULT_MAX_RETRIES,
       timeout: Turbopuffer::Client::DEFAULT_TIMEOUT_IN_SECONDS,
       initial_retry_delay: Turbopuffer::Client::DEFAULT_INITIAL_RETRY_DELAY,
-      max_retry_delay: Turbopuffer::Client::DEFAULT_MAX_RETRY_DELAY
+      max_retry_delay: Turbopuffer::Client::DEFAULT_MAX_RETRY_DELAY,
+      # Maximum number of HTTP connections held open per origin.
+      pool_size: Turbopuffer::Client::DEFAULT_POOL_SIZE
     )
     end
   end
