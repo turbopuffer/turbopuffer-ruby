@@ -114,10 +114,17 @@ module Turbopuffer
         }
 
         type status =
-          { ready_replicas: Integer, updated_at: Time, utilization: Float }
+          {
+            ready_replicas: Integer,
+            replicas: Integer,
+            updated_at: Time,
+            utilization: Float
+          }
 
         class Status < Turbopuffer::Internal::Type::BaseModel
           attr_accessor ready_replicas: Integer
+
+          attr_accessor replicas: Integer
 
           attr_accessor updated_at: Time
 
@@ -125,12 +132,14 @@ module Turbopuffer
 
           def initialize: (
             ready_replicas: Integer,
+            replicas: Integer,
             updated_at: Time,
             utilization: Float
           ) -> void
 
           def to_hash: -> {
             ready_replicas: Integer,
+            replicas: Integer,
             updated_at: Time,
             utilization: Float
           }
