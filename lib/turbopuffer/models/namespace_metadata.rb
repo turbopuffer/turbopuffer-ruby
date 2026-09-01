@@ -150,6 +150,15 @@ module Turbopuffer
           #   @return [Integer]
           required :ready_replicas, Integer
 
+          # @!attribute replicas
+          #   The number of running replicas for the namespace. Replicas are billed once
+          #   running, even before they finish warming their caches and become ready to serve
+          #   traffic. This count is updated independently and may briefly disagree with the
+          #   other status fields.
+          #
+          #   @return [Integer]
+          required :replicas, Integer
+
           # @!attribute updated_at
           #   The timestamp of the latest pinning status snapshot.
           #
@@ -163,13 +172,15 @@ module Turbopuffer
           #   @return [Float]
           required :utilization, Float
 
-          # @!method initialize(ready_replicas:, updated_at:, utilization:)
+          # @!method initialize(ready_replicas:, replicas:, updated_at:, utilization:)
           #   Some parameter documentations has been truncated, see
           #   {Turbopuffer::Models::NamespaceMetadata::Pinning::Status} for more details.
           #
           #   Operational status for a pinned namespace.
           #
           #   @param ready_replicas [Integer] The number of replicas that are warm and serving traffic.
+          #
+          #   @param replicas [Integer] The number of running replicas for the namespace. Replicas are billed once runni
           #
           #   @param updated_at [Time] The timestamp of the latest pinning status snapshot.
           #
