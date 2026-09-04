@@ -52,6 +52,7 @@ module Turbopuffer
         queries: ::Array[Turbopuffer::NamespaceMultiQueryParams::Query],
         ?namespace: String,
         ?consistency: Turbopuffer::NamespaceMultiQueryParams::Consistency,
+        ?limit: Turbopuffer::Models::NamespaceMultiQueryParams::limit,
         ?rerank_by: top,
         ?vector_encoding: Turbopuffer::Models::vector_encoding,
         ?request_options: Turbopuffer::request_opts
@@ -92,6 +93,7 @@ module Turbopuffer
       def update_metadata: (
         ?namespace: String,
         ?pinning: Turbopuffer::Models::NamespaceMetadataPatch::pinning?,
+        ?read_only: bool,
         ?request_options: Turbopuffer::request_opts
       ) -> Turbopuffer::NamespaceMetadata
 

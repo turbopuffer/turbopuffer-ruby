@@ -1,5 +1,16 @@
 # Changelog
 
+## 2.5.0 (2026-09-04)
+
+Full Changelog: [v2.4.0...v2.5.0](https://github.com/turbopuffer/turbopuffer-ruby/compare/v2.4.0...v2.5.0)
+
+### Features
+
+* Add `read_only` namespace field ([8dfb1f7](https://github.com/turbopuffer/turbopuffer-ruby/commit/8dfb1f77bf0f2ad5eb1c238a0c4b3df49549b9fd))
+* Apply limit on rerank_by when provided ([fbd70cb](https://github.com/turbopuffer/turbopuffer-ruby/commit/fbd70cbaeb31bae86f197975d2bdd40669620cf1))
+* spec: no-op change to Stainless spec ([4e0d0cc](https://github.com/turbopuffer/turbopuffer-ruby/commit/4e0d0ccb819df54524e8b5c3fd3efea8105ddae7))
+* tpuf-engine: expose billed_replicas in pinning metadata ([3f414fc](https://github.com/turbopuffer/turbopuffer-ruby/commit/3f414fcf1df33d8f41615755c5474f8fcd6713b2))
+
 ## 2.4.0 (2026-07-30)
 
 Full Changelog: [v2.3.0...v2.4.0](https://github.com/turbopuffer/turbopuffer-ruby/compare/v2.3.0...v2.4.0)

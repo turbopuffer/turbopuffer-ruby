@@ -201,13 +201,15 @@ module Turbopuffer
       #
       # Issue multiple concurrent queries filter or search documents.
       #
-      # @overload multi_query(queries:, namespace: nil, consistency: nil, rerank_by: nil, vector_encoding: nil, request_options: {})
+      # @overload multi_query(queries:, namespace: nil, consistency: nil, limit: nil, rerank_by: nil, vector_encoding: nil, request_options: {})
       #
       # @param queries [Array<Turbopuffer::Models::NamespaceMultiQueryParams::Query>] Body param
       #
       # @param namespace [String] Path param: The name of the namespace.
       #
       # @param consistency [Turbopuffer::Models::NamespaceMultiQueryParams::Consistency] Body param: The consistency level for a query.
+      #
+      # @param limit [Integer, Turbopuffer::Models::NamespaceMultiQueryParams::Limit::Total] Body param: Limits the total number of reranked documents returned.
       #
       # @param rerank_by [Object] Body param: How to combine the rows returned by each sub-query into a single ran
       #
@@ -355,11 +357,13 @@ module Turbopuffer
       #
       # Update metadata configuration for a namespace.
       #
-      # @overload update_metadata(namespace: nil, pinning: nil, request_options: {})
+      # @overload update_metadata(namespace: nil, pinning: nil, read_only: nil, request_options: {})
       #
       # @param namespace [String] Path param: The name of the namespace.
       #
       # @param pinning [Boolean, Turbopuffer::Models::PinningConfig, nil] Body param: Configuration for namespace pinning.
+      #
+      # @param read_only [Boolean] Body param: Set to `true` to reject document and schema writes, or `false` to al
       #
       # @param request_options [Turbopuffer::RequestOptions, Hash{Symbol=>Object}, nil]
       #

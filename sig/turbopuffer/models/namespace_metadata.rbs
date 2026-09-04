@@ -10,6 +10,7 @@ module Turbopuffer
         schema: ::Hash[Symbol, Turbopuffer::AttributeSchemaConfig],
         updated_at: Time,
         pinning: Turbopuffer::NamespaceMetadata::Pinning,
+        read_only: bool,
         sharding: Turbopuffer::ShardingConfig
       }
 
@@ -34,6 +35,10 @@ module Turbopuffer
         Turbopuffer::NamespaceMetadata::Pinning
       ) -> Turbopuffer::NamespaceMetadata::Pinning
 
+      attr_reader read_only: bool?
+
+      def read_only=: (bool) -> bool
+
       attr_reader sharding: Turbopuffer::ShardingConfig?
 
       def sharding=: (
@@ -49,6 +54,7 @@ module Turbopuffer
         schema: ::Hash[Symbol, Turbopuffer::AttributeSchemaConfig],
         updated_at: Time,
         ?pinning: Turbopuffer::NamespaceMetadata::Pinning,
+        ?read_only: bool,
         ?sharding: Turbopuffer::ShardingConfig
       ) -> void
 
@@ -61,6 +67,7 @@ module Turbopuffer
         schema: ::Hash[Symbol, Turbopuffer::AttributeSchemaConfig],
         updated_at: Time,
         pinning: Turbopuffer::NamespaceMetadata::Pinning,
+        read_only: bool,
         sharding: Turbopuffer::ShardingConfig
       }
 
@@ -114,10 +121,17 @@ module Turbopuffer
         }
 
         type status =
-          { ready_replicas: Integer, updated_at: Time, utilization: Float }
+          {
+            ready_replicas: Integer,
+            replicas: Integer,
+            updated_at: Time,
+            utilization: Float
+          }
 
         class Status < Turbopuffer::Internal::Type::BaseModel
           attr_accessor ready_replicas: Integer
+
+          attr_accessor replicas: Integer
 
           attr_accessor updated_at: Time
 
@@ -125,12 +139,14 @@ module Turbopuffer
 
           def initialize: (
             ready_replicas: Integer,
+            replicas: Integer,
             updated_at: Time,
             utilization: Float
           ) -> void
 
           def to_hash: -> {
             ready_replicas: Integer,
+            replicas: Integer,
             updated_at: Time,
             utilization: Float
           }

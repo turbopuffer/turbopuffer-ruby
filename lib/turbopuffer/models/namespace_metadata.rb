@@ -52,6 +52,12 @@ module Turbopuffer
       #   @return [Turbopuffer::Models::NamespaceMetadata::Pinning, nil]
       optional :pinning, -> { Turbopuffer::NamespaceMetadata::Pinning }
 
+      # @!attribute read_only
+      #   Whether document and schema writes are rejected. Omitted when `false`.
+      #
+      #   @return [Boolean, nil]
+      optional :read_only, Turbopuffer::Internal::Type::Boolean
+
       # @!attribute sharding
       #   Configuration for namespace sharding, which partitions a namespace's documents
       #   across multiple internal shards to scale indexing and query throughput beyond a
@@ -61,7 +67,7 @@ module Turbopuffer
       #   @return [Turbopuffer::Models::ShardingConfig, nil]
       optional :sharding, -> { Turbopuffer::ShardingConfig }
 
-      # @!method initialize(approx_logical_bytes:, approx_row_count:, created_at:, encryption:, index:, schema:, updated_at:, pinning: nil, sharding: nil)
+      # @!method initialize(approx_logical_bytes:, approx_row_count:, created_at:, encryption:, index:, schema:, updated_at:, pinning: nil, read_only: nil, sharding: nil)
       #   Some parameter documentations has been truncated, see
       #   {Turbopuffer::Models::NamespaceMetadata} for more details.
       #
@@ -82,6 +88,8 @@ module Turbopuffer
       #   @param updated_at [Time] The timestamp when the namespace was last modified by a write operation.
       #
       #   @param pinning [Turbopuffer::Models::NamespaceMetadata::Pinning] Configuration for namespace pinning, along with the current status of the pinned
+      #
+      #   @param read_only [Boolean] Whether document and schema writes are rejected. Omitted when `false`.
       #
       #   @param sharding [Turbopuffer::Models::ShardingConfig] Configuration for namespace sharding, which partitions a namespace's documents a
 
@@ -150,6 +158,15 @@ module Turbopuffer
           #   @return [Integer]
           required :ready_replicas, Integer
 
+          # @!attribute replicas
+          #   The number of running replicas for the namespace. Replicas are billed once
+          #   running, even before they finish warming their caches and become ready to serve
+          #   traffic. This count is updated independently and may briefly disagree with the
+          #   other status fields.
+          #
+          #   @return [Integer]
+          required :replicas, Integer
+
           # @!attribute updated_at
           #   The timestamp of the latest pinning status snapshot.
           #
@@ -163,13 +180,15 @@ module Turbopuffer
           #   @return [Float]
           required :utilization, Float
 
-          # @!method initialize(ready_replicas:, updated_at:, utilization:)
+          # @!method initialize(ready_replicas:, replicas:, updated_at:, utilization:)
           #   Some parameter documentations has been truncated, see
           #   {Turbopuffer::Models::NamespaceMetadata::Pinning::Status} for more details.
           #
           #   Operational status for a pinned namespace.
           #
           #   @param ready_replicas [Integer] The number of replicas that are warm and serving traffic.
+          #
+          #   @param replicas [Integer] The number of running replicas for the namespace. Replicas are billed once runni
           #
           #   @param updated_at [Time] The timestamp of the latest pinning status snapshot.
           #

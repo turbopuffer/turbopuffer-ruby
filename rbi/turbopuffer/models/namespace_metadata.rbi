@@ -45,6 +45,13 @@ module Turbopuffer
       end
       attr_writer :pinning
 
+      # Whether document and schema writes are rejected. Omitted when `false`.
+      sig { returns(T.nilable(T::Boolean)) }
+      attr_reader :read_only
+
+      sig { params(read_only: T::Boolean).void }
+      attr_writer :read_only
+
       # Configuration for namespace sharding, which partitions a namespace's documents
       # across multiple internal shards to scale indexing and query throughput beyond a
       # single machine. Sharding can only be configured on a namespace's inaugural
@@ -74,6 +81,7 @@ module Turbopuffer
           schema: T::Hash[Symbol, Turbopuffer::AttributeSchemaConfig::OrHash],
           updated_at: Time,
           pinning: Turbopuffer::NamespaceMetadata::Pinning::OrHash,
+          read_only: T::Boolean,
           sharding: Turbopuffer::ShardingConfig::OrHash
         ).returns(T.attached_class)
       end
@@ -94,6 +102,8 @@ module Turbopuffer
         # Configuration for namespace pinning, along with the current status of the pinned
         # namespace.
         pinning: nil,
+        # Whether document and schema writes are rejected. Omitted when `false`.
+        read_only: nil,
         # Configuration for namespace sharding, which partitions a namespace's documents
         # across multiple internal shards to scale indexing and query throughput beyond a
         # single machine. Sharding can only be configured on a namespace's inaugural
@@ -113,6 +123,7 @@ module Turbopuffer
             schema: T::Hash[Symbol, Turbopuffer::AttributeSchemaConfig],
             updated_at: Time,
             pinning: Turbopuffer::NamespaceMetadata::Pinning,
+            read_only: T::Boolean,
             sharding: Turbopuffer::ShardingConfig
           }
         )
@@ -252,6 +263,13 @@ module Turbopuffer
           sig { returns(Integer) }
           attr_accessor :ready_replicas
 
+          # The number of running replicas for the namespace. Replicas are billed once
+          # running, even before they finish warming their caches and become ready to serve
+          # traffic. This count is updated independently and may briefly disagree with the
+          # other status fields.
+          sig { returns(Integer) }
+          attr_accessor :replicas
+
           # The timestamp of the latest pinning status snapshot.
           sig { returns(Time) }
           attr_accessor :updated_at
@@ -265,6 +283,7 @@ module Turbopuffer
           sig do
             params(
               ready_replicas: Integer,
+              replicas: Integer,
               updated_at: Time,
               utilization: Float
             ).returns(T.attached_class)
@@ -272,6 +291,11 @@ module Turbopuffer
           def self.new(
             # The number of replicas that are warm and serving traffic.
             ready_replicas:,
+            # The number of running replicas for the namespace. Replicas are billed once
+            # running, even before they finish warming their caches and become ready to serve
+            # traffic. This count is updated independently and may briefly disagree with the
+            # other status fields.
+            replicas:,
             # The timestamp of the latest pinning status snapshot.
             updated_at:,
             # Aggregate utilization for the pinned namespace, reported as a value between 0.0
@@ -282,7 +306,12 @@ module Turbopuffer
 
           sig do
             override.returns(
-              { ready_replicas: Integer, updated_at: Time, utilization: Float }
+              {
+                ready_replicas: Integer,
+                replicas: Integer,
+                updated_at: Time,
+                utilization: Float
+              }
             )
           end
           def to_hash

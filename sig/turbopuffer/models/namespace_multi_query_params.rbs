@@ -5,6 +5,7 @@ module Turbopuffer
         namespace: String,
         queries: ::Array[Turbopuffer::NamespaceMultiQueryParams::Query],
         consistency: Turbopuffer::NamespaceMultiQueryParams::Consistency,
+        limit: Turbopuffer::Models::NamespaceMultiQueryParams::limit,
         rerank_by: top,
         vector_encoding: Turbopuffer::Models::vector_encoding
       }
@@ -26,6 +27,12 @@ module Turbopuffer
         Turbopuffer::NamespaceMultiQueryParams::Consistency
       ) -> Turbopuffer::NamespaceMultiQueryParams::Consistency
 
+      attr_reader limit: Turbopuffer::Models::NamespaceMultiQueryParams::limit?
+
+      def limit=: (
+        Turbopuffer::Models::NamespaceMultiQueryParams::limit
+      ) -> Turbopuffer::Models::NamespaceMultiQueryParams::limit
+
       attr_reader rerank_by: top?
 
       def rerank_by=: (top) -> top
@@ -40,6 +47,7 @@ module Turbopuffer
         queries: ::Array[Turbopuffer::NamespaceMultiQueryParams::Query],
         ?namespace: String,
         ?consistency: Turbopuffer::NamespaceMultiQueryParams::Consistency,
+        ?limit: Turbopuffer::Models::NamespaceMultiQueryParams::limit,
         ?rerank_by: top,
         ?vector_encoding: Turbopuffer::Models::vector_encoding,
         ?request_options: Turbopuffer::request_opts
@@ -49,6 +57,7 @@ module Turbopuffer
         namespace: String,
         queries: ::Array[Turbopuffer::NamespaceMultiQueryParams::Query],
         consistency: Turbopuffer::NamespaceMultiQueryParams::Consistency,
+        limit: Turbopuffer::Models::NamespaceMultiQueryParams::limit,
         rerank_by: top,
         vector_encoding: Turbopuffer::Models::vector_encoding,
         request_options: Turbopuffer::RequestOptions
@@ -183,6 +192,25 @@ module Turbopuffer
 
           def self?.values: -> ::Array[Turbopuffer::Models::NamespaceMultiQueryParams::Consistency::level]
         end
+      end
+
+      type limit =
+        Integer | Turbopuffer::NamespaceMultiQueryParams::Limit::Total
+
+      module Limit
+        extend Turbopuffer::Internal::Type::Union
+
+        type total = { total: Integer }
+
+        class Total < Turbopuffer::Internal::Type::BaseModel
+          attr_accessor total: Integer
+
+          def initialize: (total: Integer) -> void
+
+          def to_hash: -> { total: Integer }
+        end
+
+        def self?.variants: -> ::Array[Turbopuffer::Models::NamespaceMultiQueryParams::limit]
       end
     end
   end

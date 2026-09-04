@@ -159,6 +159,11 @@ module Turbopuffer
           namespace: String,
           consistency:
             Turbopuffer::NamespaceMultiQueryParams::Consistency::OrHash,
+          limit:
+            T.any(
+              Integer,
+              Turbopuffer::NamespaceMultiQueryParams::Limit::Total::OrHash
+            ),
           rerank_by: T.anything,
           vector_encoding: Turbopuffer::VectorEncoding::OrSymbol,
           request_options: Turbopuffer::RequestOptions::OrHash
@@ -171,6 +176,8 @@ module Turbopuffer
         namespace: nil,
         # Body param: The consistency level for a query.
         consistency: nil,
+        # Body param: Limits the total number of reranked documents returned.
+        limit: nil,
         # Body param: How to combine the rows returned by each sub-query into a single
         # ranked list.
         rerank_by: nil,
@@ -287,6 +294,7 @@ module Turbopuffer
           namespace: String,
           pinning:
             T.nilable(T.any(T::Boolean, Turbopuffer::PinningConfig::OrHash)),
+          read_only: T::Boolean,
           request_options: Turbopuffer::RequestOptions::OrHash
         ).returns(Turbopuffer::NamespaceMetadata)
       end
@@ -300,6 +308,10 @@ module Turbopuffer
         # - `true`: enable pinning with default configuration
         # - Object: set pinning configuration
         pinning: nil,
+        # Body param: Set to `true` to reject document and schema writes, or `false` to
+        # allow them. Writes already in progress may still commit. Metadata updates remain
+        # available.
+        read_only: nil,
         request_options: {}
       )
       end
