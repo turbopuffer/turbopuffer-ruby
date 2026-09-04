@@ -357,11 +357,13 @@ module Turbopuffer
       #
       # Update metadata configuration for a namespace.
       #
-      # @overload update_metadata(namespace: nil, pinning: nil, request_options: {})
+      # @overload update_metadata(namespace: nil, pinning: nil, read_only: nil, request_options: {})
       #
       # @param namespace [String] Path param: The name of the namespace.
       #
       # @param pinning [Boolean, Turbopuffer::Models::PinningConfig, nil] Body param: Configuration for namespace pinning.
+      #
+      # @param read_only [Boolean] Body param: Set to `true` to reject document and schema writes, or `false` to al
       #
       # @param request_options [Turbopuffer::RequestOptions, Hash{Symbol=>Object}, nil]
       #

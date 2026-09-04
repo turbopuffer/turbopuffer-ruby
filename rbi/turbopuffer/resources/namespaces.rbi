@@ -294,6 +294,7 @@ module Turbopuffer
           namespace: String,
           pinning:
             T.nilable(T.any(T::Boolean, Turbopuffer::PinningConfig::OrHash)),
+          read_only: T::Boolean,
           request_options: Turbopuffer::RequestOptions::OrHash
         ).returns(Turbopuffer::NamespaceMetadata)
       end
@@ -307,6 +308,10 @@ module Turbopuffer
         # - `true`: enable pinning with default configuration
         # - Object: set pinning configuration
         pinning: nil,
+        # Body param: Set to `true` to reject document and schema writes, or `false` to
+        # allow them. Writes already in progress may still commit. Metadata updates remain
+        # available.
+        read_only: nil,
         request_options: {}
       )
       end
