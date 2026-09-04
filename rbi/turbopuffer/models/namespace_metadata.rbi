@@ -45,6 +45,13 @@ module Turbopuffer
       end
       attr_writer :pinning
 
+      # Whether document and schema writes are rejected. Omitted when `false`.
+      sig { returns(T.nilable(T::Boolean)) }
+      attr_reader :read_only
+
+      sig { params(read_only: T::Boolean).void }
+      attr_writer :read_only
+
       # Configuration for namespace sharding, which partitions a namespace's documents
       # across multiple internal shards to scale indexing and query throughput beyond a
       # single machine. Sharding can only be configured on a namespace's inaugural
@@ -74,6 +81,7 @@ module Turbopuffer
           schema: T::Hash[Symbol, Turbopuffer::AttributeSchemaConfig::OrHash],
           updated_at: Time,
           pinning: Turbopuffer::NamespaceMetadata::Pinning::OrHash,
+          read_only: T::Boolean,
           sharding: Turbopuffer::ShardingConfig::OrHash
         ).returns(T.attached_class)
       end
@@ -94,6 +102,8 @@ module Turbopuffer
         # Configuration for namespace pinning, along with the current status of the pinned
         # namespace.
         pinning: nil,
+        # Whether document and schema writes are rejected. Omitted when `false`.
+        read_only: nil,
         # Configuration for namespace sharding, which partitions a namespace's documents
         # across multiple internal shards to scale indexing and query throughput beyond a
         # single machine. Sharding can only be configured on a namespace's inaugural
@@ -113,6 +123,7 @@ module Turbopuffer
             schema: T::Hash[Symbol, Turbopuffer::AttributeSchemaConfig],
             updated_at: Time,
             pinning: Turbopuffer::NamespaceMetadata::Pinning,
+            read_only: T::Boolean,
             sharding: Turbopuffer::ShardingConfig
           }
         )
