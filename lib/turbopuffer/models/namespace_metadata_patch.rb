@@ -14,13 +14,22 @@ module Turbopuffer
       #   @return [Boolean, Turbopuffer::Models::PinningConfig, nil]
       optional :pinning, union: -> { Turbopuffer::NamespaceMetadataPatch::Pinning }, nil?: true
 
-      # @!method initialize(pinning: nil)
+      # @!attribute read_only
+      #   Set to `true` to reject document and schema writes, or `false` to allow them.
+      #   Writes already in progress may still commit. Metadata updates remain available.
+      #
+      #   @return [Boolean, nil]
+      optional :read_only, Turbopuffer::Internal::Type::Boolean
+
+      # @!method initialize(pinning: nil, read_only: nil)
       #   Some parameter documentations has been truncated, see
       #   {Turbopuffer::Models::NamespaceMetadataPatch} for more details.
       #
       #   Request to update namespace metadata configuration.
       #
       #   @param pinning [Boolean, Turbopuffer::Models::PinningConfig, nil] Configuration for namespace pinning.
+      #
+      #   @param read_only [Boolean] Set to `true` to reject document and schema writes, or `false` to allow them. Wr
 
       # Configuration for namespace pinning.
       #
