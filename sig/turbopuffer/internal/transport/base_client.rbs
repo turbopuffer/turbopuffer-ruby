@@ -82,7 +82,8 @@ module Turbopuffer
           ?headers: ::Hash[String, (String
           | Integer
           | ::Array[(String | Integer)?])?],
-          ?idempotency_header: String?
+          ?idempotency_header: String?,
+          ?max_connections: Integer
         ) -> void
 
         private def auth_headers: -> ::Hash[String, String]

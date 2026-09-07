@@ -235,6 +235,14 @@ Each instance of `Turbopuffer::Client` has its own HTTP connection pool with a d
 
 When all available connections from the pool are checked out, requests wait for a new connection to become available, with queue time counting towards the request timeout.
 
+You can use the `max_connections` option to configure this:
+
+```ruby
+turbopuffer = Turbopuffer::Client.new(
+  max_connections: 16 # default is 99
+)
+```
+
 Unless otherwise specified, other classes in the SDK do not have locks protecting their underlying data structure.
 
 ## Sorbet
