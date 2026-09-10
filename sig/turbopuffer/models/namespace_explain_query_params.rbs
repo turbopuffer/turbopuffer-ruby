@@ -12,6 +12,7 @@ module Turbopuffer
         group_by: ::Array[top],
         include_attributes: Turbopuffer::Models::include_attributes,
         limit: Turbopuffer::Models::NamespaceExplainQueryParams::limit,
+        offset: Integer,
         rank_by: top,
         top_k: Integer,
         vector_encoding: Turbopuffer::Models::vector_encoding
@@ -70,6 +71,10 @@ module Turbopuffer
         Turbopuffer::Models::NamespaceExplainQueryParams::limit
       ) -> Turbopuffer::Models::NamespaceExplainQueryParams::limit
 
+      attr_reader offset: Integer?
+
+      def offset=: (Integer) -> Integer
+
       attr_reader rank_by: top?
 
       def rank_by=: (top) -> top
@@ -95,6 +100,7 @@ module Turbopuffer
         ?group_by: ::Array[top],
         ?include_attributes: Turbopuffer::Models::include_attributes,
         ?limit: Turbopuffer::Models::NamespaceExplainQueryParams::limit,
+        ?offset: Integer,
         ?rank_by: top,
         ?top_k: Integer,
         ?vector_encoding: Turbopuffer::Models::vector_encoding,
@@ -112,6 +118,7 @@ module Turbopuffer
         group_by: ::Array[top],
         include_attributes: Turbopuffer::Models::include_attributes,
         limit: Turbopuffer::Models::NamespaceExplainQueryParams::limit,
+        offset: Integer,
         rank_by: top,
         top_k: Integer,
         vector_encoding: Turbopuffer::Models::vector_encoding,

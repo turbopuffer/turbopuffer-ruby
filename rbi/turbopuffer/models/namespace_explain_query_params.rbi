@@ -104,6 +104,14 @@ module Turbopuffer
       sig { params(limit: T.any(Integer, Turbopuffer::Limit::OrHash)).void }
       attr_writer :limit
 
+      # Number of documents to skip before returning results. Supported only in v2
+      # queries with an explicit `rank_by` and `top_k` or `limit`.
+      sig { returns(T.nilable(Integer)) }
+      attr_reader :offset
+
+      sig { params(offset: Integer).void }
+      attr_writer :offset
+
       # How to rank the documents in the namespace.
       sig { returns(T.nilable(T.anything)) }
       attr_reader :rank_by
@@ -140,6 +148,7 @@ module Turbopuffer
           group_by: T::Array[T.anything],
           include_attributes: Turbopuffer::IncludeAttributes::Variants,
           limit: T.any(Integer, Turbopuffer::Limit::OrHash),
+          offset: Integer,
           rank_by: T.anything,
           top_k: Integer,
           vector_encoding: Turbopuffer::VectorEncoding::OrSymbol,
@@ -172,6 +181,9 @@ module Turbopuffer
         include_attributes: nil,
         # Limits the documents returned by a query.
         limit: nil,
+        # Number of documents to skip before returning results. Supported only in v2
+        # queries with an explicit `rank_by` and `top_k` or `limit`.
+        offset: nil,
         # How to rank the documents in the namespace.
         rank_by: nil,
         # The number of results to return.
@@ -195,6 +207,7 @@ module Turbopuffer
             group_by: T::Array[T.anything],
             include_attributes: Turbopuffer::IncludeAttributes::Variants,
             limit: T.any(Integer, Turbopuffer::Limit),
+            offset: Integer,
             rank_by: T.anything,
             top_k: Integer,
             vector_encoding: Turbopuffer::VectorEncoding::OrSymbol,
