@@ -98,7 +98,7 @@ module Turbopuffer
       #
       # Explain a query plan.
       #
-      # @overload explain_query(namespace: nil, aggregate_by: nil, compute_attributes: nil, consistency: nil, distance_metric: nil, exclude_attributes: nil, filters: nil, group_by: nil, include_attributes: nil, limit: nil, rank_by: nil, top_k: nil, vector_encoding: nil, request_options: {})
+      # @overload explain_query(namespace: nil, aggregate_by: nil, compute_attributes: nil, consistency: nil, distance_metric: nil, exclude_attributes: nil, filters: nil, group_by: nil, include_attributes: nil, limit: nil, offset: nil, rank_by: nil, top_k: nil, vector_encoding: nil, request_options: {})
       #
       # @param namespace [String] Path param: The name of the namespace.
       #
@@ -119,6 +119,8 @@ module Turbopuffer
       # @param include_attributes [Boolean, Array<String>] Body param: Whether to include attributes in the response.
       #
       # @param limit [Integer, Turbopuffer::Models::Limit] Body param: Limits the documents returned by a query.
+      #
+      # @param offset [Integer] Body param: Number of documents to skip before returning results. Supported only
       #
       # @param rank_by [Object] Body param: How to rank the documents in the namespace.
       #
@@ -201,7 +203,7 @@ module Turbopuffer
       #
       # Issue multiple concurrent queries filter or search documents.
       #
-      # @overload multi_query(queries:, namespace: nil, consistency: nil, limit: nil, rerank_by: nil, vector_encoding: nil, request_options: {})
+      # @overload multi_query(queries:, namespace: nil, consistency: nil, limit: nil, offset: nil, rerank_by: nil, vector_encoding: nil, request_options: {})
       #
       # @param queries [Array<Turbopuffer::Models::NamespaceMultiQueryParams::Query>] Body param
       #
@@ -210,6 +212,8 @@ module Turbopuffer
       # @param consistency [Turbopuffer::Models::NamespaceMultiQueryParams::Consistency] Body param: The consistency level for a query.
       #
       # @param limit [Integer, Turbopuffer::Models::NamespaceMultiQueryParams::Limit::Total] Body param: Limits the total number of reranked documents returned.
+      #
+      # @param offset [Integer] Body param: Number of reranked documents to skip before returning results. Requi
       #
       # @param rerank_by [Object] Body param: How to combine the rows returned by each sub-query into a single ran
       #
@@ -240,7 +244,7 @@ module Turbopuffer
       #
       # Query, filter, full-text search and vector search documents.
       #
-      # @overload query(namespace: nil, aggregate_by: nil, compute_attributes: nil, consistency: nil, distance_metric: nil, exclude_attributes: nil, filters: nil, group_by: nil, include_attributes: nil, limit: nil, rank_by: nil, top_k: nil, vector_encoding: nil, request_options: {})
+      # @overload query(namespace: nil, aggregate_by: nil, compute_attributes: nil, consistency: nil, distance_metric: nil, exclude_attributes: nil, filters: nil, group_by: nil, include_attributes: nil, limit: nil, offset: nil, rank_by: nil, top_k: nil, vector_encoding: nil, request_options: {})
       #
       # @param namespace [String] Path param: The name of the namespace.
       #
@@ -261,6 +265,8 @@ module Turbopuffer
       # @param include_attributes [Boolean, Array<String>] Body param: Whether to include attributes in the response.
       #
       # @param limit [Integer, Turbopuffer::Models::Limit] Body param: Limits the documents returned by a query.
+      #
+      # @param offset [Integer] Body param: Number of documents to skip before returning results. Supported only
       #
       # @param rank_by [Object] Body param: How to rank the documents in the namespace.
       #

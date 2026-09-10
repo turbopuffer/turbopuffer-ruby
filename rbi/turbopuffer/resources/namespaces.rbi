@@ -80,6 +80,7 @@ module Turbopuffer
           group_by: T::Array[T.anything],
           include_attributes: Turbopuffer::IncludeAttributes::Variants,
           limit: T.any(Integer, Turbopuffer::Limit::OrHash),
+          offset: Integer,
           rank_by: T.anything,
           top_k: Integer,
           vector_encoding: Turbopuffer::VectorEncoding::OrSymbol,
@@ -113,6 +114,9 @@ module Turbopuffer
         include_attributes: nil,
         # Body param: Limits the documents returned by a query.
         limit: nil,
+        # Body param: Number of documents to skip before returning results. Supported only
+        # in v2 queries with an explicit `rank_by` and `top_k` or `limit`.
+        offset: nil,
         # Body param: How to rank the documents in the namespace.
         rank_by: nil,
         # Body param: The number of results to return.
@@ -164,6 +168,7 @@ module Turbopuffer
               Integer,
               Turbopuffer::NamespaceMultiQueryParams::Limit::Total::OrHash
             ),
+          offset: Integer,
           rerank_by: T.anything,
           vector_encoding: Turbopuffer::VectorEncoding::OrSymbol,
           request_options: Turbopuffer::RequestOptions::OrHash
@@ -178,6 +183,9 @@ module Turbopuffer
         consistency: nil,
         # Body param: Limits the total number of reranked documents returned.
         limit: nil,
+        # Body param: Number of reranked documents to skip before returning results.
+        # Requires `rerank_by` and `limit`.
+        offset: nil,
         # Body param: How to combine the rows returned by each sub-query into a single
         # ranked list.
         rerank_by: nil,
@@ -200,6 +208,7 @@ module Turbopuffer
           group_by: T::Array[T.anything],
           include_attributes: Turbopuffer::IncludeAttributes::Variants,
           limit: T.any(Integer, Turbopuffer::Limit::OrHash),
+          offset: Integer,
           rank_by: T.anything,
           top_k: Integer,
           vector_encoding: Turbopuffer::VectorEncoding::OrSymbol,
@@ -233,6 +242,9 @@ module Turbopuffer
         include_attributes: nil,
         # Body param: Limits the documents returned by a query.
         limit: nil,
+        # Body param: Number of documents to skip before returning results. Supported only
+        # in v2 queries with an explicit `rank_by` and `top_k` or `limit`.
+        offset: nil,
         # Body param: How to rank the documents in the namespace.
         rank_by: nil,
         # Body param: The number of results to return.
