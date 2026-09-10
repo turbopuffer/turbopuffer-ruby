@@ -32,6 +32,7 @@ module Turbopuffer
         ?group_by: ::Array[top],
         ?include_attributes: Turbopuffer::Models::include_attributes,
         ?limit: Turbopuffer::Models::NamespaceExplainQueryParams::limit,
+        ?offset: Integer,
         ?rank_by: top,
         ?top_k: Integer,
         ?vector_encoding: Turbopuffer::Models::vector_encoding,
@@ -53,6 +54,7 @@ module Turbopuffer
         ?namespace: String,
         ?consistency: Turbopuffer::NamespaceMultiQueryParams::Consistency,
         ?limit: Turbopuffer::Models::NamespaceMultiQueryParams::limit,
+        ?offset: Integer,
         ?rerank_by: top,
         ?vector_encoding: Turbopuffer::Models::vector_encoding,
         ?request_options: Turbopuffer::request_opts
@@ -69,6 +71,7 @@ module Turbopuffer
         ?group_by: ::Array[top],
         ?include_attributes: Turbopuffer::Models::include_attributes,
         ?limit: Turbopuffer::Models::NamespaceQueryParams::limit,
+        ?offset: Integer,
         ?rank_by: top,
         ?top_k: Integer,
         ?vector_encoding: Turbopuffer::Models::vector_encoding,

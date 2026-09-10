@@ -30,6 +30,13 @@ module Turbopuffer
       #   @return [Integer, Turbopuffer::Models::NamespaceMultiQueryParams::Limit::Total, nil]
       optional :limit, union: -> { Turbopuffer::NamespaceMultiQueryParams::Limit }
 
+      # @!attribute offset
+      #   Number of reranked documents to skip before returning results. Requires
+      #   `rerank_by` and `limit`.
+      #
+      #   @return [Integer, nil]
+      optional :offset, Integer
+
       # @!attribute rerank_by
       #   How to combine the rows returned by each sub-query into a single ranked list.
       #
@@ -42,7 +49,10 @@ module Turbopuffer
       #   @return [Symbol, Turbopuffer::Models::VectorEncoding, nil]
       optional :vector_encoding, enum: -> { Turbopuffer::VectorEncoding }
 
-      # @!method initialize(queries:, namespace: nil, consistency: nil, limit: nil, rerank_by: nil, vector_encoding: nil, request_options: {})
+      # @!method initialize(queries:, namespace: nil, consistency: nil, limit: nil, offset: nil, rerank_by: nil, vector_encoding: nil, request_options: {})
+      #   Some parameter documentations has been truncated, see
+      #   {Turbopuffer::Models::NamespaceMultiQueryParams} for more details.
+      #
       #   @param queries [Array<Turbopuffer::Models::NamespaceMultiQueryParams::Query>]
       #
       #   @param namespace [String]
@@ -50,6 +60,9 @@ module Turbopuffer
       #   @param consistency [Turbopuffer::Models::NamespaceMultiQueryParams::Consistency] The consistency level for a query.
       #
       #   @param limit [Integer, Turbopuffer::Models::NamespaceMultiQueryParams::Limit::Total] Limits the total number of reranked documents returned.
+      #
+      #   @param offset [Integer] Number of reranked documents to skip before returning results. Requires
+      #   `rerank\_
       #
       #   @param rerank_by [Object] How to combine the rows returned by each sub-query into a single ranked list.
       #
@@ -112,6 +125,13 @@ module Turbopuffer
         #   @return [Integer, Turbopuffer::Models::Limit, nil]
         optional :limit, union: -> { Turbopuffer::NamespaceMultiQueryParams::Query::Limit }
 
+        # @!attribute offset
+        #   Number of documents to skip before returning results. Supported only in v2
+        #   queries with an explicit `rank_by` and `top_k` or `limit`.
+        #
+        #   @return [Integer, nil]
+        optional :offset, Integer
+
         # @!attribute rank_by
         #   How to rank the documents in the namespace.
         #
@@ -124,7 +144,7 @@ module Turbopuffer
         #   @return [Integer, nil]
         optional :top_k, Integer
 
-        # @!method initialize(aggregate_by: nil, compute_attributes: nil, distance_metric: nil, exclude_attributes: nil, filters: nil, group_by: nil, include_attributes: nil, limit: nil, rank_by: nil, top_k: nil)
+        # @!method initialize(aggregate_by: nil, compute_attributes: nil, distance_metric: nil, exclude_attributes: nil, filters: nil, group_by: nil, include_attributes: nil, limit: nil, offset: nil, rank_by: nil, top_k: nil)
         #   Some parameter documentations has been truncated, see
         #   {Turbopuffer::Models::NamespaceMultiQueryParams::Query} for more details.
         #
@@ -145,6 +165,8 @@ module Turbopuffer
         #   @param include_attributes [Boolean, Array<String>] Whether to include attributes in the response.
         #
         #   @param limit [Integer, Turbopuffer::Models::Limit] Limits the documents returned by a query.
+        #
+        #   @param offset [Integer] Number of documents to skip before returning results. Supported only in v2 queri
         #
         #   @param rank_by [Object] How to rank the documents in the namespace.
         #
