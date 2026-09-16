@@ -208,21 +208,10 @@ module Turbopuffer
         end
       end
 
-      type limit =
-        Integer | Turbopuffer::NamespaceMultiQueryParams::Limit::Total
+      type limit = Integer | Turbopuffer::RerankLimit
 
       module Limit
         extend Turbopuffer::Internal::Type::Union
-
-        type total = { total: Integer }
-
-        class Total < Turbopuffer::Internal::Type::BaseModel
-          attr_accessor total: Integer
-
-          def initialize: (total: Integer) -> void
-
-          def to_hash: -> { total: Integer }
-        end
 
         def self?.variants: -> ::Array[Turbopuffer::Models::NamespaceMultiQueryParams::limit]
       end

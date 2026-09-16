@@ -27,7 +27,7 @@ module Turbopuffer
       # @!attribute limit
       #   Limits the total number of reranked documents returned.
       #
-      #   @return [Integer, Turbopuffer::Models::NamespaceMultiQueryParams::Limit::Total, nil]
+      #   @return [Integer, Turbopuffer::Models::RerankLimit, nil]
       optional :limit, union: -> { Turbopuffer::NamespaceMultiQueryParams::Limit }
 
       # @!attribute offset
@@ -59,7 +59,7 @@ module Turbopuffer
       #
       #   @param consistency [Turbopuffer::Models::NamespaceMultiQueryParams::Consistency] The consistency level for a query.
       #
-      #   @param limit [Integer, Turbopuffer::Models::NamespaceMultiQueryParams::Limit::Total] Limits the total number of reranked documents returned.
+      #   @param limit [Integer, Turbopuffer::Models::RerankLimit] Limits the total number of reranked documents returned.
       #
       #   @param offset [Integer] Number of reranked documents to skip before returning results. Requires
       #   `rerank\_
@@ -223,20 +223,11 @@ module Turbopuffer
 
         variant Integer
 
-        variant -> { Turbopuffer::NamespaceMultiQueryParams::Limit::Total }
-
-        class Total < Turbopuffer::Internal::Type::BaseModel
-          # @!attribute total
-          #
-          #   @return [Integer]
-          required :total, Integer
-
-          # @!method initialize(total:)
-          #   @param total [Integer]
-        end
+        # Limits the total number of reranked documents returned.
+        variant -> { Turbopuffer::RerankLimit }
 
         # @!method self.variants
-        #   @return [Array(Integer, Turbopuffer::Models::NamespaceMultiQueryParams::Limit::Total)]
+        #   @return [Array(Integer, Turbopuffer::Models::RerankLimit)]
       end
     end
   end

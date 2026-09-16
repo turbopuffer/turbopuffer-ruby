@@ -38,23 +38,11 @@ module Turbopuffer
       attr_writer :consistency
 
       # Limits the total number of reranked documents returned.
-      sig do
-        returns(
-          T.nilable(
-            T.any(Integer, Turbopuffer::NamespaceMultiQueryParams::Limit::Total)
-          )
-        )
-      end
+      sig { returns(T.nilable(T.any(Integer, Turbopuffer::RerankLimit))) }
       attr_reader :limit
 
       sig do
-        params(
-          limit:
-            T.any(
-              Integer,
-              Turbopuffer::NamespaceMultiQueryParams::Limit::Total::OrHash
-            )
-        ).void
+        params(limit: T.any(Integer, Turbopuffer::RerankLimit::OrHash)).void
       end
       attr_writer :limit
 
@@ -89,11 +77,7 @@ module Turbopuffer
           namespace: String,
           consistency:
             Turbopuffer::NamespaceMultiQueryParams::Consistency::OrHash,
-          limit:
-            T.any(
-              Integer,
-              Turbopuffer::NamespaceMultiQueryParams::Limit::Total::OrHash
-            ),
+          limit: T.any(Integer, Turbopuffer::RerankLimit::OrHash),
           offset: Integer,
           rerank_by: T.anything,
           vector_encoding: Turbopuffer::VectorEncoding::OrSymbol,
@@ -124,11 +108,7 @@ module Turbopuffer
             namespace: String,
             queries: T::Array[Turbopuffer::NamespaceMultiQueryParams::Query],
             consistency: Turbopuffer::NamespaceMultiQueryParams::Consistency,
-            limit:
-              T.any(
-                Integer,
-                Turbopuffer::NamespaceMultiQueryParams::Limit::Total
-              ),
+            limit: T.any(Integer, Turbopuffer::RerankLimit),
             offset: Integer,
             rerank_by: T.anything,
             vector_encoding: Turbopuffer::VectorEncoding::OrSymbol,
@@ -419,31 +399,7 @@ module Turbopuffer
       module Limit
         extend Turbopuffer::Internal::Type::Union
 
-        Variants =
-          T.type_alias do
-            T.any(Integer, Turbopuffer::NamespaceMultiQueryParams::Limit::Total)
-          end
-
-        class Total < Turbopuffer::Internal::Type::BaseModel
-          OrHash =
-            T.type_alias do
-              T.any(
-                Turbopuffer::NamespaceMultiQueryParams::Limit::Total,
-                Turbopuffer::Internal::AnyHash
-              )
-            end
-
-          sig { returns(Integer) }
-          attr_accessor :total
-
-          sig { params(total: Integer).returns(T.attached_class) }
-          def self.new(total:)
-          end
-
-          sig { override.returns({ total: Integer }) }
-          def to_hash
-          end
-        end
+        Variants = T.type_alias { T.any(Integer, Turbopuffer::RerankLimit) }
 
         sig do
           override.returns(

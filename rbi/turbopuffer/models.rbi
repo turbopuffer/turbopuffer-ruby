@@ -103,6 +103,8 @@ module Turbopuffer
 
   QueryPerformance = Turbopuffer::Models::QueryPerformance
 
+  RerankLimit = Turbopuffer::Models::RerankLimit
+
   Row = Turbopuffer::Models::Row
 
   RrfParams = Turbopuffer::Models::RrfParams

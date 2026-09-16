@@ -93,6 +93,8 @@ module Turbopuffer
 
   class QueryPerformance = Turbopuffer::Models::QueryPerformance
 
+  class RerankLimit = Turbopuffer::Models::RerankLimit
+
   class Row = Turbopuffer::Models::Row
 
   class RrfParams = Turbopuffer::Models::RrfParams
