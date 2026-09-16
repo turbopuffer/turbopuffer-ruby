@@ -163,11 +163,7 @@ module Turbopuffer
           namespace: String,
           consistency:
             Turbopuffer::NamespaceMultiQueryParams::Consistency::OrHash,
-          limit:
-            T.any(
-              Integer,
-              Turbopuffer::NamespaceMultiQueryParams::Limit::Total::OrHash
-            ),
+          limit: T.any(Integer, Turbopuffer::RerankLimit::OrHash),
           offset: Integer,
           rerank_by: T.anything,
           vector_encoding: Turbopuffer::VectorEncoding::OrSymbol,
