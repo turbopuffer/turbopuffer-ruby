@@ -1,0 +1,13 @@
+module Turbopuffer
+  module Models
+    type rerank_limit = { total: Integer }
+
+    class RerankLimit < Turbopuffer::Internal::Type::BaseModel
+      attr_accessor total: Integer
+
+      def initialize: (total: Integer) -> void
+
+      def to_hash: -> { total: Integer }
+    end
+  end
+end

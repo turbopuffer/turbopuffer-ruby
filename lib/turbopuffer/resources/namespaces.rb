@@ -211,7 +211,7 @@ module Turbopuffer
       #
       # @param consistency [Turbopuffer::Models::NamespaceMultiQueryParams::Consistency] Body param: The consistency level for a query.
       #
-      # @param limit [Integer, Turbopuffer::Models::NamespaceMultiQueryParams::Limit::Total] Body param: Limits the total number of reranked documents returned.
+      # @param limit [Integer, Turbopuffer::Models::RerankLimit] Body param: Limits the total number of reranked documents returned.
       #
       # @param offset [Integer] Body param: Number of reranked documents to skip before returning results. Requi
       #
