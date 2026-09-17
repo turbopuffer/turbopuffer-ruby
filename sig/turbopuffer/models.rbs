@@ -23,6 +23,10 @@ module Turbopuffer
 
   class ContainsAnyTokenFilterParams = Turbopuffer::Models::ContainsAnyTokenFilterParams
 
+  module CopyFromNamespaceOperation = Turbopuffer::Models::CopyFromNamespaceOperation
+
+  module CopyFromNamespaceOperationResult = Turbopuffer::Models::CopyFromNamespaceOperationResult
+
   module CopyFromNamespaceParams = Turbopuffer::Models::CopyFromNamespaceParams
 
   class DecayParams = Turbopuffer::Models::DecayParams
@@ -73,11 +77,15 @@ module Turbopuffer
 
   class NamespaceMultiQueryParams = Turbopuffer::Models::NamespaceMultiQueryParams
 
+  class NamespacePollCopyFromParams = Turbopuffer::Models::NamespacePollCopyFromParams
+
   class NamespaceQueryParams = Turbopuffer::Models::NamespaceQueryParams
 
   class NamespaceRecallParams = Turbopuffer::Models::NamespaceRecallParams
 
   class NamespaceSchemaParams = Turbopuffer::Models::NamespaceSchemaParams
+
+  class NamespaceStartCopyFromParams = Turbopuffer::Models::NamespaceStartCopyFromParams
 
   class NamespaceSummary = Turbopuffer::Models::NamespaceSummary
 
@@ -86,6 +94,8 @@ module Turbopuffer
   class NamespaceUpdateSchemaParams = Turbopuffer::Models::NamespaceUpdateSchemaParams
 
   class NamespaceWriteParams = Turbopuffer::Models::NamespaceWriteParams
+
+  class OperationError = Turbopuffer::Models::OperationError
 
   class PinningConfig = Turbopuffer::Models::PinningConfig
 
@@ -114,4 +124,6 @@ module Turbopuffer
   class WriteBilling = Turbopuffer::Models::WriteBilling
 
   class WritePerformance = Turbopuffer::Models::WritePerformance
+
+  class WriteResult = Turbopuffer::Models::WriteResult
 end
