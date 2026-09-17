@@ -191,6 +191,23 @@ module Turbopuffer
       )
       end
 
+      # Retrieve the current status of a copy operation.
+      sig do
+        params(
+          token: String,
+          namespace: String,
+          request_options: Turbopuffer::RequestOptions::OrHash
+        ).returns(Turbopuffer::CopyFromNamespaceOperation::Variants)
+      end
+      def poll_copy_from(
+        # The operation token obtained when starting the copy.
+        token,
+        # The name of the namespace.
+        namespace: nil,
+        request_options: {}
+      )
+      end
+
       # Query, filter, full-text search and vector search documents.
       sig do
         params(
@@ -292,6 +309,40 @@ module Turbopuffer
       def schema(
         # The name of the namespace.
         namespace: nil,
+        request_options: {}
+      )
+      end
+
+      # Start copying all documents from another namespace into this one. Returns an
+      # operation token without waiting for the copy to finish. Use the token to poll
+      # for progress and the result.
+      sig do
+        params(
+          source_namespace: String,
+          namespace: String,
+          dest_encryption:
+            T.any(
+              Turbopuffer::Encryption::CustomerManaged::OrHash,
+              Turbopuffer::Encryption::Default::OrHash
+            ),
+          source_api_key: String,
+          source_region: String,
+          request_options: Turbopuffer::RequestOptions::OrHash
+        ).returns(Turbopuffer::Models::NamespaceStartCopyFromResponse)
+      end
+      def start_copy_from(
+        # Body param: The namespace to copy documents from.
+        source_namespace:,
+        # Path param: The name of the namespace.
+        namespace: nil,
+        # Body param: (Optional) The encryption configuration for the destination
+        # namespace.
+        dest_encryption: nil,
+        # Body param: (Optional) An API key for the organization containing the source
+        # namespace
+        source_api_key: nil,
+        # Body param: (Optional) The region of the source namespace.
+        source_region: nil,
         request_options: {}
       )
       end
