@@ -1,0 +1,33 @@
+module Turbopuffer
+  module Models
+    type copy_from_namespace_operation_result =
+      Turbopuffer::CopyFromNamespaceOperationResult::Success
+      | Turbopuffer::CopyFromNamespaceOperationResult::Error
+
+    module CopyFromNamespaceOperationResult
+      extend Turbopuffer::Internal::Type::Union
+
+      type success = { success: Turbopuffer::WriteResult }
+
+      class Success < Turbopuffer::Internal::Type::BaseModel
+        attr_accessor success: Turbopuffer::WriteResult
+
+        def initialize: (success: Turbopuffer::WriteResult) -> void
+
+        def to_hash: -> { success: Turbopuffer::WriteResult }
+      end
+
+      type error = { error: Turbopuffer::OperationError }
+
+      class Error < Turbopuffer::Internal::Type::BaseModel
+        attr_accessor error: Turbopuffer::OperationError
+
+        def initialize: (error: Turbopuffer::OperationError) -> void
+
+        def to_hash: -> { error: Turbopuffer::OperationError }
+      end
+
+      def self?.variants: -> ::Array[Turbopuffer::Models::copy_from_namespace_operation_result]
+    end
+  end
+end

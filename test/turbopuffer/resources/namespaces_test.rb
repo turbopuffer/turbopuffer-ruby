@@ -151,6 +151,30 @@ class Turbopuffer::Test::Resources::NamespacesTest < Turbopuffer::Test::Resource
     end
   end
 
+  def test_poll_copy_from_required_params
+    skip("Mock server tests are disabled")
+
+    response = @turbopuffer.namespaces.poll_copy_from("token", namespace: "namespace")
+
+    assert_pattern do
+      response => Turbopuffer::CopyFromNamespaceOperation
+    end
+
+    assert_pattern do
+      case response
+      in Turbopuffer::CopyFromNamespaceOperation::Running
+      in Turbopuffer::CopyFromNamespaceOperation::Finished
+      end
+    end
+
+    assert_pattern do
+      case response
+      in {status: :running, start_time: Time, progress: String | nil}
+      in {status: :finished, finish_time: Time, result: Turbopuffer::CopyFromNamespaceOperationResult, start_time: Time}
+      end
+    end
+  end
+
   def test_query_required_params
     skip("Mock server tests are disabled")
 
@@ -197,6 +221,23 @@ class Turbopuffer::Test::Resources::NamespacesTest < Turbopuffer::Test::Resource
 
     assert_pattern do
       response => ^(Turbopuffer::Internal::Type::HashOf[Turbopuffer::AttributeSchemaConfig])
+    end
+  end
+
+  def test_start_copy_from_required_params
+    skip("Mock server tests are disabled")
+
+    response =
+      @turbopuffer.namespaces.start_copy_from(namespace: "namespace", source_namespace: "source_namespace")
+
+    assert_pattern do
+      response => Turbopuffer::Models::NamespaceStartCopyFromResponse
+    end
+
+    assert_pattern do
+      response => {
+        token: String
+      }
     end
   end
 

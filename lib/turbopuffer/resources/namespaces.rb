@@ -239,6 +239,33 @@ module Turbopuffer
         )
       end
 
+      # Retrieve the current status of a copy operation.
+      #
+      # @overload poll_copy_from(token, namespace: nil, request_options: {})
+      #
+      # @param token [String] The operation token obtained when starting the copy.
+      #
+      # @param namespace [String] The name of the namespace.
+      #
+      # @param request_options [Turbopuffer::RequestOptions, Hash{Symbol=>Object}, nil]
+      #
+      # @return [Turbopuffer::Models::CopyFromNamespaceOperation::Running, Turbopuffer::Models::CopyFromNamespaceOperation::Finished]
+      #
+      # @see Turbopuffer::Models::NamespacePollCopyFromParams
+      def poll_copy_from(token, params = {})
+        parsed, options = Turbopuffer::NamespacePollCopyFromParams.dump_request(params)
+        namespace =
+          parsed.delete(:namespace) do
+            @client.default_namespace
+          end
+        @client.request(
+          method: :get,
+          path: ["v1/namespaces/%1$s/operations/%2$s?stainless_overload=pollCopyFrom", namespace, token],
+          model: Turbopuffer::CopyFromNamespaceOperation,
+          options: options
+        )
+      end
+
       # Some parameter documentations has been truncated, see
       # {Turbopuffer::Models::NamespaceQueryParams} for more details.
       #
@@ -354,6 +381,45 @@ module Turbopuffer
           method: :get,
           path: ["v1/namespaces/%1$s/schema", namespace],
           model: Turbopuffer::Internal::Type::HashOf[Turbopuffer::AttributeSchemaConfig],
+          options: options
+        )
+      end
+
+      # Some parameter documentations has been truncated, see
+      # {Turbopuffer::Models::NamespaceStartCopyFromParams} for more details.
+      #
+      # Start copying all documents from another namespace into this one. Returns an
+      # operation token without waiting for the copy to finish. Use the token to poll
+      # for progress and the result.
+      #
+      # @overload start_copy_from(source_namespace:, namespace: nil, dest_encryption: nil, source_api_key: nil, source_region: nil, request_options: {})
+      #
+      # @param source_namespace [String] Body param: The namespace to copy documents from.
+      #
+      # @param namespace [String] Path param: The name of the namespace.
+      #
+      # @param dest_encryption [Turbopuffer::Models::Encryption::CustomerManaged, Turbopuffer::Models::Encryption::Default] Body param: (Optional) The encryption configuration for the destination namespac
+      #
+      # @param source_api_key [String] Body param: (Optional) An API key for the organization containing the source nam
+      #
+      # @param source_region [String] Body param: (Optional) The region of the source namespace.
+      #
+      # @param request_options [Turbopuffer::RequestOptions, Hash{Symbol=>Object}, nil]
+      #
+      # @return [Turbopuffer::Models::NamespaceStartCopyFromResponse]
+      #
+      # @see Turbopuffer::Models::NamespaceStartCopyFromParams
+      def start_copy_from(params)
+        parsed, options = Turbopuffer::NamespaceStartCopyFromParams.dump_request(params)
+        namespace =
+          parsed.delete(:namespace) do
+            @client.default_namespace
+          end
+        @client.request(
+          method: :post,
+          path: ["v2/namespaces/%1$s/async?stainless_overload=startCopyFrom", namespace],
+          body: parsed,
+          model: Turbopuffer::Models::NamespaceStartCopyFromResponse,
           options: options
         )
       end
