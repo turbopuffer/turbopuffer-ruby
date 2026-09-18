@@ -1,5 +1,24 @@
 # Changelog
 
+## 2.5.0 (2026-09-18)
+
+Full Changelog: [v2.4.0...v2.5.0](https://github.com/turbopuffer/turbopuffer-ruby/compare/v2.4.0...v2.5.0)
+
+### Features
+
+* Add `read_only` namespace field ([8dfb1f7](https://github.com/turbopuffer/turbopuffer-ruby/commit/8dfb1f77bf0f2ad5eb1c238a0c4b3df49549b9fd))
+* **api:** Merge remote-tracking branch 'origin/preview/benesch/named-rerank-limit-schema' ([917c0b7](https://github.com/turbopuffer/turbopuffer-ruby/commit/917c0b700820ef1d68eb92c485d02e1013fe4479))
+* Apply limit on rerank_by when provided ([fbd70cb](https://github.com/turbopuffer/turbopuffer-ruby/commit/fbd70cbaeb31bae86f197975d2bdd40669620cf1))
+* engine,openapi: async copy_from_namespace endpoints ([5af8916](https://github.com/turbopuffer/turbopuffer-ruby/commit/5af89166d027304ae1869e691bf79cade774c04a))
+* spec: no-op change to Stainless spec ([4e0d0cc](https://github.com/turbopuffer/turbopuffer-ruby/commit/4e0d0ccb819df54524e8b5c3fd3efea8105ddae7))
+* tpuf-engine: Adding pagination through `offset` ([1de87c9](https://github.com/turbopuffer/turbopuffer-ruby/commit/1de87c959126a8737a724c5cd594bd844cc43bf0))
+* tpuf-engine: expose billed_replicas in pinning metadata ([3f414fc](https://github.com/turbopuffer/turbopuffer-ruby/commit/3f414fcf1df33d8f41615755c5474f8fcd6713b2))
+
+
+### Bug Fixes
+
+* wrap start copy request bodies ([#70](https://github.com/turbopuffer/turbopuffer-ruby/issues/70)) ([4a44435](https://github.com/turbopuffer/turbopuffer-ruby/commit/4a444351b3a1dc68f0dcba86fe15dcac03d3ae88))
+
 ## 2.4.0 (2026-07-30)
 
 Full Changelog: [v2.3.0...v2.4.0](https://github.com/turbopuffer/turbopuffer-ruby/compare/v2.3.0...v2.4.0)
