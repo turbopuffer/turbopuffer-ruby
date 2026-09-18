@@ -418,7 +418,7 @@ module Turbopuffer
         @client.request(
           method: :post,
           path: ["v2/namespaces/%1$s/async?stainless_overload=startCopyFrom", namespace],
-          body: parsed,
+          body: {copy_from_namespace: parsed},
           model: Turbopuffer::Models::NamespaceStartCopyFromResponse,
           options: options
         )
