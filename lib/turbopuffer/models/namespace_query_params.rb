@@ -72,6 +72,13 @@ module Turbopuffer
       #   @return [Integer, Turbopuffer::Models::Limit, nil]
       optional :limit, union: -> { Turbopuffer::NamespaceQueryParams::Limit }
 
+      # @!attribute offset
+      #   Number of documents to skip before returning results. Supported only in v2
+      #   queries with an explicit `rank_by` and `top_k` or `limit`.
+      #
+      #   @return [Integer, nil]
+      optional :offset, Integer
+
       # @!attribute rank_by
       #   How to rank the documents in the namespace.
       #
@@ -90,7 +97,7 @@ module Turbopuffer
       #   @return [Symbol, Turbopuffer::Models::VectorEncoding, nil]
       optional :vector_encoding, enum: -> { Turbopuffer::VectorEncoding }
 
-      # @!method initialize(namespace: nil, aggregate_by: nil, compute_attributes: nil, consistency: nil, distance_metric: nil, exclude_attributes: nil, filters: nil, group_by: nil, include_attributes: nil, limit: nil, rank_by: nil, top_k: nil, vector_encoding: nil, request_options: {})
+      # @!method initialize(namespace: nil, aggregate_by: nil, compute_attributes: nil, consistency: nil, distance_metric: nil, exclude_attributes: nil, filters: nil, group_by: nil, include_attributes: nil, limit: nil, offset: nil, rank_by: nil, top_k: nil, vector_encoding: nil, request_options: {})
       #   Some parameter documentations has been truncated, see
       #   {Turbopuffer::Models::NamespaceQueryParams} for more details.
       #
@@ -113,6 +120,8 @@ module Turbopuffer
       #   @param include_attributes [Boolean, Array<String>] Whether to include attributes in the response.
       #
       #   @param limit [Integer, Turbopuffer::Models::Limit] Limits the documents returned by a query.
+      #
+      #   @param offset [Integer] Number of documents to skip before returning results. Supported only in v2 queri
       #
       #   @param rank_by [Object] How to rank the documents in the namespace.
       #

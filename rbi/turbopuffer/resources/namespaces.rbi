@@ -80,6 +80,7 @@ module Turbopuffer
           group_by: T::Array[T.anything],
           include_attributes: Turbopuffer::IncludeAttributes::Variants,
           limit: T.any(Integer, Turbopuffer::Limit::OrHash),
+          offset: Integer,
           rank_by: T.anything,
           top_k: Integer,
           vector_encoding: Turbopuffer::VectorEncoding::OrSymbol,
@@ -113,6 +114,9 @@ module Turbopuffer
         include_attributes: nil,
         # Body param: Limits the documents returned by a query.
         limit: nil,
+        # Body param: Number of documents to skip before returning results. Supported only
+        # in v2 queries with an explicit `rank_by` and `top_k` or `limit`.
+        offset: nil,
         # Body param: How to rank the documents in the namespace.
         rank_by: nil,
         # Body param: The number of results to return.
@@ -159,6 +163,8 @@ module Turbopuffer
           namespace: String,
           consistency:
             Turbopuffer::NamespaceMultiQueryParams::Consistency::OrHash,
+          limit: T.any(Integer, Turbopuffer::RerankLimit::OrHash),
+          offset: Integer,
           rerank_by: T.anything,
           vector_encoding: Turbopuffer::VectorEncoding::OrSymbol,
           request_options: Turbopuffer::RequestOptions::OrHash
@@ -171,11 +177,33 @@ module Turbopuffer
         namespace: nil,
         # Body param: The consistency level for a query.
         consistency: nil,
+        # Body param: Limits the total number of reranked documents returned.
+        limit: nil,
+        # Body param: Number of reranked documents to skip before returning results.
+        # Requires `rerank_by` and `limit`.
+        offset: nil,
         # Body param: How to combine the rows returned by each sub-query into a single
         # ranked list.
         rerank_by: nil,
         # Body param: The encoding to use for vectors in the response.
         vector_encoding: nil,
+        request_options: {}
+      )
+      end
+
+      # Retrieve the current status of a copy operation.
+      sig do
+        params(
+          token: String,
+          namespace: String,
+          request_options: Turbopuffer::RequestOptions::OrHash
+        ).returns(Turbopuffer::CopyFromNamespaceOperation::Variants)
+      end
+      def poll_copy_from(
+        # The operation token obtained when starting the copy.
+        token,
+        # The name of the namespace.
+        namespace: nil,
         request_options: {}
       )
       end
@@ -193,6 +221,7 @@ module Turbopuffer
           group_by: T::Array[T.anything],
           include_attributes: Turbopuffer::IncludeAttributes::Variants,
           limit: T.any(Integer, Turbopuffer::Limit::OrHash),
+          offset: Integer,
           rank_by: T.anything,
           top_k: Integer,
           vector_encoding: Turbopuffer::VectorEncoding::OrSymbol,
@@ -226,6 +255,9 @@ module Turbopuffer
         include_attributes: nil,
         # Body param: Limits the documents returned by a query.
         limit: nil,
+        # Body param: Number of documents to skip before returning results. Supported only
+        # in v2 queries with an explicit `rank_by` and `top_k` or `limit`.
+        offset: nil,
         # Body param: How to rank the documents in the namespace.
         rank_by: nil,
         # Body param: The number of results to return.
@@ -281,12 +313,47 @@ module Turbopuffer
       )
       end
 
+      # Start copying all documents from another namespace into this one. Returns an
+      # operation token without waiting for the copy to finish. Use the token to poll
+      # for progress and the result.
+      sig do
+        params(
+          source_namespace: String,
+          namespace: String,
+          dest_encryption:
+            T.any(
+              Turbopuffer::Encryption::CustomerManaged::OrHash,
+              Turbopuffer::Encryption::Default::OrHash
+            ),
+          source_api_key: String,
+          source_region: String,
+          request_options: Turbopuffer::RequestOptions::OrHash
+        ).returns(Turbopuffer::Models::NamespaceStartCopyFromResponse)
+      end
+      def start_copy_from(
+        # Body param: The namespace to copy documents from.
+        source_namespace:,
+        # Path param: The name of the namespace.
+        namespace: nil,
+        # Body param: (Optional) The encryption configuration for the destination
+        # namespace.
+        dest_encryption: nil,
+        # Body param: (Optional) An API key for the organization containing the source
+        # namespace
+        source_api_key: nil,
+        # Body param: (Optional) The region of the source namespace.
+        source_region: nil,
+        request_options: {}
+      )
+      end
+
       # Update metadata configuration for a namespace.
       sig do
         params(
           namespace: String,
           pinning:
             T.nilable(T.any(T::Boolean, Turbopuffer::PinningConfig::OrHash)),
+          read_only: T::Boolean,
           request_options: Turbopuffer::RequestOptions::OrHash
         ).returns(Turbopuffer::NamespaceMetadata)
       end
@@ -300,6 +367,10 @@ module Turbopuffer
         # - `true`: enable pinning with default configuration
         # - Object: set pinning configuration
         pinning: nil,
+        # Body param: Set to `true` to reject document and schema writes, or `false` to
+        # allow them. Writes already in progress may still commit. Metadata updates remain
+        # available.
+        read_only: nil,
         request_options: {}
       )
       end

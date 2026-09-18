@@ -1,0 +1,30 @@
+module Turbopuffer
+  module Models
+    type namespace_poll_copy_from_params =
+      { namespace: String, token: String }
+      & Turbopuffer::Internal::Type::request_parameters
+
+    class NamespacePollCopyFromParams < Turbopuffer::Internal::Type::BaseModel
+      extend Turbopuffer::Internal::Type::RequestParameters::Converter
+      include Turbopuffer::Internal::Type::RequestParameters
+
+      attr_reader namespace: String?
+
+      def namespace=: (String) -> String
+
+      attr_accessor token: String
+
+      def initialize: (
+        token: String,
+        ?namespace: String,
+        ?request_options: Turbopuffer::request_opts
+      ) -> void
+
+      def to_hash: -> {
+        namespace: String,
+        token: String,
+        request_options: Turbopuffer::RequestOptions
+      }
+    end
+  end
+end

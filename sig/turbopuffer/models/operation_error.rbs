@@ -1,0 +1,34 @@
+module Turbopuffer
+  module Models
+    type operation_error =
+      { detail: Turbopuffer::OperationError::Detail, status_code: Integer }
+
+    class OperationError < Turbopuffer::Internal::Type::BaseModel
+      attr_accessor detail: Turbopuffer::OperationError::Detail
+
+      attr_accessor status_code: Integer
+
+      def initialize: (
+        detail: Turbopuffer::OperationError::Detail,
+        status_code: Integer
+      ) -> void
+
+      def to_hash: -> {
+        detail: Turbopuffer::OperationError::Detail,
+        status_code: Integer
+      }
+
+      type detail = { error: String, status: :error }
+
+      class Detail < Turbopuffer::Internal::Type::BaseModel
+        attr_accessor error: String
+
+        attr_accessor status: :error
+
+        def initialize: (error: String, ?status: :error) -> void
+
+        def to_hash: -> { error: String, status: :error }
+      end
+    end
+  end
+end

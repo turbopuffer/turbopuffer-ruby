@@ -37,6 +37,23 @@ module Turbopuffer
       end
       attr_writer :consistency
 
+      # Limits the total number of reranked documents returned.
+      sig { returns(T.nilable(T.any(Integer, Turbopuffer::RerankLimit))) }
+      attr_reader :limit
+
+      sig do
+        params(limit: T.any(Integer, Turbopuffer::RerankLimit::OrHash)).void
+      end
+      attr_writer :limit
+
+      # Number of reranked documents to skip before returning results. Requires
+      # `rerank_by` and `limit`.
+      sig { returns(T.nilable(Integer)) }
+      attr_reader :offset
+
+      sig { params(offset: Integer).void }
+      attr_writer :offset
+
       # How to combine the rows returned by each sub-query into a single ranked list.
       sig { returns(T.nilable(T.anything)) }
       attr_reader :rerank_by
@@ -60,6 +77,8 @@ module Turbopuffer
           namespace: String,
           consistency:
             Turbopuffer::NamespaceMultiQueryParams::Consistency::OrHash,
+          limit: T.any(Integer, Turbopuffer::RerankLimit::OrHash),
+          offset: Integer,
           rerank_by: T.anything,
           vector_encoding: Turbopuffer::VectorEncoding::OrSymbol,
           request_options: Turbopuffer::RequestOptions::OrHash
@@ -70,6 +89,11 @@ module Turbopuffer
         namespace: nil,
         # The consistency level for a query.
         consistency: nil,
+        # Limits the total number of reranked documents returned.
+        limit: nil,
+        # Number of reranked documents to skip before returning results. Requires
+        # `rerank_by` and `limit`.
+        offset: nil,
         # How to combine the rows returned by each sub-query into a single ranked list.
         rerank_by: nil,
         # The encoding to use for vectors in the response.
@@ -84,6 +108,8 @@ module Turbopuffer
             namespace: String,
             queries: T::Array[Turbopuffer::NamespaceMultiQueryParams::Query],
             consistency: Turbopuffer::NamespaceMultiQueryParams::Consistency,
+            limit: T.any(Integer, Turbopuffer::RerankLimit),
+            offset: Integer,
             rerank_by: T.anything,
             vector_encoding: Turbopuffer::VectorEncoding::OrSymbol,
             request_options: Turbopuffer::RequestOptions
@@ -170,6 +196,14 @@ module Turbopuffer
         sig { params(limit: T.any(Integer, Turbopuffer::Limit::OrHash)).void }
         attr_writer :limit
 
+        # Number of documents to skip before returning results. Supported only in v2
+        # queries with an explicit `rank_by` and `top_k` or `limit`.
+        sig { returns(T.nilable(Integer)) }
+        attr_reader :offset
+
+        sig { params(offset: Integer).void }
+        attr_writer :offset
+
         # How to rank the documents in the namespace.
         sig { returns(T.nilable(T.anything)) }
         attr_reader :rank_by
@@ -195,6 +229,7 @@ module Turbopuffer
             group_by: T::Array[T.anything],
             include_attributes: Turbopuffer::IncludeAttributes::Variants,
             limit: T.any(Integer, Turbopuffer::Limit::OrHash),
+            offset: Integer,
             rank_by: T.anything,
             top_k: Integer
           ).returns(T.attached_class)
@@ -222,6 +257,9 @@ module Turbopuffer
           include_attributes: nil,
           # Limits the documents returned by a query.
           limit: nil,
+          # Number of documents to skip before returning results. Supported only in v2
+          # queries with an explicit `rank_by` and `top_k` or `limit`.
+          offset: nil,
           # How to rank the documents in the namespace.
           rank_by: nil,
           # The number of results to return.
@@ -240,6 +278,7 @@ module Turbopuffer
               group_by: T::Array[T.anything],
               include_attributes: Turbopuffer::IncludeAttributes::Variants,
               limit: T.any(Integer, Turbopuffer::Limit),
+              offset: Integer,
               rank_by: T.anything,
               top_k: Integer
             }
@@ -353,6 +392,21 @@ module Turbopuffer
           end
           def self.values
           end
+        end
+      end
+
+      # Limits the total number of reranked documents returned.
+      module Limit
+        extend Turbopuffer::Internal::Type::Union
+
+        Variants = T.type_alias { T.any(Integer, Turbopuffer::RerankLimit) }
+
+        sig do
+          override.returns(
+            T::Array[Turbopuffer::NamespaceMultiQueryParams::Limit::Variants]
+          )
+        end
+        def self.variants
         end
       end
     end

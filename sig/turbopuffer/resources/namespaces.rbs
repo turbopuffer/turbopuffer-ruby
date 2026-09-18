@@ -32,6 +32,7 @@ module Turbopuffer
         ?group_by: ::Array[top],
         ?include_attributes: Turbopuffer::Models::include_attributes,
         ?limit: Turbopuffer::Models::NamespaceExplainQueryParams::limit,
+        ?offset: Integer,
         ?rank_by: top,
         ?top_k: Integer,
         ?vector_encoding: Turbopuffer::Models::vector_encoding,
@@ -52,10 +53,18 @@ module Turbopuffer
         queries: ::Array[Turbopuffer::NamespaceMultiQueryParams::Query],
         ?namespace: String,
         ?consistency: Turbopuffer::NamespaceMultiQueryParams::Consistency,
+        ?limit: Turbopuffer::Models::NamespaceMultiQueryParams::limit,
+        ?offset: Integer,
         ?rerank_by: top,
         ?vector_encoding: Turbopuffer::Models::vector_encoding,
         ?request_options: Turbopuffer::request_opts
       ) -> Turbopuffer::Models::NamespaceMultiQueryResponse
+
+      def poll_copy_from: (
+        String token,
+        ?namespace: String,
+        ?request_options: Turbopuffer::request_opts
+      ) -> Turbopuffer::Models::copy_from_namespace_operation
 
       def query: (
         ?namespace: String,
@@ -68,6 +77,7 @@ module Turbopuffer
         ?group_by: ::Array[top],
         ?include_attributes: Turbopuffer::Models::include_attributes,
         ?limit: Turbopuffer::Models::NamespaceQueryParams::limit,
+        ?offset: Integer,
         ?rank_by: top,
         ?top_k: Integer,
         ?vector_encoding: Turbopuffer::Models::vector_encoding,
@@ -89,9 +99,19 @@ module Turbopuffer
         ?request_options: Turbopuffer::request_opts
       ) -> Turbopuffer::Models::namespace_schema_response
 
+      def start_copy_from: (
+        source_namespace: String,
+        ?namespace: String,
+        ?dest_encryption: Turbopuffer::Models::encryption,
+        ?source_api_key: String,
+        ?source_region: String,
+        ?request_options: Turbopuffer::request_opts
+      ) -> Turbopuffer::Models::NamespaceStartCopyFromResponse
+
       def update_metadata: (
         ?namespace: String,
         ?pinning: Turbopuffer::Models::NamespaceMetadataPatch::pinning?,
+        ?read_only: bool,
         ?request_options: Turbopuffer::request_opts
       ) -> Turbopuffer::NamespaceMetadata
 

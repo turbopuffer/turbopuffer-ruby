@@ -6,14 +6,24 @@ module Turbopuffer
       # @api private
       #
       # @example
-      #   # `attribute_embed` is a `Turbopuffer::AttributeEmbed`
-      #   case attribute_embed
-      #   when String
-      #     # ...
-      #   when Turbopuffer::AttributeEmbedConfig
-      #     puts(attribute_embed.model)
+      #   # `copy_from_namespace_operation` is a `Turbopuffer::CopyFromNamespaceOperation`
+      #   case copy_from_namespace_operation
+      #   when Turbopuffer::CopyFromNamespaceOperation::Running
+      #     puts(copy_from_namespace_operation.start_time)
+      #   when Turbopuffer::CopyFromNamespaceOperation::Finished
+      #     puts(copy_from_namespace_operation.finish_time)
       #   else
-      #     puts(attribute_embed)
+      #     puts(copy_from_namespace_operation)
+      #   end
+      #
+      # @example
+      #   case copy_from_namespace_operation
+      #   in {status: :running, start_time: start_time, progress: progress}
+      #     puts(start_time)
+      #   in {status: :finished, finish_time: finish_time, result: result, start_time: start_time}
+      #     puts(finish_time)
+      #   else
+      #     puts(copy_from_namespace_operation)
       #   end
       module Union
         include Turbopuffer::Internal::Type::Converter

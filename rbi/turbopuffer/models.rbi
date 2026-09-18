@@ -31,6 +31,11 @@ module Turbopuffer
   ContainsAnyTokenFilterParams =
     Turbopuffer::Models::ContainsAnyTokenFilterParams
 
+  CopyFromNamespaceOperation = Turbopuffer::Models::CopyFromNamespaceOperation
+
+  CopyFromNamespaceOperationResult =
+    Turbopuffer::Models::CopyFromNamespaceOperationResult
+
   CopyFromNamespaceParams = Turbopuffer::Models::CopyFromNamespaceParams
 
   DecayParams = Turbopuffer::Models::DecayParams
@@ -82,11 +87,16 @@ module Turbopuffer
 
   NamespaceMultiQueryParams = Turbopuffer::Models::NamespaceMultiQueryParams
 
+  NamespacePollCopyFromParams = Turbopuffer::Models::NamespacePollCopyFromParams
+
   NamespaceQueryParams = Turbopuffer::Models::NamespaceQueryParams
 
   NamespaceRecallParams = Turbopuffer::Models::NamespaceRecallParams
 
   NamespaceSchemaParams = Turbopuffer::Models::NamespaceSchemaParams
+
+  NamespaceStartCopyFromParams =
+    Turbopuffer::Models::NamespaceStartCopyFromParams
 
   NamespaceSummary = Turbopuffer::Models::NamespaceSummary
 
@@ -97,11 +107,15 @@ module Turbopuffer
 
   NamespaceWriteParams = Turbopuffer::Models::NamespaceWriteParams
 
+  OperationError = Turbopuffer::Models::OperationError
+
   PinningConfig = Turbopuffer::Models::PinningConfig
 
   QueryBilling = Turbopuffer::Models::QueryBilling
 
   QueryPerformance = Turbopuffer::Models::QueryPerformance
+
+  RerankLimit = Turbopuffer::Models::RerankLimit
 
   Row = Turbopuffer::Models::Row
 
@@ -122,4 +136,6 @@ module Turbopuffer
   WriteBilling = Turbopuffer::Models::WriteBilling
 
   WritePerformance = Turbopuffer::Models::WritePerformance
+
+  WriteResult = Turbopuffer::Models::WriteResult
 end

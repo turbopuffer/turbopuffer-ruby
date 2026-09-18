@@ -1,0 +1,65 @@
+module Turbopuffer
+  module Models
+    type copy_from_namespace_operation =
+      Turbopuffer::CopyFromNamespaceOperation::Running
+      | Turbopuffer::CopyFromNamespaceOperation::Finished
+
+    module CopyFromNamespaceOperation
+      extend Turbopuffer::Internal::Type::Union
+
+      type running = { start_time: Time, status: :running, progress: String }
+
+      class Running < Turbopuffer::Internal::Type::BaseModel
+        attr_accessor start_time: Time
+
+        attr_accessor status: :running
+
+        attr_reader progress: String?
+
+        def progress=: (String) -> String
+
+        def initialize: (
+          start_time: Time,
+          ?progress: String,
+          ?status: :running
+        ) -> void
+
+        def to_hash: -> { start_time: Time, status: :running, progress: String }
+      end
+
+      type finished =
+        {
+          finish_time: Time,
+          result: Turbopuffer::Models::copy_from_namespace_operation_result,
+          start_time: Time,
+          status: :finished
+        }
+
+      class Finished < Turbopuffer::Internal::Type::BaseModel
+        attr_accessor finish_time: Time
+
+        attr_accessor result: Turbopuffer::Models::copy_from_namespace_operation_result
+
+        attr_accessor start_time: Time
+
+        attr_accessor status: :finished
+
+        def initialize: (
+          finish_time: Time,
+          result: Turbopuffer::Models::copy_from_namespace_operation_result,
+          start_time: Time,
+          ?status: :finished
+        ) -> void
+
+        def to_hash: -> {
+          finish_time: Time,
+          result: Turbopuffer::Models::copy_from_namespace_operation_result,
+          start_time: Time,
+          status: :finished
+        }
+      end
+
+      def self?.variants: -> ::Array[Turbopuffer::Models::copy_from_namespace_operation]
+    end
+  end
+end

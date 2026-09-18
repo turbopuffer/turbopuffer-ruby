@@ -98,7 +98,7 @@ module Turbopuffer
       #
       # Explain a query plan.
       #
-      # @overload explain_query(namespace: nil, aggregate_by: nil, compute_attributes: nil, consistency: nil, distance_metric: nil, exclude_attributes: nil, filters: nil, group_by: nil, include_attributes: nil, limit: nil, rank_by: nil, top_k: nil, vector_encoding: nil, request_options: {})
+      # @overload explain_query(namespace: nil, aggregate_by: nil, compute_attributes: nil, consistency: nil, distance_metric: nil, exclude_attributes: nil, filters: nil, group_by: nil, include_attributes: nil, limit: nil, offset: nil, rank_by: nil, top_k: nil, vector_encoding: nil, request_options: {})
       #
       # @param namespace [String] Path param: The name of the namespace.
       #
@@ -119,6 +119,8 @@ module Turbopuffer
       # @param include_attributes [Boolean, Array<String>] Body param: Whether to include attributes in the response.
       #
       # @param limit [Integer, Turbopuffer::Models::Limit] Body param: Limits the documents returned by a query.
+      #
+      # @param offset [Integer] Body param: Number of documents to skip before returning results. Supported only
       #
       # @param rank_by [Object] Body param: How to rank the documents in the namespace.
       #
@@ -201,13 +203,17 @@ module Turbopuffer
       #
       # Issue multiple concurrent queries filter or search documents.
       #
-      # @overload multi_query(queries:, namespace: nil, consistency: nil, rerank_by: nil, vector_encoding: nil, request_options: {})
+      # @overload multi_query(queries:, namespace: nil, consistency: nil, limit: nil, offset: nil, rerank_by: nil, vector_encoding: nil, request_options: {})
       #
       # @param queries [Array<Turbopuffer::Models::NamespaceMultiQueryParams::Query>] Body param
       #
       # @param namespace [String] Path param: The name of the namespace.
       #
       # @param consistency [Turbopuffer::Models::NamespaceMultiQueryParams::Consistency] Body param: The consistency level for a query.
+      #
+      # @param limit [Integer, Turbopuffer::Models::RerankLimit] Body param: Limits the total number of reranked documents returned.
+      #
+      # @param offset [Integer] Body param: Number of reranked documents to skip before returning results. Requi
       #
       # @param rerank_by [Object] Body param: How to combine the rows returned by each sub-query into a single ran
       #
@@ -233,12 +239,39 @@ module Turbopuffer
         )
       end
 
+      # Retrieve the current status of a copy operation.
+      #
+      # @overload poll_copy_from(token, namespace: nil, request_options: {})
+      #
+      # @param token [String] The operation token obtained when starting the copy.
+      #
+      # @param namespace [String] The name of the namespace.
+      #
+      # @param request_options [Turbopuffer::RequestOptions, Hash{Symbol=>Object}, nil]
+      #
+      # @return [Turbopuffer::Models::CopyFromNamespaceOperation::Running, Turbopuffer::Models::CopyFromNamespaceOperation::Finished]
+      #
+      # @see Turbopuffer::Models::NamespacePollCopyFromParams
+      def poll_copy_from(token, params = {})
+        parsed, options = Turbopuffer::NamespacePollCopyFromParams.dump_request(params)
+        namespace =
+          parsed.delete(:namespace) do
+            @client.default_namespace
+          end
+        @client.request(
+          method: :get,
+          path: ["v1/namespaces/%1$s/operations/%2$s?stainless_overload=pollCopyFrom", namespace, token],
+          model: Turbopuffer::CopyFromNamespaceOperation,
+          options: options
+        )
+      end
+
       # Some parameter documentations has been truncated, see
       # {Turbopuffer::Models::NamespaceQueryParams} for more details.
       #
       # Query, filter, full-text search and vector search documents.
       #
-      # @overload query(namespace: nil, aggregate_by: nil, compute_attributes: nil, consistency: nil, distance_metric: nil, exclude_attributes: nil, filters: nil, group_by: nil, include_attributes: nil, limit: nil, rank_by: nil, top_k: nil, vector_encoding: nil, request_options: {})
+      # @overload query(namespace: nil, aggregate_by: nil, compute_attributes: nil, consistency: nil, distance_metric: nil, exclude_attributes: nil, filters: nil, group_by: nil, include_attributes: nil, limit: nil, offset: nil, rank_by: nil, top_k: nil, vector_encoding: nil, request_options: {})
       #
       # @param namespace [String] Path param: The name of the namespace.
       #
@@ -259,6 +292,8 @@ module Turbopuffer
       # @param include_attributes [Boolean, Array<String>] Body param: Whether to include attributes in the response.
       #
       # @param limit [Integer, Turbopuffer::Models::Limit] Body param: Limits the documents returned by a query.
+      #
+      # @param offset [Integer] Body param: Number of documents to skip before returning results. Supported only
       #
       # @param rank_by [Object] Body param: How to rank the documents in the namespace.
       #
@@ -351,15 +386,56 @@ module Turbopuffer
       end
 
       # Some parameter documentations has been truncated, see
+      # {Turbopuffer::Models::NamespaceStartCopyFromParams} for more details.
+      #
+      # Start copying all documents from another namespace into this one. Returns an
+      # operation token without waiting for the copy to finish. Use the token to poll
+      # for progress and the result.
+      #
+      # @overload start_copy_from(source_namespace:, namespace: nil, dest_encryption: nil, source_api_key: nil, source_region: nil, request_options: {})
+      #
+      # @param source_namespace [String] Body param: The namespace to copy documents from.
+      #
+      # @param namespace [String] Path param: The name of the namespace.
+      #
+      # @param dest_encryption [Turbopuffer::Models::Encryption::CustomerManaged, Turbopuffer::Models::Encryption::Default] Body param: (Optional) The encryption configuration for the destination namespac
+      #
+      # @param source_api_key [String] Body param: (Optional) An API key for the organization containing the source nam
+      #
+      # @param source_region [String] Body param: (Optional) The region of the source namespace.
+      #
+      # @param request_options [Turbopuffer::RequestOptions, Hash{Symbol=>Object}, nil]
+      #
+      # @return [Turbopuffer::Models::NamespaceStartCopyFromResponse]
+      #
+      # @see Turbopuffer::Models::NamespaceStartCopyFromParams
+      def start_copy_from(params)
+        parsed, options = Turbopuffer::NamespaceStartCopyFromParams.dump_request(params)
+        namespace =
+          parsed.delete(:namespace) do
+            @client.default_namespace
+          end
+        @client.request(
+          method: :post,
+          path: ["v2/namespaces/%1$s/async?stainless_overload=startCopyFrom", namespace],
+          body: {copy_from_namespace: parsed},
+          model: Turbopuffer::Models::NamespaceStartCopyFromResponse,
+          options: options
+        )
+      end
+
+      # Some parameter documentations has been truncated, see
       # {Turbopuffer::Models::NamespaceUpdateMetadataParams} for more details.
       #
       # Update metadata configuration for a namespace.
       #
-      # @overload update_metadata(namespace: nil, pinning: nil, request_options: {})
+      # @overload update_metadata(namespace: nil, pinning: nil, read_only: nil, request_options: {})
       #
       # @param namespace [String] Path param: The name of the namespace.
       #
       # @param pinning [Boolean, Turbopuffer::Models::PinningConfig, nil] Body param: Configuration for namespace pinning.
+      #
+      # @param read_only [Boolean] Body param: Set to `true` to reject document and schema writes, or `false` to al
       #
       # @param request_options [Turbopuffer::RequestOptions, Hash{Symbol=>Object}, nil]
       #

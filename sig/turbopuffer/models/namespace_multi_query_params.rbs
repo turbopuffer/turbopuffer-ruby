@@ -5,6 +5,8 @@ module Turbopuffer
         namespace: String,
         queries: ::Array[Turbopuffer::NamespaceMultiQueryParams::Query],
         consistency: Turbopuffer::NamespaceMultiQueryParams::Consistency,
+        limit: Turbopuffer::Models::NamespaceMultiQueryParams::limit,
+        offset: Integer,
         rerank_by: top,
         vector_encoding: Turbopuffer::Models::vector_encoding
       }
@@ -26,6 +28,16 @@ module Turbopuffer
         Turbopuffer::NamespaceMultiQueryParams::Consistency
       ) -> Turbopuffer::NamespaceMultiQueryParams::Consistency
 
+      attr_reader limit: Turbopuffer::Models::NamespaceMultiQueryParams::limit?
+
+      def limit=: (
+        Turbopuffer::Models::NamespaceMultiQueryParams::limit
+      ) -> Turbopuffer::Models::NamespaceMultiQueryParams::limit
+
+      attr_reader offset: Integer?
+
+      def offset=: (Integer) -> Integer
+
       attr_reader rerank_by: top?
 
       def rerank_by=: (top) -> top
@@ -40,6 +52,8 @@ module Turbopuffer
         queries: ::Array[Turbopuffer::NamespaceMultiQueryParams::Query],
         ?namespace: String,
         ?consistency: Turbopuffer::NamespaceMultiQueryParams::Consistency,
+        ?limit: Turbopuffer::Models::NamespaceMultiQueryParams::limit,
+        ?offset: Integer,
         ?rerank_by: top,
         ?vector_encoding: Turbopuffer::Models::vector_encoding,
         ?request_options: Turbopuffer::request_opts
@@ -49,6 +63,8 @@ module Turbopuffer
         namespace: String,
         queries: ::Array[Turbopuffer::NamespaceMultiQueryParams::Query],
         consistency: Turbopuffer::NamespaceMultiQueryParams::Consistency,
+        limit: Turbopuffer::Models::NamespaceMultiQueryParams::limit,
+        offset: Integer,
         rerank_by: top,
         vector_encoding: Turbopuffer::Models::vector_encoding,
         request_options: Turbopuffer::RequestOptions
@@ -64,6 +80,7 @@ module Turbopuffer
           group_by: ::Array[top],
           include_attributes: Turbopuffer::Models::include_attributes,
           limit: Turbopuffer::Models::NamespaceMultiQueryParams::Query::limit,
+          offset: Integer,
           rank_by: top,
           top_k: Integer
         }
@@ -107,6 +124,10 @@ module Turbopuffer
           Turbopuffer::Models::NamespaceMultiQueryParams::Query::limit
         ) -> Turbopuffer::Models::NamespaceMultiQueryParams::Query::limit
 
+        attr_reader offset: Integer?
+
+        def offset=: (Integer) -> Integer
+
         attr_reader rank_by: top?
 
         def rank_by=: (top) -> top
@@ -124,6 +145,7 @@ module Turbopuffer
           ?group_by: ::Array[top],
           ?include_attributes: Turbopuffer::Models::include_attributes,
           ?limit: Turbopuffer::Models::NamespaceMultiQueryParams::Query::limit,
+          ?offset: Integer,
           ?rank_by: top,
           ?top_k: Integer
         ) -> void
@@ -137,6 +159,7 @@ module Turbopuffer
           group_by: ::Array[top],
           include_attributes: Turbopuffer::Models::include_attributes,
           limit: Turbopuffer::Models::NamespaceMultiQueryParams::Query::limit,
+          offset: Integer,
           rank_by: top,
           top_k: Integer
         }
@@ -183,6 +206,14 @@ module Turbopuffer
 
           def self?.values: -> ::Array[Turbopuffer::Models::NamespaceMultiQueryParams::Consistency::level]
         end
+      end
+
+      type limit = Integer | Turbopuffer::RerankLimit
+
+      module Limit
+        extend Turbopuffer::Internal::Type::Union
+
+        def self?.variants: -> ::Array[Turbopuffer::Models::NamespaceMultiQueryParams::limit]
       end
     end
   end
