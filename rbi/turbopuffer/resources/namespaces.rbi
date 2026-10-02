@@ -451,9 +451,9 @@ module Turbopuffer
       def write(
         # Path param: The name of the namespace.
         namespace: nil,
-        # Body param
+        # Body param: The namespace to create an instant, copy-on-write clone of.
         branch_from_namespace: nil,
-        # Body param
+        # Body param: The namespace to copy documents from.
         copy_from_namespace: nil,
         # Body param: The filter specifying which documents to delete.
         delete_by_filter: nil,
