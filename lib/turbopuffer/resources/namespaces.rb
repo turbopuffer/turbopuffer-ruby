@@ -463,7 +463,7 @@ module Turbopuffer
       #
       # @param namespace [String] Path param: The name of the namespace.
       #
-      # @param schema [Hash{Symbol=>String, Turbopuffer::Models::AttributeSchemaConfig}] Body param: The desired schema for the namespace.
+      # @param schema [Hash{Symbol=>String, Turbopuffer::Models::AttributeSchemaConfig, Turbopuffer::Models::AttributeSchemaDrop}] Body param: The desired schema for the namespace.
       #
       # @param request_options [Turbopuffer::RequestOptions, Hash{Symbol=>Object}, nil]
       #
@@ -494,9 +494,9 @@ module Turbopuffer
       #
       # @param namespace [String] Path param: The name of the namespace.
       #
-      # @param branch_from_namespace [String, Turbopuffer::Models::BranchFromNamespaceParams::BranchFromNamespaceConfig] Body param: The namespace to create an instant, copy-on-write clone of.
+      # @param branch_from_namespace [String, Turbopuffer::Models::BranchFromNamespaceParams::BranchFromNamespaceConfig] Body param
       #
-      # @param copy_from_namespace [String, Turbopuffer::Models::CopyFromNamespaceParams::CopyFromNamespaceConfig] Body param: The namespace to copy documents from.
+      # @param copy_from_namespace [String, Turbopuffer::Models::CopyFromNamespaceParams::CopyFromNamespaceConfig] Body param
       #
       # @param delete_by_filter [Object] Body param: The filter specifying which documents to delete.
       #
@@ -524,7 +524,7 @@ module Turbopuffer
       #
       # @param return_affected_ids [Boolean] Body param: If true, return the IDs of affected rows (deleted, patched, upserted
       #
-      # @param schema [Hash{Symbol=>String, Turbopuffer::Models::AttributeSchemaConfig}] Body param: The schema of the attributes attached to the documents.
+      # @param schema [Hash{Symbol=>String, Turbopuffer::Models::AttributeSchemaConfig, Turbopuffer::Models::AttributeSchemaDrop}] Body param: The schema of the attributes attached to the documents.
       #
       # @param sharding [Turbopuffer::Models::ShardingConfig] Body param: Configuration for namespace sharding, which partitions a namespace's
       #
