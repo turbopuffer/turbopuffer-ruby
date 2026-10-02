@@ -108,7 +108,7 @@ module Turbopuffer
       # @!attribute schema
       #   The schema of the attributes attached to the documents.
       #
-      #   @return [Hash{Symbol=>String, Turbopuffer::Models::AttributeSchemaConfig}, nil]
+      #   @return [Hash{Symbol=>String, Turbopuffer::Models::AttributeSchemaConfig, Turbopuffer::Models::AttributeSchemaDrop}, nil]
       optional :schema, -> { Turbopuffer::Internal::Type::HashOf[union: Turbopuffer::AttributeSchema] }
 
       # @!attribute sharding
@@ -175,7 +175,7 @@ module Turbopuffer
       #
       #   @param return_affected_ids [Boolean] If true, return the IDs of affected rows (deleted, patched, upserted) in the res
       #
-      #   @param schema [Hash{Symbol=>String, Turbopuffer::Models::AttributeSchemaConfig}] The schema of the attributes attached to the documents.
+      #   @param schema [Hash{Symbol=>String, Turbopuffer::Models::AttributeSchemaConfig, Turbopuffer::Models::AttributeSchemaDrop}] The schema of the attributes attached to the documents.
       #
       #   @param sharding [Turbopuffer::Models::ShardingConfig] Configuration for namespace sharding, which partitions a namespace's documents a
       #
