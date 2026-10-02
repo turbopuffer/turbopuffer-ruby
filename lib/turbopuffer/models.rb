@@ -50,6 +50,8 @@ module Turbopuffer
 
   AttributeSchemaConfig = Turbopuffer::Models::AttributeSchemaConfig
 
+  AttributeSchemaDrop = Turbopuffer::Models::AttributeSchemaDrop
+
   AttributeType = Turbopuffer::Models::AttributeType
 
   Bm25ClauseParams = Turbopuffer::Models::Bm25ClauseParams

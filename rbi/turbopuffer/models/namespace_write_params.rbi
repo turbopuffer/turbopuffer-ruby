@@ -20,7 +20,6 @@ module Turbopuffer
       sig { params(namespace: String).void }
       attr_writer :namespace
 
-      # The namespace to create an instant, copy-on-write clone of.
       sig do
         returns(
           T.nilable(
@@ -44,7 +43,6 @@ module Turbopuffer
       end
       attr_writer :branch_from_namespace
 
-      # The namespace to copy documents from.
       sig do
         returns(
           T.nilable(
@@ -192,7 +190,14 @@ module Turbopuffer
       sig do
         returns(
           T.nilable(
-            T::Hash[Symbol, T.any(String, Turbopuffer::AttributeSchemaConfig)]
+            T::Hash[
+              Symbol,
+              T.any(
+                String,
+                Turbopuffer::AttributeSchemaConfig,
+                Turbopuffer::AttributeSchemaDrop
+              )
+            ]
           )
         )
       end
@@ -203,7 +208,11 @@ module Turbopuffer
           schema:
             T::Hash[
               Symbol,
-              T.any(String, Turbopuffer::AttributeSchemaConfig::OrHash)
+              T.any(
+                String,
+                Turbopuffer::AttributeSchemaConfig::OrHash,
+                Turbopuffer::AttributeSchemaDrop::OrHash
+              )
             ]
         ).void
       end
@@ -275,7 +284,11 @@ module Turbopuffer
           schema:
             T::Hash[
               Symbol,
-              T.any(String, Turbopuffer::AttributeSchemaConfig::OrHash)
+              T.any(
+                String,
+                Turbopuffer::AttributeSchemaConfig::OrHash,
+                Turbopuffer::AttributeSchemaDrop::OrHash
+              )
             ],
           sharding: Turbopuffer::ShardingConfig::OrHash,
           upsert_columns: Turbopuffer::Columns::OrHash,
@@ -286,9 +299,7 @@ module Turbopuffer
       end
       def self.new(
         namespace: nil,
-        # The namespace to create an instant, copy-on-write clone of.
         branch_from_namespace: nil,
-        # The namespace to copy documents from.
         copy_from_namespace: nil,
         # The filter specifying which documents to delete.
         delete_by_filter: nil,
@@ -371,7 +382,11 @@ module Turbopuffer
             schema:
               T::Hash[
                 Symbol,
-                T.any(String, Turbopuffer::AttributeSchemaConfig)
+                T.any(
+                  String,
+                  Turbopuffer::AttributeSchemaConfig,
+                  Turbopuffer::AttributeSchemaDrop
+                )
               ],
             sharding: Turbopuffer::ShardingConfig,
             upsert_columns: Turbopuffer::Columns,

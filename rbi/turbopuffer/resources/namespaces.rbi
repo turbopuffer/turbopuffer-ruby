@@ -382,7 +382,11 @@ module Turbopuffer
           schema:
             T::Hash[
               Symbol,
-              T.any(String, Turbopuffer::AttributeSchemaConfig::OrHash)
+              T.any(
+                String,
+                Turbopuffer::AttributeSchemaConfig::OrHash,
+                Turbopuffer::AttributeSchemaDrop::OrHash
+              )
             ],
           request_options: Turbopuffer::RequestOptions::OrHash
         ).returns(T::Hash[Symbol, Turbopuffer::AttributeSchemaConfig])
@@ -431,7 +435,11 @@ module Turbopuffer
           schema:
             T::Hash[
               Symbol,
-              T.any(String, Turbopuffer::AttributeSchemaConfig::OrHash)
+              T.any(
+                String,
+                Turbopuffer::AttributeSchemaConfig::OrHash,
+                Turbopuffer::AttributeSchemaDrop::OrHash
+              )
             ],
           sharding: Turbopuffer::ShardingConfig::OrHash,
           upsert_columns: Turbopuffer::Columns::OrHash,
@@ -443,9 +451,9 @@ module Turbopuffer
       def write(
         # Path param: The name of the namespace.
         namespace: nil,
-        # Body param: The namespace to create an instant, copy-on-write clone of.
+        # Body param
         branch_from_namespace: nil,
-        # Body param: The namespace to copy documents from.
+        # Body param
         copy_from_namespace: nil,
         # Body param: The filter specifying which documents to delete.
         delete_by_filter: nil,

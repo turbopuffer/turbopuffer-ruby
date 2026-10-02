@@ -13,13 +13,11 @@ module Turbopuffer
       optional :namespace, String
 
       # @!attribute branch_from_namespace
-      #   The namespace to create an instant, copy-on-write clone of.
       #
       #   @return [String, Turbopuffer::Models::BranchFromNamespaceParams::BranchFromNamespaceConfig, nil]
       optional :branch_from_namespace, union: -> { Turbopuffer::BranchFromNamespaceParams }
 
       # @!attribute copy_from_namespace
-      #   The namespace to copy documents from.
       #
       #   @return [String, Turbopuffer::Models::CopyFromNamespaceParams::CopyFromNamespaceConfig, nil]
       optional :copy_from_namespace, union: -> { Turbopuffer::CopyFromNamespaceParams }
@@ -108,7 +106,7 @@ module Turbopuffer
       # @!attribute schema
       #   The schema of the attributes attached to the documents.
       #
-      #   @return [Hash{Symbol=>String, Turbopuffer::Models::AttributeSchemaConfig}, nil]
+      #   @return [Hash{Symbol=>String, Turbopuffer::Models::AttributeSchemaConfig, Turbopuffer::Models::AttributeSchemaDrop}, nil]
       optional :schema, -> { Turbopuffer::Internal::Type::HashOf[union: Turbopuffer::AttributeSchema] }
 
       # @!attribute sharding
@@ -145,9 +143,9 @@ module Turbopuffer
       #
       #   @param namespace [String]
       #
-      #   @param branch_from_namespace [String, Turbopuffer::Models::BranchFromNamespaceParams::BranchFromNamespaceConfig] The namespace to create an instant, copy-on-write clone of.
+      #   @param branch_from_namespace [String, Turbopuffer::Models::BranchFromNamespaceParams::BranchFromNamespaceConfig]
       #
-      #   @param copy_from_namespace [String, Turbopuffer::Models::CopyFromNamespaceParams::CopyFromNamespaceConfig] The namespace to copy documents from.
+      #   @param copy_from_namespace [String, Turbopuffer::Models::CopyFromNamespaceParams::CopyFromNamespaceConfig]
       #
       #   @param delete_by_filter [Object] The filter specifying which documents to delete.
       #
@@ -175,7 +173,7 @@ module Turbopuffer
       #
       #   @param return_affected_ids [Boolean] If true, return the IDs of affected rows (deleted, patched, upserted) in the res
       #
-      #   @param schema [Hash{Symbol=>String, Turbopuffer::Models::AttributeSchemaConfig}] The schema of the attributes attached to the documents.
+      #   @param schema [Hash{Symbol=>String, Turbopuffer::Models::AttributeSchemaConfig, Turbopuffer::Models::AttributeSchemaDrop}] The schema of the attributes attached to the documents.
       #
       #   @param sharding [Turbopuffer::Models::ShardingConfig] Configuration for namespace sharding, which partitions a namespace's documents a
       #
