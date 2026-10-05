@@ -12,8 +12,11 @@ module Turbopuffer
       # Detailed configuration for an attribute attached to a document.
       variant -> { Turbopuffer::AttributeSchemaConfig }
 
+      # Drops the attribute from the namespace. Cannot be combined with other schema settings.
+      variant -> { Turbopuffer::AttributeSchemaDrop }
+
       # @!method self.variants
-      #   @return [Array(String, Turbopuffer::Models::AttributeSchemaConfig)]
+      #   @return [Array(String, Turbopuffer::Models::AttributeSchemaConfig, Turbopuffer::Models::AttributeSchemaDrop)]
     end
   end
 end
