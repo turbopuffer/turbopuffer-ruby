@@ -1,0 +1,13 @@
+module Turbopuffer
+  module Models
+    type attribute_schema_drop = { drop: bool }
+
+    class AttributeSchemaDrop < Turbopuffer::Internal::Type::BaseModel
+      attr_accessor drop: bool
+
+      def initialize: (drop: bool) -> void
+
+      def to_hash: -> { drop: bool }
+    end
+  end
+end

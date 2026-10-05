@@ -7,7 +7,13 @@ module Turbopuffer
       extend Turbopuffer::Internal::Type::Union
 
       Variants =
-        T.type_alias { T.any(String, Turbopuffer::AttributeSchemaConfig) }
+        T.type_alias do
+          T.any(
+            String,
+            Turbopuffer::AttributeSchemaConfig,
+            Turbopuffer::AttributeSchemaDrop
+          )
+        end
 
       sig { override.returns(T::Array[Turbopuffer::AttributeSchema::Variants]) }
       def self.variants
