@@ -9,6 +9,8 @@ module Turbopuffer
 
   class AttributeSchemaConfig = Turbopuffer::Models::AttributeSchemaConfig
 
+  class AttributeSchemaDrop = Turbopuffer::Models::AttributeSchemaDrop
+
   class AttributeType = Turbopuffer::Models::AttributeType
 
   class Bm25ClauseParams = Turbopuffer::Models::Bm25ClauseParams
