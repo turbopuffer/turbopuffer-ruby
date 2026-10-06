@@ -68,6 +68,17 @@ module Turbopuffer
       end
       attr_writer :copy_from_namespace
 
+      # If `true`, ensures the namespace is created, even if the request writes no
+      # documents. Creating an empty namespace requires the `id` type to be declared in
+      # `schema`. If `false`, a namespace is never created, and a 404 is returned if it
+      # does not exist. If omitted, a namespace is created by the first request that
+      # writes documents.
+      sig { returns(T.nilable(T::Boolean)) }
+      attr_reader :create_namespace
+
+      sig { params(create_namespace: T::Boolean).void }
+      attr_writer :create_namespace
+
       # The filter specifying which documents to delete.
       sig { returns(T.nilable(T.anything)) }
       attr_reader :delete_by_filter
@@ -265,6 +276,7 @@ module Turbopuffer
               String,
               Turbopuffer::CopyFromNamespaceParams::CopyFromNamespaceConfig::OrHash
             ),
+          create_namespace: T::Boolean,
           delete_by_filter: T.anything,
           delete_by_filter_allow_partial: T::Boolean,
           delete_condition: T.anything,
@@ -305,6 +317,12 @@ module Turbopuffer
         branch_from_namespace: nil,
         # The namespace to copy documents from.
         copy_from_namespace: nil,
+        # If `true`, ensures the namespace is created, even if the request writes no
+        # documents. Creating an empty namespace requires the `id` type to be declared in
+        # `schema`. If `false`, a namespace is never created, and a 404 is returned if it
+        # does not exist. If omitted, a namespace is created by the first request that
+        # writes documents.
+        create_namespace: nil,
         # The filter specifying which documents to delete.
         delete_by_filter: nil,
         # Allow partial completion when filter matches too many documents.
@@ -366,6 +384,7 @@ module Turbopuffer
                 String,
                 Turbopuffer::CopyFromNamespaceParams::CopyFromNamespaceConfig
               ),
+            create_namespace: T::Boolean,
             delete_by_filter: T.anything,
             delete_by_filter_allow_partial: T::Boolean,
             delete_condition: T.anything,
