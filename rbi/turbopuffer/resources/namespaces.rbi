@@ -382,7 +382,11 @@ module Turbopuffer
           schema:
             T::Hash[
               Symbol,
-              T.any(String, Turbopuffer::AttributeSchemaConfig::OrHash)
+              T.any(
+                String,
+                Turbopuffer::AttributeSchemaConfig::OrHash,
+                Turbopuffer::AttributeSchemaDrop::OrHash
+              )
             ],
           request_options: Turbopuffer::RequestOptions::OrHash
         ).returns(T::Hash[Symbol, Turbopuffer::AttributeSchemaConfig])
@@ -431,7 +435,11 @@ module Turbopuffer
           schema:
             T::Hash[
               Symbol,
-              T.any(String, Turbopuffer::AttributeSchemaConfig::OrHash)
+              T.any(
+                String,
+                Turbopuffer::AttributeSchemaConfig::OrHash,
+                Turbopuffer::AttributeSchemaDrop::OrHash
+              )
             ],
           sharding: Turbopuffer::ShardingConfig::OrHash,
           upsert_columns: Turbopuffer::Columns::OrHash,
