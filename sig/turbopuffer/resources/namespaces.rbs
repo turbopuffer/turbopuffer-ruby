@@ -125,6 +125,7 @@ module Turbopuffer
         ?namespace: String,
         ?branch_from_namespace: Turbopuffer::Models::branch_from_namespace_params,
         ?copy_from_namespace: Turbopuffer::Models::copy_from_namespace_params,
+        ?create_namespace: bool,
         ?delete_by_filter: top,
         ?delete_by_filter_allow_partial: bool,
         ?delete_condition: top,
