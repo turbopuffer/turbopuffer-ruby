@@ -24,7 +24,14 @@ module Turbopuffer
       sig do
         returns(
           T.nilable(
-            T::Hash[Symbol, T.any(String, Turbopuffer::AttributeSchemaConfig)]
+            T::Hash[
+              Symbol,
+              T.any(
+                String,
+                Turbopuffer::AttributeSchemaConfig,
+                Turbopuffer::AttributeSchemaDrop
+              )
+            ]
           )
         )
       end
@@ -35,7 +42,11 @@ module Turbopuffer
           schema:
             T::Hash[
               Symbol,
-              T.any(String, Turbopuffer::AttributeSchemaConfig::OrHash)
+              T.any(
+                String,
+                Turbopuffer::AttributeSchemaConfig::OrHash,
+                Turbopuffer::AttributeSchemaDrop::OrHash
+              )
             ]
         ).void
       end
@@ -47,7 +58,11 @@ module Turbopuffer
           schema:
             T::Hash[
               Symbol,
-              T.any(String, Turbopuffer::AttributeSchemaConfig::OrHash)
+              T.any(
+                String,
+                Turbopuffer::AttributeSchemaConfig::OrHash,
+                Turbopuffer::AttributeSchemaDrop::OrHash
+              )
             ],
           request_options: Turbopuffer::RequestOptions::OrHash
         ).returns(T.attached_class)
@@ -67,7 +82,11 @@ module Turbopuffer
             schema:
               T::Hash[
                 Symbol,
-                T.any(String, Turbopuffer::AttributeSchemaConfig)
+                T.any(
+                  String,
+                  Turbopuffer::AttributeSchemaConfig,
+                  Turbopuffer::AttributeSchemaDrop
+                )
               ],
             request_options: Turbopuffer::RequestOptions
           }
