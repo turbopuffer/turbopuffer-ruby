@@ -124,11 +124,20 @@ module Turbopuffer
           #   @return [Integer]
           required :unindexed_bytes, Integer
 
-          # @!method initialize(unindexed_bytes:, status: :updating)
+          # @!attribute unindexed_rows
+          #   The number of rows in the write-ahead log that have not yet been indexed. Write
+          #   backpressure is applied when this exceeds the unindexed row limit.
+          #
+          #   @return [Integer]
+          required :unindexed_rows, Integer
+
+          # @!method initialize(unindexed_bytes:, unindexed_rows:, status: :updating)
           #   Some parameter documentations has been truncated, see
           #   {Turbopuffer::Models::NamespaceMetadata::Index::IndexUpdating} for more details.
           #
           #   @param unindexed_bytes [Integer] The number of bytes in the namespace that are in the write-ahead log but have no
+          #
+          #   @param unindexed_rows [Integer] The number of rows in the write-ahead log that have not yet been indexed. Write
           #
           #   @param status [Symbol, :updating]
         end
