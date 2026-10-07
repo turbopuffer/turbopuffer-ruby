@@ -1,5 +1,14 @@
 # Changelog
 
+## [2.6.0](https://github.com/turbopuffer/turbopuffer-ruby/compare/v2.5.0...v2.6.0) (2026-10-07)
+
+
+### Features
+
+* add create_namespace to openapi.yml ([39cb498](https://github.com/turbopuffer/turbopuffer-ruby/commit/39cb4987eb4b8783caf2484554588e954be76244))
+* stainless to stlc migration ([6e6718f](https://github.com/turbopuffer/turbopuffer-ruby/commit/6e6718fd42b5c2608ea0164f5cf32ea6609104ad))
+* stlc: qol fixes ([95ae3c3](https://github.com/turbopuffer/turbopuffer-ruby/commit/95ae3c31b03afe8384da1f384a6eb0cdcda952f3))
+
 ## 2.5.0 (2026-09-18)
 
 Full Changelog: [v2.4.0...v2.5.0](https://github.com/turbopuffer/turbopuffer-ruby/compare/v2.4.0...v2.5.0)
