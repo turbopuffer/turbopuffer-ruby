@@ -494,9 +494,9 @@ module Turbopuffer
       #
       # @param namespace [String] Path param: The name of the namespace.
       #
-      # @param branch_from_namespace [String, Turbopuffer::Models::BranchFromNamespaceParams::BranchFromNamespaceConfig] Body param: The namespace to create an instant, copy-on-write clone of.
+      # @param branch_from_namespace [String, Turbopuffer::Models::BranchFromNamespaceParams::BranchFromNamespaceConfig] Body param
       #
-      # @param copy_from_namespace [String, Turbopuffer::Models::CopyFromNamespaceParams::CopyFromNamespaceConfig] Body param: The namespace to copy documents from.
+      # @param copy_from_namespace [String, Turbopuffer::Models::CopyFromNamespaceParams::CopyFromNamespaceConfig] Body param
       #
       # @param create_namespace [Boolean] Body param: If `true`, ensures the namespace is created, even if the request wri
       #

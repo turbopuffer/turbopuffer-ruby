@@ -452,9 +452,9 @@ module Turbopuffer
       def write(
         # Path param: The name of the namespace.
         namespace: nil,
-        # Body param: The namespace to create an instant, copy-on-write clone of.
+        # Body param
         branch_from_namespace: nil,
-        # Body param: The namespace to copy documents from.
+        # Body param
         copy_from_namespace: nil,
         # Body param: If `true`, ensures the namespace is created, even if the request
         # writes no documents. Creating an empty namespace requires the `id` type to be
