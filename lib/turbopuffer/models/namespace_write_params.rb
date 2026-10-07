@@ -24,6 +24,16 @@ module Turbopuffer
       #   @return [String, Turbopuffer::Models::CopyFromNamespaceParams::CopyFromNamespaceConfig, nil]
       optional :copy_from_namespace, union: -> { Turbopuffer::CopyFromNamespaceParams }
 
+      # @!attribute create_namespace
+      #   If `true`, ensures the namespace is created, even if the request writes no
+      #   documents. Creating an empty namespace requires the `id` type to be declared in
+      #   `schema`. If `false`, a namespace is never created, and a 404 is returned if it
+      #   does not exist. If omitted, a namespace is created by the first request that
+      #   writes documents.
+      #
+      #   @return [Boolean, nil]
+      optional :create_namespace, Turbopuffer::Internal::Type::Boolean
+
       # @!attribute delete_by_filter
       #   The filter specifying which documents to delete.
       #
@@ -139,7 +149,7 @@ module Turbopuffer
       #   @return [Array<Turbopuffer::Models::Row>, nil]
       optional :upsert_rows, -> { Turbopuffer::Internal::Type::ArrayOf[Turbopuffer::Row] }
 
-      # @!method initialize(namespace: nil, branch_from_namespace: nil, copy_from_namespace: nil, delete_by_filter: nil, delete_by_filter_allow_partial: nil, delete_condition: nil, deletes: nil, disable_backpressure: nil, distance_metric: nil, encryption: nil, patch_by_filter: nil, patch_by_filter_allow_partial: nil, patch_columns: nil, patch_condition: nil, patch_rows: nil, return_affected_ids: nil, schema: nil, sharding: nil, upsert_columns: nil, upsert_condition: nil, upsert_rows: nil, request_options: {})
+      # @!method initialize(namespace: nil, branch_from_namespace: nil, copy_from_namespace: nil, create_namespace: nil, delete_by_filter: nil, delete_by_filter_allow_partial: nil, delete_condition: nil, deletes: nil, disable_backpressure: nil, distance_metric: nil, encryption: nil, patch_by_filter: nil, patch_by_filter_allow_partial: nil, patch_columns: nil, patch_condition: nil, patch_rows: nil, return_affected_ids: nil, schema: nil, sharding: nil, upsert_columns: nil, upsert_condition: nil, upsert_rows: nil, request_options: {})
       #   Some parameter documentations has been truncated, see
       #   {Turbopuffer::Models::NamespaceWriteParams} for more details.
       #
@@ -148,6 +158,8 @@ module Turbopuffer
       #   @param branch_from_namespace [String, Turbopuffer::Models::BranchFromNamespaceParams::BranchFromNamespaceConfig] The namespace to create an instant, copy-on-write clone of.
       #
       #   @param copy_from_namespace [String, Turbopuffer::Models::CopyFromNamespaceParams::CopyFromNamespaceConfig] The namespace to copy documents from.
+      #
+      #   @param create_namespace [Boolean] If `true`, ensures the namespace is created, even if the request writes no docum
       #
       #   @param delete_by_filter [Object] The filter specifying which documents to delete.
       #
