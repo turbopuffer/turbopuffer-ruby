@@ -180,8 +180,7 @@ module Turbopuffer
           sig { returns(Integer) }
           attr_accessor :unindexed_bytes
 
-          # The number of rows in the write-ahead log that have not yet been indexed. Write
-          # backpressure is applied when this exceeds the unindexed row limit.
+          # The number of rows in the write-ahead log that have not yet been indexed.
           sig { returns(Integer) }
           attr_accessor :unindexed_rows
 
@@ -196,8 +195,7 @@ module Turbopuffer
             # The number of bytes in the namespace that are in the write-ahead log but have
             # not yet been indexed.
             unindexed_bytes:,
-            # The number of rows in the write-ahead log that have not yet been indexed. Write
-            # backpressure is applied when this exceeds the unindexed row limit.
+            # The number of rows in the write-ahead log that have not yet been indexed.
             unindexed_rows:,
             status: :updating
           )
