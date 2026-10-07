@@ -414,6 +414,7 @@ module Turbopuffer
               String,
               Turbopuffer::CopyFromNamespaceParams::CopyFromNamespaceConfig::OrHash
             ),
+          create_namespace: T::Boolean,
           delete_by_filter: T.anything,
           delete_by_filter_allow_partial: T::Boolean,
           delete_condition: T.anything,
@@ -451,10 +452,16 @@ module Turbopuffer
       def write(
         # Path param: The name of the namespace.
         namespace: nil,
-        # Body param: The namespace to create an instant, copy-on-write clone of.
+        # Body param
         branch_from_namespace: nil,
-        # Body param: The namespace to copy documents from.
+        # Body param
         copy_from_namespace: nil,
+        # Body param: If `true`, ensures the namespace is created, even if the request
+        # writes no documents. Creating an empty namespace requires the `id` type to be
+        # declared in `schema`. If `false`, a namespace is never created, and a 404 is
+        # returned if it does not exist. If omitted, a namespace is created by the first
+        # request that writes documents.
+        create_namespace: nil,
         # Body param: The filter specifying which documents to delete.
         delete_by_filter: nil,
         # Body param: Allow partial completion when filter matches too many documents.
