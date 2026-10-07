@@ -20,6 +20,7 @@ module Turbopuffer
       sig { params(namespace: String).void }
       attr_writer :namespace
 
+      # The namespace to create an instant, copy-on-write clone of.
       sig do
         returns(
           T.nilable(
@@ -43,6 +44,7 @@ module Turbopuffer
       end
       attr_writer :branch_from_namespace
 
+      # The namespace to copy documents from.
       sig do
         returns(
           T.nilable(
@@ -311,7 +313,9 @@ module Turbopuffer
       end
       def self.new(
         namespace: nil,
+        # The namespace to create an instant, copy-on-write clone of.
         branch_from_namespace: nil,
+        # The namespace to copy documents from.
         copy_from_namespace: nil,
         # If `true`, ensures the namespace is created, even if the request writes no
         # documents. Creating an empty namespace requires the `id` type to be declared in
