@@ -180,20 +180,38 @@ module Turbopuffer
           sig { returns(Integer) }
           attr_accessor :unindexed_bytes
 
+          # The number of rows in the write-ahead log that have not yet been indexed. Write
+          # backpressure is applied when this exceeds the unindexed row limit.
+          sig { returns(Integer) }
+          attr_accessor :unindexed_rows
+
           sig do
-            params(unindexed_bytes: Integer, status: Symbol).returns(
-              T.attached_class
-            )
+            params(
+              unindexed_bytes: Integer,
+              unindexed_rows: Integer,
+              status: Symbol
+            ).returns(T.attached_class)
           end
           def self.new(
             # The number of bytes in the namespace that are in the write-ahead log but have
             # not yet been indexed.
             unindexed_bytes:,
+            # The number of rows in the write-ahead log that have not yet been indexed. Write
+            # backpressure is applied when this exceeds the unindexed row limit.
+            unindexed_rows:,
             status: :updating
           )
           end
 
-          sig { override.returns({ status: Symbol, unindexed_bytes: Integer }) }
+          sig do
+            override.returns(
+              {
+                status: Symbol,
+                unindexed_bytes: Integer,
+                unindexed_rows: Integer
+              }
+            )
+          end
           def to_hash
           end
         end
