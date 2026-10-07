@@ -7,7 +7,10 @@ module Turbopuffer
         cache_temperature: String,
         exhaustive_search_count: Integer,
         query_execution_ms: Integer,
-        server_total_ms: Integer
+        server_total_ms: Integer,
+        embedding_ms: Integer,
+        embedding_tokens: Integer,
+        last_included_write_at: Time
       }
 
     class QueryPerformance < Turbopuffer::Internal::Type::BaseModel
@@ -23,13 +26,28 @@ module Turbopuffer
 
       attr_accessor server_total_ms: Integer
 
+      attr_reader embedding_ms: Integer?
+
+      def embedding_ms=: (Integer) -> Integer
+
+      attr_reader embedding_tokens: Integer?
+
+      def embedding_tokens=: (Integer) -> Integer
+
+      attr_reader last_included_write_at: Time?
+
+      def last_included_write_at=: (Time) -> Time
+
       def initialize: (
         approx_namespace_size: Integer,
         cache_hit_ratio: Float,
         cache_temperature: String,
         exhaustive_search_count: Integer,
         query_execution_ms: Integer,
-        server_total_ms: Integer
+        server_total_ms: Integer,
+        ?embedding_ms: Integer,
+        ?embedding_tokens: Integer,
+        ?last_included_write_at: Time
       ) -> void
 
       def to_hash: -> {
@@ -38,7 +56,10 @@ module Turbopuffer
         cache_temperature: String,
         exhaustive_search_count: Integer,
         query_execution_ms: Integer,
-        server_total_ms: Integer
+        server_total_ms: Integer,
+        embedding_ms: Integer,
+        embedding_tokens: Integer,
+        last_included_write_at: Time
       }
     end
   end
