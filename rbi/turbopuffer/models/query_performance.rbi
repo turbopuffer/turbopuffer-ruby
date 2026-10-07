@@ -34,6 +34,28 @@ module Turbopuffer
       sig { returns(Integer) }
       attr_accessor :server_total_ms
 
+      # Time spent embedding text, in milliseconds. Only set when using a native
+      # embedding model.
+      sig { returns(T.nilable(Integer)) }
+      attr_reader :embedding_ms
+
+      sig { params(embedding_ms: Integer).void }
+      attr_writer :embedding_ms
+
+      # The number of tokens embedded. Only set when using a native embedding model.
+      sig { returns(T.nilable(Integer)) }
+      attr_reader :embedding_tokens
+
+      sig { params(embedding_tokens: Integer).void }
+      attr_writer :embedding_tokens
+
+      # The timestamp of the last write operation that the query observed.
+      sig { returns(T.nilable(Time)) }
+      attr_reader :last_included_write_at
+
+      sig { params(last_included_write_at: Time).void }
+      attr_writer :last_included_write_at
+
       # The performance information for a query.
       sig do
         params(
@@ -42,7 +64,10 @@ module Turbopuffer
           cache_temperature: String,
           exhaustive_search_count: Integer,
           query_execution_ms: Integer,
-          server_total_ms: Integer
+          server_total_ms: Integer,
+          embedding_ms: Integer,
+          embedding_tokens: Integer,
+          last_included_write_at: Time
         ).returns(T.attached_class)
       end
       def self.new(
@@ -59,7 +84,14 @@ module Turbopuffer
         query_execution_ms:,
         # Request time measured on the server, including time spent waiting for other
         # queries to complete if the namespace was at its concurrency limit.
-        server_total_ms:
+        server_total_ms:,
+        # Time spent embedding text, in milliseconds. Only set when using a native
+        # embedding model.
+        embedding_ms: nil,
+        # The number of tokens embedded. Only set when using a native embedding model.
+        embedding_tokens: nil,
+        # The timestamp of the last write operation that the query observed.
+        last_included_write_at: nil
       )
       end
 
@@ -71,7 +103,10 @@ module Turbopuffer
             cache_temperature: String,
             exhaustive_search_count: Integer,
             query_execution_ms: Integer,
-            server_total_ms: Integer
+            server_total_ms: Integer,
+            embedding_ms: Integer,
+            embedding_tokens: Integer,
+            last_included_write_at: Time
           }
         )
       end
