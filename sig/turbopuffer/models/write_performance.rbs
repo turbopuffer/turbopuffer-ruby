@@ -1,13 +1,34 @@
 module Turbopuffer
   module Models
-    type write_performance = { server_total_ms: Integer }
+    type write_performance =
+      {
+        server_total_ms: Integer,
+        embedding_ms: Integer,
+        embedding_tokens: Integer
+      }
 
     class WritePerformance < Turbopuffer::Internal::Type::BaseModel
       attr_accessor server_total_ms: Integer
 
-      def initialize: (server_total_ms: Integer) -> void
+      attr_reader embedding_ms: Integer?
 
-      def to_hash: -> { server_total_ms: Integer }
+      def embedding_ms=: (Integer) -> Integer
+
+      attr_reader embedding_tokens: Integer?
+
+      def embedding_tokens=: (Integer) -> Integer
+
+      def initialize: (
+        server_total_ms: Integer,
+        ?embedding_ms: Integer,
+        ?embedding_tokens: Integer
+      ) -> void
+
+      def to_hash: -> {
+        server_total_ms: Integer,
+        embedding_ms: Integer,
+        embedding_tokens: Integer
+      }
     end
   end
 end
