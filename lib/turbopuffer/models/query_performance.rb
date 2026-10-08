@@ -54,13 +54,7 @@ module Turbopuffer
       #   @return [Integer, nil]
       optional :embedding_tokens, Integer
 
-      # @!attribute last_included_write_at
-      #   The timestamp of the last write operation that the query observed.
-      #
-      #   @return [Time, nil]
-      optional :last_included_write_at, Time
-
-      # @!method initialize(approx_namespace_size:, cache_hit_ratio:, cache_temperature:, exhaustive_search_count:, query_execution_ms:, server_total_ms:, embedding_ms: nil, embedding_tokens: nil, last_included_write_at: nil)
+      # @!method initialize(approx_namespace_size:, cache_hit_ratio:, cache_temperature:, exhaustive_search_count:, query_execution_ms:, server_total_ms:, embedding_ms: nil, embedding_tokens: nil)
       #   Some parameter documentations has been truncated, see
       #   {Turbopuffer::Models::QueryPerformance} for more details.
       #
@@ -81,8 +75,6 @@ module Turbopuffer
       #   @param embedding_ms [Integer] Time spent embedding text, in milliseconds. Only set when using a native embeddi
       #
       #   @param embedding_tokens [Integer] The number of tokens embedded. Only set when using a native embedding model.
-      #
-      #   @param last_included_write_at [Time] The timestamp of the last write operation that the query observed.
     end
   end
 end

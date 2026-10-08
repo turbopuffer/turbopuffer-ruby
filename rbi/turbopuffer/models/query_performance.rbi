@@ -49,13 +49,6 @@ module Turbopuffer
       sig { params(embedding_tokens: Integer).void }
       attr_writer :embedding_tokens
 
-      # The timestamp of the last write operation that the query observed.
-      sig { returns(T.nilable(Time)) }
-      attr_reader :last_included_write_at
-
-      sig { params(last_included_write_at: Time).void }
-      attr_writer :last_included_write_at
-
       # The performance information for a query.
       sig do
         params(
@@ -66,8 +59,7 @@ module Turbopuffer
           query_execution_ms: Integer,
           server_total_ms: Integer,
           embedding_ms: Integer,
-          embedding_tokens: Integer,
-          last_included_write_at: Time
+          embedding_tokens: Integer
         ).returns(T.attached_class)
       end
       def self.new(
@@ -89,9 +81,7 @@ module Turbopuffer
         # embedding model.
         embedding_ms: nil,
         # The number of tokens embedded. Only set when using a native embedding model.
-        embedding_tokens: nil,
-        # The timestamp of the last write operation that the query observed.
-        last_included_write_at: nil
+        embedding_tokens: nil
       )
       end
 
@@ -105,8 +95,7 @@ module Turbopuffer
             query_execution_ms: Integer,
             server_total_ms: Integer,
             embedding_ms: Integer,
-            embedding_tokens: Integer,
-            last_included_write_at: Time
+            embedding_tokens: Integer
           }
         )
       end
