@@ -1,5 +1,18 @@
 # Changelog
 
+## [2.7.0](https://github.com/turbopuffer/turbopuffer-ruby/compare/v2.6.0...v2.7.0) (2026-10-08)
+
+
+### Features
+
+* embedding: openapi embedding stats ([8e507b4](https://github.com/turbopuffer/turbopuffer-ruby/commit/8e507b4be4c36b6a451e4ae1caee59d477fcc494))
+* metadata: expose unindexed_rows in index status ([d9fe3b0](https://github.com/turbopuffer/turbopuffer-ruby/commit/d9fe3b065aff2fb578c7f950cce4c2664037b0a5))
+
+
+### Chores
+
+* regenerate SDK ([b6678e9](https://github.com/turbopuffer/turbopuffer-ruby/commit/b6678e9fd9a33f4545541da85e7578d377154801))
+
 ## [2.6.0](https://github.com/turbopuffer/turbopuffer-ruby/compare/v2.5.0...v2.6.0) (2026-10-07)
 
 
