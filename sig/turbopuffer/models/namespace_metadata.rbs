@@ -88,16 +88,31 @@ module Turbopuffer
           def to_hash: -> { status: :"up-to-date" }
         end
 
-        type index_updating = { status: :updating, unindexed_bytes: Integer }
+        type index_updating =
+          {
+            status: :updating,
+            unindexed_bytes: Integer,
+            unindexed_rows: Integer
+          }
 
         class IndexUpdating < Turbopuffer::Internal::Type::BaseModel
           attr_accessor status: :updating
 
           attr_accessor unindexed_bytes: Integer
 
-          def initialize: (unindexed_bytes: Integer, ?status: :updating) -> void
+          attr_accessor unindexed_rows: Integer
 
-          def to_hash: -> { status: :updating, unindexed_bytes: Integer }
+          def initialize: (
+            unindexed_bytes: Integer,
+            unindexed_rows: Integer,
+            ?status: :updating
+          ) -> void
+
+          def to_hash: -> {
+            status: :updating,
+            unindexed_bytes: Integer,
+            unindexed_rows: Integer
+          }
         end
 
         def self?.variants: -> ::Array[Turbopuffer::Models::NamespaceMetadata::index]
