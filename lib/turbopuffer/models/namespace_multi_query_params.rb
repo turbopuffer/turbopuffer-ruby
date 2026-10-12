@@ -38,7 +38,8 @@ module Turbopuffer
       optional :offset, Integer
 
       # @!attribute rerank_by
-      #   How to combine the rows returned by each sub-query into a single ranked list.
+      #   How to combine the rows returned by each sub-query into a single ranked list
+      #   using RRF or a reranking model.
       #
       #   @return [Object, nil]
       optional :rerank_by, Turbopuffer::Internal::Type::Unknown
@@ -64,7 +65,7 @@ module Turbopuffer
       #   @param offset [Integer] Number of reranked documents to skip before returning results. Requires
       #   `rerank\_
       #
-      #   @param rerank_by [Object] How to combine the rows returned by each sub-query into a single ranked list.
+      #   @param rerank_by [Object] How to combine the rows returned by each sub-query into a single ranked list usi
       #
       #   @param vector_encoding [Symbol, Turbopuffer::Models::VectorEncoding] The encoding to use for vectors in the response.
       #
