@@ -56,16 +56,10 @@ module Turbopuffer
 
       # How to combine the rows returned by each sub-query into a single ranked list
       # using RRF or a reranking model.
-      sig do
-        returns(T.nilable(T.any(Turbopuffer::RerankModelParams, T.anything)))
-      end
+      sig { returns(T.nilable(T.anything)) }
       attr_reader :rerank_by
 
-      sig do
-        params(
-          rerank_by: T.any(Turbopuffer::RerankModelParams::OrHash, T.anything)
-        ).void
-      end
+      sig { params(rerank_by: T.anything).void }
       attr_writer :rerank_by
 
       # The encoding to use for vectors in the response.
@@ -86,7 +80,7 @@ module Turbopuffer
             Turbopuffer::NamespaceMultiQueryParams::Consistency::OrHash,
           limit: T.any(Integer, Turbopuffer::RerankLimit::OrHash),
           offset: Integer,
-          rerank_by: T.any(Turbopuffer::RerankModelParams::OrHash, T.anything),
+          rerank_by: T.anything,
           vector_encoding: Turbopuffer::VectorEncoding::OrSymbol,
           request_options: Turbopuffer::RequestOptions::OrHash
         ).returns(T.attached_class)
@@ -118,7 +112,7 @@ module Turbopuffer
             consistency: Turbopuffer::NamespaceMultiQueryParams::Consistency,
             limit: T.any(Integer, Turbopuffer::RerankLimit),
             offset: Integer,
-            rerank_by: T.any(Turbopuffer::RerankModelParams, T.anything),
+            rerank_by: T.anything,
             vector_encoding: Turbopuffer::VectorEncoding::OrSymbol,
             request_options: Turbopuffer::RequestOptions
           }
@@ -412,23 +406,6 @@ module Turbopuffer
         sig do
           override.returns(
             T::Array[Turbopuffer::NamespaceMultiQueryParams::Limit::Variants]
-          )
-        end
-        def self.variants
-        end
-      end
-
-      # How to combine the rows returned by each sub-query into a single ranked list
-      # using RRF or a reranking model.
-      module RerankBy
-        extend Turbopuffer::Internal::Type::Union
-
-        Variants =
-          T.type_alias { T.any(Turbopuffer::RerankModelParams, T.anything) }
-
-        sig do
-          override.returns(
-            T::Array[Turbopuffer::NamespaceMultiQueryParams::RerankBy::Variants]
           )
         end
         def self.variants

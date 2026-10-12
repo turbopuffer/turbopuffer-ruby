@@ -7,7 +7,7 @@ module Turbopuffer
         consistency: Turbopuffer::NamespaceMultiQueryParams::Consistency,
         limit: Turbopuffer::Models::NamespaceMultiQueryParams::limit,
         offset: Integer,
-        rerank_by: Turbopuffer::Models::NamespaceMultiQueryParams::rerank_by,
+        rerank_by: top,
         vector_encoding: Turbopuffer::Models::vector_encoding
       }
       & Turbopuffer::Internal::Type::request_parameters
@@ -38,11 +38,9 @@ module Turbopuffer
 
       def offset=: (Integer) -> Integer
 
-      attr_reader rerank_by: Turbopuffer::Models::NamespaceMultiQueryParams::rerank_by?
+      attr_reader rerank_by: top?
 
-      def rerank_by=: (
-        Turbopuffer::Models::NamespaceMultiQueryParams::rerank_by
-      ) -> Turbopuffer::Models::NamespaceMultiQueryParams::rerank_by
+      def rerank_by=: (top) -> top
 
       attr_reader vector_encoding: Turbopuffer::Models::vector_encoding?
 
@@ -56,7 +54,7 @@ module Turbopuffer
         ?consistency: Turbopuffer::NamespaceMultiQueryParams::Consistency,
         ?limit: Turbopuffer::Models::NamespaceMultiQueryParams::limit,
         ?offset: Integer,
-        ?rerank_by: Turbopuffer::Models::NamespaceMultiQueryParams::rerank_by,
+        ?rerank_by: top,
         ?vector_encoding: Turbopuffer::Models::vector_encoding,
         ?request_options: Turbopuffer::request_opts
       ) -> void
@@ -67,7 +65,7 @@ module Turbopuffer
         consistency: Turbopuffer::NamespaceMultiQueryParams::Consistency,
         limit: Turbopuffer::Models::NamespaceMultiQueryParams::limit,
         offset: Integer,
-        rerank_by: Turbopuffer::Models::NamespaceMultiQueryParams::rerank_by,
+        rerank_by: top,
         vector_encoding: Turbopuffer::Models::vector_encoding,
         request_options: Turbopuffer::RequestOptions
       }
@@ -216,14 +214,6 @@ module Turbopuffer
         extend Turbopuffer::Internal::Type::Union
 
         def self?.variants: -> ::Array[Turbopuffer::Models::NamespaceMultiQueryParams::limit]
-      end
-
-      type rerank_by = Turbopuffer::RerankModelParams | top
-
-      module RerankBy
-        extend Turbopuffer::Internal::Type::Union
-
-        def self?.variants: -> ::Array[Turbopuffer::Models::NamespaceMultiQueryParams::rerank_by]
       end
     end
   end

@@ -215,7 +215,7 @@ module Turbopuffer
       #
       # @param offset [Integer] Body param: Number of reranked documents to skip before returning results. Requi
       #
-      # @param rerank_by [Turbopuffer::Models::RerankModelParams, Object] Body param: How to combine the rows returned by each sub-query into a single ran
+      # @param rerank_by [Object] Body param: How to combine the rows returned by each sub-query into a single ran
       #
       # @param vector_encoding [Symbol, Turbopuffer::Models::VectorEncoding] Body param: The encoding to use for vectors in the response.
       #

@@ -41,8 +41,8 @@ module Turbopuffer
       #   How to combine the rows returned by each sub-query into a single ranked list
       #   using RRF or a reranking model.
       #
-      #   @return [Turbopuffer::Models::RerankModelParams, Object, nil]
-      optional :rerank_by, union: -> { Turbopuffer::NamespaceMultiQueryParams::RerankBy }
+      #   @return [Object, nil]
+      optional :rerank_by, Turbopuffer::Internal::Type::Unknown
 
       # @!attribute vector_encoding
       #   The encoding to use for vectors in the response.
@@ -65,7 +65,7 @@ module Turbopuffer
       #   @param offset [Integer] Number of reranked documents to skip before returning results. Requires
       #   `rerank\_
       #
-      #   @param rerank_by [Turbopuffer::Models::RerankModelParams, Object] How to combine the rows returned by each sub-query into a single ranked list usi
+      #   @param rerank_by [Object] How to combine the rows returned by each sub-query into a single ranked list usi
       #
       #   @param vector_encoding [Symbol, Turbopuffer::Models::VectorEncoding] The encoding to use for vectors in the response.
       #
@@ -229,21 +229,6 @@ module Turbopuffer
 
         # @!method self.variants
         #   @return [Array(Integer, Turbopuffer::Models::RerankLimit)]
-      end
-
-      # How to combine the rows returned by each sub-query into a single ranked list
-      # using RRF or a reranking model.
-      module RerankBy
-        extend Turbopuffer::Internal::Type::Union
-
-        # Rerank retrieved candidates with a model.
-        variant -> { Turbopuffer::RerankModelParams }
-
-        # Rerank with RRF.
-        variant Turbopuffer::Internal::Type::Unknown
-
-        # @!method self.variants
-        #   @return [Array(Turbopuffer::Models::RerankModelParams, Object)]
       end
     end
   end

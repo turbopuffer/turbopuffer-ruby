@@ -165,7 +165,7 @@ module Turbopuffer
             Turbopuffer::NamespaceMultiQueryParams::Consistency::OrHash,
           limit: T.any(Integer, Turbopuffer::RerankLimit::OrHash),
           offset: Integer,
-          rerank_by: T.any(Turbopuffer::RerankModelParams::OrHash, T.anything),
+          rerank_by: T.anything,
           vector_encoding: Turbopuffer::VectorEncoding::OrSymbol,
           request_options: Turbopuffer::RequestOptions::OrHash
         ).returns(Turbopuffer::Models::NamespaceMultiQueryResponse)
