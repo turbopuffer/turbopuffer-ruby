@@ -85,6 +85,12 @@ module Turbopuffer
       #   @return [Object, nil]
       optional :rank_by, Turbopuffer::Internal::Type::Unknown
 
+      # @!attribute rerank_by
+      #   Rerank retrieved candidates with a model.
+      #
+      #   @return [Turbopuffer::Models::RerankModelParams, nil]
+      optional :rerank_by, -> { Turbopuffer::RerankModelParams }
+
       # @!attribute top_k
       #   The number of results to return.
       #
@@ -97,7 +103,7 @@ module Turbopuffer
       #   @return [Symbol, Turbopuffer::Models::VectorEncoding, nil]
       optional :vector_encoding, enum: -> { Turbopuffer::VectorEncoding }
 
-      # @!method initialize(namespace: nil, aggregate_by: nil, compute_attributes: nil, consistency: nil, distance_metric: nil, exclude_attributes: nil, filters: nil, group_by: nil, include_attributes: nil, limit: nil, offset: nil, rank_by: nil, top_k: nil, vector_encoding: nil, request_options: {})
+      # @!method initialize(namespace: nil, aggregate_by: nil, compute_attributes: nil, consistency: nil, distance_metric: nil, exclude_attributes: nil, filters: nil, group_by: nil, include_attributes: nil, limit: nil, offset: nil, rank_by: nil, rerank_by: nil, top_k: nil, vector_encoding: nil, request_options: {})
       #   Some parameter documentations has been truncated, see
       #   {Turbopuffer::Models::NamespaceQueryParams} for more details.
       #
@@ -124,6 +130,8 @@ module Turbopuffer
       #   @param offset [Integer] Number of documents to skip before returning results. Supported only in v2 queri
       #
       #   @param rank_by [Object] How to rank the documents in the namespace.
+      #
+      #   @param rerank_by [Turbopuffer::Models::RerankModelParams] Rerank retrieved candidates with a model.
       #
       #   @param top_k [Integer] The number of results to return.
       #

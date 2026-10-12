@@ -1,0 +1,18 @@
+module Turbopuffer
+  module Models
+    type rerank_model_params =
+      { attribute: String, model: String, query: String }
+
+    class RerankModelParams < Turbopuffer::Internal::Type::BaseModel
+      attr_accessor attribute: String
+
+      attr_accessor model: String
+
+      attr_accessor query: String
+
+      def initialize: (attribute: String, model: String, query: String) -> void
+
+      def to_hash: -> { attribute: String, model: String, query: String }
+    end
+  end
+end

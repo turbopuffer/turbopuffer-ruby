@@ -55,7 +55,7 @@ module Turbopuffer
         ?consistency: Turbopuffer::NamespaceMultiQueryParams::Consistency,
         ?limit: Turbopuffer::Models::NamespaceMultiQueryParams::limit,
         ?offset: Integer,
-        ?rerank_by: top,
+        ?rerank_by: Turbopuffer::Models::NamespaceMultiQueryParams::rerank_by,
         ?vector_encoding: Turbopuffer::Models::vector_encoding,
         ?request_options: Turbopuffer::request_opts
       ) -> Turbopuffer::Models::NamespaceMultiQueryResponse
@@ -79,6 +79,7 @@ module Turbopuffer
         ?limit: Turbopuffer::Models::NamespaceQueryParams::limit,
         ?offset: Integer,
         ?rank_by: top,
+        ?rerank_by: Turbopuffer::RerankModelParams,
         ?top_k: Integer,
         ?vector_encoding: Turbopuffer::Models::vector_encoding,
         ?request_options: Turbopuffer::request_opts

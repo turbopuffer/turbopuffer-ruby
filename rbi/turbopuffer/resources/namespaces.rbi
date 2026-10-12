@@ -165,7 +165,7 @@ module Turbopuffer
             Turbopuffer::NamespaceMultiQueryParams::Consistency::OrHash,
           limit: T.any(Integer, Turbopuffer::RerankLimit::OrHash),
           offset: Integer,
-          rerank_by: T.anything,
+          rerank_by: T.any(Turbopuffer::RerankModelParams::OrHash, T.anything),
           vector_encoding: Turbopuffer::VectorEncoding::OrSymbol,
           request_options: Turbopuffer::RequestOptions::OrHash
         ).returns(Turbopuffer::Models::NamespaceMultiQueryResponse)
@@ -183,7 +183,7 @@ module Turbopuffer
         # Requires `rerank_by` and `limit`.
         offset: nil,
         # Body param: How to combine the rows returned by each sub-query into a single
-        # ranked list.
+        # ranked list using RRF or a reranking model.
         rerank_by: nil,
         # Body param: The encoding to use for vectors in the response.
         vector_encoding: nil,
@@ -223,6 +223,7 @@ module Turbopuffer
           limit: T.any(Integer, Turbopuffer::Limit::OrHash),
           offset: Integer,
           rank_by: T.anything,
+          rerank_by: Turbopuffer::RerankModelParams::OrHash,
           top_k: Integer,
           vector_encoding: Turbopuffer::VectorEncoding::OrSymbol,
           request_options: Turbopuffer::RequestOptions::OrHash
@@ -260,6 +261,8 @@ module Turbopuffer
         offset: nil,
         # Body param: How to rank the documents in the namespace.
         rank_by: nil,
+        # Body param: Rerank retrieved candidates with a model.
+        rerank_by: nil,
         # Body param: The number of results to return.
         top_k: nil,
         # Body param: The encoding to use for vectors in the response.

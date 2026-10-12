@@ -215,7 +215,7 @@ module Turbopuffer
       #
       # @param offset [Integer] Body param: Number of reranked documents to skip before returning results. Requi
       #
-      # @param rerank_by [Object] Body param: How to combine the rows returned by each sub-query into a single ran
+      # @param rerank_by [Turbopuffer::Models::RerankModelParams, Object] Body param: How to combine the rows returned by each sub-query into a single ran
       #
       # @param vector_encoding [Symbol, Turbopuffer::Models::VectorEncoding] Body param: The encoding to use for vectors in the response.
       #
@@ -271,7 +271,7 @@ module Turbopuffer
       #
       # Query, filter, full-text search and vector search documents.
       #
-      # @overload query(namespace: nil, aggregate_by: nil, compute_attributes: nil, consistency: nil, distance_metric: nil, exclude_attributes: nil, filters: nil, group_by: nil, include_attributes: nil, limit: nil, offset: nil, rank_by: nil, top_k: nil, vector_encoding: nil, request_options: {})
+      # @overload query(namespace: nil, aggregate_by: nil, compute_attributes: nil, consistency: nil, distance_metric: nil, exclude_attributes: nil, filters: nil, group_by: nil, include_attributes: nil, limit: nil, offset: nil, rank_by: nil, rerank_by: nil, top_k: nil, vector_encoding: nil, request_options: {})
       #
       # @param namespace [String] Path param: The name of the namespace.
       #
@@ -296,6 +296,8 @@ module Turbopuffer
       # @param offset [Integer] Body param: Number of documents to skip before returning results. Supported only
       #
       # @param rank_by [Object] Body param: How to rank the documents in the namespace.
+      #
+      # @param rerank_by [Turbopuffer::Models::RerankModelParams] Body param: Rerank retrieved candidates with a model.
       #
       # @param top_k [Integer] Body param: The number of results to return.
       #
