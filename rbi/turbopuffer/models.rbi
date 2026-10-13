@@ -119,6 +119,8 @@ module Turbopuffer
 
   RerankLimit = Turbopuffer::Models::RerankLimit
 
+  RerankModelParams = Turbopuffer::Models::RerankModelParams
+
   Row = Turbopuffer::Models::Row
 
   RrfParams = Turbopuffer::Models::RrfParams
