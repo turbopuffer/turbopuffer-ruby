@@ -114,6 +114,13 @@ module Turbopuffer
       sig { params(rank_by: T.anything).void }
       attr_writer :rank_by
 
+      # Rerank retrieved candidates with a model.
+      sig { returns(T.nilable(Turbopuffer::RerankModelParams)) }
+      attr_reader :rerank_by
+
+      sig { params(rerank_by: Turbopuffer::RerankModelParams::OrHash).void }
+      attr_writer :rerank_by
+
       # The number of results to return.
       sig { returns(T.nilable(Integer)) }
       attr_reader :top_k
@@ -144,6 +151,7 @@ module Turbopuffer
           limit: T.any(Integer, Turbopuffer::Limit::OrHash),
           offset: Integer,
           rank_by: T.anything,
+          rerank_by: Turbopuffer::RerankModelParams::OrHash,
           top_k: Integer,
           vector_encoding: Turbopuffer::VectorEncoding::OrSymbol,
           request_options: Turbopuffer::RequestOptions::OrHash
@@ -180,6 +188,8 @@ module Turbopuffer
         offset: nil,
         # How to rank the documents in the namespace.
         rank_by: nil,
+        # Rerank retrieved candidates with a model.
+        rerank_by: nil,
         # The number of results to return.
         top_k: nil,
         # The encoding to use for vectors in the response.
@@ -203,6 +213,7 @@ module Turbopuffer
             limit: T.any(Integer, Turbopuffer::Limit),
             offset: Integer,
             rank_by: T.anything,
+            rerank_by: Turbopuffer::RerankModelParams,
             top_k: Integer,
             vector_encoding: Turbopuffer::VectorEncoding::OrSymbol,
             request_options: Turbopuffer::RequestOptions
