@@ -11,7 +11,7 @@ module Turbopuffer
       required :attribute, String
 
       # @!attribute model
-      #   The reranking model to use.
+      #   Which reranking model to use.
       #
       #   @return [String]
       required :model, String
@@ -30,7 +30,7 @@ module Turbopuffer
       #
       #   @param attribute [String] The string attribute to score. Must be included in `include_attributes` in every
       #
-      #   @param model [String] The reranking model to use.
+      #   @param model [String] Which reranking model to use.
       #
       #   @param query [String] The query text to score each document against.
     end

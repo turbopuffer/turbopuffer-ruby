@@ -13,7 +13,7 @@ module Turbopuffer
       sig { returns(String) }
       attr_accessor :attribute
 
-      # The reranking model to use.
+      # Which reranking model to use.
       sig { returns(String) }
       attr_accessor :model
 
@@ -31,7 +31,7 @@ module Turbopuffer
         # The string attribute to score. Must be included in `include_attributes` in every
         # query.
         attribute:,
-        # The reranking model to use.
+        # Which reranking model to use.
         model:,
         # The query text to score each document against.
         query:
