@@ -54,8 +54,7 @@ module Turbopuffer
       sig { params(offset: Integer).void }
       attr_writer :offset
 
-      # How to combine the rows returned by each sub-query into a single ranked list
-      # using RRF or a reranking model.
+      # How to combine the rows returned by each sub-query into a single ranked list.
       sig { returns(T.nilable(T.anything)) }
       attr_reader :rerank_by
 
@@ -95,8 +94,7 @@ module Turbopuffer
         # Number of reranked documents to skip before returning results. Requires
         # `rerank_by` and `limit`.
         offset: nil,
-        # How to combine the rows returned by each sub-query into a single ranked list
-        # using RRF or a reranking model.
+        # How to combine the rows returned by each sub-query into a single ranked list.
         rerank_by: nil,
         # The encoding to use for vectors in the response.
         vector_encoding: nil,

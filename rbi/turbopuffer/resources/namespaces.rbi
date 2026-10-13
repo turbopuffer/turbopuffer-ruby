@@ -183,7 +183,7 @@ module Turbopuffer
         # Requires `rerank_by` and `limit`.
         offset: nil,
         # Body param: How to combine the rows returned by each sub-query into a single
-        # ranked list using RRF or a reranking model.
+        # ranked list.
         rerank_by: nil,
         # Body param: The encoding to use for vectors in the response.
         vector_encoding: nil,
