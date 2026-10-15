@@ -11,7 +11,7 @@ GIT
 PATH
   remote: .
   specs:
-    turbopuffer (2.7.0)
+    turbopuffer (2.8.0)
       cgi
       connection_pool
 
