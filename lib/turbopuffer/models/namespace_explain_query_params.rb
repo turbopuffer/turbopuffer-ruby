@@ -87,8 +87,8 @@ module Turbopuffer
 
       # @!attribute search_effort
       #   Multiplies the number of clusters searched by an ANN query. Higher values
-      #   improve recall at the cost of latency. Billed as that many queries, rounded up.
-      #   Between 1 and 10, defaults to 1.
+      #   improve recall at the cost of latency. Queried bytes are billed proportionally.
+      #   Between 0.01 and 100, defaults to 1.
       #
       #   @return [Float, nil]
       optional :search_effort, Float

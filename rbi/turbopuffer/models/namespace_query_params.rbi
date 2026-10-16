@@ -122,8 +122,8 @@ module Turbopuffer
       attr_writer :rerank_by
 
       # Multiplies the number of clusters searched by an ANN query. Higher values
-      # improve recall at the cost of latency. Billed as that many queries, rounded up.
-      # Between 1 and 10, defaults to 1.
+      # improve recall at the cost of latency. Queried bytes are billed proportionally.
+      # Between 0.01 and 100, defaults to 1.
       sig { returns(T.nilable(Float)) }
       attr_reader :search_effort
 
@@ -201,8 +201,8 @@ module Turbopuffer
         # Rerank retrieved candidates with a model.
         rerank_by: nil,
         # Multiplies the number of clusters searched by an ANN query. Higher values
-        # improve recall at the cost of latency. Billed as that many queries, rounded up.
-        # Between 1 and 10, defaults to 1.
+        # improve recall at the cost of latency. Queried bytes are billed proportionally.
+        # Between 0.01 and 100, defaults to 1.
         search_effort: nil,
         # The number of results to return.
         top_k: nil,

@@ -121,8 +121,8 @@ module Turbopuffer
         # Body param: How to rank the documents in the namespace.
         rank_by: nil,
         # Body param: Multiplies the number of clusters searched by an ANN query. Higher
-        # values improve recall at the cost of latency. Billed as that many queries,
-        # rounded up. Between 1 and 10, defaults to 1.
+        # values improve recall at the cost of latency. Queried bytes are billed
+        # proportionally. Between 0.01 and 100, defaults to 1.
         search_effort: nil,
         # Body param: The number of results to return.
         top_k: nil,
@@ -270,8 +270,8 @@ module Turbopuffer
         # Body param: Rerank retrieved candidates with a model.
         rerank_by: nil,
         # Body param: Multiplies the number of clusters searched by an ANN query. Higher
-        # values improve recall at the cost of latency. Billed as that many queries,
-        # rounded up. Between 1 and 10, defaults to 1.
+        # values improve recall at the cost of latency. Queried bytes are billed
+        # proportionally. Between 0.01 and 100, defaults to 1.
         search_effort: nil,
         # Body param: The number of results to return.
         top_k: nil,
