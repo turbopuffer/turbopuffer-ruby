@@ -138,13 +138,21 @@ module Turbopuffer
         #   @return [Object, nil]
         optional :rank_by, Turbopuffer::Internal::Type::Unknown
 
+        # @!attribute search_effort
+        #   Multiplies the number of clusters searched by an ANN query. Higher values
+        #   improve recall at the cost of latency. Queried bytes are billed proportionally.
+        #   Between 0.01 and 100, defaults to 1.
+        #
+        #   @return [Float, nil]
+        optional :search_effort, Float
+
         # @!attribute top_k
         #   The number of results to return.
         #
         #   @return [Integer, nil]
         optional :top_k, Integer
 
-        # @!method initialize(aggregate_by: nil, compute_attributes: nil, distance_metric: nil, exclude_attributes: nil, filters: nil, group_by: nil, include_attributes: nil, limit: nil, offset: nil, rank_by: nil, top_k: nil)
+        # @!method initialize(aggregate_by: nil, compute_attributes: nil, distance_metric: nil, exclude_attributes: nil, filters: nil, group_by: nil, include_attributes: nil, limit: nil, offset: nil, rank_by: nil, search_effort: nil, top_k: nil)
         #   Some parameter documentations has been truncated, see
         #   {Turbopuffer::Models::NamespaceMultiQueryParams::Query} for more details.
         #
@@ -169,6 +177,8 @@ module Turbopuffer
         #   @param offset [Integer] Number of documents to skip before returning results. Supported only in v2 queri
         #
         #   @param rank_by [Object] How to rank the documents in the namespace.
+        #
+        #   @param search_effort [Float] Multiplies the number of clusters searched by an ANN query. Higher values improv
         #
         #   @param top_k [Integer] The number of results to return.
 

@@ -9,7 +9,7 @@ module Turbopuffer
       # A string ID.
       variant String
 
-      # An integer ID.
+      # An unsigned 64-bit integer ID.
       variant Integer
 
       # @!method self.variants
