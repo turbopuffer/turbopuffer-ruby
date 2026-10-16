@@ -199,6 +199,21 @@ class Turbopuffer::Test::TelemetryTest < Minitest::Test
     assert_equal({total: 400}, Telemetry.compute_durations(untraced, 400))
   end
 
+  def test_records_are_taken_when_the_first_attempt_begins
+    buffer = Telemetry::Buffer.new
+    add_record(buffer)
+    info = Turbopuffer::Internal::Transport::RequestObserver::RequestInfo.new(method: :post, url: QUERY_PATH)
+    scope = Telemetry::Observer.new(buffer).start(info)
+
+    # A request that fails before it's sent never takes them.
+    refute_nil(buffer.take&.tap { buffer.restore(_1) })
+
+    request = {headers: {}}
+    scope.attempt_begin(0, request)
+    refute_nil(request.fetch(:headers)[Telemetry::HEADER])
+    assert_nil(buffer.take)
+  end
+
   def test_durations_are_integer_microseconds
     buffer = Telemetry::Buffer.new
     buffer.record(

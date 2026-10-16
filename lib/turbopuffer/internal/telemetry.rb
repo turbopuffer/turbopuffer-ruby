@@ -352,14 +352,16 @@ module Turbopuffer
           @buffer = buffer
           @info = info
           # Kept for later attempts until one of them may have reached the server.
-          @batch = buffer.take
+          @batch = nil
         end
 
         # @api private
         #
-        # @param _attempt [Integer]
+        # @param attempt [Integer]
         # @param request [Hash{Symbol=>Object}]
-        def attempt_begin(_attempt, request)
+        def attempt_begin(attempt, request)
+          # Taken only once a request is about to be sent, so one that fails before then can't lose it.
+          @batch = @buffer.take if attempt.zero?
           request.fetch(:headers)[HEADER] = @batch.header if @batch
         end
 
