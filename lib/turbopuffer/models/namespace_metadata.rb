@@ -29,6 +29,7 @@ module Turbopuffer
       required :encryption, union: -> { Turbopuffer::Encryption }
 
       # @!attribute index
+      #   The state of the namespace's index.
       #
       #   @return [Turbopuffer::Models::NamespaceMetadata::Index::IndexUpToDate, Turbopuffer::Models::NamespaceMetadata::Index::IndexUpdating]
       required :index, union: -> { Turbopuffer::NamespaceMetadata::Index }
@@ -81,7 +82,7 @@ module Turbopuffer
       #
       #   @param encryption [Turbopuffer::Models::Encryption::CustomerManaged, Turbopuffer::Models::Encryption::Default] The encryption configuration for a namespace.
       #
-      #   @param index [Turbopuffer::Models::NamespaceMetadata::Index::IndexUpToDate, Turbopuffer::Models::NamespaceMetadata::Index::IndexUpdating]
+      #   @param index [Turbopuffer::Models::NamespaceMetadata::Index::IndexUpToDate, Turbopuffer::Models::NamespaceMetadata::Index::IndexUpdating] The state of the namespace's index.
       #
       #   @param schema [Hash{Symbol=>Turbopuffer::Models::AttributeSchemaConfig}] The schema of the namespace.
       #
@@ -93,12 +94,16 @@ module Turbopuffer
       #
       #   @param sharding [Turbopuffer::Models::ShardingConfig] Configuration for namespace sharding, which partitions a namespace's documents a
 
+      # The state of the namespace's index.
+      #
       # @see Turbopuffer::Models::NamespaceMetadata#index
       module Index
         extend Turbopuffer::Internal::Type::Union
 
+        # Every document in the namespace is indexed.
         variant -> { Turbopuffer::NamespaceMetadata::Index::IndexUpToDate }
 
+        # Some documents are in the write-ahead log and haven't been indexed yet.
         variant -> { Turbopuffer::NamespaceMetadata::Index::IndexUpdating }
 
         class IndexUpToDate < Turbopuffer::Internal::Type::BaseModel
@@ -108,6 +113,8 @@ module Turbopuffer
           required :status, const: :"up-to-date"
 
           # @!method initialize(status: :"up-to-date")
+          #   Every document in the namespace is indexed.
+          #
           #   @param status [Symbol, :"up-to-date"]
         end
 
@@ -133,6 +140,8 @@ module Turbopuffer
           # @!method initialize(unindexed_bytes:, unindexed_rows:, status: :updating)
           #   Some parameter documentations has been truncated, see
           #   {Turbopuffer::Models::NamespaceMetadata::Index::IndexUpdating} for more details.
+          #
+          #   Some documents are in the write-ahead log and haven't been indexed yet.
           #
           #   @param unindexed_bytes [Integer] The number of bytes in the namespace that are in the write-ahead log but have no
           #
