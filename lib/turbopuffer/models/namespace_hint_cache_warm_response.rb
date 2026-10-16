@@ -11,6 +11,7 @@ module Turbopuffer
       required :status, const: :ACCEPTED
 
       # @!attribute message
+      #   A message describing the result of the request.
       #
       #   @return [String, nil]
       optional :message, String
@@ -18,7 +19,7 @@ module Turbopuffer
       # @!method initialize(message: nil, status: :ACCEPTED)
       #   The response to a successful cache warm request.
       #
-      #   @param message [String]
+      #   @param message [String] A message describing the result of the request.
       #
       #   @param status [Symbol, :ACCEPTED] The status of the request.
     end

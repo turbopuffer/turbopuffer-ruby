@@ -59,6 +59,8 @@ module Turbopuffer
         required :query_vector, Turbopuffer::Internal::Type::ArrayOf[Float]
 
         # @!method initialize(nearest_neighbors:, query_vector:)
+        #   The ground truth for one of the queries.
+        #
         #   @param nearest_neighbors [Array<Turbopuffer::Models::Row>] The true nearest neighbors with their distances and vectors.
         #
         #   @param query_vector [Array<Float>] The query vector used for this search.

@@ -27,6 +27,7 @@ module Turbopuffer
         sig { returns(String) }
         attr_accessor :source_namespace
 
+        # Configuration for branching from another namespace.
         sig { params(source_namespace: String).returns(T.attached_class) }
         def self.new(
           # The namespace to create an instant, copy-on-write clone of.

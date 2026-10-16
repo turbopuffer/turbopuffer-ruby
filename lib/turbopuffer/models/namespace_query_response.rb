@@ -17,33 +17,43 @@ module Turbopuffer
       required :performance, -> { Turbopuffer::QueryPerformance }
 
       # @!attribute aggregation_groups
+      #   One object per aggregation group, with its group key and the value of each
+      #   requested aggregation. Only present when `aggregate_by` and `group_by` are both
+      #   set.
       #
       #   @return [Array<Hash{Symbol=>Object}>, nil]
       optional :aggregation_groups,
                Turbopuffer::Internal::Type::ArrayOf[Turbopuffer::Internal::Type::HashOf[Turbopuffer::Internal::Type::Unknown]]
 
       # @!attribute aggregations
+      #   The value of each requested aggregation, keyed by its label. Only present when
+      #   `aggregate_by` is set without `group_by`.
       #
       #   @return [Hash{Symbol=>Object}, nil]
       optional :aggregations, Turbopuffer::Internal::Type::HashOf[Turbopuffer::Internal::Type::Unknown]
 
       # @!attribute rows
+      #   The documents that matched the query, ordered by `rank_by`. Only present when
+      #   `rank_by` is set.
       #
       #   @return [Array<Turbopuffer::Models::Row>, nil]
       optional :rows, -> { Turbopuffer::Internal::Type::ArrayOf[Turbopuffer::Row] }
 
       # @!method initialize(billing:, performance:, aggregation_groups: nil, aggregations: nil, rows: nil)
+      #   Some parameter documentations has been truncated, see
+      #   {Turbopuffer::Models::NamespaceQueryResponse} for more details.
+      #
       #   The result of a query.
       #
       #   @param billing [Turbopuffer::Models::QueryBilling] The billing information for a query.
       #
       #   @param performance [Turbopuffer::Models::QueryPerformance] The performance information for a query.
       #
-      #   @param aggregation_groups [Array<Hash{Symbol=>Object}>]
+      #   @param aggregation_groups [Array<Hash{Symbol=>Object}>] One object per aggregation group, with its group key and the value of each reque
       #
-      #   @param aggregations [Hash{Symbol=>Object}]
+      #   @param aggregations [Hash{Symbol=>Object}] The value of each requested aggregation, keyed by its label. Only present when `
       #
-      #   @param rows [Array<Turbopuffer::Models::Row>]
+      #   @param rows [Array<Turbopuffer::Models::Row>] The documents that matched the query, ordered by `rank_by`. Only present when `r
     end
   end
 end
