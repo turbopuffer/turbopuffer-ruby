@@ -85,6 +85,9 @@ module Turbopuffer
     #
     # @param compression [Boolean] Whether to request compressed responses. Defaults to false.
     #
+    # @param telemetry [Boolean, nil] Whether to report client-side request timings to turbopuffer on
+    # subsequent requests. Defaults to `ENV["TURBOPUFFER_TELEMETRY"]`, and is off when that's unset.
+    #
     # @param max_retries [Integer] Max number of retries to attempt after a failed retryable request.
     #
     # @param timeout [Float]
@@ -98,6 +101,7 @@ module Turbopuffer
       default_namespace: nil,
       base_url: ENV["TURBOPUFFER_BASE_URL"],
       compression: false,
+      telemetry: nil,
       max_retries: self.class::DEFAULT_MAX_RETRIES,
       timeout: self.class::DEFAULT_TIMEOUT_IN_SECONDS,
       initial_retry_delay: self.class::DEFAULT_INITIAL_RETRY_DELAY,
@@ -143,6 +147,9 @@ module Turbopuffer
         max_retry_delay: max_retry_delay,
         headers: headers
       )
+
+      buffer = Turbopuffer::Internal::Telemetry.buffer_for(telemetry, @api_key, @base_url.to_s)
+      self.request_observer = Turbopuffer::Internal::Telemetry::Observer.new(buffer) if buffer
     end
   end
 end

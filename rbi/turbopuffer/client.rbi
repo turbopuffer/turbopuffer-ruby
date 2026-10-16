@@ -66,6 +66,7 @@ module Turbopuffer
         default_namespace: T.nilable(String),
         base_url: T.nilable(String),
         compression: T::Boolean,
+        telemetry: T.nilable(T::Boolean),
         max_retries: Integer,
         timeout: Float,
         initial_retry_delay: Float,
@@ -83,6 +84,10 @@ module Turbopuffer
       base_url: ENV["TURBOPUFFER_BASE_URL"],
       # Whether to request compressed responses. Defaults to false.
       compression: false,
+      # Whether to report client-side request timings to turbopuffer on subsequent
+      # requests. Defaults to `ENV["TURBOPUFFER_TELEMETRY"]`, and is off when that's
+      # unset.
+      telemetry: nil,
       # Max number of retries to attempt after a failed retryable request.
       max_retries: Turbopuffer::Client::DEFAULT_MAX_RETRIES,
       timeout: Turbopuffer::Client::DEFAULT_TIMEOUT_IN_SECONDS,

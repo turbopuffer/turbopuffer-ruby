@@ -1,0 +1,129 @@
+module Turbopuffer
+  module Internal
+    module Telemetry
+      ENV_VAR: String
+      HEADER: String
+      SAMPLE_RATE_HEADER: String
+
+      ENVELOPE_VERSION: Integer
+
+      MAX_RECORDS_PER_HEADER: Integer
+      MAX_BUFFERED_RECORDS: Integer
+
+      TRUE_VALUES: ::Array[String]
+      FALSE_VALUES: ::Array[String]
+
+      NAMESPACE_RE: Regexp
+      OPERATION_RE: Regexp
+      SCHEME_AND_HOST_RE: Regexp
+
+      def self.resolve_enabled: (bool? value) -> bool
+
+      def self.route_template: (
+        Symbol | String method,
+        URI::Generic | String url
+      ) -> String
+
+      def self.compute_durations: (
+        Turbopuffer::Internal::Transport::RequestObserver::Timings timings,
+        Integer end_at
+      ) -> ::Hash[Symbol, Integer]
+
+      def self.random: -> Float
+
+      def self.buffer_for: (
+        bool? enabled,
+        String api_key,
+        String base_url
+      ) -> Turbopuffer::Internal::Telemetry::Buffer?
+
+      def self.after_fork_in_child: -> void
+
+      private def self.install_fork_hook: -> void
+
+      class Batch
+        attr_reader records: ::Array[[Integer, ::Hash[Symbol, top]]]
+
+        attr_reader dropped: Integer
+
+        attr_reader header: String
+
+        def initialize: (
+          ::Array[[Integer, ::Hash[Symbol, top]]] records,
+          Integer dropped
+        ) -> void
+      end
+
+      class Buffer
+        attr_reader sample_rate: Float
+
+        def initialize: -> void
+
+        def observe_response: (top response) -> void
+
+        def record: (
+          method: Symbol | String,
+          url: URI::Generic | String,
+          status: Integer,
+          retries: Integer,
+          durations: ::Hash[Symbol, Integer],
+          ?server_total_ms: Numeric?,
+          ?error: String?,
+          ?reused: bool?
+        ) -> void
+
+        def take: -> Turbopuffer::Internal::Telemetry::Batch?
+
+        def restore: (Turbopuffer::Internal::Telemetry::Batch batch) -> void
+
+        def reset_after_fork: -> void
+      end
+
+      class Observer < Turbopuffer::Internal::Transport::RequestObserver
+        attr_reader buffer: Turbopuffer::Internal::Telemetry::Buffer
+
+        def initialize: (
+          Turbopuffer::Internal::Telemetry::Buffer buffer
+        ) -> void
+
+        def start: (
+          Turbopuffer::Internal::Transport::RequestObserver::RequestInfo info
+        ) -> Turbopuffer::Internal::Telemetry::Scope
+      end
+
+      class Scope < Turbopuffer::Internal::Transport::RequestObserver::RequestScope
+        def initialize: (
+          Turbopuffer::Internal::Telemetry::Buffer buffer,
+          Turbopuffer::Internal::Transport::RequestObserver::RequestInfo info
+        ) -> void
+
+        def attempt_begin: (
+          Integer attempt,
+          ::Hash[Symbol, top] request
+        ) -> void
+
+        def attempt_end: (
+          Turbopuffer::Internal::Transport::RequestObserver::AttemptResult result
+        ) -> void
+
+        def finish: (
+          Turbopuffer::Internal::Transport::RequestObserver::RequestResult result
+        ) -> void
+
+        private def status: (
+          Turbopuffer::Internal::Transport::RequestObserver::RequestResult result
+        ) -> Integer
+
+        private def error_name: (Symbol? kind) -> String?
+
+        private def server_total_ms: (top parsed) -> Numeric?
+
+        private def field: (top value, Symbol name) -> top
+      end
+
+      module ForkHook
+        def _fork: -> Integer
+      end
+    end
+  end
+end
