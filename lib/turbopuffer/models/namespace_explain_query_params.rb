@@ -164,6 +164,7 @@ module Turbopuffer
       module Limit
         extend Turbopuffer::Internal::Type::Union
 
+        # Limits the total number of documents returned.
         variant Integer
 
         # Limits the documents returned by a query.

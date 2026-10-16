@@ -10,8 +10,10 @@ module Turbopuffer
 
       discriminator :status
 
+      # The copy is still in progress.
       variant :running, -> { Turbopuffer::CopyFromNamespaceOperation::Running }
 
+      # The copy has finished, successfully or not.
       variant :finished, -> { Turbopuffer::CopyFromNamespaceOperation::Finished }
 
       class Running < Turbopuffer::Internal::Type::BaseModel
@@ -37,6 +39,8 @@ module Turbopuffer
         #   Some parameter documentations has been truncated, see
         #   {Turbopuffer::Models::CopyFromNamespaceOperation::Running} for more details.
         #
+        #   The copy is still in progress.
+        #
         #   @param start_time [Time] The time at which the operation started.
         #
         #   @param progress [String] A freeform description of the operation's progress. May be absent, and its forma
@@ -52,6 +56,7 @@ module Turbopuffer
         required :finish_time, Time
 
         # @!attribute result
+        #   The result of the copy.
         #
         #   @return [Turbopuffer::Models::CopyFromNamespaceOperationResult::Success, Turbopuffer::Models::CopyFromNamespaceOperationResult::Error]
         required :result, union: -> { Turbopuffer::CopyFromNamespaceOperationResult }
@@ -68,9 +73,11 @@ module Turbopuffer
         required :status, const: :finished
 
         # @!method initialize(finish_time:, result:, start_time:, status: :finished)
+        #   The copy has finished, successfully or not.
+        #
         #   @param finish_time [Time] The time at which the operation finished.
         #
-        #   @param result [Turbopuffer::Models::CopyFromNamespaceOperationResult::Success, Turbopuffer::Models::CopyFromNamespaceOperationResult::Error]
+        #   @param result [Turbopuffer::Models::CopyFromNamespaceOperationResult::Success, Turbopuffer::Models::CopyFromNamespaceOperationResult::Error] The result of the copy.
         #
         #   @param start_time [Time] The time at which the operation started.
         #
