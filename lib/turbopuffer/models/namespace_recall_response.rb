@@ -59,7 +59,10 @@ module Turbopuffer
         required :query_vector, Turbopuffer::Internal::Type::ArrayOf[Float]
 
         # @!method initialize(nearest_neighbors:, query_vector:)
-        #   The ground truth for one of the queries.
+        #   One of the searches the evaluation ran: its query vector, sampled at random from
+        #   the namespace's vectors unless `rank_by` is set, and the query's true nearest
+        #   neighbors, found by exhaustive search. Recall compares these neighbors to the
+        #   results of the approximate nearest neighbor (ANN) search.
         #
         #   @param nearest_neighbors [Array<Turbopuffer::Models::Row>] The true nearest neighbors with their distances and vectors.
         #
