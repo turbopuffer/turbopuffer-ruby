@@ -78,9 +78,6 @@ module Turbopuffer
             )
           end
 
-        # One object per aggregation group, with its group key and the value of each
-        # requested aggregation. Only present when `aggregate_by` and `group_by` are both
-        # set.
         sig { returns(T.nilable(T::Array[T::Hash[Symbol, T.anything]])) }
         attr_reader :aggregation_groups
 
@@ -89,8 +86,6 @@ module Turbopuffer
         end
         attr_writer :aggregation_groups
 
-        # The value of each requested aggregation, keyed by its label. Only present when
-        # `aggregate_by` is set without `group_by`.
         sig { returns(T.nilable(T::Hash[Symbol, T.anything])) }
         attr_reader :aggregations
 
@@ -105,7 +100,10 @@ module Turbopuffer
         sig { params(rows: T::Array[Turbopuffer::Row::OrHash]).void }
         attr_writer :rows
 
-        # The result of a query, or of one subquery of a multi-query.
+        # The result of a query, or of one subquery of a multi-query. With `aggregate_by`,
+        # `aggregations` maps each aggregation's label to its value. With `group_by` as
+        # well, `aggregation_groups` holds one object per group instead, with its group
+        # key and the value of each aggregation.
         sig do
           params(
             aggregation_groups: T::Array[T::Hash[Symbol, T.anything]],
@@ -114,12 +112,7 @@ module Turbopuffer
           ).returns(T.attached_class)
         end
         def self.new(
-          # One object per aggregation group, with its group key and the value of each
-          # requested aggregation. Only present when `aggregate_by` and `group_by` are both
-          # set.
           aggregation_groups: nil,
-          # The value of each requested aggregation, keyed by its label. Only present when
-          # `aggregate_by` is set without `group_by`.
           aggregations: nil,
           # The documents that matched the query, ordered by `rank_by`. Only present when
           # `rank_by` is set.

@@ -481,7 +481,8 @@ module Turbopuffer
         distance_metric: nil,
         # Body param: The encryption configuration for a namespace.
         encryption: nil,
-        # Body param: The patch and filter specifying which documents to patch.
+        # Body param: Sets the attributes in `patch` on every document that matches
+        # `filters`.
         patch_by_filter: nil,
         # Body param: Allow partial completion when filter matches too many documents.
         patch_by_filter_allow_partial: nil,
