@@ -128,17 +128,17 @@ module Turbopuffer
         # custom code.
         class Timings
           # @return [Integer, nil]
-          attr_accessor :attempt_start,
-                        :serialize_start,
+          attr_accessor :attempt_begin,
+                        :serialize_begin,
                         :serialize_end,
                         :request_ready,
-                        :connect_start,
+                        :connect_begin,
                         :connect_end,
-                        :send_start,
+                        :send_begin,
                         :send_end,
                         :response_headers,
                         :body_end,
-                        :deserialize_start,
+                        :deserialize_begin,
                         :deserialize_end
 
           # Whether the attempt used an existing connection, nil when unknown.
@@ -195,7 +195,7 @@ module Turbopuffer
             cause = (error.is_a?(Turbopuffer::Errors::APIConnectionError) && error.cause) || error
             # a connect that started but never ended failed
             connecting =
-              (!timings.connect_start.nil? && timings.connect_end.nil?) ||
+              (!timings.connect_begin.nil? && timings.connect_end.nil?) ||
               Turbopuffer::Internal::Transport::RequestObserver::CONNECT_ERRORS.any? { cause.is_a?(_1) }
             case cause
             in ConnectionPool::TimeoutError
@@ -258,7 +258,7 @@ module Turbopuffer
             @retries = retry_count
             unless @attempt.zero?
               @timings = Turbopuffer::Internal::Transport::RequestObserver::Timings.new
-              @timings.attempt_start = Turbopuffer::Internal::Transport::RequestObserver.now
+              @timings.attempt_begin = Turbopuffer::Internal::Transport::RequestObserver.now
             end
 
             @timings.request_ready = Turbopuffer::Internal::Transport::RequestObserver.now
@@ -304,8 +304,8 @@ module Turbopuffer
           end
 
           # @api private
-          def deserialize_start
-            @timings.deserialize_start = Turbopuffer::Internal::Transport::RequestObserver.now
+          def deserialize_begin
+            @timings.deserialize_begin = Turbopuffer::Internal::Transport::RequestObserver.now
           end
 
           # @api private
@@ -320,14 +320,14 @@ module Turbopuffer
 
             # the attempt in flight was interrupted, e.g. by a non-`StandardError`
             attempt_end(error, nil) if @request && error
-            unless @timings.deserialize_start.nil?
+            unless @timings.deserialize_begin.nil?
               @timings.deserialize_end = Turbopuffer::Internal::Transport::RequestObserver.now
             end
             # the body is read lazily while decoding, so deserializing starts once it's read
             body_end = @timings.body_end
-            deserialize_start = @timings.deserialize_start
-            if body_end && deserialize_start && body_end > deserialize_start
-              @timings.deserialize_start = body_end
+            deserialize_begin = @timings.deserialize_begin
+            if body_end && deserialize_begin && body_end > deserialize_begin
+              @timings.deserialize_begin = body_end
             end
 
             error_kind =
@@ -364,10 +364,10 @@ module Turbopuffer
             @response = nil
             @finished = false
             @timings = Turbopuffer::Internal::Transport::RequestObserver::Timings.new
-            @timings.attempt_start = started_at
+            @timings.attempt_begin = started_at
             return unless body
 
-            @timings.serialize_start = started_at
+            @timings.serialize_begin = started_at
             @timings.serialize_end = built_at
           end
         end

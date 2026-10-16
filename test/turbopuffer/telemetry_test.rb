@@ -167,15 +167,15 @@ class Turbopuffer::Test::TelemetryTest < Minitest::Test
 
   def test_durations
     timings = Turbopuffer::Internal::Transport::RequestObserver::Timings.new
-    timings.attempt_start = 0
+    timings.attempt_begin = 0
     timings.request_ready = 50
-    timings.connect_start = 150
+    timings.connect_begin = 150
     timings.connect_end = 400
-    timings.send_start = 410
+    timings.send_begin = 410
     timings.send_end = 500
     timings.response_headers = 900
     timings.body_end = 950
-    timings.extra[:compress_start] = 60
+    timings.extra[:compress_begin] = 60
     timings.extra[:compress_end] = 100
     assert_equal(
       {total: 1000, compress: 40, pool: 50, connect: 250, send: 90, wait: 400, body_read: 50},
@@ -183,9 +183,9 @@ class Turbopuffer::Test::TelemetryTest < Minitest::Test
     )
 
     reused = Turbopuffer::Internal::Transport::RequestObserver::Timings.new
-    reused.attempt_start = 0
+    reused.attempt_begin = 0
     reused.request_ready = 100
-    reused.send_start = 130
+    reused.send_begin = 130
     reused.send_end = 350
     reused.response_headers = 300
     durations = Telemetry.compute_durations(reused, 400)
@@ -195,7 +195,7 @@ class Turbopuffer::Test::TelemetryTest < Minitest::Test
 
     # Untraced phases are left out.
     untraced = Turbopuffer::Internal::Transport::RequestObserver::Timings.new
-    untraced.attempt_start = 0
+    untraced.attempt_begin = 0
     assert_equal({total: 400}, Telemetry.compute_durations(untraced, 400))
   end
 

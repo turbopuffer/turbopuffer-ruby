@@ -412,9 +412,9 @@ class TurbopufferTest < Minitest::Test
     assert_nil(finish.error)
     assert_same(attempt.timings, finish.timings)
     timings = finish.timings
-    assert_operator(timings.attempt_start, :<=, timings.request_ready)
+    assert_operator(timings.attempt_begin, :<=, timings.request_ready)
     assert_operator(timings.request_ready, :<=, timings.response_headers)
-    assert_operator(timings.deserialize_start, :<=, timings.deserialize_end)
+    assert_operator(timings.deserialize_begin, :<=, timings.deserialize_end)
 
     assert_requested(:any, /./, headers: {"x-observed-attempt" => "0"}, times: 1)
   end
@@ -438,7 +438,7 @@ class TurbopufferTest < Minitest::Test
     assert_equal([0, 1], attempts.map(&:attempt))
     assert_equal(%w[500 200], attempts.map { _1.response.code })
     refute_same(*attempts.map(&:timings))
-    assert_nil(attempts.first.timings.deserialize_start)
+    assert_nil(attempts.first.timings.deserialize_begin)
 
     _, finish = observer.events.last
     assert_equal(1, finish.retries)

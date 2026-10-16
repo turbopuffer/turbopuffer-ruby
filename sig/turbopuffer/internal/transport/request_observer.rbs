@@ -79,19 +79,19 @@ module Turbopuffer
         end
 
         class Timings
-          attr_accessor attempt_start: Integer?
+          attr_accessor attempt_begin: Integer?
 
-          attr_accessor serialize_start: Integer?
+          attr_accessor serialize_begin: Integer?
 
           attr_accessor serialize_end: Integer?
 
           attr_accessor request_ready: Integer?
 
-          attr_accessor connect_start: Integer?
+          attr_accessor connect_begin: Integer?
 
           attr_accessor connect_end: Integer?
 
-          attr_accessor send_start: Integer?
+          attr_accessor send_begin: Integer?
 
           attr_accessor send_end: Integer?
 
@@ -99,7 +99,7 @@ module Turbopuffer
 
           attr_accessor body_end: Integer?
 
-          attr_accessor deserialize_start: Integer?
+          attr_accessor deserialize_begin: Integer?
 
           attr_accessor deserialize_end: Integer?
 
@@ -136,7 +136,7 @@ module Turbopuffer
 
           def attempt_end: (Integer | Exception status, top response) -> void
 
-          def deserialize_start: -> void
+          def deserialize_begin: -> void
 
           def finish: (?response: top, ?parsed: top, ?error: Exception?) -> void
 

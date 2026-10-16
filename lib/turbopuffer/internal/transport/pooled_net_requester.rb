@@ -30,7 +30,7 @@ module Turbopuffer
 
             timings.reused = false
             timings.connect_end = nil
-            timings.connect_start = Turbopuffer::Internal::Transport::RequestObserver.now
+            timings.connect_begin = Turbopuffer::Internal::Transport::RequestObserver.now
             super.tap { timings.connect_end = Turbopuffer::Internal::Transport::RequestObserver.now }
           end
         end
@@ -48,7 +48,7 @@ module Turbopuffer
           # @param ver [String]
           # @param path [String]
           def exec(sock, ver, path)
-            @request_timings&.send_start = Turbopuffer::Internal::Transport::RequestObserver.now
+            @request_timings&.send_begin = Turbopuffer::Internal::Transport::RequestObserver.now
             super.tap { @request_timings&.send_end = Turbopuffer::Internal::Transport::RequestObserver.now }
           end
         end

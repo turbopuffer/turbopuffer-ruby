@@ -73,32 +73,32 @@ module Turbopuffer
         # @return [Hash{Symbol=>Integer}]
         def compute_durations(timings, end_at)
           durations = {}
-          return durations if timings.attempt_start.nil?
-          durations[:total] = end_at - timings.attempt_start
+          return durations if timings.attempt_begin.nil?
+          durations[:total] = end_at - timings.attempt_begin
 
-          if timings.serialize_start && timings.serialize_end
-            durations[:serialize] = timings.serialize_end - timings.serialize_start
+          if timings.serialize_begin && timings.serialize_end
+            durations[:serialize] = timings.serialize_end - timings.serialize_begin
           end
 
           # Set by transports that compress request bodies.
-          compress_start, compress_end = timings.extra.values_at(:compress_start, :compress_end)
-          if compress_start && compress_end
-            durations[:compress] = compress_end - compress_start
+          compress_begin, compress_end = timings.extra.values_at(:compress_begin, :compress_end)
+          if compress_begin && compress_end
+            durations[:compress] = compress_end - compress_begin
           end
 
           # Waiting for a free connection, until connecting a new one or sending on a reused one.
-          pool_start = compress_end || timings.request_ready
-          connection_ready = timings.connect_start || timings.send_start
-          if pool_start && connection_ready
-            durations[:pool] = [connection_ready - pool_start, 0].max
+          pool_begin = compress_end || timings.request_ready
+          connection_ready = timings.connect_begin || timings.send_begin
+          if pool_begin && connection_ready
+            durations[:pool] = [connection_ready - pool_begin, 0].max
           end
 
-          if timings.connect_start && timings.connect_end
-            durations[:connect] = timings.connect_end - timings.connect_start
+          if timings.connect_begin && timings.connect_end
+            durations[:connect] = timings.connect_end - timings.connect_begin
           end
 
-          if timings.send_start && timings.send_end
-            durations[:send] = timings.send_end - timings.send_start
+          if timings.send_begin && timings.send_end
+            durations[:send] = timings.send_end - timings.send_begin
           end
 
           # Covers the network round trip and the server.
@@ -110,8 +110,8 @@ module Turbopuffer
             durations[:body_read] = timings.body_end - timings.response_headers
           end
 
-          if timings.deserialize_start && timings.deserialize_end
-            durations[:deserialize] = timings.deserialize_end - timings.deserialize_start
+          if timings.deserialize_begin && timings.deserialize_end
+            durations[:deserialize] = timings.deserialize_end - timings.deserialize_begin
           end
 
           durations

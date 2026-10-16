@@ -541,7 +541,7 @@ module Turbopuffer
           )
 
           headers = Turbopuffer::Internal::Util.normalized_headers(response.each_header.to_h)
-          observation&.deserialize_start
+          observation&.deserialize_begin
           decoded = Turbopuffer::Internal::Util.decode_content(headers, stream: stream)
           parsed =
             case req

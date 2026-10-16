@@ -191,10 +191,10 @@ module Turbopuffer
         # Monotonic timestamps of one attempt in integer nanoseconds, from `RequestObserver.now`.
         class Timings
           sig { returns(T.nilable(Integer)) }
-          attr_accessor :attempt_start
+          attr_accessor :attempt_begin
 
           sig { returns(T.nilable(Integer)) }
-          attr_accessor :serialize_start
+          attr_accessor :serialize_begin
 
           sig { returns(T.nilable(Integer)) }
           attr_accessor :serialize_end
@@ -203,13 +203,13 @@ module Turbopuffer
           attr_accessor :request_ready
 
           sig { returns(T.nilable(Integer)) }
-          attr_accessor :connect_start
+          attr_accessor :connect_begin
 
           sig { returns(T.nilable(Integer)) }
           attr_accessor :connect_end
 
           sig { returns(T.nilable(Integer)) }
-          attr_accessor :send_start
+          attr_accessor :send_begin
 
           sig { returns(T.nilable(Integer)) }
           attr_accessor :send_end
@@ -221,7 +221,7 @@ module Turbopuffer
           attr_accessor :body_end
 
           sig { returns(T.nilable(Integer)) }
-          attr_accessor :deserialize_start
+          attr_accessor :deserialize_begin
 
           sig { returns(T.nilable(Integer)) }
           attr_accessor :deserialize_end
@@ -307,7 +307,7 @@ module Turbopuffer
 
           # @api private
           sig { void }
-          def deserialize_start
+          def deserialize_begin
           end
 
           # @api private

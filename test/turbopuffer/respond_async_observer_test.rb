@@ -96,7 +96,7 @@ class Turbopuffer::Test::RespondAsyncObserverTest < Minitest::Test
     assert_nil(write.error)
     assert_equal("200", write.response.code)
     refute_nil(write.parsed)
-    assert_operator(write.timings.body_end, :<=, polls.first.timings.attempt_start)
+    assert_operator(write.timings.body_end, :<=, polls.first.timings.attempt_begin)
     assert_operator(write.timings.deserialize_end, :>=, polls.last.timings.deserialize_end)
   end
 
