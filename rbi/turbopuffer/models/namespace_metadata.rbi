@@ -24,6 +24,7 @@ module Turbopuffer
       sig { returns(Turbopuffer::Encryption::Variants) }
       attr_accessor :encryption
 
+      # The state of the namespace's index.
       sig { returns(Turbopuffer::NamespaceMetadata::Index::Variants) }
       attr_accessor :index
 
@@ -94,6 +95,7 @@ module Turbopuffer
         created_at:,
         # The encryption configuration for a namespace.
         encryption:,
+        # The state of the namespace's index.
         index:,
         # The schema of the namespace.
         schema:,
@@ -131,6 +133,7 @@ module Turbopuffer
       def to_hash
       end
 
+      # The state of the namespace's index.
       module Index
         extend Turbopuffer::Internal::Type::Union
 
@@ -154,6 +157,7 @@ module Turbopuffer
           sig { returns(Symbol) }
           attr_accessor :status
 
+          # Every document in the namespace is indexed.
           sig { params(status: Symbol).returns(T.attached_class) }
           def self.new(status: :"up-to-date")
           end
@@ -184,6 +188,7 @@ module Turbopuffer
           sig { returns(Integer) }
           attr_accessor :unindexed_rows
 
+          # Some documents are in the write-ahead log and haven't been indexed yet.
           sig do
             params(
               unindexed_bytes: Integer,

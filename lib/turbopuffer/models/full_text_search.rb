@@ -8,6 +8,7 @@ module Turbopuffer
     module FullTextSearch
       extend Turbopuffer::Internal::Type::Union
 
+      # Whether to enable full-text search with the default configuration.
       variant Turbopuffer::Internal::Type::Boolean
 
       # Configuration options for full-text search.

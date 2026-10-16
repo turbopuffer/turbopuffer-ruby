@@ -82,7 +82,7 @@ module Turbopuffer
       #   Some parameter documentations has been truncated, see
       #   {Turbopuffer::Models::WriteResult} for more details.
       #
-      #   The response to a successful write request.
+      #   The copy succeeded, with the result of its write.
       #
       #   @param billing [Turbopuffer::Models::WriteBilling] The billing information for a write request.
       #
