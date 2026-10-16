@@ -9,6 +9,7 @@ module Turbopuffer
       # The namespace to copy documents from.
       variant String
 
+      # Configuration for copying documents from another namespace.
       variant -> { Turbopuffer::CopyFromNamespaceParams::CopyFromNamespaceConfig }
 
       class CopyFromNamespaceConfig < Turbopuffer::Internal::Type::BaseModel
@@ -31,6 +32,8 @@ module Turbopuffer
         optional :source_region, String
 
         # @!method initialize(source_namespace:, source_api_key: nil, source_region: nil)
+        #   Configuration for copying documents from another namespace.
+        #
         #   @param source_namespace [String] The namespace to copy documents from.
         #
         #   @param source_api_key [String] (Optional) An API key for the organization containing the source namespace

@@ -25,6 +25,8 @@ module Turbopuffer
       sig { params(performance: Turbopuffer::QueryPerformance::OrHash).void }
       attr_writer :performance
 
+      # The results of each subquery, in the same order as `queries`. With `rerank_by`,
+      # a single result combining the subqueries' rows.
       sig do
         returns(
           T::Array[Turbopuffer::Models::NamespaceMultiQueryResponse::Result]
@@ -48,6 +50,8 @@ module Turbopuffer
         billing:,
         # The performance information for a query.
         performance:,
+        # The results of each subquery, in the same order as `queries`. With `rerank_by`,
+        # a single result combining the subqueries' rows.
         results:
       )
       end
@@ -88,12 +92,18 @@ module Turbopuffer
         sig { params(aggregations: T::Hash[Symbol, T.anything]).void }
         attr_writer :aggregations
 
+        # The documents that matched the query, ordered by `rank_by`. Only present when
+        # `rank_by` is set.
         sig { returns(T.nilable(T::Array[Turbopuffer::Row])) }
         attr_reader :rows
 
         sig { params(rows: T::Array[Turbopuffer::Row::OrHash]).void }
         attr_writer :rows
 
+        # The result of a query, or of one subquery of a multi-query. With `aggregate_by`,
+        # `aggregations` maps each aggregation's label to its value. With `group_by` as
+        # well, `aggregation_groups` holds one object per group instead, with its group
+        # key and the value of each aggregation.
         sig do
           params(
             aggregation_groups: T::Array[T::Hash[Symbol, T.anything]],
@@ -101,7 +111,13 @@ module Turbopuffer
             rows: T::Array[Turbopuffer::Row::OrHash]
           ).returns(T.attached_class)
         end
-        def self.new(aggregation_groups: nil, aggregations: nil, rows: nil)
+        def self.new(
+          aggregation_groups: nil,
+          aggregations: nil,
+          # The documents that matched the query, ordered by `rank_by`. Only present when
+          # `rank_by` is set.
+          rows: nil
+        )
         end
 
         sig do

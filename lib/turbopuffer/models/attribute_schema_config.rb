@@ -96,6 +96,7 @@ module Turbopuffer
       module Ann
         extend Turbopuffer::Internal::Type::Union
 
+        # Whether to create an ANN index with the default configuration.
         variant Turbopuffer::Internal::Type::Boolean
 
         # Configuration options for ANN (Approximate Nearest Neighbor) indexing.

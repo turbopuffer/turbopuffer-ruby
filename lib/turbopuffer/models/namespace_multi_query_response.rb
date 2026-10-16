@@ -17,19 +17,24 @@ module Turbopuffer
       required :performance, -> { Turbopuffer::QueryPerformance }
 
       # @!attribute results
+      #   The results of each subquery, in the same order as `queries`. With `rerank_by`,
+      #   a single result combining the subqueries' rows.
       #
       #   @return [Array<Turbopuffer::Models::NamespaceMultiQueryResponse::Result>]
       required :results,
                -> { Turbopuffer::Internal::Type::ArrayOf[Turbopuffer::Models::NamespaceMultiQueryResponse::Result] }
 
       # @!method initialize(billing:, performance:, results:)
+      #   Some parameter documentations has been truncated, see
+      #   {Turbopuffer::Models::NamespaceMultiQueryResponse} for more details.
+      #
       #   The result of a multi-query.
       #
       #   @param billing [Turbopuffer::Models::QueryBilling] The billing information for a query.
       #
       #   @param performance [Turbopuffer::Models::QueryPerformance] The performance information for a query.
       #
-      #   @param results [Array<Turbopuffer::Models::NamespaceMultiQueryResponse::Result>]
+      #   @param results [Array<Turbopuffer::Models::NamespaceMultiQueryResponse::Result>] The results of each subquery, in the same order as `queries`. With `rerank_by`,
 
       class Result < Turbopuffer::Internal::Type::BaseModel
         # @!attribute aggregation_groups
@@ -44,14 +49,26 @@ module Turbopuffer
         optional :aggregations, Turbopuffer::Internal::Type::HashOf[Turbopuffer::Internal::Type::Unknown]
 
         # @!attribute rows
+        #   The documents that matched the query, ordered by `rank_by`. Only present when
+        #   `rank_by` is set.
         #
         #   @return [Array<Turbopuffer::Models::Row>, nil]
         optional :rows, -> { Turbopuffer::Internal::Type::ArrayOf[Turbopuffer::Row] }
 
         # @!method initialize(aggregation_groups: nil, aggregations: nil, rows: nil)
+        #   Some parameter documentations has been truncated, see
+        #   {Turbopuffer::Models::NamespaceMultiQueryResponse::Result} for more details.
+        #
+        #   The result of a query, or of one subquery of a multi-query. With `aggregate_by`,
+        #   `aggregations` maps each aggregation's label to its value. With `group_by` as
+        #   well, `aggregation_groups` holds one object per group instead, with its group
+        #   key and the value of each aggregation.
+        #
         #   @param aggregation_groups [Array<Hash{Symbol=>Object}>]
+        #
         #   @param aggregations [Hash{Symbol=>Object}]
-        #   @param rows [Array<Turbopuffer::Models::Row>]
+        #
+        #   @param rows [Array<Turbopuffer::Models::Row>] The documents that matched the query, ordered by `rank_by`. Only present when `r
       end
     end
   end
