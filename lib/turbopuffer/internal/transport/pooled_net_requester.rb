@@ -13,6 +13,46 @@ module Turbopuffer
 
         DEFAULT_MAX_CONNECTIONS = [Etc.nprocessors, 99].max
 
+        # @api private
+        #
+        # Records connect timings while an observed attempt has the connection checked
+        # out.
+        module ObservedConnection
+          # @return [Turbopuffer::Internal::Transport::RequestObserver::Timings, nil]
+          attr_accessor :request_timings
+
+          # @api private
+          #
+          # Also catches the reconnects `Net::HTTP` does silently.
+          private def connect
+            timings = request_timings
+            return super if timings.nil?
+
+            timings.reused = false
+            timings.connect_end = nil
+            timings.connect_start = Turbopuffer::Internal::Transport::RequestObserver.now
+            super.tap { timings.connect_end = Turbopuffer::Internal::Transport::RequestObserver.now }
+          end
+        end
+
+        # @api private
+        #
+        # Records when the request headers and body are written.
+        class ObservedRequest < Net::HTTPGenericRequest
+          # @return [Turbopuffer::Internal::Transport::RequestObserver::Timings, nil]
+          attr_accessor :request_timings
+
+          # @api private
+          #
+          # @param sock [Net::BufferedIO]
+          # @param ver [String]
+          # @param path [String]
+          def exec(sock, ver, path)
+            @request_timings&.send_start = Turbopuffer::Internal::Transport::RequestObserver.now
+            super.tap { @request_timings&.send_end = Turbopuffer::Internal::Transport::RequestObserver.now }
+          end
+        end
+
         class << self
           # @api private
           #
@@ -50,6 +90,21 @@ module Turbopuffer
 
           # @api private
           #
+          # @param conn [Net::HTTP]
+          # @param timings [Turbopuffer::Internal::Transport::RequestObserver::Timings, nil]
+          def observe_connection(conn, timings)
+            observed = conn.is_a?(self::ObservedConnection)
+            if timings
+              conn.extend(self::ObservedConnection) unless observed
+              conn.request_timings = timings
+              timings.reused = conn.started?
+            elsif observed
+              conn.request_timings = nil
+            end
+          end
+
+          # @api private
+          #
           # @param request [Hash{Symbol=>Object}] .
           #
           #   @option request [Symbol] :method
@@ -58,19 +113,23 @@ module Turbopuffer
           #
           #   @option request [Hash{String=>String}] :headers
           #
+          #   @option request [Turbopuffer::Internal::Transport::RequestObserver::Timings, nil] :timings
+          #
           # @param blk [Proc]
           #
           # @yieldparam [String]
           # @return [Array(Net::HTTPGenericRequest, Proc)]
           def build_request(request, &blk)
             method, url, headers, body = request.fetch_values(:method, :url, :headers, :body)
-            req = Net::HTTPGenericRequest.new(
+            timings = request[:timings]
+            req = (timings ? self::ObservedRequest : Net::HTTPGenericRequest).new(
               method.to_s.upcase,
               !body.nil?,
               method != :head,
               URI(url.to_s) # ensure we construct a URI class of the right scheme
             )
 
+            req.request_timings = timings if timings
             headers.each { req[_1] = _2 }
 
             case body
@@ -126,9 +185,12 @@ module Turbopuffer
         #
         #   @option request [Float] :deadline
         #
+        #   @option request [Turbopuffer::Internal::Transport::RequestObserver::Timings, nil] :timings
+        #
         # @return [Array(Integer, Net::HTTPResponse, Enumerable<String>)]
         def execute(request)
           url, deadline = request.fetch_values(:url, :deadline)
+          timings = request[:timings]
 
           req = nil
           finished = false
@@ -142,6 +204,7 @@ module Turbopuffer
               closing = nil
               ::Thread.handle_interrupt(Object => :never) do
                 ::Thread.handle_interrupt(Object => :immediate) do
+                  self.class.observe_connection(conn, timings) if timings
                   req, closing = self.class.build_request(request) do
                     self.class.calibrate_socket_timeout(conn, deadline)
                   end
@@ -155,6 +218,7 @@ module Turbopuffer
                   self.class.calibrate_socket_timeout(conn, deadline)
                   ::Kernel.catch(:jump) do
                     conn.request(req) do |rsp|
+                      timings&.response_headers = Turbopuffer::Internal::Transport::RequestObserver.now
                       y << [req, rsp]
                       ::Kernel.throw(:jump) if finished
 
@@ -164,6 +228,7 @@ module Turbopuffer
 
                         self.class.calibrate_socket_timeout(conn, deadline)
                       end
+                      timings&.body_end = Turbopuffer::Internal::Transport::RequestObserver.now
                       eof = true
                     end
                   end
@@ -172,6 +237,7 @@ module Turbopuffer
                 begin
                   conn.finish if !eof && conn&.started?
                 ensure
+                  self.class.observe_connection(conn, nil) if timings
                   closing&.call
                 end
               end
@@ -202,7 +268,16 @@ module Turbopuffer
         end
 
         define_sorbet_constant!(:Request) do
-          T.type_alias { {method: Symbol, url: URI::Generic, headers: T::Hash[String, String], body: T.anything, deadline: Float} }
+          T.type_alias do
+            {
+              method: Symbol,
+              url: URI::Generic,
+              headers: T::Hash[String, String],
+              body: T.anything,
+              deadline: Float,
+              timings: T.nilable(Turbopuffer::Internal::Transport::RequestObserver::Timings)
+            }
+          end
         end
       end
     end

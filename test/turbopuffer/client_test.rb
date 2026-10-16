@@ -342,4 +342,228 @@ class TurbopufferTest < Minitest::Test
       headers.fetch_values(*expected).each { refute_empty(_1) }
     end
   end
+
+  class RecordingObserver < Turbopuffer::Internal::Transport::RequestObserver
+    attr_reader :events
+
+    def initialize(observe: true)
+      super()
+      @events = []
+      @observe = observe
+    end
+
+    def start(info)
+      @events << [:start, info]
+      Scope.new(@events) if @observe
+    end
+
+    class Scope < Turbopuffer::Internal::Transport::RequestObserver::RequestScope
+      def initialize(events)
+        super()
+        @events = events
+      end
+
+      def attempt_begin(attempt, request)
+        @events << [:attempt_begin, attempt]
+        request[:headers]["x-observed-attempt"] = attempt.to_s
+      end
+
+      def attempt_end(result) = @events << [:attempt_end, result]
+
+      def finish(result) = @events << [:finish, result]
+    end
+  end
+
+  class RaisingObserver < Turbopuffer::Internal::Transport::RequestObserver
+    def start(_info) = Scope.new
+
+    class Scope < Turbopuffer::Internal::Transport::RequestObserver::RequestScope
+      def attempt_begin(_attempt, _request) = raise("attempt_begin")
+
+      def attempt_end(_result) = raise("attempt_end")
+
+      def finish(_result) = raise("finish")
+    end
+  end
+
+  def test_request_observer
+    stub_request(:get, "http://localhost/v1/namespaces")
+      .to_return_json(status: 200, body: {})
+    turbopuffer = Turbopuffer::Client.new(base_url: "http://localhost", api_key: "tpuf_A1...")
+    observer = RecordingObserver.new
+    turbopuffer.request_observer = observer
+
+    result = turbopuffer.namespaces
+
+    assert_equal([:start, :attempt_begin, :attempt_end, :finish], observer.events.map(&:first))
+    _, info = observer.events.first
+    assert_equal(:get, info.method)
+    assert_equal("/v1/namespaces", info.url)
+
+    _, attempt = observer.events[2]
+    assert_equal(0, attempt.attempt)
+    assert_equal("200", attempt.response.code)
+    assert_nil(attempt.error)
+    assert(attempt.reached_server)
+
+    _, finish = observer.events.last
+    assert_equal(0, finish.retries)
+    assert_same(result, finish.parsed)
+    assert_nil(finish.error)
+    assert_same(attempt.timings, finish.timings)
+    timings = finish.timings
+    assert_operator(timings.attempt_start, :<=, timings.request_ready)
+    assert_operator(timings.request_ready, :<=, timings.response_headers)
+    assert_operator(timings.deserialize_start, :<=, timings.deserialize_end)
+
+    assert_requested(:any, /./, headers: {"x-observed-attempt" => "0"}, times: 1)
+  end
+
+  def test_request_observer_retries
+    stub_request(:get, "http://localhost/v1/namespaces")
+      .to_return_json(status: 500, body: {})
+      .then
+      .to_return_json(status: 200, body: {})
+    turbopuffer = Turbopuffer::Client.new(base_url: "http://localhost", api_key: "tpuf_A1...", max_retries: 1)
+    observer = RecordingObserver.new
+    turbopuffer.request_observer = observer
+
+    result = turbopuffer.namespaces
+
+    assert_equal(
+      [:start, :attempt_begin, :attempt_end, :attempt_begin, :attempt_end, :finish],
+      observer.events.map(&:first)
+    )
+    attempts = observer.events.filter_map { _2 if _1 == :attempt_end }
+    assert_equal([0, 1], attempts.map(&:attempt))
+    assert_equal(%w[500 200], attempts.map { _1.response.code })
+    refute_same(*attempts.map(&:timings))
+    assert_nil(attempts.first.timings.deserialize_start)
+
+    _, finish = observer.events.last
+    assert_equal(1, finish.retries)
+    assert_same(result, finish.parsed)
+    assert_same(attempts.last.timings, finish.timings)
+
+    assert_requested(:any, /./, headers: {"x-observed-attempt" => "0"}, times: 1)
+    assert_requested(:any, /./, headers: {"x-observed-attempt" => "1"}, times: 1)
+  end
+
+  def test_request_observer_status_error
+    stub_request(:get, "http://localhost/v1/namespaces")
+      .to_return_json(status: 500, body: {})
+    turbopuffer = Turbopuffer::Client.new(base_url: "http://localhost", api_key: "tpuf_A1...", max_retries: 1)
+    observer = RecordingObserver.new
+    turbopuffer.request_observer = observer
+
+    assert_raises(Turbopuffer::Errors::InternalServerError) do
+      turbopuffer.namespaces
+    end
+
+    assert_equal(1, observer.events.count { _1.first == :finish })
+    event, finish = observer.events.last
+    assert_equal(:finish, event)
+    assert_equal(1, finish.retries)
+    assert_kind_of(Turbopuffer::Errors::InternalServerError, finish.error)
+    assert_nil(finish.error_kind)
+    assert_equal("500", finish.response.code)
+    assert_nil(finish.parsed)
+  end
+
+  def test_request_observer_connection_error
+    stub_request(:get, "http://localhost/v1/namespaces")
+      .to_raise(Errno::ECONNREFUSED)
+    turbopuffer = Turbopuffer::Client.new(base_url: "http://localhost", api_key: "tpuf_A1...", max_retries: 0)
+    observer = RecordingObserver.new
+    turbopuffer.request_observer = observer
+
+    error = assert_raises(Turbopuffer::Errors::APIConnectionError) do
+      turbopuffer.namespaces
+    end
+
+    assert_equal([:start, :attempt_begin, :attempt_end, :finish], observer.events.map(&:first))
+    _, attempt = observer.events[2]
+    assert_same(error, attempt.error)
+    assert_equal(:connect_error, attempt.error_kind)
+    assert_equal(false, attempt.reached_server)
+    assert_nil(attempt.response)
+
+    _, finish = observer.events.last
+    assert_same(error, finish.error)
+    assert_equal(:connect_error, finish.error_kind)
+    assert_nil(finish.response)
+  end
+
+  def test_request_observer_timeout
+    stub_request(:get, "http://localhost/v1/namespaces")
+      .to_timeout
+    turbopuffer = Turbopuffer::Client.new(base_url: "http://localhost", api_key: "tpuf_A1...", max_retries: 0)
+    observer = RecordingObserver.new
+    turbopuffer.request_observer = observer
+
+    assert_raises(Turbopuffer::Errors::APITimeoutError) do
+      turbopuffer.namespaces
+    end
+
+    _, attempt = observer.events[2]
+    assert_equal(:connect_timeout, attempt.error_kind)
+    assert_equal(false, attempt.reached_server)
+    assert_equal(:connect_timeout, observer.events.last.last.error_kind)
+  end
+
+  def test_request_observer_error_kinds
+    timings = Turbopuffer::Internal::Transport::RequestObserver::Timings.new
+    timeout = Turbopuffer::Errors::APITimeoutError.new(url: URI("https://example.com"))
+
+    # an SDK timeout without an underlying cause, such as from custom code
+    assert_equal(:timeout, Turbopuffer::Internal::Transport::RequestObserver.error_kind(timeout, timings))
+    assert_equal(
+      :canceled,
+      Turbopuffer::Internal::Transport::RequestObserver.error_kind(Interrupt.new, timings)
+    )
+    assert_equal(
+      :other,
+      Turbopuffer::Internal::Transport::RequestObserver.error_kind(ArgumentError.new, timings)
+    )
+  end
+
+  def test_request_observer_errors_are_ignored
+    stub_request(:get, "http://localhost/v1/namespaces")
+      .to_return_json(status: 200, body: {})
+
+    turbopuffer = Turbopuffer::Client.new(base_url: "http://localhost", api_key: "tpuf_A1...")
+    turbopuffer.request_observer = RaisingObserver.new
+
+    result = nil
+    _, err = capture_io do
+      result = turbopuffer.namespaces
+    end
+
+    refute_nil(result)
+    assert_equal(3, err.scan("request observer raised").size)
+  end
+
+  def test_request_observer_not_observing
+    stub_request(:get, "http://localhost/v1/namespaces")
+      .to_return_json(status: 200, body: {})
+
+    turbopuffer = Turbopuffer::Client.new(base_url: "http://localhost", api_key: "tpuf_A1...")
+    assert_nil(turbopuffer.request_observer)
+    turbopuffer.namespaces
+
+    observer = RecordingObserver.new(observe: false)
+    turbopuffer.request_observer = observer
+    turbopuffer.namespaces
+    assert_equal([:start], observer.events.map(&:first))
+
+    observer = RecordingObserver.new
+    turbopuffer.request_observer = observer
+    turbopuffer.request_observer = nil
+    turbopuffer.namespaces
+    assert_empty(observer.events)
+
+    assert_requested(:any, /./, times: 3) do
+      refute_includes(_1.headers.keys.map(&:downcase), "x-observed-attempt")
+    end
+  end
 end

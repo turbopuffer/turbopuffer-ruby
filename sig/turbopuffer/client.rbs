@@ -33,6 +33,7 @@ module Turbopuffer
       ?default_namespace: String?,
       ?base_url: String?,
       ?compression: bool,
+      ?telemetry: bool?,
       ?max_retries: Integer,
       ?timeout: Float,
       ?initial_retry_delay: Float,

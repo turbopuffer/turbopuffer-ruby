@@ -1,0 +1,153 @@
+module Turbopuffer
+  module Internal
+    module Transport
+      class RequestObserver
+        def start: (
+          Turbopuffer::Internal::Transport::RequestObserver::RequestInfo info
+        ) -> Turbopuffer::Internal::Transport::RequestObserver::RequestScope?
+
+        class RequestScope
+          def attempt_begin: (
+            Integer attempt,
+            ::Hash[Symbol, top] request
+          ) -> void
+
+          def attempt_end: (
+            Turbopuffer::Internal::Transport::RequestObserver::AttemptResult result
+          ) -> void
+
+          def finish: (
+            Turbopuffer::Internal::Transport::RequestObserver::RequestResult result
+          ) -> void
+        end
+
+        class RequestInfo
+          attr_reader method: Symbol
+
+          attr_reader url: String
+
+          def initialize: (method: Symbol, url: String) -> void
+        end
+
+        class AttemptResult
+          attr_reader attempt: Integer
+
+          attr_reader request: ::Hash[Symbol, top]
+
+          attr_reader response: top
+
+          attr_reader error: Exception?
+
+          attr_reader error_kind: Symbol?
+
+          attr_reader reached_server: bool?
+
+          attr_reader timings: Turbopuffer::Internal::Transport::RequestObserver::Timings
+
+          def initialize: (
+            attempt: Integer,
+            request: ::Hash[Symbol, top],
+            response: top,
+            error: Exception?,
+            error_kind: Symbol?,
+            reached_server: bool?,
+            timings: Turbopuffer::Internal::Transport::RequestObserver::Timings
+          ) -> void
+        end
+
+        class RequestResult
+          attr_reader retries: Integer
+
+          attr_reader response: top
+
+          attr_reader error: Exception?
+
+          attr_reader error_kind: Symbol?
+
+          attr_reader parsed: top
+
+          attr_reader timings: Turbopuffer::Internal::Transport::RequestObserver::Timings
+
+          def initialize: (
+            retries: Integer,
+            response: top,
+            error: Exception?,
+            error_kind: Symbol?,
+            parsed: top,
+            timings: Turbopuffer::Internal::Transport::RequestObserver::Timings
+          ) -> void
+        end
+
+        class Timings
+          attr_accessor attempt_start: Integer?
+
+          attr_accessor serialize_start: Integer?
+
+          attr_accessor serialize_end: Integer?
+
+          attr_accessor request_ready: Integer?
+
+          attr_accessor connect_start: Integer?
+
+          attr_accessor connect_end: Integer?
+
+          attr_accessor send_start: Integer?
+
+          attr_accessor send_end: Integer?
+
+          attr_accessor response_headers: Integer?
+
+          attr_accessor body_end: Integer?
+
+          attr_accessor deserialize_start: Integer?
+
+          attr_accessor deserialize_end: Integer?
+
+          attr_accessor reused: bool?
+
+          attr_reader extra: ::Hash[Symbol, top]
+
+          def initialize: -> void
+        end
+
+        CONNECT_ERRORS: ::Array[Class]
+
+        def self.now: -> Integer
+
+        def self.call_safely: (Symbol hook) { -> top } -> top
+
+        def self.error_kind: (
+          Exception error,
+          Turbopuffer::Internal::Transport::RequestObserver::Timings timings
+        ) -> Symbol
+
+        class Observation
+          def self.start: (
+            Turbopuffer::Internal::Transport::RequestObserver observer,
+            ::Hash[Symbol, top] request,
+            Integer started_at,
+            path: String
+          ) -> Turbopuffer::Internal::Transport::RequestObserver::Observation?
+
+          def attempt_begin: (
+            ::Hash[Symbol, top] input,
+            retry_count: Integer
+          ) -> ::Hash[Symbol, top]
+
+          def attempt_end: (Integer | Exception status, top response) -> void
+
+          def deserialize_start: -> void
+
+          def finish: (?response: top, ?parsed: top, ?error: Exception?) -> void
+
+          def initialize: (
+            Turbopuffer::Internal::Transport::RequestObserver::RequestScope scope,
+            body: bool,
+            started_at: Integer,
+            built_at: Integer
+          ) -> void
+        end
+      end
+    end
+  end
+end
