@@ -16,6 +16,8 @@ module Turbopuffer
       required :status_code, Integer
 
       # @!method initialize(detail:, status_code:)
+      #   The error of an asynchronous operation that failed.
+      #
       #   @param detail [Turbopuffer::Models::OperationError::Detail] The response to an unsuccessful request.
       #
       #   @param status_code [Integer] The HTTP status code of the operation's error.

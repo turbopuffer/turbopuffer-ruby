@@ -41,6 +41,7 @@ module Turbopuffer
         sig { params(source_region: String).void }
         attr_writer :source_region
 
+        # Configuration for copying documents from another namespace.
         sig do
           params(
             source_namespace: String,

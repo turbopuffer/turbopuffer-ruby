@@ -9,6 +9,7 @@ module Turbopuffer
       # The namespace to create an instant, copy-on-write clone of.
       variant String
 
+      # Configuration for branching from another namespace.
       variant -> { Turbopuffer::BranchFromNamespaceParams::BranchFromNamespaceConfig }
 
       class BranchFromNamespaceConfig < Turbopuffer::Internal::Type::BaseModel
@@ -19,6 +20,8 @@ module Turbopuffer
         required :source_namespace, String
 
         # @!method initialize(source_namespace:)
+        #   Configuration for branching from another namespace.
+        #
         #   @param source_namespace [String] The namespace to create an instant, copy-on-write clone of.
       end
 
