@@ -11,6 +11,8 @@ module Turbopuffer
       required :token, String
 
       # @!method initialize(token:)
+      #   The response to a successful request to start a copy.
+      #
       #   @param token [String] The token identifying the copy operation.
     end
   end

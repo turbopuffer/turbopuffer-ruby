@@ -98,7 +98,7 @@ module Turbopuffer
       #
       # Explain a query plan.
       #
-      # @overload explain_query(namespace: nil, aggregate_by: nil, compute_attributes: nil, consistency: nil, distance_metric: nil, exclude_attributes: nil, filters: nil, group_by: nil, include_attributes: nil, limit: nil, offset: nil, rank_by: nil, top_k: nil, vector_encoding: nil, request_options: {})
+      # @overload explain_query(namespace: nil, aggregate_by: nil, compute_attributes: nil, consistency: nil, distance_metric: nil, effort: nil, exclude_attributes: nil, filters: nil, group_by: nil, include_attributes: nil, limit: nil, offset: nil, rank_by: nil, top_k: nil, vector_encoding: nil, request_options: {})
       #
       # @param namespace [String] Path param: The name of the namespace.
       #
@@ -109,6 +109,8 @@ module Turbopuffer
       # @param consistency [Turbopuffer::Models::NamespaceExplainQueryParams::Consistency] Body param: The consistency level for a query.
       #
       # @param distance_metric [Symbol, Turbopuffer::Models::DistanceMetric] Body param: A function used to calculate vector similarity.
+      #
+      # @param effort [Turbopuffer::Models::NamespaceExplainQueryParams::Effort] Body param: How much work an ANN query does compared to the default. Only suppor
       #
       # @param exclude_attributes [Array<String>] Body param: List of attribute names to exclude from the response. All other attr
       #
@@ -271,7 +273,7 @@ module Turbopuffer
       #
       # Query, filter, full-text search and vector search documents.
       #
-      # @overload query(namespace: nil, aggregate_by: nil, compute_attributes: nil, consistency: nil, distance_metric: nil, exclude_attributes: nil, filters: nil, group_by: nil, include_attributes: nil, limit: nil, offset: nil, rank_by: nil, rerank_by: nil, top_k: nil, vector_encoding: nil, request_options: {})
+      # @overload query(namespace: nil, aggregate_by: nil, compute_attributes: nil, consistency: nil, distance_metric: nil, effort: nil, exclude_attributes: nil, filters: nil, group_by: nil, include_attributes: nil, limit: nil, offset: nil, rank_by: nil, rerank_by: nil, top_k: nil, vector_encoding: nil, request_options: {})
       #
       # @param namespace [String] Path param: The name of the namespace.
       #
@@ -282,6 +284,8 @@ module Turbopuffer
       # @param consistency [Turbopuffer::Models::NamespaceQueryParams::Consistency] Body param: The consistency level for a query.
       #
       # @param distance_metric [Symbol, Turbopuffer::Models::DistanceMetric] Body param: A function used to calculate vector similarity.
+      #
+      # @param effort [Turbopuffer::Models::NamespaceQueryParams::Effort] Body param: How much work an ANN query does compared to the default. Only suppor
       #
       # @param exclude_attributes [Array<String>] Body param: List of attribute names to exclude from the response. All other attr
       #
@@ -516,7 +520,7 @@ module Turbopuffer
       #
       # @param encryption [Turbopuffer::Models::Encryption::CustomerManaged, Turbopuffer::Models::Encryption::Default] Body param: The encryption configuration for a namespace.
       #
-      # @param patch_by_filter [Turbopuffer::Models::NamespaceWriteParams::PatchByFilter] Body param: The patch and filter specifying which documents to patch.
+      # @param patch_by_filter [Turbopuffer::Models::NamespaceWriteParams::PatchByFilter] Body param: Sets the attributes in `patch` on every document that matches `filte
       #
       # @param patch_by_filter_allow_partial [Boolean] Body param: Allow partial completion when filter matches too many documents.
       #

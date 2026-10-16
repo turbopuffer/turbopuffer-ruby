@@ -77,7 +77,7 @@ module Turbopuffer
       optional :encryption, union: -> { Turbopuffer::Encryption }
 
       # @!attribute patch_by_filter
-      #   The patch and filter specifying which documents to patch.
+      #   Sets the attributes in `patch` on every document that matches `filters`.
       #
       #   @return [Turbopuffer::Models::NamespaceWriteParams::PatchByFilter, nil]
       optional :patch_by_filter, -> { Turbopuffer::NamespaceWriteParams::PatchByFilter }
@@ -175,7 +175,7 @@ module Turbopuffer
       #
       #   @param encryption [Turbopuffer::Models::Encryption::CustomerManaged, Turbopuffer::Models::Encryption::Default] The encryption configuration for a namespace.
       #
-      #   @param patch_by_filter [Turbopuffer::Models::NamespaceWriteParams::PatchByFilter] The patch and filter specifying which documents to patch.
+      #   @param patch_by_filter [Turbopuffer::Models::NamespaceWriteParams::PatchByFilter] Sets the attributes in `patch` on every document that matches `filters`.
       #
       #   @param patch_by_filter_allow_partial [Boolean] Allow partial completion when filter matches too many documents.
       #
@@ -212,7 +212,7 @@ module Turbopuffer
         required :patch, Turbopuffer::Internal::Type::HashOf[Turbopuffer::Internal::Type::Unknown]
 
         # @!method initialize(filters:, patch:)
-        #   The patch and filter specifying which documents to patch.
+        #   Sets the attributes in `patch` on every document that matches `filters`.
         #
         #   @param filters [Object] Filter by attributes. Same syntax as the query endpoint.
         #

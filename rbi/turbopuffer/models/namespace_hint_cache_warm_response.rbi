@@ -15,6 +15,7 @@ module Turbopuffer
       sig { returns(Symbol) }
       attr_accessor :status
 
+      # A message describing the result of the request.
       sig { returns(T.nilable(String)) }
       attr_reader :message
 
@@ -24,6 +25,7 @@ module Turbopuffer
       # The response to a successful cache warm request.
       sig { params(message: String, status: Symbol).returns(T.attached_class) }
       def self.new(
+        # A message describing the result of the request.
         message: nil,
         # The status of the request.
         status: :ACCEPTED

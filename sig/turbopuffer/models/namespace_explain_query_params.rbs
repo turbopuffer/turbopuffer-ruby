@@ -7,6 +7,7 @@ module Turbopuffer
         compute_attributes: ::Hash[Symbol, top],
         consistency: Turbopuffer::NamespaceExplainQueryParams::Consistency,
         distance_metric: Turbopuffer::Models::distance_metric,
+        effort: Turbopuffer::NamespaceExplainQueryParams::Effort,
         exclude_attributes: ::Array[String],
         filters: top,
         group_by: ::Array[top],
@@ -46,6 +47,12 @@ module Turbopuffer
       def distance_metric=: (
         Turbopuffer::Models::distance_metric
       ) -> Turbopuffer::Models::distance_metric
+
+      attr_reader effort: Turbopuffer::NamespaceExplainQueryParams::Effort?
+
+      def effort=: (
+        Turbopuffer::NamespaceExplainQueryParams::Effort
+      ) -> Turbopuffer::NamespaceExplainQueryParams::Effort
 
       attr_reader exclude_attributes: ::Array[String]?
 
@@ -95,6 +102,7 @@ module Turbopuffer
         ?compute_attributes: ::Hash[Symbol, top],
         ?consistency: Turbopuffer::NamespaceExplainQueryParams::Consistency,
         ?distance_metric: Turbopuffer::Models::distance_metric,
+        ?effort: Turbopuffer::NamespaceExplainQueryParams::Effort,
         ?exclude_attributes: ::Array[String],
         ?filters: top,
         ?group_by: ::Array[top],
@@ -113,6 +121,7 @@ module Turbopuffer
         compute_attributes: ::Hash[Symbol, top],
         consistency: Turbopuffer::NamespaceExplainQueryParams::Consistency,
         distance_metric: Turbopuffer::Models::distance_metric,
+        effort: Turbopuffer::NamespaceExplainQueryParams::Effort,
         exclude_attributes: ::Array[String],
         filters: top,
         group_by: ::Array[top],
@@ -157,6 +166,46 @@ module Turbopuffer
           EVENTUAL: :eventual
 
           def self?.values: -> ::Array[Turbopuffer::Models::NamespaceExplainQueryParams::Consistency::level]
+        end
+      end
+
+      type effort =
+        {
+          ann: Float,
+          ann_filter: Turbopuffer::Models::NamespaceExplainQueryParams::Effort::ann_filter
+        }
+
+      class Effort < Turbopuffer::Internal::Type::BaseModel
+        attr_reader ann: Float?
+
+        def ann=: (Float) -> Float
+
+        attr_reader ann_filter: Turbopuffer::Models::NamespaceExplainQueryParams::Effort::ann_filter?
+
+        def ann_filter=: (
+          Turbopuffer::Models::NamespaceExplainQueryParams::Effort::ann_filter
+        ) -> Turbopuffer::Models::NamespaceExplainQueryParams::Effort::ann_filter
+
+        def initialize: (
+          ?ann: Float,
+          ?ann_filter: Turbopuffer::Models::NamespaceExplainQueryParams::Effort::ann_filter
+        ) -> void
+
+        def to_hash: -> {
+          ann: Float,
+          ann_filter: Turbopuffer::Models::NamespaceExplainQueryParams::Effort::ann_filter
+        }
+
+        type ann_filter = :auto | :prefilter | :postfilter
+
+        module AnnFilter
+          extend Turbopuffer::Internal::Type::Enum
+
+          AUTO: :auto
+          PREFILTER: :prefilter
+          POSTFILTER: :postfilter
+
+          def self?.values: -> ::Array[Turbopuffer::Models::NamespaceExplainQueryParams::Effort::ann_filter]
         end
       end
 
