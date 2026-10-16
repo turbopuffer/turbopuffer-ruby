@@ -147,7 +147,7 @@ module Turbopuffer
       end
       attr_writer :encryption
 
-      # The patch and filter specifying which documents to patch.
+      # Sets the attributes in `patch` on every document that matches `filters`.
       sig do
         returns(T.nilable(Turbopuffer::NamespaceWriteParams::PatchByFilter))
       end
@@ -337,7 +337,7 @@ module Turbopuffer
         distance_metric: nil,
         # The encryption configuration for a namespace.
         encryption: nil,
-        # The patch and filter specifying which documents to patch.
+        # Sets the attributes in `patch` on every document that matches `filters`.
         patch_by_filter: nil,
         # Allow partial completion when filter matches too many documents.
         patch_by_filter_allow_partial: nil,
@@ -438,7 +438,7 @@ module Turbopuffer
         sig { returns(T::Hash[Symbol, T.anything]) }
         attr_accessor :patch
 
-        # The patch and filter specifying which documents to patch.
+        # Sets the attributes in `patch` on every document that matches `filters`.
         sig do
           params(
             filters: T.anything,

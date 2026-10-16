@@ -19,6 +19,7 @@ module Turbopuffer
       sig { returns(Integer) }
       attr_accessor :status_code
 
+      # The error of an asynchronous operation that failed.
       sig do
         params(
           detail: Turbopuffer::OperationError::Detail::OrHash,

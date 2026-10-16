@@ -7,6 +7,7 @@ module Turbopuffer
         compute_attributes: ::Hash[Symbol, top],
         consistency: Turbopuffer::NamespaceQueryParams::Consistency,
         distance_metric: Turbopuffer::Models::distance_metric,
+        effort: Turbopuffer::NamespaceQueryParams::Effort,
         exclude_attributes: ::Array[String],
         filters: top,
         group_by: ::Array[top],
@@ -15,7 +16,6 @@ module Turbopuffer
         offset: Integer,
         rank_by: top,
         rerank_by: Turbopuffer::RerankModelParams,
-        search_effort: Float,
         top_k: Integer,
         vector_encoding: Turbopuffer::Models::vector_encoding
       }
@@ -48,6 +48,12 @@ module Turbopuffer
       def distance_metric=: (
         Turbopuffer::Models::distance_metric
       ) -> Turbopuffer::Models::distance_metric
+
+      attr_reader effort: Turbopuffer::NamespaceQueryParams::Effort?
+
+      def effort=: (
+        Turbopuffer::NamespaceQueryParams::Effort
+      ) -> Turbopuffer::NamespaceQueryParams::Effort
 
       attr_reader exclude_attributes: ::Array[String]?
 
@@ -87,10 +93,6 @@ module Turbopuffer
         Turbopuffer::RerankModelParams
       ) -> Turbopuffer::RerankModelParams
 
-      attr_reader search_effort: Float?
-
-      def search_effort=: (Float) -> Float
-
       attr_reader top_k: Integer?
 
       def top_k=: (Integer) -> Integer
@@ -107,6 +109,7 @@ module Turbopuffer
         ?compute_attributes: ::Hash[Symbol, top],
         ?consistency: Turbopuffer::NamespaceQueryParams::Consistency,
         ?distance_metric: Turbopuffer::Models::distance_metric,
+        ?effort: Turbopuffer::NamespaceQueryParams::Effort,
         ?exclude_attributes: ::Array[String],
         ?filters: top,
         ?group_by: ::Array[top],
@@ -115,7 +118,6 @@ module Turbopuffer
         ?offset: Integer,
         ?rank_by: top,
         ?rerank_by: Turbopuffer::RerankModelParams,
-        ?search_effort: Float,
         ?top_k: Integer,
         ?vector_encoding: Turbopuffer::Models::vector_encoding,
         ?request_options: Turbopuffer::request_opts
@@ -127,6 +129,7 @@ module Turbopuffer
         compute_attributes: ::Hash[Symbol, top],
         consistency: Turbopuffer::NamespaceQueryParams::Consistency,
         distance_metric: Turbopuffer::Models::distance_metric,
+        effort: Turbopuffer::NamespaceQueryParams::Effort,
         exclude_attributes: ::Array[String],
         filters: top,
         group_by: ::Array[top],
@@ -135,7 +138,6 @@ module Turbopuffer
         offset: Integer,
         rank_by: top,
         rerank_by: Turbopuffer::RerankModelParams,
-        search_effort: Float,
         top_k: Integer,
         vector_encoding: Turbopuffer::Models::vector_encoding,
         request_options: Turbopuffer::RequestOptions
@@ -171,6 +173,46 @@ module Turbopuffer
           EVENTUAL: :eventual
 
           def self?.values: -> ::Array[Turbopuffer::Models::NamespaceQueryParams::Consistency::level]
+        end
+      end
+
+      type effort =
+        {
+          ann: Float,
+          ann_filter: Turbopuffer::Models::NamespaceQueryParams::Effort::ann_filter
+        }
+
+      class Effort < Turbopuffer::Internal::Type::BaseModel
+        attr_reader ann: Float?
+
+        def ann=: (Float) -> Float
+
+        attr_reader ann_filter: Turbopuffer::Models::NamespaceQueryParams::Effort::ann_filter?
+
+        def ann_filter=: (
+          Turbopuffer::Models::NamespaceQueryParams::Effort::ann_filter
+        ) -> Turbopuffer::Models::NamespaceQueryParams::Effort::ann_filter
+
+        def initialize: (
+          ?ann: Float,
+          ?ann_filter: Turbopuffer::Models::NamespaceQueryParams::Effort::ann_filter
+        ) -> void
+
+        def to_hash: -> {
+          ann: Float,
+          ann_filter: Turbopuffer::Models::NamespaceQueryParams::Effort::ann_filter
+        }
+
+        type ann_filter = :auto | :prefilter | :postfilter
+
+        module AnnFilter
+          extend Turbopuffer::Internal::Type::Enum
+
+          AUTO: :auto
+          PREFILTER: :prefilter
+          POSTFILTER: :postfilter
+
+          def self?.values: -> ::Array[Turbopuffer::Models::NamespaceQueryParams::Effort::ann_filter]
         end
       end
 

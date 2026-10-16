@@ -75,6 +75,7 @@ module Turbopuffer
           aggregate_by: ::Hash[Symbol, top],
           compute_attributes: ::Hash[Symbol, top],
           distance_metric: Turbopuffer::Models::distance_metric,
+          effort: Turbopuffer::NamespaceMultiQueryParams::Query::Effort,
           exclude_attributes: ::Array[String],
           filters: top,
           group_by: ::Array[top],
@@ -82,7 +83,6 @@ module Turbopuffer
           limit: Turbopuffer::Models::NamespaceMultiQueryParams::Query::limit,
           offset: Integer,
           rank_by: top,
-          search_effort: Float,
           top_k: Integer
         }
 
@@ -100,6 +100,12 @@ module Turbopuffer
         def distance_metric=: (
           Turbopuffer::Models::distance_metric
         ) -> Turbopuffer::Models::distance_metric
+
+        attr_reader effort: Turbopuffer::NamespaceMultiQueryParams::Query::Effort?
+
+        def effort=: (
+          Turbopuffer::NamespaceMultiQueryParams::Query::Effort
+        ) -> Turbopuffer::NamespaceMultiQueryParams::Query::Effort
 
         attr_reader exclude_attributes: ::Array[String]?
 
@@ -133,10 +139,6 @@ module Turbopuffer
 
         def rank_by=: (top) -> top
 
-        attr_reader search_effort: Float?
-
-        def search_effort=: (Float) -> Float
-
         attr_reader top_k: Integer?
 
         def top_k=: (Integer) -> Integer
@@ -145,6 +147,7 @@ module Turbopuffer
           ?aggregate_by: ::Hash[Symbol, top],
           ?compute_attributes: ::Hash[Symbol, top],
           ?distance_metric: Turbopuffer::Models::distance_metric,
+          ?effort: Turbopuffer::NamespaceMultiQueryParams::Query::Effort,
           ?exclude_attributes: ::Array[String],
           ?filters: top,
           ?group_by: ::Array[top],
@@ -152,7 +155,6 @@ module Turbopuffer
           ?limit: Turbopuffer::Models::NamespaceMultiQueryParams::Query::limit,
           ?offset: Integer,
           ?rank_by: top,
-          ?search_effort: Float,
           ?top_k: Integer
         ) -> void
 
@@ -160,6 +162,7 @@ module Turbopuffer
           aggregate_by: ::Hash[Symbol, top],
           compute_attributes: ::Hash[Symbol, top],
           distance_metric: Turbopuffer::Models::distance_metric,
+          effort: Turbopuffer::NamespaceMultiQueryParams::Query::Effort,
           exclude_attributes: ::Array[String],
           filters: top,
           group_by: ::Array[top],
@@ -167,9 +170,48 @@ module Turbopuffer
           limit: Turbopuffer::Models::NamespaceMultiQueryParams::Query::limit,
           offset: Integer,
           rank_by: top,
-          search_effort: Float,
           top_k: Integer
         }
+
+        type effort =
+          {
+            ann: Float,
+            ann_filter: Turbopuffer::Models::NamespaceMultiQueryParams::Query::Effort::ann_filter
+          }
+
+        class Effort < Turbopuffer::Internal::Type::BaseModel
+          attr_reader ann: Float?
+
+          def ann=: (Float) -> Float
+
+          attr_reader ann_filter: Turbopuffer::Models::NamespaceMultiQueryParams::Query::Effort::ann_filter?
+
+          def ann_filter=: (
+            Turbopuffer::Models::NamespaceMultiQueryParams::Query::Effort::ann_filter
+          ) -> Turbopuffer::Models::NamespaceMultiQueryParams::Query::Effort::ann_filter
+
+          def initialize: (
+            ?ann: Float,
+            ?ann_filter: Turbopuffer::Models::NamespaceMultiQueryParams::Query::Effort::ann_filter
+          ) -> void
+
+          def to_hash: -> {
+            ann: Float,
+            ann_filter: Turbopuffer::Models::NamespaceMultiQueryParams::Query::Effort::ann_filter
+          }
+
+          type ann_filter = :auto | :prefilter | :postfilter
+
+          module AnnFilter
+            extend Turbopuffer::Internal::Type::Enum
+
+            AUTO: :auto
+            PREFILTER: :prefilter
+            POSTFILTER: :postfilter
+
+            def self?.values: -> ::Array[Turbopuffer::Models::NamespaceMultiQueryParams::Query::Effort::ann_filter]
+          end
+        end
 
         type limit = Integer | Turbopuffer::Limit
 

@@ -57,6 +57,16 @@ module Turbopuffer
       end
       attr_writer :distance_metric
 
+      # How much work an ANN query does compared to the default. Only supported for ANN
+      # queries.
+      sig { returns(T.nilable(Turbopuffer::NamespaceQueryParams::Effort)) }
+      attr_reader :effort
+
+      sig do
+        params(effort: Turbopuffer::NamespaceQueryParams::Effort::OrHash).void
+      end
+      attr_writer :effort
+
       # List of attribute names to exclude from the response. All other attributes will
       # be included in the response.
       sig { returns(T.nilable(T::Array[String])) }
@@ -121,15 +131,6 @@ module Turbopuffer
       sig { params(rerank_by: Turbopuffer::RerankModelParams::OrHash).void }
       attr_writer :rerank_by
 
-      # Multiplies the number of clusters searched by an ANN query. Higher values
-      # improve recall at the cost of latency. Queried bytes are billed proportionally.
-      # Between 0.01 and 100, defaults to 1.
-      sig { returns(T.nilable(Float)) }
-      attr_reader :search_effort
-
-      sig { params(search_effort: Float).void }
-      attr_writer :search_effort
-
       # The number of results to return.
       sig { returns(T.nilable(Integer)) }
       attr_reader :top_k
@@ -153,6 +154,7 @@ module Turbopuffer
           compute_attributes: T::Hash[Symbol, T.anything],
           consistency: Turbopuffer::NamespaceQueryParams::Consistency::OrHash,
           distance_metric: Turbopuffer::DistanceMetric::OrSymbol,
+          effort: Turbopuffer::NamespaceQueryParams::Effort::OrHash,
           exclude_attributes: T::Array[String],
           filters: T.anything,
           group_by: T::Array[T.anything],
@@ -161,7 +163,6 @@ module Turbopuffer
           offset: Integer,
           rank_by: T.anything,
           rerank_by: Turbopuffer::RerankModelParams::OrHash,
-          search_effort: Float,
           top_k: Integer,
           vector_encoding: Turbopuffer::VectorEncoding::OrSymbol,
           request_options: Turbopuffer::RequestOptions::OrHash
@@ -180,6 +181,9 @@ module Turbopuffer
         consistency: nil,
         # A function used to calculate vector similarity.
         distance_metric: nil,
+        # How much work an ANN query does compared to the default. Only supported for ANN
+        # queries.
+        effort: nil,
         # List of attribute names to exclude from the response. All other attributes will
         # be included in the response.
         exclude_attributes: nil,
@@ -200,10 +204,6 @@ module Turbopuffer
         rank_by: nil,
         # Rerank retrieved candidates with a model.
         rerank_by: nil,
-        # Multiplies the number of clusters searched by an ANN query. Higher values
-        # improve recall at the cost of latency. Queried bytes are billed proportionally.
-        # Between 0.01 and 100, defaults to 1.
-        search_effort: nil,
         # The number of results to return.
         top_k: nil,
         # The encoding to use for vectors in the response.
@@ -220,6 +220,7 @@ module Turbopuffer
             compute_attributes: T::Hash[Symbol, T.anything],
             consistency: Turbopuffer::NamespaceQueryParams::Consistency,
             distance_metric: Turbopuffer::DistanceMetric::OrSymbol,
+            effort: Turbopuffer::NamespaceQueryParams::Effort,
             exclude_attributes: T::Array[String],
             filters: T.anything,
             group_by: T::Array[T.anything],
@@ -228,7 +229,6 @@ module Turbopuffer
             offset: Integer,
             rank_by: T.anything,
             rerank_by: Turbopuffer::RerankModelParams,
-            search_effort: Float,
             top_k: Integer,
             vector_encoding: Turbopuffer::VectorEncoding::OrSymbol,
             request_options: Turbopuffer::RequestOptions
@@ -320,6 +320,118 @@ module Turbopuffer
             override.returns(
               T::Array[
                 Turbopuffer::NamespaceQueryParams::Consistency::Level::TaggedSymbol
+              ]
+            )
+          end
+          def self.values
+          end
+        end
+      end
+
+      class Effort < Turbopuffer::Internal::Type::BaseModel
+        OrHash =
+          T.type_alias do
+            T.any(
+              Turbopuffer::NamespaceQueryParams::Effort,
+              Turbopuffer::Internal::AnyHash
+            )
+          end
+
+        # Multiplies the work done. Higher values improve recall at the cost of latency.
+        # Queries are billed proportionally.
+        sig { returns(T.nilable(Float)) }
+        attr_reader :ann
+
+        sig { params(ann: Float).void }
+        attr_writer :ann
+
+        # How filters are applied. `auto` uses the query planner. `prefilter` evaluates
+        # filters before the ANN search. `postfilter` evaluates filters only on rows near
+        # the query vector. Does not affect pricing.
+        sig do
+          returns(
+            T.nilable(
+              Turbopuffer::NamespaceQueryParams::Effort::AnnFilter::OrSymbol
+            )
+          )
+        end
+        attr_reader :ann_filter
+
+        sig do
+          params(
+            ann_filter:
+              Turbopuffer::NamespaceQueryParams::Effort::AnnFilter::OrSymbol
+          ).void
+        end
+        attr_writer :ann_filter
+
+        # How much work an ANN query does compared to the default. Only supported for ANN
+        # queries.
+        sig do
+          params(
+            ann: Float,
+            ann_filter:
+              Turbopuffer::NamespaceQueryParams::Effort::AnnFilter::OrSymbol
+          ).returns(T.attached_class)
+        end
+        def self.new(
+          # Multiplies the work done. Higher values improve recall at the cost of latency.
+          # Queries are billed proportionally.
+          ann: nil,
+          # How filters are applied. `auto` uses the query planner. `prefilter` evaluates
+          # filters before the ANN search. `postfilter` evaluates filters only on rows near
+          # the query vector. Does not affect pricing.
+          ann_filter: nil
+        )
+        end
+
+        sig do
+          override.returns(
+            {
+              ann: Float,
+              ann_filter:
+                Turbopuffer::NamespaceQueryParams::Effort::AnnFilter::OrSymbol
+            }
+          )
+        end
+        def to_hash
+        end
+
+        # How filters are applied. `auto` uses the query planner. `prefilter` evaluates
+        # filters before the ANN search. `postfilter` evaluates filters only on rows near
+        # the query vector. Does not affect pricing.
+        module AnnFilter
+          extend Turbopuffer::Internal::Type::Enum
+
+          TaggedSymbol =
+            T.type_alias do
+              T.all(
+                Symbol,
+                Turbopuffer::NamespaceQueryParams::Effort::AnnFilter
+              )
+            end
+          OrSymbol = T.type_alias { T.any(Symbol, String) }
+
+          AUTO =
+            T.let(
+              :auto,
+              Turbopuffer::NamespaceQueryParams::Effort::AnnFilter::TaggedSymbol
+            )
+          PREFILTER =
+            T.let(
+              :prefilter,
+              Turbopuffer::NamespaceQueryParams::Effort::AnnFilter::TaggedSymbol
+            )
+          POSTFILTER =
+            T.let(
+              :postfilter,
+              Turbopuffer::NamespaceQueryParams::Effort::AnnFilter::TaggedSymbol
+            )
+
+          sig do
+            override.returns(
+              T::Array[
+                Turbopuffer::NamespaceQueryParams::Effort::AnnFilter::TaggedSymbol
               ]
             )
           end

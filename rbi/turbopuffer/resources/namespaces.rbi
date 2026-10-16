@@ -75,6 +75,7 @@ module Turbopuffer
           consistency:
             Turbopuffer::NamespaceExplainQueryParams::Consistency::OrHash,
           distance_metric: Turbopuffer::DistanceMetric::OrSymbol,
+          effort: Turbopuffer::NamespaceExplainQueryParams::Effort::OrHash,
           exclude_attributes: T::Array[String],
           filters: T.anything,
           group_by: T::Array[T.anything],
@@ -82,7 +83,6 @@ module Turbopuffer
           limit: T.any(Integer, Turbopuffer::Limit::OrHash),
           offset: Integer,
           rank_by: T.anything,
-          search_effort: Float,
           top_k: Integer,
           vector_encoding: Turbopuffer::VectorEncoding::OrSymbol,
           request_options: Turbopuffer::RequestOptions::OrHash
@@ -102,6 +102,9 @@ module Turbopuffer
         consistency: nil,
         # Body param: A function used to calculate vector similarity.
         distance_metric: nil,
+        # Body param: How much work an ANN query does compared to the default. Only
+        # supported for ANN queries.
+        effort: nil,
         # Body param: List of attribute names to exclude from the response. All other
         # attributes will be included in the response.
         exclude_attributes: nil,
@@ -120,10 +123,6 @@ module Turbopuffer
         offset: nil,
         # Body param: How to rank the documents in the namespace.
         rank_by: nil,
-        # Body param: Multiplies the number of clusters searched by an ANN query. Higher
-        # values improve recall at the cost of latency. Queried bytes are billed
-        # proportionally. Between 0.01 and 100, defaults to 1.
-        search_effort: nil,
         # Body param: The number of results to return.
         top_k: nil,
         # Body param: The encoding to use for vectors in the response.
@@ -221,6 +220,7 @@ module Turbopuffer
           compute_attributes: T::Hash[Symbol, T.anything],
           consistency: Turbopuffer::NamespaceQueryParams::Consistency::OrHash,
           distance_metric: Turbopuffer::DistanceMetric::OrSymbol,
+          effort: Turbopuffer::NamespaceQueryParams::Effort::OrHash,
           exclude_attributes: T::Array[String],
           filters: T.anything,
           group_by: T::Array[T.anything],
@@ -229,7 +229,6 @@ module Turbopuffer
           offset: Integer,
           rank_by: T.anything,
           rerank_by: Turbopuffer::RerankModelParams::OrHash,
-          search_effort: Float,
           top_k: Integer,
           vector_encoding: Turbopuffer::VectorEncoding::OrSymbol,
           request_options: Turbopuffer::RequestOptions::OrHash
@@ -249,6 +248,9 @@ module Turbopuffer
         consistency: nil,
         # Body param: A function used to calculate vector similarity.
         distance_metric: nil,
+        # Body param: How much work an ANN query does compared to the default. Only
+        # supported for ANN queries.
+        effort: nil,
         # Body param: List of attribute names to exclude from the response. All other
         # attributes will be included in the response.
         exclude_attributes: nil,
@@ -269,10 +271,6 @@ module Turbopuffer
         rank_by: nil,
         # Body param: Rerank retrieved candidates with a model.
         rerank_by: nil,
-        # Body param: Multiplies the number of clusters searched by an ANN query. Higher
-        # values improve recall at the cost of latency. Queried bytes are billed
-        # proportionally. Between 0.01 and 100, defaults to 1.
-        search_effort: nil,
         # Body param: The number of results to return.
         top_k: nil,
         # Body param: The encoding to use for vectors in the response.
@@ -491,7 +489,8 @@ module Turbopuffer
         distance_metric: nil,
         # Body param: The encryption configuration for a namespace.
         encryption: nil,
-        # Body param: The patch and filter specifying which documents to patch.
+        # Body param: Sets the attributes in `patch` on every document that matches
+        # `filters`.
         patch_by_filter: nil,
         # Body param: Allow partial completion when filter matches too many documents.
         patch_by_filter_allow_partial: nil,

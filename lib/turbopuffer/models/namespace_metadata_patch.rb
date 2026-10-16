@@ -42,6 +42,7 @@ module Turbopuffer
       module Pinning
         extend Turbopuffer::Internal::Type::Union
 
+        # `true` to enable pinning with the default configuration, or `false` to remove pinning.
         variant Turbopuffer::Internal::Type::Boolean
 
         # Configuration for namespace pinning.

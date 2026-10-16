@@ -27,6 +27,7 @@ module Turbopuffer
         ?compute_attributes: ::Hash[Symbol, top],
         ?consistency: Turbopuffer::NamespaceExplainQueryParams::Consistency,
         ?distance_metric: Turbopuffer::Models::distance_metric,
+        ?effort: Turbopuffer::NamespaceExplainQueryParams::Effort,
         ?exclude_attributes: ::Array[String],
         ?filters: top,
         ?group_by: ::Array[top],
@@ -34,7 +35,6 @@ module Turbopuffer
         ?limit: Turbopuffer::Models::NamespaceExplainQueryParams::limit,
         ?offset: Integer,
         ?rank_by: top,
-        ?search_effort: Float,
         ?top_k: Integer,
         ?vector_encoding: Turbopuffer::Models::vector_encoding,
         ?request_options: Turbopuffer::request_opts
@@ -73,6 +73,7 @@ module Turbopuffer
         ?compute_attributes: ::Hash[Symbol, top],
         ?consistency: Turbopuffer::NamespaceQueryParams::Consistency,
         ?distance_metric: Turbopuffer::Models::distance_metric,
+        ?effort: Turbopuffer::NamespaceQueryParams::Effort,
         ?exclude_attributes: ::Array[String],
         ?filters: top,
         ?group_by: ::Array[top],
@@ -81,7 +82,6 @@ module Turbopuffer
         ?offset: Integer,
         ?rank_by: top,
         ?rerank_by: Turbopuffer::RerankModelParams,
-        ?search_effort: Float,
         ?top_k: Integer,
         ?vector_encoding: Turbopuffer::Models::vector_encoding,
         ?request_options: Turbopuffer::request_opts

@@ -92,6 +92,13 @@ module Turbopuffer
         #   @return [Symbol, Turbopuffer::Models::DistanceMetric, nil]
         optional :distance_metric, enum: -> { Turbopuffer::DistanceMetric }
 
+        # @!attribute effort
+        #   How much work an ANN query does compared to the default. Only supported for ANN
+        #   queries.
+        #
+        #   @return [Turbopuffer::Models::NamespaceMultiQueryParams::Query::Effort, nil]
+        optional :effort, -> { Turbopuffer::NamespaceMultiQueryParams::Query::Effort }
+
         # @!attribute exclude_attributes
         #   List of attribute names to exclude from the response. All other attributes will
         #   be included in the response.
@@ -138,21 +145,13 @@ module Turbopuffer
         #   @return [Object, nil]
         optional :rank_by, Turbopuffer::Internal::Type::Unknown
 
-        # @!attribute search_effort
-        #   Multiplies the number of clusters searched by an ANN query. Higher values
-        #   improve recall at the cost of latency. Queried bytes are billed proportionally.
-        #   Between 0.01 and 100, defaults to 1.
-        #
-        #   @return [Float, nil]
-        optional :search_effort, Float
-
         # @!attribute top_k
         #   The number of results to return.
         #
         #   @return [Integer, nil]
         optional :top_k, Integer
 
-        # @!method initialize(aggregate_by: nil, compute_attributes: nil, distance_metric: nil, exclude_attributes: nil, filters: nil, group_by: nil, include_attributes: nil, limit: nil, offset: nil, rank_by: nil, search_effort: nil, top_k: nil)
+        # @!method initialize(aggregate_by: nil, compute_attributes: nil, distance_metric: nil, effort: nil, exclude_attributes: nil, filters: nil, group_by: nil, include_attributes: nil, limit: nil, offset: nil, rank_by: nil, top_k: nil)
         #   Some parameter documentations has been truncated, see
         #   {Turbopuffer::Models::NamespaceMultiQueryParams::Query} for more details.
         #
@@ -163,6 +162,8 @@ module Turbopuffer
         #   @param compute_attributes [Hash{Symbol=>Object}] Computes additional values on documents returned by a query. Each key is the nam
         #
         #   @param distance_metric [Symbol, Turbopuffer::Models::DistanceMetric] A function used to calculate vector similarity.
+        #
+        #   @param effort [Turbopuffer::Models::NamespaceMultiQueryParams::Query::Effort] How much work an ANN query does compared to the default. Only supported for ANN
         #
         #   @param exclude_attributes [Array<String>] List of attribute names to exclude from the response. All other attributes will
         #
@@ -178,9 +179,53 @@ module Turbopuffer
         #
         #   @param rank_by [Object] How to rank the documents in the namespace.
         #
-        #   @param search_effort [Float] Multiplies the number of clusters searched by an ANN query. Higher values improv
-        #
         #   @param top_k [Integer] The number of results to return.
+
+        # @see Turbopuffer::Models::NamespaceMultiQueryParams::Query#effort
+        class Effort < Turbopuffer::Internal::Type::BaseModel
+          # @!attribute ann
+          #   Multiplies the work done. Higher values improve recall at the cost of latency.
+          #   Queries are billed proportionally.
+          #
+          #   @return [Float, nil]
+          optional :ann, Float
+
+          # @!attribute ann_filter
+          #   How filters are applied. `auto` uses the query planner. `prefilter` evaluates
+          #   filters before the ANN search. `postfilter` evaluates filters only on rows near
+          #   the query vector. Does not affect pricing.
+          #
+          #   @return [Symbol, Turbopuffer::Models::NamespaceMultiQueryParams::Query::Effort::AnnFilter, nil]
+          optional :ann_filter, enum: -> { Turbopuffer::NamespaceMultiQueryParams::Query::Effort::AnnFilter }
+
+          # @!method initialize(ann: nil, ann_filter: nil)
+          #   Some parameter documentations has been truncated, see
+          #   {Turbopuffer::Models::NamespaceMultiQueryParams::Query::Effort} for more
+          #   details.
+          #
+          #   How much work an ANN query does compared to the default. Only supported for ANN
+          #   queries.
+          #
+          #   @param ann [Float] Multiplies the work done. Higher values improve recall at the cost of latency. Q
+          #
+          #   @param ann_filter [Symbol, Turbopuffer::Models::NamespaceMultiQueryParams::Query::Effort::AnnFilter] How filters are applied. `auto` uses the query planner. `prefilter` evaluates fi
+
+          # How filters are applied. `auto` uses the query planner. `prefilter` evaluates
+          # filters before the ANN search. `postfilter` evaluates filters only on rows near
+          # the query vector. Does not affect pricing.
+          #
+          # @see Turbopuffer::Models::NamespaceMultiQueryParams::Query::Effort#ann_filter
+          module AnnFilter
+            extend Turbopuffer::Internal::Type::Enum
+
+            AUTO = :auto
+            PREFILTER = :prefilter
+            POSTFILTER = :postfilter
+
+            # @!method self.values
+            #   @return [Array<Symbol>]
+          end
+        end
 
         # Limits the documents returned by a query.
         #
@@ -231,6 +276,7 @@ module Turbopuffer
       module Limit
         extend Turbopuffer::Internal::Type::Union
 
+        # Limits the total number of reranked documents returned.
         variant Integer
 
         # Limits the total number of reranked documents returned.

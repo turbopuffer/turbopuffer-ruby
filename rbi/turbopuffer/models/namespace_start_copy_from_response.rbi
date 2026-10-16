@@ -15,6 +15,7 @@ module Turbopuffer
       sig { returns(String) }
       attr_accessor :token
 
+      # The response to a successful request to start a copy.
       sig { params(token: String).returns(T.attached_class) }
       def self.new(
         # The token identifying the copy operation.
