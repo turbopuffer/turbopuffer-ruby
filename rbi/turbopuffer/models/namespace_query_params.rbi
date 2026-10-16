@@ -121,6 +121,15 @@ module Turbopuffer
       sig { params(rerank_by: Turbopuffer::RerankModelParams::OrHash).void }
       attr_writer :rerank_by
 
+      # Multiplies the number of clusters searched by an ANN query. Higher values
+      # improve recall at the cost of latency. Billed as that many queries, rounded up.
+      # Between 1 and 10, defaults to 1.
+      sig { returns(T.nilable(Float)) }
+      attr_reader :search_effort
+
+      sig { params(search_effort: Float).void }
+      attr_writer :search_effort
+
       # The number of results to return.
       sig { returns(T.nilable(Integer)) }
       attr_reader :top_k
@@ -152,6 +161,7 @@ module Turbopuffer
           offset: Integer,
           rank_by: T.anything,
           rerank_by: Turbopuffer::RerankModelParams::OrHash,
+          search_effort: Float,
           top_k: Integer,
           vector_encoding: Turbopuffer::VectorEncoding::OrSymbol,
           request_options: Turbopuffer::RequestOptions::OrHash
@@ -190,6 +200,10 @@ module Turbopuffer
         rank_by: nil,
         # Rerank retrieved candidates with a model.
         rerank_by: nil,
+        # Multiplies the number of clusters searched by an ANN query. Higher values
+        # improve recall at the cost of latency. Billed as that many queries, rounded up.
+        # Between 1 and 10, defaults to 1.
+        search_effort: nil,
         # The number of results to return.
         top_k: nil,
         # The encoding to use for vectors in the response.
@@ -214,6 +228,7 @@ module Turbopuffer
             offset: Integer,
             rank_by: T.anything,
             rerank_by: Turbopuffer::RerankModelParams,
+            search_effort: Float,
             top_k: Integer,
             vector_encoding: Turbopuffer::VectorEncoding::OrSymbol,
             request_options: Turbopuffer::RequestOptions

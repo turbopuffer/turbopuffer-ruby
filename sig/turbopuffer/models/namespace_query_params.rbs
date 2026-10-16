@@ -15,6 +15,7 @@ module Turbopuffer
         offset: Integer,
         rank_by: top,
         rerank_by: Turbopuffer::RerankModelParams,
+        search_effort: Float,
         top_k: Integer,
         vector_encoding: Turbopuffer::Models::vector_encoding
       }
@@ -86,6 +87,10 @@ module Turbopuffer
         Turbopuffer::RerankModelParams
       ) -> Turbopuffer::RerankModelParams
 
+      attr_reader search_effort: Float?
+
+      def search_effort=: (Float) -> Float
+
       attr_reader top_k: Integer?
 
       def top_k=: (Integer) -> Integer
@@ -110,6 +115,7 @@ module Turbopuffer
         ?offset: Integer,
         ?rank_by: top,
         ?rerank_by: Turbopuffer::RerankModelParams,
+        ?search_effort: Float,
         ?top_k: Integer,
         ?vector_encoding: Turbopuffer::Models::vector_encoding,
         ?request_options: Turbopuffer::request_opts
@@ -129,6 +135,7 @@ module Turbopuffer
         offset: Integer,
         rank_by: top,
         rerank_by: Turbopuffer::RerankModelParams,
+        search_effort: Float,
         top_k: Integer,
         vector_encoding: Turbopuffer::Models::vector_encoding,
         request_options: Turbopuffer::RequestOptions
