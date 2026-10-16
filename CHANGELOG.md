@@ -1,5 +1,13 @@
 # Changelog
 
+## [2.9.0](https://github.com/turbopuffer/turbopuffer-ruby/compare/v2.8.0...v2.9.0) (2026-10-16)
+
+
+### Features
+
+* Bound document IDs to 0 so they become `u64` in Rust ([b5b3f8d](https://github.com/turbopuffer/turbopuffer-ruby/commit/b5b3f8d237cd8a488634cbc83a2bc67e0318e7da))
+* OpenAPI: Add missing descriptions to prettify docblocks in output SDKs ([712aef9](https://github.com/turbopuffer/turbopuffer-ruby/commit/712aef9d7f7b21807a7aef09509a158a6317611c))
+
 ## [2.8.0](https://github.com/turbopuffer/turbopuffer-ruby/compare/v2.7.0...v2.8.0) (2026-10-13)
 
 
