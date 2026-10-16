@@ -14,6 +14,7 @@ module Turbopuffer
         limit: Turbopuffer::Models::NamespaceExplainQueryParams::limit,
         offset: Integer,
         rank_by: top,
+        search_effort: Float,
         top_k: Integer,
         vector_encoding: Turbopuffer::Models::vector_encoding
       }
@@ -79,6 +80,10 @@ module Turbopuffer
 
       def rank_by=: (top) -> top
 
+      attr_reader search_effort: Float?
+
+      def search_effort=: (Float) -> Float
+
       attr_reader top_k: Integer?
 
       def top_k=: (Integer) -> Integer
@@ -102,6 +107,7 @@ module Turbopuffer
         ?limit: Turbopuffer::Models::NamespaceExplainQueryParams::limit,
         ?offset: Integer,
         ?rank_by: top,
+        ?search_effort: Float,
         ?top_k: Integer,
         ?vector_encoding: Turbopuffer::Models::vector_encoding,
         ?request_options: Turbopuffer::request_opts
@@ -120,6 +126,7 @@ module Turbopuffer
         limit: Turbopuffer::Models::NamespaceExplainQueryParams::limit,
         offset: Integer,
         rank_by: top,
+        search_effort: Float,
         top_k: Integer,
         vector_encoding: Turbopuffer::Models::vector_encoding,
         request_options: Turbopuffer::RequestOptions
