@@ -435,6 +435,7 @@ module Turbopuffer
         sig { returns(T.anything) }
         attr_accessor :filters
 
+        # The attributes to set on every document that matches `filters`.
         sig { returns(T::Hash[Symbol, T.anything]) }
         attr_accessor :patch
 
@@ -448,6 +449,7 @@ module Turbopuffer
         def self.new(
           # Filter by attributes. Same syntax as the query endpoint.
           filters:,
+          # The attributes to set on every document that matches `filters`.
           patch:
         )
         end

@@ -25,6 +25,9 @@ module Turbopuffer
       sig { params(performance: Turbopuffer::QueryPerformance::OrHash).void }
       attr_writer :performance
 
+      # One object per aggregation group, with its group key and the value of each
+      # requested aggregation. Only present when `aggregate_by` and `group_by` are both
+      # set.
       sig { returns(T.nilable(T::Array[T::Hash[Symbol, T.anything]])) }
       attr_reader :aggregation_groups
 
@@ -33,12 +36,16 @@ module Turbopuffer
       end
       attr_writer :aggregation_groups
 
+      # The value of each requested aggregation, keyed by its label. Only present when
+      # `aggregate_by` is set without `group_by`.
       sig { returns(T.nilable(T::Hash[Symbol, T.anything])) }
       attr_reader :aggregations
 
       sig { params(aggregations: T::Hash[Symbol, T.anything]).void }
       attr_writer :aggregations
 
+      # The documents that matched the query, ordered by `rank_by`. Only present when
+      # `rank_by` is set.
       sig { returns(T.nilable(T::Array[Turbopuffer::Row])) }
       attr_reader :rows
 
@@ -60,8 +67,15 @@ module Turbopuffer
         billing:,
         # The performance information for a query.
         performance:,
+        # One object per aggregation group, with its group key and the value of each
+        # requested aggregation. Only present when `aggregate_by` and `group_by` are both
+        # set.
         aggregation_groups: nil,
+        # The value of each requested aggregation, keyed by its label. Only present when
+        # `aggregate_by` is set without `group_by`.
         aggregations: nil,
+        # The documents that matched the query, ordered by `rank_by`. Only present when
+        # `rank_by` is set.
         rows: nil
       )
       end

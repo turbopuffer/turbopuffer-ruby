@@ -104,6 +104,7 @@ module Turbopuffer
         sig { returns(T::Array[Float]) }
         attr_accessor :query_vector
 
+        # The ground truth for one of the queries.
         sig do
           params(
             nearest_neighbors: T::Array[Turbopuffer::Row::OrHash],

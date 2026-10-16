@@ -86,7 +86,7 @@ module Turbopuffer
       sig { params(upserted_ids: T::Array[Turbopuffer::ID::Variants]).void }
       attr_writer :upserted_ids
 
-      # The response to a successful write request.
+      # The copy succeeded, with the result of its write.
       sig do
         params(
           billing: Turbopuffer::WriteBilling::OrHash,

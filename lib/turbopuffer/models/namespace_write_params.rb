@@ -207,6 +207,7 @@ module Turbopuffer
         required :filters, Turbopuffer::Internal::Type::Unknown
 
         # @!attribute patch
+        #   The attributes to set on every document that matches `filters`.
         #
         #   @return [Hash{Symbol=>Object}]
         required :patch, Turbopuffer::Internal::Type::HashOf[Turbopuffer::Internal::Type::Unknown]
@@ -216,7 +217,7 @@ module Turbopuffer
         #
         #   @param filters [Object] Filter by attributes. Same syntax as the query endpoint.
         #
-        #   @param patch [Hash{Symbol=>Object}]
+        #   @param patch [Hash{Symbol=>Object}] The attributes to set on every document that matches `filters`.
       end
     end
   end

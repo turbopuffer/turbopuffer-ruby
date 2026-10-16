@@ -2,6 +2,7 @@
 
 module Turbopuffer
   module Models
+    # The result of a finished copy operation.
     module CopyFromNamespaceOperationResult
       extend Turbopuffer::Internal::Type::Union
 
@@ -22,7 +23,7 @@ module Turbopuffer
             )
           end
 
-        # The response to a successful write request.
+        # The copy succeeded, with the result of its write.
         sig { returns(Turbopuffer::WriteResult) }
         attr_reader :success
 
@@ -35,7 +36,7 @@ module Turbopuffer
           )
         end
         def self.new(
-          # The response to a successful write request.
+          # The copy succeeded, with the result of its write.
           success:
         )
         end
@@ -54,6 +55,7 @@ module Turbopuffer
             )
           end
 
+        # The copy failed, with its error.
         sig { returns(Turbopuffer::OperationError) }
         attr_reader :error
 
@@ -65,7 +67,10 @@ module Turbopuffer
             T.attached_class
           )
         end
-        def self.new(error:)
+        def self.new(
+          # The copy failed, with its error.
+          error:
+        )
         end
 
         sig { override.returns({ error: Turbopuffer::OperationError }) }
