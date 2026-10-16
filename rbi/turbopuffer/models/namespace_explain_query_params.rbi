@@ -119,6 +119,15 @@ module Turbopuffer
       sig { params(rank_by: T.anything).void }
       attr_writer :rank_by
 
+      # Multiplies the number of clusters searched by an ANN query. Higher values
+      # improve recall at the cost of latency. Queried bytes are billed proportionally.
+      # Between 0.01 and 100, defaults to 1.
+      sig { returns(T.nilable(Float)) }
+      attr_reader :search_effort
+
+      sig { params(search_effort: Float).void }
+      attr_writer :search_effort
+
       # The number of results to return.
       sig { returns(T.nilable(Integer)) }
       attr_reader :top_k
@@ -150,6 +159,7 @@ module Turbopuffer
           limit: T.any(Integer, Turbopuffer::Limit::OrHash),
           offset: Integer,
           rank_by: T.anything,
+          search_effort: Float,
           top_k: Integer,
           vector_encoding: Turbopuffer::VectorEncoding::OrSymbol,
           request_options: Turbopuffer::RequestOptions::OrHash
@@ -186,6 +196,10 @@ module Turbopuffer
         offset: nil,
         # How to rank the documents in the namespace.
         rank_by: nil,
+        # Multiplies the number of clusters searched by an ANN query. Higher values
+        # improve recall at the cost of latency. Queried bytes are billed proportionally.
+        # Between 0.01 and 100, defaults to 1.
+        search_effort: nil,
         # The number of results to return.
         top_k: nil,
         # The encoding to use for vectors in the response.
@@ -209,6 +223,7 @@ module Turbopuffer
             limit: T.any(Integer, Turbopuffer::Limit),
             offset: Integer,
             rank_by: T.anything,
+            search_effort: Float,
             top_k: Integer,
             vector_encoding: Turbopuffer::VectorEncoding::OrSymbol,
             request_options: Turbopuffer::RequestOptions

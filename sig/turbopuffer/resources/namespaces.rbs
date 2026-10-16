@@ -34,6 +34,7 @@ module Turbopuffer
         ?limit: Turbopuffer::Models::NamespaceExplainQueryParams::limit,
         ?offset: Integer,
         ?rank_by: top,
+        ?search_effort: Float,
         ?top_k: Integer,
         ?vector_encoding: Turbopuffer::Models::vector_encoding,
         ?request_options: Turbopuffer::request_opts
@@ -80,6 +81,7 @@ module Turbopuffer
         ?offset: Integer,
         ?rank_by: top,
         ?rerank_by: Turbopuffer::RerankModelParams,
+        ?search_effort: Float,
         ?top_k: Integer,
         ?vector_encoding: Turbopuffer::Models::vector_encoding,
         ?request_options: Turbopuffer::request_opts
