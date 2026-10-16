@@ -75,6 +75,7 @@ module Turbopuffer
           consistency:
             Turbopuffer::NamespaceExplainQueryParams::Consistency::OrHash,
           distance_metric: Turbopuffer::DistanceMetric::OrSymbol,
+          effort: Turbopuffer::NamespaceExplainQueryParams::Effort::OrHash,
           exclude_attributes: T::Array[String],
           filters: T.anything,
           group_by: T::Array[T.anything],
@@ -101,6 +102,9 @@ module Turbopuffer
         consistency: nil,
         # Body param: A function used to calculate vector similarity.
         distance_metric: nil,
+        # Body param: How much work an ANN query does compared to the default. Only
+        # supported for ANN queries.
+        effort: nil,
         # Body param: List of attribute names to exclude from the response. All other
         # attributes will be included in the response.
         exclude_attributes: nil,
@@ -216,6 +220,7 @@ module Turbopuffer
           compute_attributes: T::Hash[Symbol, T.anything],
           consistency: Turbopuffer::NamespaceQueryParams::Consistency::OrHash,
           distance_metric: Turbopuffer::DistanceMetric::OrSymbol,
+          effort: Turbopuffer::NamespaceQueryParams::Effort::OrHash,
           exclude_attributes: T::Array[String],
           filters: T.anything,
           group_by: T::Array[T.anything],
@@ -243,6 +248,9 @@ module Turbopuffer
         consistency: nil,
         # Body param: A function used to calculate vector similarity.
         distance_metric: nil,
+        # Body param: How much work an ANN query does compared to the default. Only
+        # supported for ANN queries.
+        effort: nil,
         # Body param: List of attribute names to exclude from the response. All other
         # attributes will be included in the response.
         exclude_attributes: nil,
@@ -481,7 +489,8 @@ module Turbopuffer
         distance_metric: nil,
         # Body param: The encryption configuration for a namespace.
         encryption: nil,
-        # Body param: The patch and filter specifying which documents to patch.
+        # Body param: Sets the attributes in `patch` on every document that matches
+        # `filters`.
         patch_by_filter: nil,
         # Body param: Allow partial completion when filter matches too many documents.
         patch_by_filter_allow_partial: nil,

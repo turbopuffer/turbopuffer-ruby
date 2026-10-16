@@ -38,6 +38,7 @@ module Turbopuffer
         sig { params(progress: String).void }
         attr_writer :progress
 
+        # The copy is still in progress.
         sig do
           params(start_time: Time, progress: String, status: Symbol).returns(
             T.attached_class
@@ -75,6 +76,7 @@ module Turbopuffer
         sig { returns(Time) }
         attr_accessor :finish_time
 
+        # The result of the copy.
         sig { returns(Turbopuffer::CopyFromNamespaceOperationResult::Variants) }
         attr_accessor :result
 
@@ -85,6 +87,7 @@ module Turbopuffer
         sig { returns(Symbol) }
         attr_accessor :status
 
+        # The copy has finished, successfully or not.
         sig do
           params(
             finish_time: Time,
@@ -100,6 +103,7 @@ module Turbopuffer
         def self.new(
           # The time at which the operation finished.
           finish_time:,
+          # The result of the copy.
           result:,
           # The time at which the operation started.
           start_time:,
