@@ -1,5 +1,18 @@
 # Changelog
 
+## [2.8.0](https://github.com/turbopuffer/turbopuffer-ruby/compare/v2.7.0...v2.8.0) (2026-10-13)
+
+
+### Features
+
+* rerank: support reranking with a model ([1e57cad](https://github.com/turbopuffer/turbopuffer-ruby/commit/1e57cadcb4369d6e5eac22eac5e7bf6bba4b516b))
+
+
+### Chores
+
+* regenerate SDK ([707ebd4](https://github.com/turbopuffer/turbopuffer-ruby/commit/707ebd46ade3bb8e2dfc29546f7117b1ae890b26))
+* regenerate SDK ([5f41594](https://github.com/turbopuffer/turbopuffer-ruby/commit/5f41594877a1bf91b5c14d57f80ea56b2f1f979d))
+
 ## [2.7.0](https://github.com/turbopuffer/turbopuffer-ruby/compare/v2.6.0...v2.7.0) (2026-10-08)
 
 
