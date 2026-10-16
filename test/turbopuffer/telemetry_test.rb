@@ -418,6 +418,17 @@ class Turbopuffer::Test::TelemetryTest < Minitest::Test
     assert_equal([[0, "canceled"]], sent_records(@requests.last).map { _1.values_at(:status, :error) })
   end
 
+  def test_parse_failures_are_recorded
+    not_json = {status: 200, headers: {"content-type" => "application/json"}, body: "not json"}
+    serve(:post, "#{BASE_URL}#{QUERY_PATH}", not_json, query_response)
+    ns = new_client(max_retries: 0).namespace("my-ns")
+
+    assert_raises(JSON::ParserError) { ns.query(top_k: 1) }
+    ns.query(top_k: 1)
+
+    assert_equal([[200, "other"]], sent_records(@requests[1]).map { _1.values_at(:status, :error) })
+  end
+
   def test_failures_are_recorded
     serve(
       :post,

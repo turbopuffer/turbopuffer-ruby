@@ -413,8 +413,8 @@ module Turbopuffer
         def error_name(kind)
           if kind.nil?
             nil
-          elsif kind == :canceled
-            "canceled"
+          elsif kind == :canceled || kind == :other
+            kind.to_s
           elsif kind.end_with?("timeout")
             "timeout"
           else
