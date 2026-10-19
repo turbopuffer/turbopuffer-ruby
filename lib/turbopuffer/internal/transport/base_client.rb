@@ -179,6 +179,10 @@ module Turbopuffer
         attr_reader :requester
 
         # @api private
+        # @return [Turbopuffer::Internal::Transport::RequestObserver, nil]
+        attr_accessor :request_observer
+
+        # @api private
         #
         # @param base_url [String]
         # @param timeout [Float]
@@ -213,6 +217,7 @@ module Turbopuffer
           @max_retries = max_retries
           @initial_retry_delay = initial_retry_delay
           @max_retry_delay = max_retry_delay
+          @request_observer = nil
         end
 
         # @api private
@@ -374,9 +379,11 @@ module Turbopuffer
         #
         # @param send_retry_header [Boolean]
         #
+        # @param observation [Turbopuffer::Internal::Transport::RequestObserver::Observation, nil]
+        #
         # @raise [Turbopuffer::Errors::APIError]
         # @return [Array(Integer, Net::HTTPResponse, Enumerable<String>)]
-        def send_request(request, redirect_count:, retry_count:, send_retry_header:)
+        def send_request(request, redirect_count:, retry_count:, send_retry_header:, observation: nil)
           url, headers, max_retries, timeout = request.fetch_values(:url, :headers, :max_retries, :timeout)
           input = {**request.except(:timeout), deadline: Turbopuffer::Internal::Util.monotonic_secs + timeout}
 
@@ -384,11 +391,13 @@ module Turbopuffer
             headers["x-stainless-retry-count"] = retry_count.to_s
           end
 
+          input = observation.attempt_begin(input, retry_count: retry_count) if observation
           begin
             status, response, stream = @requester.execute(input)
           rescue Turbopuffer::Errors::APIConnectionError => e
             status = e
           end
+          observation&.attempt_end(status, response)
           headers = Turbopuffer::Internal::Util.normalized_headers(response&.each_header&.to_h)
 
           case status
@@ -407,7 +416,8 @@ module Turbopuffer
               request,
               redirect_count: redirect_count + 1,
               retry_count: retry_count,
-              send_retry_header: send_retry_header
+              send_retry_header: send_retry_header,
+              observation: observation
             )
           in Turbopuffer::Errors::APIConnectionError if retry_count >= max_retries
             raise status
@@ -436,7 +446,8 @@ module Turbopuffer
               request,
               redirect_count: redirect_count,
               retry_count: retry_count + 1,
-              send_retry_header: send_retry_header
+              send_retry_header: send_retry_header,
+              observation: observation
             )
           end
         end
@@ -486,7 +497,16 @@ module Turbopuffer
           opts = req[:options].to_h
           unwrap = req[:unwrap]
           Turbopuffer::RequestOptions.validate!(opts)
+          started_at = Turbopuffer::Internal::Transport::RequestObserver.now if @request_observer
           request = build_request(req.except(:options), opts)
+          if started_at
+            observation = Turbopuffer::Internal::Transport::RequestObserver::Observation.start(
+              @request_observer,
+              request,
+              started_at,
+              path: Turbopuffer::Internal::Util.interpolate_path(req.fetch(:path))
+            )
+          end
           url = request.fetch(:url)
 
           # Don't send the current retry count in the headers if the caller modified the header defaults.
@@ -495,28 +515,37 @@ module Turbopuffer
             request,
             redirect_count: 0,
             retry_count: 0,
-            send_retry_header: send_retry_header
+            send_retry_header: send_retry_header,
+            observation: observation
           )
 
           headers = Turbopuffer::Internal::Util.normalized_headers(response.each_header.to_h)
+          observation&.deserialize_begin
           decoded = Turbopuffer::Internal::Util.decode_content(headers, stream: stream)
-          case req
-          in {stream: Class => st}
-            st.new(
-              model: model,
-              url: url,
-              status: status,
-              headers: headers,
-              response: response,
-              unwrap: unwrap,
-              stream: decoded
-            )
-          in {page: Class => page}
-            page.new(client: self, req: req, headers: headers, page_data: decoded)
-          else
-            unwrapped = Turbopuffer::Internal::Util.dig(decoded, unwrap)
-            Turbopuffer::Internal::Type::Converter.coerce(model, unwrapped)
-          end
+          parsed =
+            case req
+            in {stream: Class => st}
+              st.new(
+                model: model,
+                url: url,
+                status: status,
+                headers: headers,
+                response: response,
+                unwrap: unwrap,
+                stream: decoded
+              )
+            in {page: Class => page}
+              page.new(client: self, req: req, headers: headers, page_data: decoded)
+            else
+              unwrapped = Turbopuffer::Internal::Util.dig(decoded, unwrap)
+              Turbopuffer::Internal::Type::Converter.coerce(model, unwrapped)
+            end
+          # streamed responses are read by the caller, so they never finish
+          observation&.finish(response: response, parsed: parsed) unless req[:stream]
+          parsed
+        rescue Exception => e # rubocop:disable Lint/RescueException
+          observation&.finish(error: e)
+          raise
         end
 
         # @api private
