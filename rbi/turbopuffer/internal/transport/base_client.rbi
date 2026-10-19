@@ -144,6 +144,12 @@ module Turbopuffer
 
         # @api private
         sig do
+          returns(T.nilable(Turbopuffer::Internal::Transport::RequestObserver))
+        end
+        attr_accessor :request_observer
+
+        # @api private
+        sig do
           params(
             base_url: String,
             timeout: Float,
@@ -219,14 +225,19 @@ module Turbopuffer
             request: Turbopuffer::Internal::Transport::BaseClient::RequestInput,
             redirect_count: Integer,
             retry_count: Integer,
-            send_retry_header: T::Boolean
+            send_retry_header: T::Boolean,
+            observation:
+              T.nilable(
+                Turbopuffer::Internal::Transport::RequestObserver::Observation
+              )
           ).returns([Integer, Net::HTTPResponse, T::Enumerable[String]])
         end
         def send_request(
           request,
           redirect_count:,
           retry_count:,
-          send_retry_header:
+          send_retry_header:,
+          observation: nil
         )
         end
 

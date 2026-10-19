@@ -10,12 +10,21 @@ module Turbopuffer
             url: URI::Generic,
             headers: ::Hash[String, String],
             body: top,
-            deadline: Float
+            deadline: Float,
+            timings: Turbopuffer::Internal::Transport::RequestObserver::Timings?
           }
 
         KEEP_ALIVE_TIMEOUT: 30
 
         DEFAULT_MAX_CONNECTIONS: Integer
+
+        module ObservedConnection
+          attr_accessor request_timings: Turbopuffer::Internal::Transport::RequestObserver::Timings?
+        end
+
+        class ObservedRequest
+          attr_accessor request_timings: Turbopuffer::Internal::Transport::RequestObserver::Timings?
+        end
 
         def self.connect: (
           cert_store: OpenSSL::X509::Store,
@@ -23,6 +32,11 @@ module Turbopuffer
         ) -> top
 
         def self.calibrate_socket_timeout: (top conn, Float deadline) -> void
+
+        def self.observe_connection: (
+          top conn,
+          Turbopuffer::Internal::Transport::RequestObserver::Timings? timings
+        ) -> void
 
         def self.build_request: (
           Turbopuffer::Internal::Transport::PooledNetRequester::request request

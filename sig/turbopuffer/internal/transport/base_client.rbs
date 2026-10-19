@@ -73,6 +73,9 @@ module Turbopuffer
         # @api private
         attr_reader requester: Turbopuffer::Internal::Transport::PooledNetRequester
 
+        # @api private
+        attr_accessor request_observer: Turbopuffer::Internal::Transport::RequestObserver?
+
         def initialize: (
           base_url: String,
           ?timeout: Float,
@@ -105,7 +108,8 @@ module Turbopuffer
           Turbopuffer::Internal::Transport::BaseClient::request_input request,
           redirect_count: Integer,
           retry_count: Integer,
-          send_retry_header: bool
+          send_retry_header: bool,
+          ?observation: Turbopuffer::Internal::Transport::RequestObserver::Observation?
         ) -> [Integer, top, Enumerable[String]]
 
         def request: (

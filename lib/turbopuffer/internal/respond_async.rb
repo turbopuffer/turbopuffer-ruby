@@ -157,7 +157,7 @@ module Turbopuffer
             sleep(timeout.sleep_duration)
             nil
           in {status: "finished", result: {success: success}}
-            response = Net::HTTPOK.new("1.1", 200, "OK")
+            response = Net::HTTPOK.new("1.1", "200", "OK")
             response["content-type"] = "application/json"
             [200, response, [JSON.generate(success)]]
           in {status: "finished", result: {error: {status_code: Integer => err_status, **rest}}}
