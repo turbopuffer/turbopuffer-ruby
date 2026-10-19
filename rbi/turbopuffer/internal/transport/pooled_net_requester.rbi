@@ -14,7 +14,11 @@ module Turbopuffer
               url: URI::Generic,
               headers: T::Hash[String, String],
               body: T.anything,
-              deadline: Float
+              deadline: Float,
+              timings:
+                T.nilable(
+                  Turbopuffer::Internal::Transport::RequestObserver::Timings
+                )
             }
           end
 
@@ -23,6 +27,35 @@ module Turbopuffer
         KEEP_ALIVE_TIMEOUT = 30
 
         DEFAULT_MAX_CONNECTIONS = T.let(T.unsafe(nil), Integer)
+
+        # @api private
+        #
+        # Records connect timings while an observed attempt has the connection checked
+        # out.
+        module ObservedConnection
+          sig do
+            returns(
+              T.nilable(
+                Turbopuffer::Internal::Transport::RequestObserver::Timings
+              )
+            )
+          end
+          attr_accessor :request_timings
+        end
+
+        # @api private
+        #
+        # Records when the request headers and body are written.
+        class ObservedRequest < Net::HTTPGenericRequest
+          sig do
+            returns(
+              T.nilable(
+                Turbopuffer::Internal::Transport::RequestObserver::Timings
+              )
+            )
+          end
+          attr_accessor :request_timings
+        end
 
         class << self
           # @api private
@@ -37,6 +70,19 @@ module Turbopuffer
           # @api private
           sig { params(conn: Net::HTTP, deadline: Float).void }
           def calibrate_socket_timeout(conn, deadline)
+          end
+
+          # @api private
+          sig do
+            params(
+              conn: Net::HTTP,
+              timings:
+                T.nilable(
+                  Turbopuffer::Internal::Transport::RequestObserver::Timings
+                )
+            ).void
+          end
+          def observe_connection(conn, timings)
           end
 
           # @api private
