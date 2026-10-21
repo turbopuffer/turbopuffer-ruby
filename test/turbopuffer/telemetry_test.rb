@@ -31,8 +31,30 @@ module Turbopuffer::Test::TelemetryHelpers
     {status: status, headers: {"content-type" => "application/json", **headers}, body: JSON.generate(body)}
   end
 
-  def add_record(buffer, status: 200)
-    buffer.record(method: :post, url: QUERY_PATH, status: status, retries: 0, durations: {total: 5_000_000})
+  def add_record(buffer, status: 200, sample_rate: 1.0)
+    buffer.record(
+      method: :post,
+      url: QUERY_PATH,
+      status: status,
+      retries: 0,
+      durations: {total: 5_000_000},
+      sample_rate: sample_rate
+    )
+  end
+
+  # Returns the millisecond time and random bytes of a generated request ID, checking its format.
+  def decode_request_id(id)
+    length = (Telemetry::REQUEST_ID_BYTES * 8).ceildiv(5)
+    assert_match(/\A#{Telemetry::REQUEST_ID_PREFIX}[#{Telemetry::REQUEST_ID_ALPHABET}]{#{length}}\z/, id)
+    bits = id.delete_prefix(Telemetry::REQUEST_ID_PREFIX).each_char.map do
+      Telemetry::REQUEST_ID_ALPHABET.index(_1).to_s(2).rjust(5, "0")
+    end.join
+    # The bits after the last byte only pad the final character.
+    assert_equal(0, bits[(Telemetry::REQUEST_ID_BYTES * 8)..].to_i(2), id)
+    bytes = [bits].pack("B*").bytes.first(Telemetry::REQUEST_ID_BYTES)
+    random = bytes.first(Telemetry::REQUEST_ID_RANDOM_BYTES)
+    time = bytes.drop(Telemetry::REQUEST_ID_RANDOM_BYTES).zip(random).map { _1 ^ _2 }
+    [[0, 0, *time].pack("C*").unpack1("Q>"), random.pack("C*")]
   end
 end
 
@@ -99,6 +121,8 @@ class Turbopuffer::Test::TelemetryTest < Minitest::Test
     assert_equal(1, payload.fetch(:version))
     payload.fetch(:records)
   end
+
+  def sent_request_id(request) = request.headers["X-Request-Id"]
 
   def test_disabled_by_default
     refute(Telemetry.resolve_enabled(nil))
@@ -222,6 +246,7 @@ class Turbopuffer::Test::TelemetryTest < Minitest::Test
       status: 200,
       retries: 2,
       durations: {total: 1_234_567, compress: 0, deserialize: 999},
+      sample_rate: 1.0,
       server_total_ms: 7
     )
 
@@ -282,6 +307,28 @@ class Turbopuffer::Test::TelemetryTest < Minitest::Test
       end
       assert_equal(0.5, buffer.sample_rate, value)
     end
+  end
+
+  def test_samples_requests
+    buffer = Telemetry::Buffer.new
+    buffer.instance_variable_set(:@sample_rate, 0.5)
+    Telemetry.stub(:random, 0.3) do
+      assert_equal(0.5, buffer.sample)
+      add_record(buffer, sample_rate: 0.5)
+      assert_equal(0.5, take_payload(buffer).fetch(:records).first.fetch(:sample_rate))
+
+      buffer.instance_variable_set(:@sample_rate, 0.25)
+      assert_nil(buffer.sample)
+    end
+
+    buffer.instance_variable_set(:@sample_rate, 0.0)
+    Telemetry.stub(:random, 0.0) { assert_nil(buffer.sample) }
+
+    # A full rate isn't reported.
+    buffer.instance_variable_set(:@sample_rate, 1.0)
+    assert_equal(1.0, buffer.sample)
+    add_record(buffer, sample_rate: 1.0)
+    refute_includes(take_payload(buffer).fetch(:records).first, :sample_rate)
   end
 
   def test_fork_resets_buffers
@@ -352,7 +399,10 @@ class Turbopuffer::Test::TelemetryTest < Minitest::Test
     ns.query(top_k: 1)
 
     assert_equal(2, @requests.length)
-    @requests.each { assert_nil(sent_records(_1)) }
+    @requests.each do |request|
+      assert_nil(sent_records(request))
+      assert_nil(sent_request_id(request))
+    end
   end
 
   def test_server_sample_rate_of_zero_stops_recording
@@ -363,6 +413,8 @@ class Turbopuffer::Test::TelemetryTest < Minitest::Test
 
     @requests.each { assert_nil(sent_records(_1)) }
     assert_equal(0.0, buffer_of(client).sample_rate)
+    # Unrecorded requests have no request IDs to link.
+    assert_nil(sent_request_id(@requests[1]))
   end
 
   def test_server_sample_rate_is_applied
@@ -373,14 +425,18 @@ class Turbopuffer::Test::TelemetryTest < Minitest::Test
     )
     ns = new_client.namespace("my-ns")
 
+    # Requests are sampled when they start, so the first is sampled before the server's rate is known.
+    ns.query(top_k: 1)
     Telemetry.stub(:random, 0.2) { ns.query(top_k: 1) }
     Telemetry.stub(:random, 0.3) do
       ns.query(top_k: 1)
       ns.query(top_k: 1)
     end
 
-    assert_equal(0.25, sent_records(@requests[1]).first.fetch(:sample_rate))
-    assert_nil(sent_records(@requests[2]))
+    refute_includes(sent_records(@requests[1]).first, :sample_rate)
+    assert_equal(0.25, sent_records(@requests[2]).first.fetch(:sample_rate))
+    assert_nil(sent_records(@requests[3]))
+    assert_nil(sent_request_id(@requests[2]))
   end
 
   def test_batch_is_resent_after_connect_error
@@ -548,6 +604,76 @@ class Turbopuffer::Test::TelemetryTest < Minitest::Test
 
     *_polls, request = all_records(client)
     assert_equal(["POST /v2/namespaces/{ns}", 202, "timeout"], request.values_at(:route, :status, :error))
+  end
+
+  def test_encodes_base32
+    # The vectors of riverpro's uuidbase32, which uses the same encoding.
+    {
+      0x00 => "22222222222222222222222222",
+      0x01 => "22222222222222222222222226",
+      0x0f => "2222222222222222222222223w",
+      0xff => "222222222222222222222222zw"
+    }.each do |byte, encoded|
+      assert_equal(encoded, Telemetry.encode_base32([*[0] * 15, byte].pack("C*")))
+    end
+    assert_equal("zzzzzzzzzzzzzzzzzzzzzzzzzw", Telemetry.encode_base32([0xff].pack("C") * 16))
+
+    # A request ID, generated by Python's base64 module independently of this implementation.
+    random = [0x9f, 0x1c, 0x2e, 0x7a, 0x4b, 0x6d, 0x8e, 0x0f, 0x1a, 0x2b, 0x3c, 0x4d].pack("C*")
+    id = Telemetry.new_request_id(Time.at(0, 1_792_497_600_123, :millisecond), random: random)
+    assert_equal("tpreq_nwi4wymfhqb2yalfblatxjfremalg", id)
+    assert_equal([1_792_497_600_123, random], decode_request_id(id))
+  end
+
+  def test_generates_request_ids
+    now = Time.at(0, 1_792_497_600_123, :millisecond)
+    millis, random = decode_request_id(Telemetry.new_request_id(now))
+    assert_equal(1_792_497_600_123, millis)
+    _, other = decode_request_id(Telemetry.new_request_id(now))
+    refute_equal(random, other)
+  end
+
+  def test_keeps_request_ids_set_by_callers
+    ENV["TURBOPUFFER_CUSTOM_HEADERS"] = "X-Request-Id: my-request"
+    serve(:post, "#{BASE_URL}#{QUERY_PATH}", query_response)
+    client = new_client
+    ns = client.namespace("my-ns")
+
+    ns.query(top_k: 1)
+    ns.query(top_k: 1, request_options: {extra_headers: {"X-Request-Id" => "my-other-request"}})
+
+    assert_equal(%w[my-request my-other-request], @requests.map { sent_request_id(_1) })
+    records = all_records(client)
+    assert_equal(2, records.length)
+    records.each { refute_includes(_1, :request_id) }
+  end
+
+  def test_retries_keep_their_request_ids
+    serve(:post, "#{BASE_URL}#{QUERY_PATH}", {status: 503}, query_response)
+    client = new_client
+
+    client.namespace("my-ns").query(top_k: 1)
+
+    assert_equal(2, @requests.length)
+    id = sent_request_id(@requests[0])
+    refute_nil(id)
+    assert_equal(id, sent_request_id(@requests[1]))
+    record, = take_payload(buffer_of(client)).fetch(:records)
+    assert_equal(id, record.fetch(:request_id))
+    assert_equal(1, record.fetch(:retries))
+  end
+
+  def test_sends_request_ids_that_records_repeat
+    serve(:post, "#{BASE_URL}#{QUERY_PATH}", query_response)
+    ns = new_client.namespace("my-ns")
+
+    ns.query(top_k: 1)
+    ns.query(top_k: 1)
+
+    ids = @requests.map { sent_request_id(_1) }
+    refute_equal(ids[0], ids[1])
+    ids.each { decode_request_id(_1) }
+    assert_equal(ids[0], sent_records(@requests[1]).first.fetch(:request_id))
   end
 end
 

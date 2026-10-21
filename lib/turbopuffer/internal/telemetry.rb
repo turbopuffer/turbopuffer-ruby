@@ -9,16 +9,30 @@ module Turbopuffer
     # header. The server controls how many requests are recorded by advertising a
     # sample rate in the `X-turbopuffer-Client-Telemetry-Sample-Rate` response header.
     #
+    # Each recorded request is sent with an `X-Request-Id` that its record repeats, so the
+    # server can show the client's timings in the same trace as its own.
+    #
     # @api private
     module Telemetry
       ENV_VAR = "TURBOPUFFER_TELEMETRY"
       HEADER = "x-turbopuffer-client-telemetry"
       SAMPLE_RATE_HEADER = "x-turbopuffer-client-telemetry-sample-rate"
+      # Sorted by ASCII value, so that encoded IDs sort like their bytes.
+      REQUEST_ID_ALPHABET = "234567abcdefghijklmnopqrstuvwxyz"
+      # The bytes in a request ID before it's encoded. The first `REQUEST_ID_RANDOM_BYTES` are
+      # random, and the rest hold the time it was generated.
+      REQUEST_ID_BYTES = 18
+      # The request header that carries the IDs of recorded requests.
+      REQUEST_ID_HEADER = "x-request-id"
+      # The prefix of generated request IDs.
+      REQUEST_ID_PREFIX = "tpreq_"
+      # The random bytes at the start of a request ID.
+      REQUEST_ID_RANDOM_BYTES = 12
 
       ENVELOPE_VERSION = 1
 
       # Keeps the header well under the 8 KB per-line limit of common proxies.
-      MAX_RECORDS_PER_HEADER = 20
+      MAX_RECORDS_PER_HEADER = 16
       MAX_BUFFERED_RECORDS = 1000
 
       TRUE_VALUES = %w[1 true yes on].freeze
@@ -123,6 +137,37 @@ module Turbopuffer
         #
         # @return [Float]
         def random = Kernel.rand
+
+        # @api private
+        #
+        # Encodes `bytes` in base32 with `REQUEST_ID_ALPHABET`, in RFC 4648's bit order without
+        # padding.
+        #
+        # @param bytes [String]
+        #
+        # @return [String]
+        def encode_base32(bytes)
+          bytes.unpack1("B*").scan(/.{1,5}/).map { REQUEST_ID_ALPHABET[_1.ljust(5, "0").to_i(2)] }.join
+        end
+
+        # @api private
+        #
+        # Generates the ID of a request that will be recorded. Its format is private to turbopuffer,
+        # which only links IDs in the format it expects: 12 random bytes, then the 48-bit
+        # millisecond time they were generated XORed with the first 6 random bytes, in base32
+        # after a prefix.
+        #
+        # @param now [Time]
+        # @param random [String] overridden by tests
+        #
+        # @return [String]
+        def new_request_id(now, random: SecureRandom.random_bytes(REQUEST_ID_RANDOM_BYTES))
+          millis = (now.to_r * 1000).floor
+          # The low bytes of the big-endian time.
+          time = [millis].pack("Q>").bytes.last(REQUEST_ID_BYTES - REQUEST_ID_RANDOM_BYTES)
+          masked = time.zip(random.bytes).map { _1 ^ _2 }.pack("C*")
+          REQUEST_ID_PREFIX + encode_base32(random + masked)
+        end
 
         # @api private
         #
@@ -234,33 +279,48 @@ module Turbopuffer
 
         # @api private
         #
-        # Samples and buffers a record for one request.
+        # Decides whether to record a request that's starting, returning the sample rate it was
+        # recorded at.
+        #
+        # @return [Float, nil]
+        def sample
+          rate = @sample_rate
+          return nil if rate <= 0.0 || (rate < 1.0 && Telemetry.random >= rate)
+          rate
+        end
+
+        # @api private
+        #
+        # Buffers the record of a request sampled at `sample_rate`.
         #
         # @param method [Symbol, String]
         # @param url [URI::Generic, String]
         # @param status [Integer]
         # @param retries [Integer]
         # @param durations [Hash{Symbol=>Integer}] in nanoseconds
+        # @param sample_rate [Float]
         # @param server_total_ms [Numeric, nil]
         # @param error [String, nil]
         # @param reused [Boolean, nil]
+        # @param request_id [String, nil] the `X-Request-Id` the request was sent with, when the
+        #   client generated it
         def record(
           method:,
           url:,
           status:,
           retries:,
           durations:,
+          sample_rate:,
           server_total_ms: nil,
           error: nil,
-          reused: nil
+          reused: nil,
+          request_id: nil
         )
-          rate = @sample_rate
-          return if rate <= 0.0 || (rate < 1.0 && Telemetry.random >= rate)
-
           rec = {route: Telemetry.route_template(method, url), status: status}
           rec[:error] = error unless error.nil?
           rec[:retries] = retries unless retries.zero?
-          rec[:sample_rate] = rate if rate < 1.0
+          rec[:request_id] = request_id unless request_id.nil?
+          rec[:sample_rate] = sample_rate if sample_rate < 1.0
           durations.each do |name, duration|
             # A zero compress duration means the body wasn't compressed.
             next if name == :compress && duration.zero?
@@ -353,6 +413,11 @@ module Turbopuffer
           @info = info
           # Kept for later attempts until one of them may have reached the server.
           @batch = nil
+          # The rate the request was recorded at, or nil if it isn't recorded. Sampled up front, so
+          # that only requests whose records the server will get are sent with request IDs.
+          @sample_rate = buffer.sample
+          # Sent with every attempt, so retries share the request's trace.
+          @request_id = @sample_rate && Telemetry.new_request_id(Time.now)
         end
 
         # @api private
@@ -360,9 +425,15 @@ module Turbopuffer
         # @param attempt [Integer]
         # @param request [Hash{Symbol=>Object}]
         def attempt_begin(attempt, request)
+          headers = request.fetch(:headers)
           # Taken only once a request is about to be sent, so one that fails before then can't lose it.
-          @batch = @buffer.take if attempt.zero?
-          request.fetch(:headers)[HEADER] = @batch.header if @batch
+          if attempt.zero?
+            @batch = @buffer.take
+            # An ID set by the caller is theirs to use, so the request keeps it and isn't linked.
+            @request_id = nil if headers.key?(REQUEST_ID_HEADER)
+          end
+          headers[HEADER] = @batch.header if @batch
+          headers[REQUEST_ID_HEADER] = @request_id if @request_id
         end
 
         # @api private
@@ -388,6 +459,9 @@ module Turbopuffer
             @buffer.restore(@batch)
             @batch = nil
           end
+          return if @sample_rate.nil?
+          # A rate of zero asks clients to stop recording, even requests that were already sampled.
+          return if @buffer.sample_rate <= 0.0
 
           @buffer.record(
             method: @info.method,
@@ -395,9 +469,11 @@ module Turbopuffer
             status: status(result),
             retries: result.retries,
             durations: durations,
+            sample_rate: @sample_rate,
             server_total_ms: server_total_ms(result.parsed),
             error: error_name(result.error_kind),
-            reused: timings.reused
+            reused: timings.reused,
+            request_id: @request_id
           )
         end
 
