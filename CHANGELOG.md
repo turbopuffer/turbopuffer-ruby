@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.10.0](https://github.com/turbopuffer/turbopuffer-ruby/compare/v2.9.0...v2.10.0) (2026-10-22)
+
+
+### Features
+
+* Send client-generated request IDs ([#77](https://github.com/turbopuffer/turbopuffer-ruby/issues/77)) ([3812a2f](https://github.com/turbopuffer/turbopuffer-ruby/commit/3812a2fc924254f1c5c8b67a6f8dd6892b02e7aa))
+
 ## [2.9.0](https://github.com/turbopuffer/turbopuffer-ruby/compare/v2.8.0...v2.9.0) (2026-10-20)
 
 
