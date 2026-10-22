@@ -4,6 +4,11 @@ module Turbopuffer
       ENV_VAR: String
       HEADER: String
       SAMPLE_RATE_HEADER: String
+      REQUEST_ID_ALPHABET: String
+      REQUEST_ID_BYTES: Integer
+      REQUEST_ID_HEADER: String
+      REQUEST_ID_PREFIX: String
+      REQUEST_ID_RANDOM_BYTES: Integer
 
       ENVELOPE_VERSION: Integer
 
@@ -30,6 +35,10 @@ module Turbopuffer
       ) -> ::Hash[Symbol, Integer]
 
       def self.random: -> Float
+
+      def self.encode_base32: (String bytes) -> String
+
+      def self.new_request_id: (Time now, ?random: String) -> String
 
       def self.buffer_for: (
         bool? enabled,
@@ -61,15 +70,19 @@ module Turbopuffer
 
         def observe_response: (top response) -> void
 
+        def sample: -> Float?
+
         def record: (
           method: Symbol | String,
           url: URI::Generic | String,
           status: Integer,
           retries: Integer,
           durations: ::Hash[Symbol, Integer],
+          sample_rate: Float,
           ?server_total_ms: Numeric?,
           ?error: String?,
-          ?reused: bool?
+          ?reused: bool?,
+          ?request_id: String?
         ) -> void
 
         def take: -> Turbopuffer::Internal::Telemetry::Batch?

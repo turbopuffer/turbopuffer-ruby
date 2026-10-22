@@ -9,6 +9,16 @@ module Turbopuffer
       ENV_VAR = T.let(T.unsafe(nil), String)
       HEADER = T.let(T.unsafe(nil), String)
       SAMPLE_RATE_HEADER = T.let(T.unsafe(nil), String)
+      # Sorted by ASCII value, so that encoded IDs sort like their bytes.
+      REQUEST_ID_ALPHABET = T.let(T.unsafe(nil), String)
+      # The bytes in a request ID before it's encoded.
+      REQUEST_ID_BYTES = T.let(T.unsafe(nil), Integer)
+      # The request header that carries the IDs of recorded requests.
+      REQUEST_ID_HEADER = T.let(T.unsafe(nil), String)
+      # The prefix of generated request IDs.
+      REQUEST_ID_PREFIX = T.let(T.unsafe(nil), String)
+      # The random bytes at the start of a request ID.
+      REQUEST_ID_RANDOM_BYTES = T.let(T.unsafe(nil), Integer)
 
       ENVELOPE_VERSION = T.let(T.unsafe(nil), Integer)
 
@@ -58,6 +68,24 @@ module Turbopuffer
         # @api private
         sig { returns(Float) }
         def random
+        end
+
+        # @api private
+        #
+        # Encodes `bytes` in base32 with `REQUEST_ID_ALPHABET`, in RFC 4648's bit order without
+        # padding.
+        sig { params(bytes: String).returns(String) }
+        def encode_base32(bytes)
+        end
+
+        # @api private
+        #
+        # Generates the ID of a request that will be recorded. Its format is private to turbopuffer.
+        sig { params(now: Time, random: String).returns(String) }
+        def new_request_id(
+          now,
+          random: SecureRandom.random_bytes(REQUEST_ID_RANDOM_BYTES)
+        )
         end
 
         # @api private
@@ -129,7 +157,15 @@ module Turbopuffer
 
         # @api private
         #
-        # Samples and buffers a record for one request.
+        # Decides whether to record a request that's starting, returning the sample rate it was
+        # recorded at.
+        sig { returns(T.nilable(Float)) }
+        def sample
+        end
+
+        # @api private
+        #
+        # Buffers the record of a request sampled at `sample_rate`.
         sig do
           params(
             method: T.any(Symbol, String),
@@ -137,9 +173,11 @@ module Turbopuffer
             status: Integer,
             retries: Integer,
             durations: T::Hash[Symbol, Integer],
+            sample_rate: Float,
             server_total_ms: T.nilable(Numeric),
             error: T.nilable(String),
-            reused: T.nilable(T::Boolean)
+            reused: T.nilable(T::Boolean),
+            request_id: T.nilable(String)
           ).void
         end
         def record(
@@ -148,9 +186,11 @@ module Turbopuffer
           status:,
           retries:,
           durations:,
+          sample_rate:,
           server_total_ms: nil,
           error: nil,
-          reused: nil
+          reused: nil,
+          request_id: nil
         )
         end
 
