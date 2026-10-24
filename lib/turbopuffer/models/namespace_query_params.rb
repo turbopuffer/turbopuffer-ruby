@@ -146,10 +146,23 @@ module Turbopuffer
         #   @return [Symbol, Turbopuffer::Models::NamespaceQueryParams::Consistency::Level, nil]
         optional :level, enum: -> { Turbopuffer::NamespaceQueryParams::Consistency::Level }
 
-        # @!method initialize(level: nil)
+        # @!attribute max_staleness_seconds
+        #   How long an eventually consistent query may reuse the node's cached view of the
+        #   namespace before refreshing it from object storage. Only valid with
+        #   `level: eventual`. Defaults to 60.
+        #
+        #   @return [Integer, nil]
+        optional :max_staleness_seconds, Integer
+
+        # @!method initialize(level: nil, max_staleness_seconds: nil)
+        #   Some parameter documentations has been truncated, see
+        #   {Turbopuffer::Models::NamespaceQueryParams::Consistency} for more details.
+        #
         #   The consistency level for a query.
         #
         #   @param level [Symbol, Turbopuffer::Models::NamespaceQueryParams::Consistency::Level] The query's consistency level.
+        #
+        #   @param max_staleness_seconds [Integer] How long an eventually consistent query may reuse the node's cached view of the
 
         # The query's consistency level.
         #
