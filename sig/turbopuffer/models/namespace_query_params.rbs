@@ -135,7 +135,10 @@ module Turbopuffer
       }
 
       type consistency =
-        { level: Turbopuffer::Models::NamespaceQueryParams::Consistency::level }
+        {
+          level: Turbopuffer::Models::NamespaceQueryParams::Consistency::level,
+          max_staleness_seconds: Integer
+        }
 
       class Consistency < Turbopuffer::Internal::Type::BaseModel
         attr_reader level: Turbopuffer::Models::NamespaceQueryParams::Consistency::level?
@@ -144,12 +147,18 @@ module Turbopuffer
           Turbopuffer::Models::NamespaceQueryParams::Consistency::level
         ) -> Turbopuffer::Models::NamespaceQueryParams::Consistency::level
 
+        attr_reader max_staleness_seconds: Integer?
+
+        def max_staleness_seconds=: (Integer) -> Integer
+
         def initialize: (
-          ?level: Turbopuffer::Models::NamespaceQueryParams::Consistency::level
+          ?level: Turbopuffer::Models::NamespaceQueryParams::Consistency::level,
+          ?max_staleness_seconds: Integer
         ) -> void
 
         def to_hash: -> {
-          level: Turbopuffer::Models::NamespaceQueryParams::Consistency::level
+          level: Turbopuffer::Models::NamespaceQueryParams::Consistency::level,
+          max_staleness_seconds: Integer
         }
 
         type level = :strong | :eventual
