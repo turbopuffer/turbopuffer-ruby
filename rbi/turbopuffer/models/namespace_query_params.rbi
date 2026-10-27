@@ -250,16 +250,30 @@ module Turbopuffer
         end
         attr_writer :level
 
+        # How long an eventually consistent query may reuse the node's cached view of the
+        # namespace before refreshing it from object storage. Only valid with
+        # `level: eventual`. Defaults to 60.
+        sig { returns(T.nilable(Integer)) }
+        attr_reader :max_staleness_seconds
+
+        sig { params(max_staleness_seconds: Integer).void }
+        attr_writer :max_staleness_seconds
+
         # The consistency level for a query.
         sig do
           params(
             level:
-              Turbopuffer::NamespaceQueryParams::Consistency::Level::OrSymbol
+              Turbopuffer::NamespaceQueryParams::Consistency::Level::OrSymbol,
+            max_staleness_seconds: Integer
           ).returns(T.attached_class)
         end
         def self.new(
           # The query's consistency level.
-          level: nil
+          level: nil,
+          # How long an eventually consistent query may reuse the node's cached view of the
+          # namespace before refreshing it from object storage. Only valid with
+          # `level: eventual`. Defaults to 60.
+          max_staleness_seconds: nil
         )
         end
 
@@ -267,7 +281,8 @@ module Turbopuffer
           override.returns(
             {
               level:
-                Turbopuffer::NamespaceQueryParams::Consistency::Level::OrSymbol
+                Turbopuffer::NamespaceQueryParams::Consistency::Level::OrSymbol,
+              max_staleness_seconds: Integer
             }
           )
         end
