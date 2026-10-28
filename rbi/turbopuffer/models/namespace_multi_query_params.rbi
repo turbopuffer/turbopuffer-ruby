@@ -25,14 +25,24 @@ module Turbopuffer
 
       # The consistency level for a query.
       sig do
-        returns(T.nilable(Turbopuffer::NamespaceMultiQueryParams::Consistency))
+        returns(
+          T.nilable(
+            T.any(
+              Turbopuffer::NamespaceMultiQueryParams::Consistency::Strong,
+              Turbopuffer::NamespaceMultiQueryParams::Consistency::Eventual
+            )
+          )
+        )
       end
       attr_reader :consistency
 
       sig do
         params(
           consistency:
-            Turbopuffer::NamespaceMultiQueryParams::Consistency::OrHash
+            T.any(
+              Turbopuffer::NamespaceMultiQueryParams::Consistency::Strong::OrHash,
+              Turbopuffer::NamespaceMultiQueryParams::Consistency::Eventual::OrHash
+            )
         ).void
       end
       attr_writer :consistency
@@ -76,7 +86,10 @@ module Turbopuffer
             T::Array[Turbopuffer::NamespaceMultiQueryParams::Query::OrHash],
           namespace: String,
           consistency:
-            Turbopuffer::NamespaceMultiQueryParams::Consistency::OrHash,
+            T.any(
+              Turbopuffer::NamespaceMultiQueryParams::Consistency::Strong::OrHash,
+              Turbopuffer::NamespaceMultiQueryParams::Consistency::Eventual::OrHash
+            ),
           limit: T.any(Integer, Turbopuffer::RerankLimit::OrHash),
           offset: Integer,
           rerank_by: T.anything,
@@ -107,7 +120,11 @@ module Turbopuffer
           {
             namespace: String,
             queries: T::Array[Turbopuffer::NamespaceMultiQueryParams::Query],
-            consistency: Turbopuffer::NamespaceMultiQueryParams::Consistency,
+            consistency:
+              T.any(
+                Turbopuffer::NamespaceMultiQueryParams::Consistency::Strong,
+                Turbopuffer::NamespaceMultiQueryParams::Consistency::Eventual
+              ),
             limit: T.any(Integer, Turbopuffer::RerankLimit),
             offset: Integer,
             rerank_by: T.anything,
@@ -305,108 +322,91 @@ module Turbopuffer
         end
       end
 
-      class Consistency < Turbopuffer::Internal::Type::BaseModel
-        OrHash =
+      # The consistency level for a query.
+      module Consistency
+        extend Turbopuffer::Internal::Type::Union
+
+        Variants =
           T.type_alias do
             T.any(
-              Turbopuffer::NamespaceMultiQueryParams::Consistency,
-              Turbopuffer::Internal::AnyHash
+              Turbopuffer::NamespaceMultiQueryParams::Consistency::Strong,
+              Turbopuffer::NamespaceMultiQueryParams::Consistency::Eventual
             )
           end
 
-        # The query's consistency level.
-        sig do
-          returns(
-            T.nilable(
-              Turbopuffer::NamespaceMultiQueryParams::Consistency::Level::OrSymbol
+        class Strong < Turbopuffer::Internal::Type::BaseModel
+          OrHash =
+            T.type_alias do
+              T.any(
+                Turbopuffer::NamespaceMultiQueryParams::Consistency::Strong,
+                Turbopuffer::Internal::AnyHash
+              )
+            end
+
+          sig { returns(Symbol) }
+          attr_accessor :level
+
+          # Strong consistency. Requires a round-trip to object storage to fetch the latest
+          # writes.
+          sig { params(level: Symbol).returns(T.attached_class) }
+          def self.new(level: :strong)
+          end
+
+          sig { override.returns({ level: Symbol }) }
+          def to_hash
+          end
+        end
+
+        class Eventual < Turbopuffer::Internal::Type::BaseModel
+          OrHash =
+            T.type_alias do
+              T.any(
+                Turbopuffer::NamespaceMultiQueryParams::Consistency::Eventual,
+                Turbopuffer::Internal::AnyHash
+              )
+            end
+
+          sig { returns(Symbol) }
+          attr_accessor :level
+
+          # How long the query may reuse the node's cached view of the namespace before
+          # refreshing it from object storage. Defaults to 60.
+          sig { returns(T.nilable(Integer)) }
+          attr_reader :max_staleness_seconds
+
+          sig { params(max_staleness_seconds: Integer).void }
+          attr_writer :max_staleness_seconds
+
+          # Eventual consistency. Does not require a round-trip to object storage, but may
+          # not see the latest writes.
+          sig do
+            params(max_staleness_seconds: Integer, level: Symbol).returns(
+              T.attached_class
             )
+          end
+          def self.new(
+            # How long the query may reuse the node's cached view of the namespace before
+            # refreshing it from object storage. Defaults to 60.
+            max_staleness_seconds: nil,
+            level: :eventual
           )
-        end
-        attr_reader :level
+          end
 
-        sig do
-          params(
-            level:
-              Turbopuffer::NamespaceMultiQueryParams::Consistency::Level::OrSymbol
-          ).void
-        end
-        attr_writer :level
-
-        # How long an eventually consistent query may reuse the node's cached view of the
-        # namespace before refreshing it from object storage. Only valid with
-        # `level: eventual`. Defaults to 60.
-        sig { returns(T.nilable(Integer)) }
-        attr_reader :max_staleness_seconds
-
-        sig { params(max_staleness_seconds: Integer).void }
-        attr_writer :max_staleness_seconds
-
-        # The consistency level for a query.
-        sig do
-          params(
-            level:
-              Turbopuffer::NamespaceMultiQueryParams::Consistency::Level::OrSymbol,
-            max_staleness_seconds: Integer
-          ).returns(T.attached_class)
-        end
-        def self.new(
-          # The query's consistency level.
-          level: nil,
-          # How long an eventually consistent query may reuse the node's cached view of the
-          # namespace before refreshing it from object storage. Only valid with
-          # `level: eventual`. Defaults to 60.
-          max_staleness_seconds: nil
-        )
+          sig do
+            override.returns({ level: Symbol, max_staleness_seconds: Integer })
+          end
+          def to_hash
+          end
         end
 
         sig do
           override.returns(
-            {
-              level:
-                Turbopuffer::NamespaceMultiQueryParams::Consistency::Level::OrSymbol,
-              max_staleness_seconds: Integer
-            }
+            T::Array[
+              Turbopuffer::NamespaceMultiQueryParams::Consistency::Variants
+            ]
           )
         end
-        def to_hash
-        end
-
-        # The query's consistency level.
-        module Level
-          extend Turbopuffer::Internal::Type::Enum
-
-          TaggedSymbol =
-            T.type_alias do
-              T.all(
-                Symbol,
-                Turbopuffer::NamespaceMultiQueryParams::Consistency::Level
-              )
-            end
-          OrSymbol = T.type_alias { T.any(Symbol, String) }
-
-          # Strong consistency. Requires a round-trip to object storage to fetch the latest writes.
-          STRONG =
-            T.let(
-              :strong,
-              Turbopuffer::NamespaceMultiQueryParams::Consistency::Level::TaggedSymbol
-            )
-
-          # Eventual consistency. Does not require a round-trip to object storage, but may not see the latest writes.
-          EVENTUAL =
-            T.let(
-              :eventual,
-              Turbopuffer::NamespaceMultiQueryParams::Consistency::Level::TaggedSymbol
-            )
-
-          sig do
-            override.returns(
-              T::Array[
-                Turbopuffer::NamespaceMultiQueryParams::Consistency::Level::TaggedSymbol
-              ]
-            )
-          end
-          def self.values
-          end
+        def self.variants
         end
       end
 
