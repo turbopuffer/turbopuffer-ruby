@@ -1,5 +1,15 @@
 # Changelog
 
+## [2.10.0](https://github.com/turbopuffer/turbopuffer-ruby/compare/v2.9.0...v2.10.0) (2026-10-28)
+
+
+### Features
+
+* openapi: add encryption_context to customer-managed encryption ([1df756b](https://github.com/turbopuffer/turbopuffer-ruby/commit/1df756b4a97d526ced288201f8d7a5193bfd5c8b))
+* Send client-generated request IDs ([#77](https://github.com/turbopuffer/turbopuffer-ruby/issues/77)) ([3812a2f](https://github.com/turbopuffer/turbopuffer-ruby/commit/3812a2fc924254f1c5c8b67a6f8dd6892b02e7aa))
+* spec: split query consistency into strong and eventual variants ([2e12e6c](https://github.com/turbopuffer/turbopuffer-ruby/commit/2e12e6c36b4bb9ba8dcba9ecddfb243d4bda1dd7))
+* tpuf-engine: add max_staleness_seconds to eventual consistency ([e77b67d](https://github.com/turbopuffer/turbopuffer-ruby/commit/e77b67dc350327860e1f2f75702b162d06cb222e))
+
 ## [2.9.0](https://github.com/turbopuffer/turbopuffer-ruby/compare/v2.8.0...v2.9.0) (2026-10-20)
 
 
