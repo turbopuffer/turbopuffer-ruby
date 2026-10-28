@@ -106,7 +106,7 @@ module Turbopuffer
       #
       # @param compute_attributes [Hash{Symbol=>Object}] Body param: Computes additional values on documents returned by a query. Each ke
       #
-      # @param consistency [Turbopuffer::Models::NamespaceExplainQueryParams::Consistency] Body param: The consistency level for a query.
+      # @param consistency [Turbopuffer::Models::NamespaceExplainQueryParams::Consistency::Strong, Turbopuffer::Models::NamespaceExplainQueryParams::Consistency::Eventual] Body param: The consistency level for a query.
       #
       # @param distance_metric [Symbol, Turbopuffer::Models::DistanceMetric] Body param: A function used to calculate vector similarity.
       #
@@ -209,7 +209,7 @@ module Turbopuffer
       #
       # @param namespace [String] Path param: The name of the namespace.
       #
-      # @param consistency [Turbopuffer::Models::NamespaceMultiQueryParams::Consistency] Body param: The consistency level for a query.
+      # @param consistency [Turbopuffer::Models::NamespaceMultiQueryParams::Consistency::Strong, Turbopuffer::Models::NamespaceMultiQueryParams::Consistency::Eventual] Body param: The consistency level for a query.
       #
       # @param limit [Integer, Turbopuffer::Models::RerankLimit] Body param: Limits the total number of reranked documents returned.
       #
@@ -279,7 +279,7 @@ module Turbopuffer
       #
       # @param compute_attributes [Hash{Symbol=>Object}] Body param: Computes additional values on documents returned by a query. Each ke
       #
-      # @param consistency [Turbopuffer::Models::NamespaceQueryParams::Consistency] Body param: The consistency level for a query.
+      # @param consistency [Turbopuffer::Models::NamespaceQueryParams::Consistency::Strong, Turbopuffer::Models::NamespaceQueryParams::Consistency::Eventual] Body param: The consistency level for a query.
       #
       # @param distance_metric [Symbol, Turbopuffer::Models::DistanceMetric] Body param: A function used to calculate vector similarity.
       #
@@ -496,9 +496,9 @@ module Turbopuffer
       #
       # @param namespace [String] Path param: The name of the namespace.
       #
-      # @param branch_from_namespace [String, Turbopuffer::Models::BranchFromNamespaceParams::BranchFromNamespaceConfig] Body param: Configuration for branching from another namespace.
+      # @param branch_from_namespace [String, Turbopuffer::Models::BranchFromNamespaceParams::BranchFromNamespaceConfig] Body param: The namespace to create an instant, copy-on-write clone of.
       #
-      # @param copy_from_namespace [String, Turbopuffer::Models::CopyFromNamespaceParams::CopyFromNamespaceConfig] Body param: Configuration for copying documents from another namespace.
+      # @param copy_from_namespace [String, Turbopuffer::Models::CopyFromNamespaceParams::CopyFromNamespaceConfig] Body param: The namespace to copy documents from.
       #
       # @param create_namespace [Boolean] Body param: If `true`, ensures the namespace is created, even if the request wri
       #

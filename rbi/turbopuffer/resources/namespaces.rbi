@@ -73,7 +73,10 @@ module Turbopuffer
           aggregate_by: T::Hash[Symbol, T.anything],
           compute_attributes: T::Hash[Symbol, T.anything],
           consistency:
-            Turbopuffer::NamespaceExplainQueryParams::Consistency::OrHash,
+            T.any(
+              Turbopuffer::NamespaceExplainQueryParams::Consistency::Strong::OrHash,
+              Turbopuffer::NamespaceExplainQueryParams::Consistency::Eventual::OrHash
+            ),
           distance_metric: Turbopuffer::DistanceMetric::OrSymbol,
           exclude_attributes: T::Array[String],
           filters: T.anything,
@@ -162,7 +165,10 @@ module Turbopuffer
             T::Array[Turbopuffer::NamespaceMultiQueryParams::Query::OrHash],
           namespace: String,
           consistency:
-            Turbopuffer::NamespaceMultiQueryParams::Consistency::OrHash,
+            T.any(
+              Turbopuffer::NamespaceMultiQueryParams::Consistency::Strong::OrHash,
+              Turbopuffer::NamespaceMultiQueryParams::Consistency::Eventual::OrHash
+            ),
           limit: T.any(Integer, Turbopuffer::RerankLimit::OrHash),
           offset: Integer,
           rerank_by: T.anything,
@@ -214,7 +220,11 @@ module Turbopuffer
           namespace: String,
           aggregate_by: T::Hash[Symbol, T.anything],
           compute_attributes: T::Hash[Symbol, T.anything],
-          consistency: Turbopuffer::NamespaceQueryParams::Consistency::OrHash,
+          consistency:
+            T.any(
+              Turbopuffer::NamespaceQueryParams::Consistency::Strong::OrHash,
+              Turbopuffer::NamespaceQueryParams::Consistency::Eventual::OrHash
+            ),
           distance_metric: Turbopuffer::DistanceMetric::OrSymbol,
           exclude_attributes: T::Array[String],
           filters: T.anything,
@@ -455,9 +465,9 @@ module Turbopuffer
       def write(
         # Path param: The name of the namespace.
         namespace: nil,
-        # Body param: Configuration for branching from another namespace.
+        # Body param: The namespace to create an instant, copy-on-write clone of.
         branch_from_namespace: nil,
-        # Body param: Configuration for copying documents from another namespace.
+        # Body param: The namespace to copy documents from.
         copy_from_namespace: nil,
         # Body param: If `true`, ensures the namespace is created, even if the request
         # writes no documents. Creating an empty namespace requires the `id` type to be
