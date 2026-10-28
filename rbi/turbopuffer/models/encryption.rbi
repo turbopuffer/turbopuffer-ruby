@@ -31,17 +31,44 @@ module Turbopuffer
         sig { returns(Symbol) }
         attr_accessor :mode
 
+        # The AWS KMS encryption context to send with every request that uses the key.
+        # Only supported on AWS, and must be enabled for your organization. Keys may not
+        # start with `tpuf:` or `aws:`.
+        sig { returns(T.nilable(T::Hash[Symbol, String])) }
+        attr_reader :encryption_context
+
+        sig { params(encryption_context: T::Hash[Symbol, String]).void }
+        attr_writer :encryption_context
+
         # Encrypt the namespace with a customer-managed encryption key (CMEK).
-        sig { params(key_name: String, mode: Symbol).returns(T.attached_class) }
+        sig do
+          params(
+            key_name: String,
+            encryption_context: T::Hash[Symbol, String],
+            mode: Symbol
+          ).returns(T.attached_class)
+        end
         def self.new(
           # The identifier of the CMEK key to use for encryption. For GCP, the
           # fully-qualified resource name of the key. For AWS, the ARN of the key.
           key_name:,
+          # The AWS KMS encryption context to send with every request that uses the key.
+          # Only supported on AWS, and must be enabled for your organization. Keys may not
+          # start with `tpuf:` or `aws:`.
+          encryption_context: nil,
           mode: :"customer-managed"
         )
         end
 
-        sig { override.returns({ key_name: String, mode: Symbol }) }
+        sig do
+          override.returns(
+            {
+              key_name: String,
+              mode: Symbol,
+              encryption_context: T::Hash[Symbol, String]
+            }
+          )
+        end
         def to_hash
         end
       end

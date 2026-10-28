@@ -7,16 +7,35 @@ module Turbopuffer
     module Encryption
       extend Turbopuffer::Internal::Type::Union
 
-      type customer_managed = { key_name: String, mode: :"customer-managed" }
+      type customer_managed =
+        {
+          key_name: String,
+          mode: :"customer-managed",
+          encryption_context: ::Hash[Symbol, String]
+        }
 
       class CustomerManaged < Turbopuffer::Internal::Type::BaseModel
         attr_accessor key_name: String
 
         attr_accessor mode: :"customer-managed"
 
-        def initialize: (key_name: String, ?mode: :"customer-managed") -> void
+        attr_reader encryption_context: ::Hash[Symbol, String]?
 
-        def to_hash: -> { key_name: String, mode: :"customer-managed" }
+        def encryption_context=: (
+          ::Hash[Symbol, String]
+        ) -> ::Hash[Symbol, String]
+
+        def initialize: (
+          key_name: String,
+          ?encryption_context: ::Hash[Symbol, String],
+          ?mode: :"customer-managed"
+        ) -> void
+
+        def to_hash: -> {
+          key_name: String,
+          mode: :"customer-managed",
+          encryption_context: ::Hash[Symbol, String]
+        }
       end
 
       type default = { mode: :default }
