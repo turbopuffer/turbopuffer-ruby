@@ -21,8 +21,8 @@ module Turbopuffer
       # @!attribute consistency
       #   The consistency level for a query.
       #
-      #   @return [Turbopuffer::Models::NamespaceMultiQueryParams::Consistency, nil]
-      optional :consistency, -> { Turbopuffer::NamespaceMultiQueryParams::Consistency }
+      #   @return [Turbopuffer::Models::NamespaceMultiQueryParams::Consistency::Strong, Turbopuffer::Models::NamespaceMultiQueryParams::Consistency::Eventual, nil]
+      optional :consistency, union: -> { Turbopuffer::NamespaceMultiQueryParams::Consistency }
 
       # @!attribute limit
       #   Limits the total number of reranked documents returned.
@@ -57,7 +57,7 @@ module Turbopuffer
       #
       #   @param namespace [String]
       #
-      #   @param consistency [Turbopuffer::Models::NamespaceMultiQueryParams::Consistency] The consistency level for a query.
+      #   @param consistency [Turbopuffer::Models::NamespaceMultiQueryParams::Consistency::Strong, Turbopuffer::Models::NamespaceMultiQueryParams::Consistency::Eventual] The consistency level for a query.
       #
       #   @param limit [Integer, Turbopuffer::Models::RerankLimit] Limits the total number of reranked documents returned.
       #
@@ -188,46 +188,59 @@ module Turbopuffer
         end
       end
 
-      class Consistency < Turbopuffer::Internal::Type::BaseModel
-        # @!attribute level
-        #   The query's consistency level.
-        #
-        #   @return [Symbol, Turbopuffer::Models::NamespaceMultiQueryParams::Consistency::Level, nil]
-        optional :level, enum: -> { Turbopuffer::NamespaceMultiQueryParams::Consistency::Level }
+      # The consistency level for a query.
+      module Consistency
+        extend Turbopuffer::Internal::Type::Union
 
-        # @!attribute max_staleness_seconds
-        #   How long an eventually consistent query may reuse the node's cached view of the
-        #   namespace before refreshing it from object storage. Only valid with
-        #   `level: eventual`. Defaults to 60.
-        #
-        #   @return [Integer, nil]
-        optional :max_staleness_seconds, Integer
+        discriminator :level
 
-        # @!method initialize(level: nil, max_staleness_seconds: nil)
-        #   Some parameter documentations has been truncated, see
-        #   {Turbopuffer::Models::NamespaceMultiQueryParams::Consistency} for more details.
-        #
-        #   The consistency level for a query.
-        #
-        #   @param level [Symbol, Turbopuffer::Models::NamespaceMultiQueryParams::Consistency::Level] The query's consistency level.
-        #
-        #   @param max_staleness_seconds [Integer] How long an eventually consistent query may reuse the node's cached view of the
+        # Strong consistency. Requires a round-trip to object storage to fetch the latest writes.
+        variant :strong, -> { Turbopuffer::NamespaceMultiQueryParams::Consistency::Strong }
 
-        # The query's consistency level.
-        #
-        # @see Turbopuffer::Models::NamespaceMultiQueryParams::Consistency#level
-        module Level
-          extend Turbopuffer::Internal::Type::Enum
+        # Eventual consistency. Does not require a round-trip to object storage, but may not see the latest writes.
+        variant :eventual, -> { Turbopuffer::NamespaceMultiQueryParams::Consistency::Eventual }
 
-          # Strong consistency. Requires a round-trip to object storage to fetch the latest writes.
-          STRONG = :strong
+        class Strong < Turbopuffer::Internal::Type::BaseModel
+          # @!attribute level
+          #
+          #   @return [Symbol, :strong]
+          required :level, const: :strong
 
-          # Eventual consistency. Does not require a round-trip to object storage, but may not see the latest writes.
-          EVENTUAL = :eventual
-
-          # @!method self.values
-          #   @return [Array<Symbol>]
+          # @!method initialize(level: :strong)
+          #   Strong consistency. Requires a round-trip to object storage to fetch the latest
+          #   writes.
+          #
+          #   @param level [Symbol, :strong]
         end
+
+        class Eventual < Turbopuffer::Internal::Type::BaseModel
+          # @!attribute level
+          #
+          #   @return [Symbol, :eventual]
+          required :level, const: :eventual
+
+          # @!attribute max_staleness_seconds
+          #   How long the query may reuse the node's cached view of the namespace before
+          #   refreshing it from object storage. Defaults to 60.
+          #
+          #   @return [Integer, nil]
+          optional :max_staleness_seconds, Integer
+
+          # @!method initialize(max_staleness_seconds: nil, level: :eventual)
+          #   Some parameter documentations has been truncated, see
+          #   {Turbopuffer::Models::NamespaceMultiQueryParams::Consistency::Eventual} for more
+          #   details.
+          #
+          #   Eventual consistency. Does not require a round-trip to object storage, but may
+          #   not see the latest writes.
+          #
+          #   @param max_staleness_seconds [Integer] How long the query may reuse the node's cached view of the namespace before refr
+          #
+          #   @param level [Symbol, :eventual]
+        end
+
+        # @!method self.variants
+        #   @return [Array(Turbopuffer::Models::NamespaceMultiQueryParams::Consistency::Strong, Turbopuffer::Models::NamespaceMultiQueryParams::Consistency::Eventual)]
       end
 
       # Limits the total number of reranked documents returned.
