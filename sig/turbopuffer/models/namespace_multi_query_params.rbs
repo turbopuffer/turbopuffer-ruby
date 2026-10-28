@@ -4,7 +4,7 @@ module Turbopuffer
       {
         namespace: String,
         queries: ::Array[Turbopuffer::NamespaceMultiQueryParams::Query],
-        consistency: Turbopuffer::NamespaceMultiQueryParams::Consistency,
+        consistency: Turbopuffer::Models::NamespaceMultiQueryParams::consistency,
         limit: Turbopuffer::Models::NamespaceMultiQueryParams::limit,
         offset: Integer,
         rerank_by: top,
@@ -22,11 +22,11 @@ module Turbopuffer
 
       attr_accessor queries: ::Array[Turbopuffer::NamespaceMultiQueryParams::Query]
 
-      attr_reader consistency: Turbopuffer::NamespaceMultiQueryParams::Consistency?
+      attr_reader consistency: Turbopuffer::Models::NamespaceMultiQueryParams::consistency?
 
       def consistency=: (
-        Turbopuffer::NamespaceMultiQueryParams::Consistency
-      ) -> Turbopuffer::NamespaceMultiQueryParams::Consistency
+        Turbopuffer::Models::NamespaceMultiQueryParams::consistency
+      ) -> Turbopuffer::Models::NamespaceMultiQueryParams::consistency
 
       attr_reader limit: Turbopuffer::Models::NamespaceMultiQueryParams::limit?
 
@@ -51,7 +51,7 @@ module Turbopuffer
       def initialize: (
         queries: ::Array[Turbopuffer::NamespaceMultiQueryParams::Query],
         ?namespace: String,
-        ?consistency: Turbopuffer::NamespaceMultiQueryParams::Consistency,
+        ?consistency: Turbopuffer::Models::NamespaceMultiQueryParams::consistency,
         ?limit: Turbopuffer::Models::NamespaceMultiQueryParams::limit,
         ?offset: Integer,
         ?rerank_by: top,
@@ -62,7 +62,7 @@ module Turbopuffer
       def to_hash: -> {
         namespace: String,
         queries: ::Array[Turbopuffer::NamespaceMultiQueryParams::Query],
-        consistency: Turbopuffer::NamespaceMultiQueryParams::Consistency,
+        consistency: Turbopuffer::Models::NamespaceMultiQueryParams::consistency,
         limit: Turbopuffer::Models::NamespaceMultiQueryParams::limit,
         offset: Integer,
         rerank_by: top,
@@ -174,45 +174,40 @@ module Turbopuffer
       end
 
       type consistency =
-        {
-          level: Turbopuffer::Models::NamespaceMultiQueryParams::Consistency::level,
-          max_staleness_seconds: Integer
-        }
+        Turbopuffer::NamespaceMultiQueryParams::Consistency::Strong
+        | Turbopuffer::NamespaceMultiQueryParams::Consistency::Eventual
 
-      class Consistency < Turbopuffer::Internal::Type::BaseModel
-        attr_reader level: Turbopuffer::Models::NamespaceMultiQueryParams::Consistency::level?
+      module Consistency
+        extend Turbopuffer::Internal::Type::Union
 
-        def level=: (
-          Turbopuffer::Models::NamespaceMultiQueryParams::Consistency::level
-        ) -> Turbopuffer::Models::NamespaceMultiQueryParams::Consistency::level
+        type strong = { level: :strong }
 
-        attr_reader max_staleness_seconds: Integer?
+        class Strong < Turbopuffer::Internal::Type::BaseModel
+          attr_accessor level: :strong
 
-        def max_staleness_seconds=: (Integer) -> Integer
+          def initialize: (?level: :strong) -> void
 
-        def initialize: (
-          ?level: Turbopuffer::Models::NamespaceMultiQueryParams::Consistency::level,
-          ?max_staleness_seconds: Integer
-        ) -> void
-
-        def to_hash: -> {
-          level: Turbopuffer::Models::NamespaceMultiQueryParams::Consistency::level,
-          max_staleness_seconds: Integer
-        }
-
-        type level = :strong | :eventual
-
-        module Level
-          extend Turbopuffer::Internal::Type::Enum
-
-          # Strong consistency. Requires a round-trip to object storage to fetch the latest writes.
-          STRONG: :strong
-
-          # Eventual consistency. Does not require a round-trip to object storage, but may not see the latest writes.
-          EVENTUAL: :eventual
-
-          def self?.values: -> ::Array[Turbopuffer::Models::NamespaceMultiQueryParams::Consistency::level]
+          def to_hash: -> { level: :strong }
         end
+
+        type eventual = { level: :eventual, max_staleness_seconds: Integer }
+
+        class Eventual < Turbopuffer::Internal::Type::BaseModel
+          attr_accessor level: :eventual
+
+          attr_reader max_staleness_seconds: Integer?
+
+          def max_staleness_seconds=: (Integer) -> Integer
+
+          def initialize: (
+            ?max_staleness_seconds: Integer,
+            ?level: :eventual
+          ) -> void
+
+          def to_hash: -> { level: :eventual, max_staleness_seconds: Integer }
+        end
+
+        def self?.variants: -> ::Array[Turbopuffer::Models::NamespaceMultiQueryParams::consistency]
       end
 
       type limit = Integer | Turbopuffer::RerankLimit
