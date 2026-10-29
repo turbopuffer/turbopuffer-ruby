@@ -10,6 +10,8 @@ module Turbopuffer
 
     DEFAULT_MAX_RETRY_DELAY = T.let(8.0, Float)
 
+    DEFAULT_MAX_CONNECTIONS = T.let(T.unsafe(nil), Integer)
+
     # API key used for authentication.
     sig { returns(String) }
     attr_reader :api_key
@@ -61,7 +63,8 @@ module Turbopuffer
         max_retries: Integer,
         timeout: Float,
         initial_retry_delay: Float,
-        max_retry_delay: Float
+        max_retry_delay: Float,
+        max_connections: Integer
       ).returns(T.attached_class)
     end
     def self.new(
@@ -77,7 +80,11 @@ module Turbopuffer
       max_retries: Turbopuffer::Client::DEFAULT_MAX_RETRIES,
       timeout: Turbopuffer::Client::DEFAULT_TIMEOUT_IN_SECONDS,
       initial_retry_delay: Turbopuffer::Client::DEFAULT_INITIAL_RETRY_DELAY,
-      max_retry_delay: Turbopuffer::Client::DEFAULT_MAX_RETRY_DELAY
+      max_retry_delay: Turbopuffer::Client::DEFAULT_MAX_RETRY_DELAY,
+      # Max number of concurrent HTTP connections to each origin. When all are in use,
+      # requests wait for one to become free, with the wait counting towards the request
+      # timeout.
+      max_connections: Turbopuffer::Client::DEFAULT_MAX_CONNECTIONS
     )
     end
   end
