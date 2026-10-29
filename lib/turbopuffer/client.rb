@@ -15,6 +15,9 @@ module Turbopuffer
     # Default max retry delay in seconds.
     DEFAULT_MAX_RETRY_DELAY = 8.0
 
+    # Default max number of concurrent HTTP connections to each origin.
+    DEFAULT_MAX_CONNECTIONS = Turbopuffer::Internal::Transport::PooledNetRequester::DEFAULT_MAX_CONNECTIONS
+
     # API key used for authentication.
     # @return [String]
     attr_reader :api_key
@@ -84,6 +87,10 @@ module Turbopuffer
     # @param initial_retry_delay [Float]
     #
     # @param max_retry_delay [Float]
+    #
+    # @param max_connections [Integer] Max number of concurrent HTTP connections to each origin. When all are in use,
+    # requests wait for one to become free, with the wait counting towards the request
+    # timeout.
     def initialize(
       api_key: ENV["TURBOPUFFER_API_KEY"],
       region: ENV["TURBOPUFFER_REGION"],
@@ -92,7 +99,8 @@ module Turbopuffer
       max_retries: self.class::DEFAULT_MAX_RETRIES,
       timeout: self.class::DEFAULT_TIMEOUT_IN_SECONDS,
       initial_retry_delay: self.class::DEFAULT_INITIAL_RETRY_DELAY,
-      max_retry_delay: self.class::DEFAULT_MAX_RETRY_DELAY
+      max_retry_delay: self.class::DEFAULT_MAX_RETRY_DELAY,
+      max_connections: self.class::DEFAULT_MAX_CONNECTIONS
     )
       base_url ||= "https://#{region}.turbopuffer.com"
 
@@ -123,6 +131,7 @@ module Turbopuffer
         max_retries: max_retries,
         initial_retry_delay: initial_retry_delay,
         max_retry_delay: max_retry_delay,
+        max_connections: max_connections,
         headers: headers
       )
 

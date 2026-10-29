@@ -197,9 +197,17 @@ response = client.request(
 
 The `Turbopuffer::Client` instances are threadsafe, but are only are fork-safe when there are no in-flight HTTP requests.
 
-Each instance of `Turbopuffer::Client` has its own HTTP connection pool with a default size of 99. As such, we recommend instantiating the client once per application in most settings.
+Each instance of `Turbopuffer::Client` has its own HTTP connection pool, which holds up to 99 connections to each origin by default (or one per processor, if there are more than 99). As such, we recommend instantiating the client once per application in most settings.
 
 When all available connections from the pool are checked out, requests wait for a new connection to become available, with queue time counting towards the request timeout.
+
+You can use the `max_connections` option to configure the size of the pool:
+
+```ruby
+turbopuffer = Turbopuffer::Client.new(
+  max_connections: 16 # default is 99, or the number of processors if greater
+)
+```
 
 Unless otherwise specified, other classes in the SDK do not have locks protecting their underlying data structure.
 
