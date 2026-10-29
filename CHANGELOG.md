@@ -1,5 +1,17 @@
 # Changelog
 
+## [2.11.0](https://github.com/turbopuffer/turbopuffer-ruby/compare/v2.10.0...v2.11.0) (2026-10-29)
+
+
+### Features
+
+* Add a `max_connections` client option ([#82](https://github.com/turbopuffer/turbopuffer-ruby/issues/82)) ([d0d2f33](https://github.com/turbopuffer/turbopuffer-ruby/commit/d0d2f33d0a862152f68ada2fcfdf2a9e3b631593))
+
+
+### Bug Fixes
+
+* stop requiring `base64`, which isn't a default gem as of Ruby 3.4 (thanks [@teoljungberg](https://github.com/teoljungberg)!) ([#81](https://github.com/turbopuffer/turbopuffer-ruby/issues/81)) ([c3380b6](https://github.com/turbopuffer/turbopuffer-ruby/commit/c3380b665fd1e3b5f400ac8ba816b136075c0683))
+
 ## [2.10.0](https://github.com/turbopuffer/turbopuffer-ruby/compare/v2.9.0...v2.10.0) (2026-10-29)
 
 
