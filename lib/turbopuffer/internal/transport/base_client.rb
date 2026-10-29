@@ -168,6 +168,9 @@ module Turbopuffer
         # @return [Float]
         attr_reader :max_retry_delay
 
+        # @return [Integer]
+        attr_reader :max_connections
+
         # @return [Hash{String=>String}]
         attr_reader :headers
 
@@ -189,6 +192,7 @@ module Turbopuffer
         # @param max_retries [Integer]
         # @param initial_retry_delay [Float]
         # @param max_retry_delay [Float]
+        # @param max_connections [Integer]
         # @param headers [Hash{String=>String, Integer, Array<String, Integer, nil>, nil}]
         # @param idempotency_header [String, nil]
         def initialize(
@@ -197,10 +201,16 @@ module Turbopuffer
           max_retries: 0,
           initial_retry_delay: 0.0,
           max_retry_delay: 0.0,
+          max_connections: Turbopuffer::Internal::Transport::PooledNetRequester::DEFAULT_MAX_CONNECTIONS,
           headers: {},
           idempotency_header: nil
         )
-          @requester = Turbopuffer::Internal::Transport::PooledNetRequester.new
+          # A pool of size zero would make every request wait out its timeout, so fail fast instead.
+          unless max_connections.is_a?(Integer) && max_connections.positive?
+            raise ArgumentError.new("max_connections must be a positive integer, got #{max_connections.inspect}")
+          end
+
+          @requester = Turbopuffer::Internal::Transport::PooledNetRequester.new(size: max_connections)
           @headers = Turbopuffer::Internal::Util.normalized_headers(
             self.class::PLATFORM_HEADERS,
             {
@@ -217,6 +227,7 @@ module Turbopuffer
           @max_retries = max_retries
           @initial_retry_delay = initial_retry_delay
           @max_retry_delay = max_retry_delay
+          @max_connections = max_connections
           @request_observer = nil
         end
 
