@@ -132,6 +132,9 @@ module Turbopuffer
         sig { returns(Float) }
         attr_reader :max_retry_delay
 
+        sig { returns(Integer) }
+        attr_reader :max_connections
+
         sig { returns(T::Hash[String, String]) }
         attr_reader :headers
 
@@ -156,6 +159,7 @@ module Turbopuffer
             max_retries: Integer,
             initial_retry_delay: Float,
             max_retry_delay: Float,
+            max_connections: Integer,
             headers:
               T::Hash[
                 String,
@@ -176,6 +180,7 @@ module Turbopuffer
           max_retries: 0,
           initial_retry_delay: 0.0,
           max_retry_delay: 0.0,
+          max_connections: Turbopuffer::Internal::Transport::PooledNetRequester::DEFAULT_MAX_CONNECTIONS,
           headers: {},
           idempotency_header: nil
         )

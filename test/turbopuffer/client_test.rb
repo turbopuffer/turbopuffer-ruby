@@ -30,6 +30,32 @@ class TurbopufferTest < Minitest::Test
     super
   end
 
+  def test_client_max_connections
+    turbopuffer = Turbopuffer::Client.new(base_url: "http://localhost", api_key: "tpuf_A1...")
+    assert_equal(Turbopuffer::Client::DEFAULT_MAX_CONNECTIONS, turbopuffer.max_connections)
+
+    turbopuffer = Turbopuffer::Client.new(
+      base_url: "http://localhost",
+      api_key: "tpuf_A1...",
+      max_connections: 4
+    )
+    assert_equal(4, turbopuffer.max_connections)
+    assert_equal(4, turbopuffer.requester.instance_variable_get(:@size))
+  end
+
+  def test_raises_on_invalid_max_connections
+    [0, -1, 1.5, "4", nil].each do |max_connections|
+      e = assert_raises(ArgumentError) do
+        Turbopuffer::Client.new(
+          base_url: "http://localhost",
+          api_key: "tpuf_A1...",
+          max_connections: max_connections
+        )
+      end
+      assert_match(/max_connections must be a positive integer/, e.message)
+    end
+  end
+
   def test_raises_on_missing_non_nullable_opts
     e = assert_raises(ArgumentError) do
       Turbopuffer::Client.new
