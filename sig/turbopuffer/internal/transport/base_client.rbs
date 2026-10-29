@@ -66,6 +66,8 @@ module Turbopuffer
 
         attr_reader max_retry_delay: Float
 
+        attr_reader max_connections: Integer
+
         attr_reader headers: ::Hash[String, String]
 
         attr_reader idempotency_header: String?
@@ -82,6 +84,7 @@ module Turbopuffer
           ?max_retries: Integer,
           ?initial_retry_delay: Float,
           ?max_retry_delay: Float,
+          ?max_connections: Integer,
           ?headers: ::Hash[String, (String
           | Integer
           | ::Array[(String | Integer)?])?],
