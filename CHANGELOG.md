@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.11.1](https://github.com/turbopuffer/turbopuffer-ruby/compare/v2.11.0...v2.11.1) (2026-10-29)
+
+
+### Chores
+
+* regenerate SDK ([3c39c86](https://github.com/turbopuffer/turbopuffer-ruby/commit/3c39c86b486161a3a9353c789a7807933742932b))
+
 ## [2.11.0](https://github.com/turbopuffer/turbopuffer-ruby/compare/v2.10.0...v2.11.0) (2026-10-29)
 
 
