@@ -20,6 +20,17 @@ module Turbopuffer
       sig { params(namespace: String).void }
       attr_writer :namespace
 
+      # Experimental. Stores documents in ranges of this attribute, ordered by it, so
+      # queries filtering on a narrow range of it or ordered by it skip the rest.
+      # Documents should be written in roughly ascending order of it. Must have type
+      # `int`, `uint`, `datetime` or `string`, and can only be set on a namespace's
+      # inaugural write.
+      sig { returns(T.nilable(String)) }
+      attr_reader :arrange_by
+
+      sig { params(arrange_by: String).void }
+      attr_writer :arrange_by
+
       # The namespace to create an instant, copy-on-write clone of.
       sig do
         returns(
@@ -266,6 +277,7 @@ module Turbopuffer
       sig do
         params(
           namespace: String,
+          arrange_by: String,
           branch_from_namespace:
             T.any(
               String,
@@ -313,6 +325,12 @@ module Turbopuffer
       end
       def self.new(
         namespace: nil,
+        # Experimental. Stores documents in ranges of this attribute, ordered by it, so
+        # queries filtering on a narrow range of it or ordered by it skip the rest.
+        # Documents should be written in roughly ascending order of it. Must have type
+        # `int`, `uint`, `datetime` or `string`, and can only be set on a namespace's
+        # inaugural write.
+        arrange_by: nil,
         # The namespace to create an instant, copy-on-write clone of.
         branch_from_namespace: nil,
         # The namespace to copy documents from.
@@ -374,6 +392,7 @@ module Turbopuffer
         override.returns(
           {
             namespace: String,
+            arrange_by: String,
             branch_from_namespace:
               T.any(
                 String,
