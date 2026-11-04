@@ -36,6 +36,13 @@ module Turbopuffer
       sig { returns(Time) }
       attr_accessor :updated_at
 
+      # The attribute the namespace is arranged by. Omitted when not set.
+      sig { returns(T.nilable(String)) }
+      attr_reader :arrange_by
+
+      sig { params(arrange_by: String).void }
+      attr_writer :arrange_by
+
       # Configuration for namespace pinning, along with the current status of the pinned
       # namespace.
       sig { returns(T.nilable(Turbopuffer::NamespaceMetadata::Pinning)) }
@@ -81,6 +88,7 @@ module Turbopuffer
             ),
           schema: T::Hash[Symbol, Turbopuffer::AttributeSchemaConfig::OrHash],
           updated_at: Time,
+          arrange_by: String,
           pinning: Turbopuffer::NamespaceMetadata::Pinning::OrHash,
           read_only: T::Boolean,
           sharding: Turbopuffer::ShardingConfig::OrHash
@@ -101,6 +109,8 @@ module Turbopuffer
         schema:,
         # The timestamp when the namespace was last modified by a write operation.
         updated_at:,
+        # The attribute the namespace is arranged by. Omitted when not set.
+        arrange_by: nil,
         # Configuration for namespace pinning, along with the current status of the pinned
         # namespace.
         pinning: nil,
@@ -124,6 +134,7 @@ module Turbopuffer
             index: Turbopuffer::NamespaceMetadata::Index::Variants,
             schema: T::Hash[Symbol, Turbopuffer::AttributeSchemaConfig],
             updated_at: Time,
+            arrange_by: String,
             pinning: Turbopuffer::NamespaceMetadata::Pinning,
             read_only: T::Boolean,
             sharding: Turbopuffer::ShardingConfig

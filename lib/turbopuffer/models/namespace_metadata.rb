@@ -46,6 +46,12 @@ module Turbopuffer
       #   @return [Time]
       required :updated_at, Time
 
+      # @!attribute arrange_by
+      #   The attribute the namespace is arranged by. Omitted when not set.
+      #
+      #   @return [String, nil]
+      optional :arrange_by, String
+
       # @!attribute pinning
       #   Configuration for namespace pinning, along with the current status of the pinned
       #   namespace.
@@ -68,7 +74,7 @@ module Turbopuffer
       #   @return [Turbopuffer::Models::ShardingConfig, nil]
       optional :sharding, -> { Turbopuffer::ShardingConfig }
 
-      # @!method initialize(approx_logical_bytes:, approx_row_count:, created_at:, encryption:, index:, schema:, updated_at:, pinning: nil, read_only: nil, sharding: nil)
+      # @!method initialize(approx_logical_bytes:, approx_row_count:, created_at:, encryption:, index:, schema:, updated_at:, arrange_by: nil, pinning: nil, read_only: nil, sharding: nil)
       #   Some parameter documentations has been truncated, see
       #   {Turbopuffer::Models::NamespaceMetadata} for more details.
       #
@@ -87,6 +93,8 @@ module Turbopuffer
       #   @param schema [Hash{Symbol=>Turbopuffer::Models::AttributeSchemaConfig}] The schema of the namespace.
       #
       #   @param updated_at [Time] The timestamp when the namespace was last modified by a write operation.
+      #
+      #   @param arrange_by [String] The attribute the namespace is arranged by. Omitted when not set.
       #
       #   @param pinning [Turbopuffer::Models::NamespaceMetadata::Pinning] Configuration for namespace pinning, along with the current status of the pinned
       #

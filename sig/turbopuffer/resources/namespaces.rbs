@@ -124,6 +124,7 @@ module Turbopuffer
 
       def write: (
         ?namespace: String,
+        ?arrange_by: String,
         ?branch_from_namespace: Turbopuffer::Models::branch_from_namespace_params,
         ?copy_from_namespace: Turbopuffer::Models::copy_from_namespace_params,
         ?create_namespace: bool,

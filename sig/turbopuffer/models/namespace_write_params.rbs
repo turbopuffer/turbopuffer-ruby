@@ -3,6 +3,7 @@ module Turbopuffer
     type namespace_write_params =
       {
         namespace: String,
+        arrange_by: String,
         branch_from_namespace: Turbopuffer::Models::branch_from_namespace_params,
         copy_from_namespace: Turbopuffer::Models::copy_from_namespace_params,
         create_namespace: bool,
@@ -34,6 +35,10 @@ module Turbopuffer
       attr_reader namespace: String?
 
       def namespace=: (String) -> String
+
+      attr_reader arrange_by: String?
+
+      def arrange_by=: (String) -> String
 
       attr_reader branch_from_namespace: Turbopuffer::Models::branch_from_namespace_params?
 
@@ -137,6 +142,7 @@ module Turbopuffer
 
       def initialize: (
         ?namespace: String,
+        ?arrange_by: String,
         ?branch_from_namespace: Turbopuffer::Models::branch_from_namespace_params,
         ?copy_from_namespace: Turbopuffer::Models::copy_from_namespace_params,
         ?create_namespace: bool,
@@ -163,6 +169,7 @@ module Turbopuffer
 
       def to_hash: -> {
         namespace: String,
+        arrange_by: String,
         branch_from_namespace: Turbopuffer::Models::branch_from_namespace_params,
         copy_from_namespace: Turbopuffer::Models::copy_from_namespace_params,
         create_namespace: bool,

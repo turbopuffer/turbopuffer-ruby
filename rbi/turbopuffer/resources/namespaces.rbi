@@ -417,6 +417,7 @@ module Turbopuffer
       sig do
         params(
           namespace: String,
+          arrange_by: String,
           branch_from_namespace:
             T.any(
               String,
@@ -465,6 +466,12 @@ module Turbopuffer
       def write(
         # Path param: The name of the namespace.
         namespace: nil,
+        # Body param: Experimental. Stores documents in ranges of this attribute, ordered
+        # by it, so queries filtering on a narrow range of it or ordered by it skip the
+        # rest. Documents should be written in roughly ascending order of it. Must have
+        # type `int`, `uint`, `datetime` or `string`, and can only be set on a namespace's
+        # inaugural write.
+        arrange_by: nil,
         # Body param: The namespace to create an instant, copy-on-write clone of.
         branch_from_namespace: nil,
         # Body param: The namespace to copy documents from.

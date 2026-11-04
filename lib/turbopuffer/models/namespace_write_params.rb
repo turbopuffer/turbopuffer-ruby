@@ -12,6 +12,16 @@ module Turbopuffer
       #   @return [String, nil]
       optional :namespace, String
 
+      # @!attribute arrange_by
+      #   Experimental. Stores documents in ranges of this attribute, ordered by it, so
+      #   queries filtering on a narrow range of it or ordered by it skip the rest.
+      #   Documents should be written in roughly ascending order of it. Must have type
+      #   `int`, `uint`, `datetime` or `string`, and can only be set on a namespace's
+      #   inaugural write.
+      #
+      #   @return [String, nil]
+      optional :arrange_by, String
+
       # @!attribute branch_from_namespace
       #   The namespace to create an instant, copy-on-write clone of.
       #
@@ -149,11 +159,13 @@ module Turbopuffer
       #   @return [Array<Turbopuffer::Models::Row>, nil]
       optional :upsert_rows, -> { Turbopuffer::Internal::Type::ArrayOf[Turbopuffer::Row] }
 
-      # @!method initialize(namespace: nil, branch_from_namespace: nil, copy_from_namespace: nil, create_namespace: nil, delete_by_filter: nil, delete_by_filter_allow_partial: nil, delete_condition: nil, deletes: nil, disable_backpressure: nil, distance_metric: nil, encryption: nil, patch_by_filter: nil, patch_by_filter_allow_partial: nil, patch_columns: nil, patch_condition: nil, patch_rows: nil, return_affected_ids: nil, schema: nil, sharding: nil, upsert_columns: nil, upsert_condition: nil, upsert_rows: nil, request_options: {})
+      # @!method initialize(namespace: nil, arrange_by: nil, branch_from_namespace: nil, copy_from_namespace: nil, create_namespace: nil, delete_by_filter: nil, delete_by_filter_allow_partial: nil, delete_condition: nil, deletes: nil, disable_backpressure: nil, distance_metric: nil, encryption: nil, patch_by_filter: nil, patch_by_filter_allow_partial: nil, patch_columns: nil, patch_condition: nil, patch_rows: nil, return_affected_ids: nil, schema: nil, sharding: nil, upsert_columns: nil, upsert_condition: nil, upsert_rows: nil, request_options: {})
       #   Some parameter documentations has been truncated, see
       #   {Turbopuffer::Models::NamespaceWriteParams} for more details.
       #
       #   @param namespace [String]
+      #
+      #   @param arrange_by [String] Experimental. Stores documents in ranges of this attribute, ordered by it, so qu
       #
       #   @param branch_from_namespace [String, Turbopuffer::Models::BranchFromNamespaceParams::BranchFromNamespaceConfig] The namespace to create an instant, copy-on-write clone of.
       #
