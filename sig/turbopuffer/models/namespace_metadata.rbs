@@ -9,7 +9,7 @@ module Turbopuffer
         index: Turbopuffer::Models::NamespaceMetadata::index,
         schema: ::Hash[Symbol, Turbopuffer::AttributeSchemaConfig],
         updated_at: Time,
-        arrange_by: String,
+        layout: Turbopuffer::NamespaceMetadata::Layout,
         pinning: Turbopuffer::NamespaceMetadata::Pinning,
         read_only: bool,
         sharding: Turbopuffer::ShardingConfig
@@ -30,9 +30,11 @@ module Turbopuffer
 
       attr_accessor updated_at: Time
 
-      attr_reader arrange_by: String?
+      attr_reader layout: Turbopuffer::NamespaceMetadata::Layout?
 
-      def arrange_by=: (String) -> String
+      def layout=: (
+        Turbopuffer::NamespaceMetadata::Layout
+      ) -> Turbopuffer::NamespaceMetadata::Layout
 
       attr_reader pinning: Turbopuffer::NamespaceMetadata::Pinning?
 
@@ -58,7 +60,7 @@ module Turbopuffer
         index: Turbopuffer::Models::NamespaceMetadata::index,
         schema: ::Hash[Symbol, Turbopuffer::AttributeSchemaConfig],
         updated_at: Time,
-        ?arrange_by: String,
+        ?layout: Turbopuffer::NamespaceMetadata::Layout,
         ?pinning: Turbopuffer::NamespaceMetadata::Pinning,
         ?read_only: bool,
         ?sharding: Turbopuffer::ShardingConfig
@@ -72,7 +74,7 @@ module Turbopuffer
         index: Turbopuffer::Models::NamespaceMetadata::index,
         schema: ::Hash[Symbol, Turbopuffer::AttributeSchemaConfig],
         updated_at: Time,
-        arrange_by: String,
+        layout: Turbopuffer::NamespaceMetadata::Layout,
         pinning: Turbopuffer::NamespaceMetadata::Pinning,
         read_only: bool,
         sharding: Turbopuffer::ShardingConfig
@@ -123,6 +125,18 @@ module Turbopuffer
         end
 
         def self?.variants: -> ::Array[Turbopuffer::Models::NamespaceMetadata::index]
+      end
+
+      type layout = { arrange_by: String }
+
+      class Layout < Turbopuffer::Internal::Type::BaseModel
+        attr_reader arrange_by: String?
+
+        def arrange_by=: (String) -> String
+
+        def initialize: (?arrange_by: String) -> void
+
+        def to_hash: -> { arrange_by: String }
       end
 
       type pinning = { status: Turbopuffer::NamespaceMetadata::Pinning::Status }

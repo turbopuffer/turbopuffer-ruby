@@ -3,7 +3,6 @@ module Turbopuffer
     type namespace_write_params =
       {
         namespace: String,
-        arrange_by: String,
         branch_from_namespace: Turbopuffer::Models::branch_from_namespace_params,
         copy_from_namespace: Turbopuffer::Models::copy_from_namespace_params,
         create_namespace: bool,
@@ -14,6 +13,7 @@ module Turbopuffer
         disable_backpressure: bool,
         distance_metric: Turbopuffer::Models::distance_metric,
         encryption: Turbopuffer::Models::encryption,
+        layout: Turbopuffer::NamespaceWriteParams::Layout,
         patch_by_filter: Turbopuffer::NamespaceWriteParams::PatchByFilter,
         patch_by_filter_allow_partial: bool,
         patch_columns: Turbopuffer::Columns,
@@ -35,10 +35,6 @@ module Turbopuffer
       attr_reader namespace: String?
 
       def namespace=: (String) -> String
-
-      attr_reader arrange_by: String?
-
-      def arrange_by=: (String) -> String
 
       attr_reader branch_from_namespace: Turbopuffer::Models::branch_from_namespace_params?
 
@@ -89,6 +85,12 @@ module Turbopuffer
       def encryption=: (
         Turbopuffer::Models::encryption
       ) -> Turbopuffer::Models::encryption
+
+      attr_reader layout: Turbopuffer::NamespaceWriteParams::Layout?
+
+      def layout=: (
+        Turbopuffer::NamespaceWriteParams::Layout
+      ) -> Turbopuffer::NamespaceWriteParams::Layout
 
       attr_reader patch_by_filter: Turbopuffer::NamespaceWriteParams::PatchByFilter?
 
@@ -142,7 +144,6 @@ module Turbopuffer
 
       def initialize: (
         ?namespace: String,
-        ?arrange_by: String,
         ?branch_from_namespace: Turbopuffer::Models::branch_from_namespace_params,
         ?copy_from_namespace: Turbopuffer::Models::copy_from_namespace_params,
         ?create_namespace: bool,
@@ -153,6 +154,7 @@ module Turbopuffer
         ?disable_backpressure: bool,
         ?distance_metric: Turbopuffer::Models::distance_metric,
         ?encryption: Turbopuffer::Models::encryption,
+        ?layout: Turbopuffer::NamespaceWriteParams::Layout,
         ?patch_by_filter: Turbopuffer::NamespaceWriteParams::PatchByFilter,
         ?patch_by_filter_allow_partial: bool,
         ?patch_columns: Turbopuffer::Columns,
@@ -169,7 +171,6 @@ module Turbopuffer
 
       def to_hash: -> {
         namespace: String,
-        arrange_by: String,
         branch_from_namespace: Turbopuffer::Models::branch_from_namespace_params,
         copy_from_namespace: Turbopuffer::Models::copy_from_namespace_params,
         create_namespace: bool,
@@ -180,6 +181,7 @@ module Turbopuffer
         disable_backpressure: bool,
         distance_metric: Turbopuffer::Models::distance_metric,
         encryption: Turbopuffer::Models::encryption,
+        layout: Turbopuffer::NamespaceWriteParams::Layout,
         patch_by_filter: Turbopuffer::NamespaceWriteParams::PatchByFilter,
         patch_by_filter_allow_partial: bool,
         patch_columns: Turbopuffer::Columns,
@@ -193,6 +195,18 @@ module Turbopuffer
         upsert_rows: ::Array[Turbopuffer::Row],
         request_options: Turbopuffer::RequestOptions
       }
+
+      type layout = { arrange_by: String }
+
+      class Layout < Turbopuffer::Internal::Type::BaseModel
+        attr_reader arrange_by: String?
+
+        def arrange_by=: (String) -> String
+
+        def initialize: (?arrange_by: String) -> void
+
+        def to_hash: -> { arrange_by: String }
+      end
 
       type patch_by_filter = { filters: top, patch: ::Hash[Symbol, top] }
 

@@ -417,7 +417,6 @@ module Turbopuffer
       sig do
         params(
           namespace: String,
-          arrange_by: String,
           branch_from_namespace:
             T.any(
               String,
@@ -440,6 +439,7 @@ module Turbopuffer
               Turbopuffer::Encryption::CustomerManaged::OrHash,
               Turbopuffer::Encryption::Default::OrHash
             ),
+          layout: Turbopuffer::NamespaceWriteParams::Layout::OrHash,
           patch_by_filter:
             Turbopuffer::NamespaceWriteParams::PatchByFilter::OrHash,
           patch_by_filter_allow_partial: T::Boolean,
@@ -466,12 +466,6 @@ module Turbopuffer
       def write(
         # Path param: The name of the namespace.
         namespace: nil,
-        # Body param: Experimental. Stores documents in ranges of this attribute, ordered
-        # by it, so queries filtering on a narrow range of it or ordered by it skip the
-        # rest. Documents should be written in roughly ascending order of it. Must have
-        # type `int`, `uint`, `datetime` or `string`, and can only be set on a namespace's
-        # inaugural write.
-        arrange_by: nil,
         # Body param: The namespace to create an instant, copy-on-write clone of.
         branch_from_namespace: nil,
         # Body param: The namespace to copy documents from.
@@ -498,6 +492,9 @@ module Turbopuffer
         distance_metric: nil,
         # Body param: The encryption configuration for a namespace.
         encryption: nil,
+        # Body param: Experimental. How a namespace stores its documents. Can only be set
+        # on a namespace's inaugural write, and cannot be changed later.
+        layout: nil,
         # Body param: Sets the attributes in `patch` on every document that matches
         # `filters`.
         patch_by_filter: nil,
