@@ -36,6 +36,16 @@ module Turbopuffer
       sig { returns(Time) }
       attr_accessor :updated_at
 
+      # Experimental. How a namespace stores its documents. Can only be set on a
+      # namespace's inaugural write, and cannot be changed later.
+      sig { returns(T.nilable(Turbopuffer::NamespaceMetadata::Layout)) }
+      attr_reader :layout
+
+      sig do
+        params(layout: Turbopuffer::NamespaceMetadata::Layout::OrHash).void
+      end
+      attr_writer :layout
+
       # Configuration for namespace pinning, along with the current status of the pinned
       # namespace.
       sig { returns(T.nilable(Turbopuffer::NamespaceMetadata::Pinning)) }
@@ -81,6 +91,7 @@ module Turbopuffer
             ),
           schema: T::Hash[Symbol, Turbopuffer::AttributeSchemaConfig::OrHash],
           updated_at: Time,
+          layout: Turbopuffer::NamespaceMetadata::Layout::OrHash,
           pinning: Turbopuffer::NamespaceMetadata::Pinning::OrHash,
           read_only: T::Boolean,
           sharding: Turbopuffer::ShardingConfig::OrHash
@@ -101,6 +112,9 @@ module Turbopuffer
         schema:,
         # The timestamp when the namespace was last modified by a write operation.
         updated_at:,
+        # Experimental. How a namespace stores its documents. Can only be set on a
+        # namespace's inaugural write, and cannot be changed later.
+        layout: nil,
         # Configuration for namespace pinning, along with the current status of the pinned
         # namespace.
         pinning: nil,
@@ -124,6 +138,7 @@ module Turbopuffer
             index: Turbopuffer::NamespaceMetadata::Index::Variants,
             schema: T::Hash[Symbol, Turbopuffer::AttributeSchemaConfig],
             updated_at: Time,
+            layout: Turbopuffer::NamespaceMetadata::Layout,
             pinning: Turbopuffer::NamespaceMetadata::Pinning,
             read_only: T::Boolean,
             sharding: Turbopuffer::ShardingConfig
@@ -225,6 +240,42 @@ module Turbopuffer
           )
         end
         def self.variants
+        end
+      end
+
+      class Layout < Turbopuffer::Internal::Type::BaseModel
+        OrHash =
+          T.type_alias do
+            T.any(
+              Turbopuffer::NamespaceMetadata::Layout,
+              Turbopuffer::Internal::AnyHash
+            )
+          end
+
+        # Stores documents in ranges of this attribute, ordered by it, so queries
+        # filtering on a narrow range of it or ordered by it skip the rest. Documents
+        # should be written in roughly ascending order of it. Must have type `int`,
+        # `uint`, `datetime` or `string`.
+        sig { returns(T.nilable(String)) }
+        attr_reader :arrange_by
+
+        sig { params(arrange_by: String).void }
+        attr_writer :arrange_by
+
+        # Experimental. How a namespace stores its documents. Can only be set on a
+        # namespace's inaugural write, and cannot be changed later.
+        sig { params(arrange_by: String).returns(T.attached_class) }
+        def self.new(
+          # Stores documents in ranges of this attribute, ordered by it, so queries
+          # filtering on a narrow range of it or ordered by it skip the rest. Documents
+          # should be written in roughly ascending order of it. Must have type `int`,
+          # `uint`, `datetime` or `string`.
+          arrange_by: nil
+        )
+        end
+
+        sig { override.returns({ arrange_by: String }) }
+        def to_hash
         end
       end
 

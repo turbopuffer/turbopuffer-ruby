@@ -147,6 +147,16 @@ module Turbopuffer
       end
       attr_writer :encryption
 
+      # Experimental. How a namespace stores its documents. Can only be set on a
+      # namespace's inaugural write, and cannot be changed later.
+      sig { returns(T.nilable(Turbopuffer::NamespaceWriteParams::Layout)) }
+      attr_reader :layout
+
+      sig do
+        params(layout: Turbopuffer::NamespaceWriteParams::Layout::OrHash).void
+      end
+      attr_writer :layout
+
       # Sets the attributes in `patch` on every document that matches `filters`.
       sig do
         returns(T.nilable(Turbopuffer::NamespaceWriteParams::PatchByFilter))
@@ -288,6 +298,7 @@ module Turbopuffer
               Turbopuffer::Encryption::CustomerManaged::OrHash,
               Turbopuffer::Encryption::Default::OrHash
             ),
+          layout: Turbopuffer::NamespaceWriteParams::Layout::OrHash,
           patch_by_filter:
             Turbopuffer::NamespaceWriteParams::PatchByFilter::OrHash,
           patch_by_filter_allow_partial: T::Boolean,
@@ -337,6 +348,9 @@ module Turbopuffer
         distance_metric: nil,
         # The encryption configuration for a namespace.
         encryption: nil,
+        # Experimental. How a namespace stores its documents. Can only be set on a
+        # namespace's inaugural write, and cannot be changed later.
+        layout: nil,
         # Sets the attributes in `patch` on every document that matches `filters`.
         patch_by_filter: nil,
         # Allow partial completion when filter matches too many documents.
@@ -396,6 +410,7 @@ module Turbopuffer
                 Turbopuffer::Encryption::CustomerManaged,
                 Turbopuffer::Encryption::Default
               ),
+            layout: Turbopuffer::NamespaceWriteParams::Layout,
             patch_by_filter: Turbopuffer::NamespaceWriteParams::PatchByFilter,
             patch_by_filter_allow_partial: T::Boolean,
             patch_columns: Turbopuffer::Columns,
@@ -420,6 +435,42 @@ module Turbopuffer
         )
       end
       def to_hash
+      end
+
+      class Layout < Turbopuffer::Internal::Type::BaseModel
+        OrHash =
+          T.type_alias do
+            T.any(
+              Turbopuffer::NamespaceWriteParams::Layout,
+              Turbopuffer::Internal::AnyHash
+            )
+          end
+
+        # Stores documents in ranges of this attribute, ordered by it, so queries
+        # filtering on a narrow range of it or ordered by it skip the rest. Documents
+        # should be written in roughly ascending order of it. Must have type `int`,
+        # `uint`, `datetime` or `string`.
+        sig { returns(T.nilable(String)) }
+        attr_reader :arrange_by
+
+        sig { params(arrange_by: String).void }
+        attr_writer :arrange_by
+
+        # Experimental. How a namespace stores its documents. Can only be set on a
+        # namespace's inaugural write, and cannot be changed later.
+        sig { params(arrange_by: String).returns(T.attached_class) }
+        def self.new(
+          # Stores documents in ranges of this attribute, ordered by it, so queries
+          # filtering on a narrow range of it or ordered by it skip the rest. Documents
+          # should be written in roughly ascending order of it. Must have type `int`,
+          # `uint`, `datetime` or `string`.
+          arrange_by: nil
+        )
+        end
+
+        sig { override.returns({ arrange_by: String }) }
+        def to_hash
+        end
       end
 
       class PatchByFilter < Turbopuffer::Internal::Type::BaseModel
