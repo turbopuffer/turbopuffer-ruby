@@ -439,6 +439,7 @@ module Turbopuffer
               Turbopuffer::Encryption::CustomerManaged::OrHash,
               Turbopuffer::Encryption::Default::OrHash
             ),
+          layout: Turbopuffer::NamespaceWriteParams::Layout::OrHash,
           patch_by_filter:
             Turbopuffer::NamespaceWriteParams::PatchByFilter::OrHash,
           patch_by_filter_allow_partial: T::Boolean,
@@ -491,6 +492,9 @@ module Turbopuffer
         distance_metric: nil,
         # Body param: The encryption configuration for a namespace.
         encryption: nil,
+        # Body param: Experimental. How a namespace stores its documents. Can only be set
+        # on a namespace's inaugural write, and cannot be changed later.
+        layout: nil,
         # Body param: Sets the attributes in `patch` on every document that matches
         # `filters`.
         patch_by_filter: nil,
