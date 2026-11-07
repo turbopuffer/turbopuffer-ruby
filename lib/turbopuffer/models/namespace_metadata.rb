@@ -46,6 +46,13 @@ module Turbopuffer
       #   @return [Time]
       required :updated_at, Time
 
+      # @!attribute layout
+      #   Experimental. How a namespace stores its documents. A change applies to
+      #   documents indexed after it.
+      #
+      #   @return [Turbopuffer::Models::NamespaceMetadata::Layout, nil]
+      optional :layout, -> { Turbopuffer::NamespaceMetadata::Layout }
+
       # @!attribute pinning
       #   Configuration for namespace pinning, along with the current status of the pinned
       #   namespace.
@@ -68,7 +75,7 @@ module Turbopuffer
       #   @return [Turbopuffer::Models::ShardingConfig, nil]
       optional :sharding, -> { Turbopuffer::ShardingConfig }
 
-      # @!method initialize(approx_logical_bytes:, approx_row_count:, created_at:, encryption:, index:, schema:, updated_at:, pinning: nil, read_only: nil, sharding: nil)
+      # @!method initialize(approx_logical_bytes:, approx_row_count:, created_at:, encryption:, index:, schema:, updated_at:, layout: nil, pinning: nil, read_only: nil, sharding: nil)
       #   Some parameter documentations has been truncated, see
       #   {Turbopuffer::Models::NamespaceMetadata} for more details.
       #
@@ -87,6 +94,8 @@ module Turbopuffer
       #   @param schema [Hash{Symbol=>Turbopuffer::Models::AttributeSchemaConfig}] The schema of the namespace.
       #
       #   @param updated_at [Time] The timestamp when the namespace was last modified by a write operation.
+      #
+      #   @param layout [Turbopuffer::Models::NamespaceMetadata::Layout] Experimental. How a namespace stores its documents. A change applies to document
       #
       #   @param pinning [Turbopuffer::Models::NamespaceMetadata::Pinning] Configuration for namespace pinning, along with the current status of the pinned
       #
@@ -152,6 +161,27 @@ module Turbopuffer
 
         # @!method self.variants
         #   @return [Array(Turbopuffer::Models::NamespaceMetadata::Index::IndexUpToDate, Turbopuffer::Models::NamespaceMetadata::Index::IndexUpdating)]
+      end
+
+      # @see Turbopuffer::Models::NamespaceMetadata#layout
+      class Layout < Turbopuffer::Internal::Type::BaseModel
+        # @!attribute arrange_by
+        #   Stores documents in ranges of this attribute, ordered by it, so queries
+        #   filtering on a narrow range of it or ordered by it skip the rest. Documents
+        #   should be written in roughly ascending order of it. Must have type `int`,
+        #   `uint`, `datetime` or `string`. `id` resets the namespace to the default layout.
+        #
+        #   @return [String, nil]
+        optional :arrange_by, String
+
+        # @!method initialize(arrange_by: nil)
+        #   Some parameter documentations has been truncated, see
+        #   {Turbopuffer::Models::NamespaceMetadata::Layout} for more details.
+        #
+        #   Experimental. How a namespace stores its documents. A change applies to
+        #   documents indexed after it.
+        #
+        #   @param arrange_by [String] Stores documents in ranges of this attribute, ordered by it, so queries filterin
       end
 
       # @see Turbopuffer::Models::NamespaceMetadata#pinning
