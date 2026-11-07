@@ -36,8 +36,8 @@ module Turbopuffer
       sig { returns(Time) }
       attr_accessor :updated_at
 
-      # Experimental. How a namespace stores its documents. Can only be set on a
-      # namespace's inaugural write, and cannot be changed later.
+      # Experimental. How a namespace stores its documents. A change applies to
+      # documents indexed after it.
       sig { returns(T.nilable(Turbopuffer::NamespaceMetadata::Layout)) }
       attr_reader :layout
 
@@ -112,8 +112,8 @@ module Turbopuffer
         schema:,
         # The timestamp when the namespace was last modified by a write operation.
         updated_at:,
-        # Experimental. How a namespace stores its documents. Can only be set on a
-        # namespace's inaugural write, and cannot be changed later.
+        # Experimental. How a namespace stores its documents. A change applies to
+        # documents indexed after it.
         layout: nil,
         # Configuration for namespace pinning, along with the current status of the pinned
         # namespace.
@@ -255,21 +255,21 @@ module Turbopuffer
         # Stores documents in ranges of this attribute, ordered by it, so queries
         # filtering on a narrow range of it or ordered by it skip the rest. Documents
         # should be written in roughly ascending order of it. Must have type `int`,
-        # `uint`, `datetime` or `string`.
+        # `uint`, `datetime` or `string`. `id` resets the namespace to the default layout.
         sig { returns(T.nilable(String)) }
         attr_reader :arrange_by
 
         sig { params(arrange_by: String).void }
         attr_writer :arrange_by
 
-        # Experimental. How a namespace stores its documents. Can only be set on a
-        # namespace's inaugural write, and cannot be changed later.
+        # Experimental. How a namespace stores its documents. A change applies to
+        # documents indexed after it.
         sig { params(arrange_by: String).returns(T.attached_class) }
         def self.new(
           # Stores documents in ranges of this attribute, ordered by it, so queries
           # filtering on a narrow range of it or ordered by it skip the rest. Documents
           # should be written in roughly ascending order of it. Must have type `int`,
-          # `uint`, `datetime` or `string`.
+          # `uint`, `datetime` or `string`. `id` resets the namespace to the default layout.
           arrange_by: nil
         )
         end

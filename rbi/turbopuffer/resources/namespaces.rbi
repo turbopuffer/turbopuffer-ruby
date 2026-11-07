@@ -492,8 +492,8 @@ module Turbopuffer
         distance_metric: nil,
         # Body param: The encryption configuration for a namespace.
         encryption: nil,
-        # Body param: Experimental. How a namespace stores its documents. Can only be set
-        # on a namespace's inaugural write, and cannot be changed later.
+        # Body param: Experimental. How a namespace stores its documents. A change applies
+        # to documents indexed after it.
         layout: nil,
         # Body param: Sets the attributes in `patch` on every document that matches
         # `filters`.

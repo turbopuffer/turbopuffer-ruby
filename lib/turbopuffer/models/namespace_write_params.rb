@@ -77,8 +77,8 @@ module Turbopuffer
       optional :encryption, union: -> { Turbopuffer::Encryption }
 
       # @!attribute layout
-      #   Experimental. How a namespace stores its documents. Can only be set on a
-      #   namespace's inaugural write, and cannot be changed later.
+      #   Experimental. How a namespace stores its documents. A change applies to
+      #   documents indexed after it.
       #
       #   @return [Turbopuffer::Models::NamespaceWriteParams::Layout, nil]
       optional :layout, -> { Turbopuffer::NamespaceWriteParams::Layout }
@@ -182,7 +182,7 @@ module Turbopuffer
       #
       #   @param encryption [Turbopuffer::Models::Encryption::CustomerManaged, Turbopuffer::Models::Encryption::Default] The encryption configuration for a namespace.
       #
-      #   @param layout [Turbopuffer::Models::NamespaceWriteParams::Layout] Experimental. How a namespace stores its documents. Can only be set on a namespa
+      #   @param layout [Turbopuffer::Models::NamespaceWriteParams::Layout] Experimental. How a namespace stores its documents. A change applies to document
       #
       #   @param patch_by_filter [Turbopuffer::Models::NamespaceWriteParams::PatchByFilter] Sets the attributes in `patch` on every document that matches `filters`.
       #
@@ -213,7 +213,7 @@ module Turbopuffer
         #   Stores documents in ranges of this attribute, ordered by it, so queries
         #   filtering on a narrow range of it or ordered by it skip the rest. Documents
         #   should be written in roughly ascending order of it. Must have type `int`,
-        #   `uint`, `datetime` or `string`.
+        #   `uint`, `datetime` or `string`. `id` resets the namespace to the default layout.
         #
         #   @return [String, nil]
         optional :arrange_by, String
@@ -222,8 +222,8 @@ module Turbopuffer
         #   Some parameter documentations has been truncated, see
         #   {Turbopuffer::Models::NamespaceWriteParams::Layout} for more details.
         #
-        #   Experimental. How a namespace stores its documents. Can only be set on a
-        #   namespace's inaugural write, and cannot be changed later.
+        #   Experimental. How a namespace stores its documents. A change applies to
+        #   documents indexed after it.
         #
         #   @param arrange_by [String] Stores documents in ranges of this attribute, ordered by it, so queries filterin
       end

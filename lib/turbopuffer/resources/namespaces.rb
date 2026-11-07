@@ -516,7 +516,7 @@ module Turbopuffer
       #
       # @param encryption [Turbopuffer::Models::Encryption::CustomerManaged, Turbopuffer::Models::Encryption::Default] Body param: The encryption configuration for a namespace.
       #
-      # @param layout [Turbopuffer::Models::NamespaceWriteParams::Layout] Body param: Experimental. How a namespace stores its documents. Can only be set
+      # @param layout [Turbopuffer::Models::NamespaceWriteParams::Layout] Body param: Experimental. How a namespace stores its documents. A change applies
       #
       # @param patch_by_filter [Turbopuffer::Models::NamespaceWriteParams::PatchByFilter] Body param: Sets the attributes in `patch` on every document that matches `filte
       #

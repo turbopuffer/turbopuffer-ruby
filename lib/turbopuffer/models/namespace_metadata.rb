@@ -47,8 +47,8 @@ module Turbopuffer
       required :updated_at, Time
 
       # @!attribute layout
-      #   Experimental. How a namespace stores its documents. Can only be set on a
-      #   namespace's inaugural write, and cannot be changed later.
+      #   Experimental. How a namespace stores its documents. A change applies to
+      #   documents indexed after it.
       #
       #   @return [Turbopuffer::Models::NamespaceMetadata::Layout, nil]
       optional :layout, -> { Turbopuffer::NamespaceMetadata::Layout }
@@ -95,7 +95,7 @@ module Turbopuffer
       #
       #   @param updated_at [Time] The timestamp when the namespace was last modified by a write operation.
       #
-      #   @param layout [Turbopuffer::Models::NamespaceMetadata::Layout] Experimental. How a namespace stores its documents. Can only be set on a namespa
+      #   @param layout [Turbopuffer::Models::NamespaceMetadata::Layout] Experimental. How a namespace stores its documents. A change applies to document
       #
       #   @param pinning [Turbopuffer::Models::NamespaceMetadata::Pinning] Configuration for namespace pinning, along with the current status of the pinned
       #
@@ -169,7 +169,7 @@ module Turbopuffer
         #   Stores documents in ranges of this attribute, ordered by it, so queries
         #   filtering on a narrow range of it or ordered by it skip the rest. Documents
         #   should be written in roughly ascending order of it. Must have type `int`,
-        #   `uint`, `datetime` or `string`.
+        #   `uint`, `datetime` or `string`. `id` resets the namespace to the default layout.
         #
         #   @return [String, nil]
         optional :arrange_by, String
@@ -178,8 +178,8 @@ module Turbopuffer
         #   Some parameter documentations has been truncated, see
         #   {Turbopuffer::Models::NamespaceMetadata::Layout} for more details.
         #
-        #   Experimental. How a namespace stores its documents. Can only be set on a
-        #   namespace's inaugural write, and cannot be changed later.
+        #   Experimental. How a namespace stores its documents. A change applies to
+        #   documents indexed after it.
         #
         #   @param arrange_by [String] Stores documents in ranges of this attribute, ordered by it, so queries filterin
       end

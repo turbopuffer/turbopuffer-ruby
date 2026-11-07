@@ -147,8 +147,8 @@ module Turbopuffer
       end
       attr_writer :encryption
 
-      # Experimental. How a namespace stores its documents. Can only be set on a
-      # namespace's inaugural write, and cannot be changed later.
+      # Experimental. How a namespace stores its documents. A change applies to
+      # documents indexed after it.
       sig { returns(T.nilable(Turbopuffer::NamespaceWriteParams::Layout)) }
       attr_reader :layout
 
@@ -348,8 +348,8 @@ module Turbopuffer
         distance_metric: nil,
         # The encryption configuration for a namespace.
         encryption: nil,
-        # Experimental. How a namespace stores its documents. Can only be set on a
-        # namespace's inaugural write, and cannot be changed later.
+        # Experimental. How a namespace stores its documents. A change applies to
+        # documents indexed after it.
         layout: nil,
         # Sets the attributes in `patch` on every document that matches `filters`.
         patch_by_filter: nil,
@@ -449,21 +449,21 @@ module Turbopuffer
         # Stores documents in ranges of this attribute, ordered by it, so queries
         # filtering on a narrow range of it or ordered by it skip the rest. Documents
         # should be written in roughly ascending order of it. Must have type `int`,
-        # `uint`, `datetime` or `string`.
+        # `uint`, `datetime` or `string`. `id` resets the namespace to the default layout.
         sig { returns(T.nilable(String)) }
         attr_reader :arrange_by
 
         sig { params(arrange_by: String).void }
         attr_writer :arrange_by
 
-        # Experimental. How a namespace stores its documents. Can only be set on a
-        # namespace's inaugural write, and cannot be changed later.
+        # Experimental. How a namespace stores its documents. A change applies to
+        # documents indexed after it.
         sig { params(arrange_by: String).returns(T.attached_class) }
         def self.new(
           # Stores documents in ranges of this attribute, ordered by it, so queries
           # filtering on a narrow range of it or ordered by it skip the rest. Documents
           # should be written in roughly ascending order of it. Must have type `int`,
-          # `uint`, `datetime` or `string`.
+          # `uint`, `datetime` or `string`. `id` resets the namespace to the default layout.
           arrange_by: nil
         )
         end
