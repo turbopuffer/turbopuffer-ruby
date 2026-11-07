@@ -13,6 +13,7 @@ module Turbopuffer
         disable_backpressure: bool,
         distance_metric: Turbopuffer::Models::distance_metric,
         encryption: Turbopuffer::Models::encryption,
+        layout: Turbopuffer::NamespaceWriteParams::Layout,
         patch_by_filter: Turbopuffer::NamespaceWriteParams::PatchByFilter,
         patch_by_filter_allow_partial: bool,
         patch_columns: Turbopuffer::Columns,
@@ -85,6 +86,12 @@ module Turbopuffer
         Turbopuffer::Models::encryption
       ) -> Turbopuffer::Models::encryption
 
+      attr_reader layout: Turbopuffer::NamespaceWriteParams::Layout?
+
+      def layout=: (
+        Turbopuffer::NamespaceWriteParams::Layout
+      ) -> Turbopuffer::NamespaceWriteParams::Layout
+
       attr_reader patch_by_filter: Turbopuffer::NamespaceWriteParams::PatchByFilter?
 
       def patch_by_filter=: (
@@ -147,6 +154,7 @@ module Turbopuffer
         ?disable_backpressure: bool,
         ?distance_metric: Turbopuffer::Models::distance_metric,
         ?encryption: Turbopuffer::Models::encryption,
+        ?layout: Turbopuffer::NamespaceWriteParams::Layout,
         ?patch_by_filter: Turbopuffer::NamespaceWriteParams::PatchByFilter,
         ?patch_by_filter_allow_partial: bool,
         ?patch_columns: Turbopuffer::Columns,
@@ -173,6 +181,7 @@ module Turbopuffer
         disable_backpressure: bool,
         distance_metric: Turbopuffer::Models::distance_metric,
         encryption: Turbopuffer::Models::encryption,
+        layout: Turbopuffer::NamespaceWriteParams::Layout,
         patch_by_filter: Turbopuffer::NamespaceWriteParams::PatchByFilter,
         patch_by_filter_allow_partial: bool,
         patch_columns: Turbopuffer::Columns,
@@ -186,6 +195,18 @@ module Turbopuffer
         upsert_rows: ::Array[Turbopuffer::Row],
         request_options: Turbopuffer::RequestOptions
       }
+
+      type layout = { rank_by: ::Array[top] }
+
+      class Layout < Turbopuffer::Internal::Type::BaseModel
+        attr_reader rank_by: ::Array[top]?
+
+        def rank_by=: (::Array[top]) -> ::Array[top]
+
+        def initialize: (?rank_by: ::Array[top]) -> void
+
+        def to_hash: -> { rank_by: ::Array[top] }
+      end
 
       type patch_by_filter = { filters: top, patch: ::Hash[Symbol, top] }
 
