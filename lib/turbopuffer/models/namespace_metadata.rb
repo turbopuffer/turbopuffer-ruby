@@ -165,23 +165,24 @@ module Turbopuffer
 
       # @see Turbopuffer::Models::NamespaceMetadata#layout
       class Layout < Turbopuffer::Internal::Type::BaseModel
-        # @!attribute arrange_by
-        #   Stores documents in ranges of this attribute, ordered by it, so queries
-        #   filtering on a narrow range of it or ordered by it skip the rest. Documents
+        # @!attribute rank_by
+        #   Stores documents in ranges of an attribute, in ascending order, so queries
+        #   filtering on a narrow range of it or ranking by it skip the rest. Documents
         #   should be written in roughly ascending order of it. Must have type `int`,
-        #   `uint`, `datetime` or `string`. `id` resets the namespace to the default layout.
+        #   `uint`, `datetime` or `string`. `["id", "asc"]` resets the namespace to the
+        #   default layout.
         #
-        #   @return [String, nil]
-        optional :arrange_by, String
+        #   @return [Array<Object>, nil]
+        optional :rank_by, Turbopuffer::Internal::Type::ArrayOf[Turbopuffer::Internal::Type::Unknown]
 
-        # @!method initialize(arrange_by: nil)
+        # @!method initialize(rank_by: nil)
         #   Some parameter documentations has been truncated, see
         #   {Turbopuffer::Models::NamespaceMetadata::Layout} for more details.
         #
         #   Experimental. How a namespace stores its documents. A change applies to
         #   documents indexed after it.
         #
-        #   @param arrange_by [String] Stores documents in ranges of this attribute, ordered by it, so queries filterin
+        #   @param rank_by [Array<Object>] Stores documents in ranges of an attribute, in ascending order, so queries filte
       end
 
       # @see Turbopuffer::Models::NamespaceMetadata#pinning

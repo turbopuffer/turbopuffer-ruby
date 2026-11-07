@@ -252,29 +252,31 @@ module Turbopuffer
             )
           end
 
-        # Stores documents in ranges of this attribute, ordered by it, so queries
-        # filtering on a narrow range of it or ordered by it skip the rest. Documents
+        # Stores documents in ranges of an attribute, in ascending order, so queries
+        # filtering on a narrow range of it or ranking by it skip the rest. Documents
         # should be written in roughly ascending order of it. Must have type `int`,
-        # `uint`, `datetime` or `string`. `id` resets the namespace to the default layout.
-        sig { returns(T.nilable(String)) }
-        attr_reader :arrange_by
+        # `uint`, `datetime` or `string`. `["id", "asc"]` resets the namespace to the
+        # default layout.
+        sig { returns(T.nilable(T::Array[T.anything])) }
+        attr_reader :rank_by
 
-        sig { params(arrange_by: String).void }
-        attr_writer :arrange_by
+        sig { params(rank_by: T::Array[T.anything]).void }
+        attr_writer :rank_by
 
         # Experimental. How a namespace stores its documents. A change applies to
         # documents indexed after it.
-        sig { params(arrange_by: String).returns(T.attached_class) }
+        sig { params(rank_by: T::Array[T.anything]).returns(T.attached_class) }
         def self.new(
-          # Stores documents in ranges of this attribute, ordered by it, so queries
-          # filtering on a narrow range of it or ordered by it skip the rest. Documents
+          # Stores documents in ranges of an attribute, in ascending order, so queries
+          # filtering on a narrow range of it or ranking by it skip the rest. Documents
           # should be written in roughly ascending order of it. Must have type `int`,
-          # `uint`, `datetime` or `string`. `id` resets the namespace to the default layout.
-          arrange_by: nil
+          # `uint`, `datetime` or `string`. `["id", "asc"]` resets the namespace to the
+          # default layout.
+          rank_by: nil
         )
         end
 
-        sig { override.returns({ arrange_by: String }) }
+        sig { override.returns({ rank_by: T::Array[T.anything] }) }
         def to_hash
         end
       end

@@ -127,16 +127,16 @@ module Turbopuffer
         def self?.variants: -> ::Array[Turbopuffer::Models::NamespaceMetadata::index]
       end
 
-      type layout = { arrange_by: String }
+      type layout = { rank_by: ::Array[top] }
 
       class Layout < Turbopuffer::Internal::Type::BaseModel
-        attr_reader arrange_by: String?
+        attr_reader rank_by: ::Array[top]?
 
-        def arrange_by=: (String) -> String
+        def rank_by=: (::Array[top]) -> ::Array[top]
 
-        def initialize: (?arrange_by: String) -> void
+        def initialize: (?rank_by: ::Array[top]) -> void
 
-        def to_hash: -> { arrange_by: String }
+        def to_hash: -> { rank_by: ::Array[top] }
       end
 
       type pinning = { status: Turbopuffer::NamespaceMetadata::Pinning::Status }
