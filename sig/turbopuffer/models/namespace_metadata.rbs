@@ -9,6 +9,7 @@ module Turbopuffer
         index: Turbopuffer::Models::NamespaceMetadata::index,
         schema: ::Hash[Symbol, Turbopuffer::AttributeSchemaConfig],
         updated_at: Time,
+        layout: Turbopuffer::NamespaceMetadata::Layout,
         pinning: Turbopuffer::NamespaceMetadata::Pinning,
         read_only: bool,
         sharding: Turbopuffer::ShardingConfig
@@ -28,6 +29,12 @@ module Turbopuffer
       attr_accessor schema: ::Hash[Symbol, Turbopuffer::AttributeSchemaConfig]
 
       attr_accessor updated_at: Time
+
+      attr_reader layout: Turbopuffer::NamespaceMetadata::Layout?
+
+      def layout=: (
+        Turbopuffer::NamespaceMetadata::Layout
+      ) -> Turbopuffer::NamespaceMetadata::Layout
 
       attr_reader pinning: Turbopuffer::NamespaceMetadata::Pinning?
 
@@ -53,6 +60,7 @@ module Turbopuffer
         index: Turbopuffer::Models::NamespaceMetadata::index,
         schema: ::Hash[Symbol, Turbopuffer::AttributeSchemaConfig],
         updated_at: Time,
+        ?layout: Turbopuffer::NamespaceMetadata::Layout,
         ?pinning: Turbopuffer::NamespaceMetadata::Pinning,
         ?read_only: bool,
         ?sharding: Turbopuffer::ShardingConfig
@@ -66,6 +74,7 @@ module Turbopuffer
         index: Turbopuffer::Models::NamespaceMetadata::index,
         schema: ::Hash[Symbol, Turbopuffer::AttributeSchemaConfig],
         updated_at: Time,
+        layout: Turbopuffer::NamespaceMetadata::Layout,
         pinning: Turbopuffer::NamespaceMetadata::Pinning,
         read_only: bool,
         sharding: Turbopuffer::ShardingConfig
@@ -116,6 +125,18 @@ module Turbopuffer
         end
 
         def self?.variants: -> ::Array[Turbopuffer::Models::NamespaceMetadata::index]
+      end
+
+      type layout = { rank_by: ::Array[top] }
+
+      class Layout < Turbopuffer::Internal::Type::BaseModel
+        attr_reader rank_by: ::Array[top]?
+
+        def rank_by=: (::Array[top]) -> ::Array[top]
+
+        def initialize: (?rank_by: ::Array[top]) -> void
+
+        def to_hash: -> { rank_by: ::Array[top] }
       end
 
       type pinning = { status: Turbopuffer::NamespaceMetadata::Pinning::Status }
